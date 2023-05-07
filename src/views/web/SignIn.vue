@@ -62,9 +62,9 @@
         Continue with Google
       </button> -->
     </form>
-    <div class="flx column gap-4 ai-c fw-700 acc-footer">
-      <div class="text-center">
-        <div class="mb-4">Don't have an account?</div>
+    <div class="flx column gap-4 ai-c acc-footer">
+      <div class="text-center fw-700 ">
+        <span>Don't have an account? </span>
         <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
       </div>
       <p>
