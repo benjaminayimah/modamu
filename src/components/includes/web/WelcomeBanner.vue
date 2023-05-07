@@ -39,7 +39,7 @@ section{
         z-index: 10;
         padding: 10%;
         h1{
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
     }
     #logo{
