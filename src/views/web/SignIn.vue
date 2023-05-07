@@ -42,7 +42,7 @@
             {{ validation.errors.password[0] }}
         </span>
         <div class="forgot-pass">
-          <a href="/forgotpassword" class="">Forgot your password?</a>
+          <router-link :to="{ name: 'ForgotPassword'}" class="">Forgot your password?</router-link>
         </div>
       </div>
       <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">

@@ -8,6 +8,7 @@ import Welcome from '@/views/web/WelcomeView.vue'
 import SignIn from '@/views/web/SignIn.vue'
 import SignUp from '@/views/web/SignUp.vue'
 import SignUpVillage from '@/views/web/SignUpVillage.vue'
+import ForgotPassword from '@/views/web/ForgotPassword.vue'
 import Profile from '@/views/app/Profile.vue'
 import KidsProfile from '@/components/layouts/ProfileViewKids.vue'
 import AddEventPage from '@/views/app/village/AddEventPage.vue'
@@ -121,6 +122,7 @@ const routes = [
       { path: '/signin', name: 'SignIn', component: SignIn},
       { path: '/signup', name: 'SignUp', component: SignUp},
       { path: '/signup-village', name: 'SignUpVillage', component: SignUpVillage},
+      { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword},
       { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
     ],
   },
