@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapState } from 'vuex';
 import BookingSelectKidsList from '../../../components/includes/app/BookingSelectKidsList.vue';
 export default {
@@ -41,7 +42,9 @@ export default {
     name: 'BookingSelectKids',
     computed: {
         ...mapState({
-            kids: (state) => state.kids
+            kids: (state) => state.kids,
+            hostname: (state) => state.hostname,
+            token: (state) => state.token,
         })
     },
     data() {
@@ -71,8 +74,19 @@ export default {
         },
         clrError() {
             this.error = false
+        },
+        async fetchKids() {
+            try {
+                const res = await axios.post(this.hostname + '/api/fetch-kids?token=' + this.token)
+                this.$store.commit('setKids', res.data.kids)
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
-    }
+    },
+    created() {
+        this.fetchKids()
+    },
 
 }
 </script>

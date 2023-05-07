@@ -113,7 +113,8 @@ export default createStore({
       state.current_location = payload
     },
     addNearByEvent(state, payload) {
-      state.events_near = payload
+      state.events_near = payload.events
+      state.images = payload.images
     },
 
   },

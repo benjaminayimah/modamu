@@ -47,13 +47,12 @@ export default {
         },
         computedStatus() {
             const currentDateTime = new Date()
-            const startDate = new Date(this.event.date+'T'+this.event.start_time)
-            const endDate = new Date(this.event.date+'T'+this.event.end_time)
+            const startDate = new Date(this.event.event.date+'T'+this.event.event.start_time)
+            const endDate = new Date(this.event.event.date+'T'+this.event.event.end_time)
             if(currentDateTime > startDate && currentDateTime < endDate)
             return 'ongoing'
             else if(currentDateTime < startDate)
             return 'upcoming'
-            else
             return 'past'
         }
     },

@@ -5,7 +5,7 @@ export default {
             return moment(date).format('ddd, MMMM Do YYYY'); 
         },
         format_time(time) {
-            return moment(time+' :00').format('LT'); 
+            return moment(time).format('LT'); 
         },
         format_distance(distance) {
             if (distance < 1000) {

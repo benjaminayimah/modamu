@@ -56,14 +56,9 @@ export default {
             events_near: (state) => state.events_near,
             hostname: (state) => state.hostname,
             token: (state) => state.token,
-            current_location: (state) => state.current_location
-            
+            current_location: (state) => state.current_location,
+            images: (state) => state.images
         })
-    },
-    data() {
-        return {
-            images: []
-        }
     },
     methods: {
         fetchNearByEvents: function() {
@@ -81,26 +76,24 @@ export default {
         searchEvents: function(userLat, userLng) {
             axios.post(this.hostname+'/api/get-nearby-events?token='+this.token, {lat: userLat, lng: userLng})
             .then((res) => {
-                console.log(res.data)
-                this.images = res.data.images
-                this.$store.commit('addNearByEvent', res.data.events)
+                this.$store.commit('addNearByEvent', res.data)
             }).catch((err) => {
                 console.log(err.response.data)
             })
         },
-        getDistance: function(lat1, lng1, lat2, lng2) {
-            const R = 6371e3; // Radius of the earth in meters
-            const φ1 = lat1 * Math.PI / 180; // Convert degrees to radians
-            const φ2 = lat2 * Math.PI / 180;
-            const Δφ = (lat2 - lat1) * Math.PI / 180;
-            const Δλ = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                        Math.cos(φ1) * Math.cos(φ2) *
-                        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            const d = R * c; // Distance in meters
-            return d;
-        }
+        // getDistance: function(lat1, lng1, lat2, lng2) {
+        //     const R = 6371e3; // Radius of the earth in meters
+        //     const φ1 = lat1 * Math.PI / 180; // Convert degrees to radians
+        //     const φ2 = lat2 * Math.PI / 180;
+        //     const Δφ = (lat2 - lat1) * Math.PI / 180;
+        //     const Δλ = (lng2 - lng1) * Math.PI / 180;
+        //     const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        //                 Math.cos(φ1) * Math.cos(φ2) *
+        //                 Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        //     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        //     const d = R * c; // Distance in meters
+        //     return d;
+        // }
     },
     mounted() {
         this.fetchNearByEvents()

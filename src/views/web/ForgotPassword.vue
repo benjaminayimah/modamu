@@ -30,7 +30,7 @@
     </form>
     <div class="flx column gap-4 ai-c acc-footer">
       <p>
-        <router-link :to="{ name: 'SignIn' }">Back to Sign in page</router-link>
+        <router-link :to="{ name: 'SignIn' }">Back to Sign in</router-link>
       </p>
     </div>
   </section>
