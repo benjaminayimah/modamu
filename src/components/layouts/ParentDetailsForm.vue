@@ -1,0 +1,80 @@
+<template>
+    <form @submit.prevent="">
+      <div class="form-row column">
+        <label for="phone">Phone number</label>
+        <div class="input-wrapper">
+          <input v-model="form.phone" class="form-control" type="tel" name="phone" id="phone" data-color="light" placeholder="Eg. 222-333-4444">
+        </div>
+      </div>
+      <div class="form-row column">
+        <label for="emergencyPhone">Emergency number *</label>
+        <div class="input-wrapper">
+          <input v-model="form.emergency_number" class="form-control" type="tel" name="emergencyPhone" id="emergencyPhone" data-color="light" placeholder="222-333-5555">
+        </div>
+        <span class="input-error" v-if="validation.error && validation.errors.emergency_number">
+            {{ validation.errors.emergency_number[0] }}
+        </span>
+      </div>
+      <div class="form-row column">
+        <label for="relationship">Relationship *</label>
+        <div class="input-wrapper">
+            <select v-model="form.relationship" name="relationship" id="relationship" class="form-control" data-color="light">
+                <option value="" selected>Select relationship</option>
+                <option v-for="role in getRole" :key="role.id" :value="role.name">{{ role.name }}</option>
+            </select>
+        </div>
+        <span class="input-error" v-if="validation.error && validation.errors.relationship">
+            {{ validation.errors.relationship[0] }}
+        </span>
+      </div>
+      <div class="form-row column">
+        <label for="ocupation">Occupation</label>
+        <div class="input-wrapper">
+          <input v-model="form.ocupation" class="form-control" type="text" name="ocupation" id="ocupation" data-color="light" placeholder="What's your occupation">
+        </div>
+      </div>
+    </form>
+    <button class="button-primary w-100" @click="submitSignUp">Next</button>      
+</template>
+<script>
+import axios from 'axios'
+import inputValMixin from '../../mixins/inputValMixin'
+import { mapGetters } from 'vuex';
+export default {
+  name: 'ParentSignUpMore',
+  mixins: [inputValMixin],
+  computed: mapGetters(['getRole', 'getHostname']),
+  data () {
+    return {
+      form: {
+        phone: '',
+        emergency_number: '',
+        relationship: '',
+        ocupation: '',
+      },
+      token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null
+    }
+  },
+  methods: {
+    submitSignUp() {
+        this.creating = true
+        axios.post(this.getHostname+'/api/parent-details?token=' + this.token, this.form)
+        .then((res) => {
+          this.signupSuccess(res)
+        }).catch((e) => {
+          console.log(e.response)
+          this.creating = false
+          if(e.response.status == 422){
+            this.validation.error = true
+            this.validation.errors = e.response.data.errors
+          }
+        })
+      },
+      signupSuccess(res) {
+        this.creating = false
+        this.clearErrs()
+        this.$store.commit('updateNewUser', res.data)
+      }
+  }
+}
+</script>

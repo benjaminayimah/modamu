@@ -1,0 +1,47 @@
+<template>
+    <router-link :to="{ name: 'Attendee', params: { id: kid.id, name: kid.name, event:event } }" class="grid-item table-row">
+        <div class="table-cell flx ai-c gap-8">
+            <div class="bg-img br-50"></div>
+            <span>Name of child</span>
+        </div>
+        <div class="table-cell flx ai-c">Age</div>
+        <div class="table-cell flx jc-sb ai-c">
+            <span class="gender-pill" data-type="male">Male</span>
+            <span class="ft-primary pd-0-20">
+                View profile
+                <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.715 10">
+                    <path d="M1.533,10a.715.715,0,0,1-.505-1.22L4.808,5,1.028,1.22A.715.715,0,1,1,2.038.21L6.324,4.495a.715.715,0,0,1,0,1.011L2.038,9.791A.712.712,0,0,1,1.533,10Z" transform="translate(-0.818 0)" fill="#87a5ff"/>
+                </svg>
+            </span>
+        </div>
+        <div class="flx jc-c">
+            <button class="button-primary">Accept</button>
+        </div>
+    </router-link>
+</template>
+<script>
+export default {
+    name: 'WaitListRow',
+    props: ['kid', 'event']
+}
+</script>
+<style lang="scss" scoped>
+$radius: 30px;
+.table-row{
+    .table-cell {
+        background-color: var(--bg-white);
+        &:first-child{
+            border-top-left-radius: $radius;
+            border-bottom-left-radius: $radius;
+        }
+        &:nth-child(3){
+            border-top-right-radius: $radius;
+            border-bottom-right-radius: $radius;
+        }
+    }
+}
+.button-primary {
+    height: 55px;
+    padding: 8px 50px;
+}
+</style>

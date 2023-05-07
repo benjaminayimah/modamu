@@ -1,30 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
+  <new-modal />
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import NewModal from './components/layouts/NewModal.vue'
+export default {
+  components: { NewModal },
+  name: 'App',
+  created() {
+    this.$store.commit('computeWindow')
+    window.addEventListener('resize', this.windowSize)
+    localStorage.getItem('auth') ? this.$store.dispatch('getAuthUser') : ''
+  },
+  methods: {
+    windowSize() {
+      setTimeout(()=> {
+        this.$store.commit('computeWindow')
+      }, 100)
     }
   }
+}
+</script>
+
+<style lang="scss">
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 </style>
