@@ -4,45 +4,47 @@
             <div class="flx gap-16 column">
                 <div class="row">
                     <span>Event name</span>
-                    <div><strong>Name of Event</strong></div>
+                    <div><strong>{{ event.event.name }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Event date</span>
-                    <div><strong>24th June</strong></div>
+                    <div><strong>{{ format_date(event.event.date) }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Starts</span>
-                    <div><strong>1pm</strong></div>
+                    <div><strong>{{ event.event.start_time }}</strong></div>
                 </div>
             </div>
             <div class="flx gap-16 column">
                 <div class="row">
                     <span>Event address</span>
-                    <div><strong>No. 7 lagoon street</strong></div>
+                    <div><strong>{{ event.event.address }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Ends</span>
-                    <div><strong>4pm</strong></div>
+                    <div><strong>{{ event.event.end_time }}</strong></div>
                 </div>
             </div>
         </div>
         <div class="flx jc-sb">
             <div class="flx gap-8 ai-c">
-                <i class="br-50 accepted"></i>
-                <span>Accepted</span>
+                <i class="br-50" :class="event.booking.accepted ? 'accepted' : 'pending'"></i>
+                <span class="capitalize">{{event.booking.accepted ? 'accepted' : 'pending' }}</span>
             </div>
-            <button @click="trackEvent" class="button-primary">Track</button>
+            <button @click="trackEvent" class="button-primary" :class="{ 'button-disabled' : !event.booking.accepted }" :disabled="!event.booking.accepted ? true : false">Track</button>
         </div>
     </div>
 </template>
 
 <script>
+import formatDateTime from '@/mixins/formatDateTime';
 export default {
     name: 'RegisteredEventsList',
     props: ['event'],
+    mixins: [formatDateTime],
     methods: {
         trackEvent() {
-            this.$router.push({ name: 'TrackEvent', params: { name: this.event.name}})
+            this.$router.push({ name: 'TrackEvent', params: { id: this.event.event.id, name: this.event.event.name}})
         }
     }
 }

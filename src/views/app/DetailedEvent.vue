@@ -112,7 +112,7 @@
                         </svg>
                         Add Pictures to event gallery
                     </button>
-                    <button v-else @click="bookNow" class="button-primary absolute gap-8 book-now" :class="{ 'button-disabled' : pastEvent }" :disabled="pastEvent ? true : false">
+                    <button v-else @click="!pastEvent ? bookNow : ''" class="button-primary absolute gap-8 book-now" :class="{ 'button-disabled' : pastEvent }" :disabled="pastEvent ? true : false">
                         Book now
                     </button>
                 </div>
@@ -178,7 +178,7 @@ export default {
     },
     methods: {
         bookNow() {
-            this.$router.push({ name: 'BookingSelectKids'})
+            this.$router.push({ name: 'BookingSelectKids', params: { event_id: this.event.id, event_name: this.event.name, event_price: this.event.amount }})
         },
         async setID(){
             await this.$store.commit('setTempID', this.event.id)

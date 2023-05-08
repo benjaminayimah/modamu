@@ -1,22 +1,31 @@
 <template>
-    <div class="flx column gap-8">
-        <div class="bg-img relative br-24" :style="{ backgroundImage: 'url('+event.image+')'}">
+    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.event.id, name: event.event.name }}" class="flx column gap-8">
+        <div class="bg-img relative br-24" :style="computedImage ? { backgroundImage: 'url('+hostname+'/storage/'+event.event.user_id+'/'+computedImage.image+')'} : ''">
             <div class="overlay absolute w-100 flx jc-sb">
                 <span class="price br-24 fs-08">Ongoing</span>
-                <h4 class="ft-white">$100</h4>
+                <h4 class="ft-white">${{ event.event.amount }}</h4>
             </div>
         </div>
         <div>
-            <h4 class="mb-4">Event name</h4>
-            <span class="gray fs-09">Village name</span>
+            <h4 class="mb-4">{{ event.event.name }}</h4>
+            <span class="gray fs-09">{{ event.village }}</span>
         </div>
-    </div>
+    </router-link>
 </template>
-
 <script>
+import { mapState } from 'vuex';
 export default {
     name: 'DashEventList',
-    props: ['event']
+    props: ['event'],
+    computed: {
+        ...mapState({
+            images: (state) => state.images,
+            hostname: (state) => state.hostname
+        }),
+        computedImage() {
+            return this.images.find(image => image.event_id == this.event.event.id) || null
+        }
+    }
 }
 </script>
 

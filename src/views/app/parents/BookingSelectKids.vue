@@ -18,15 +18,17 @@
             </div>
             <div class="payment-calc flx-end column flx">
                 <div class="payment-calc-container flx gap-16 column br-24 bg-white">
+                    <span v-if="error" class="input-error">Make a selection first</span>
                     <div class="flx jc-sb ai-c">
                         <h4>Amount to be paid</h4>
-                        <span class="price br-24">Price per child $100</span>
+                        <span class="price br-24">Price per child {{ $route.params.event_price }}</span>
                     </div>
                     <div class="flx jc-sb total-row br-16">
-                        <label for="total"><strong>${{ event.amount * selected.length }}</strong></label>
+                        <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    <button class="button-primary w-100">Make payment</button>
+                    {{ $route.params.event_name + '-' + $route.params.event_id + '-'+ $route.params.event_price }}
+                    <button @click="submitSelected" class="button-primary w-100">Make payment</button>
                 </div>
             </div>
         </div>
@@ -67,7 +69,23 @@ export default {
             }
         },
         submitSelected() {
-            // this.selected ? this.$router.push({ name: 'AddPayment', params: { name: this.selected.name }}) : this.errorMsg()
+            this.clrError ? this.clrError() : ''
+            if(this.checkSelection()){
+                axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, event_id: this.$route.params.event_id} )
+                .then((res) => {
+                    console.log(res.data)
+                }).catch((err) => {
+                    console.log(err.response.data)
+                })
+            }
+            
+
+        },
+        checkSelection() {
+            if(!this.selected.length) {
+                this.errorMsg()
+            }else
+            return true
         },
         errorMsg() {
             this.error = true
@@ -123,4 +141,8 @@ section {
         font-size: 1.2rem;
     }
 }
+.input-error{
+    font-size: 1rem;
+}
+
 </style>

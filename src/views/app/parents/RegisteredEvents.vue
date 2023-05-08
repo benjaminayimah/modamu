@@ -3,7 +3,7 @@
         <div class="title-row">
             <div class="flx gap-16 ai-c mb-24">
                 <h1 class="title">Track events</h1>
-                <span class="count-info count-secondary">3</span>
+                <span class="count-info count-secondary">{{ registered_events.length }}</span>
             </div>
             <div>Events your kids are billed to attend.</div>
         </div>
@@ -21,7 +21,9 @@ export default {
     name: 'RegisteredEvents',
     computed: {
         ...mapState({
-            registered_events: (state) => state.registered_events
+            registered_events: (state) => state.registered_events,
+            // token: (state) => state.token,
+            // hostname: (state) => state.hostname
         })
     }
 }

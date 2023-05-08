@@ -24,8 +24,9 @@
           </div>
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
+              <div class="flx-grow-1 bg-white centered br-24" v-if="!events.length">No event found</div>
               <div class="flx flx-grow-1 column jc-sb gap-16">
-                <div v-for="event in topEvts" :key="event.id" class="top-evt bg-white br-16 pd-8">event 1</div>
+                <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
               </div>
             </div>
         </div>
@@ -48,13 +49,6 @@
         </div>
         <div v-else class="gap-32 grid bottom-row flx-grow-1">
           <dash-event-list v-for="event in events.slice(0, 5)" :key="event.id"  :event="event"/>
-          <!-- <div v-for="event in events_near.slice(0, 5)" :key="event.id" class="flx-grow-1 flx column gap-8">
-            <div class="bg-img br-24"></div>
-            <div>
-              <h4 class="mb-4">Event name</h4>
-              <span class="gray">Village name</span>
-            </div>
-          </div> -->
         </div>
       </div>
     </section>
@@ -63,14 +57,15 @@
 import { mapState } from 'vuex';
 import userNameMixin from '../../../mixins/userNameMixin';
 import DashEventList from '../../../components/includes/app/DashEventList.vue';
+import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 export default {
-  components: { DashEventList },
+  components: { DashEventList, DashTodaysEventList },
     name: 'ParentDash',
     mixins: [userNameMixin],
     computed: {
       ...mapState({
         events: (state) => state.events,
-        user: (state) => state.user
+        user: (state) => state.user,
       })
     },
     data () {
@@ -105,9 +100,6 @@ h1 {
 }
 .stats-card {
   height: 150px;
-}
-.top-evt {
-  height: 60px;
 }
 .top-row-col-2{
   max-width: 470px;

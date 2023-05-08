@@ -25,7 +25,7 @@
                         </svg>
                         <i class="bg-primary br-50"></i>
                     </router-link>
-                    <router-link style="background-color: transparent;" to="/profile" class="flx gap-16 ai-c u-a">
+                    <router-link to="/profile" class="flx gap-16 ai-c u-a">
                         <span class="text-ellipsis">{{ computedName }}</span>
                         <div class="bg-img br-50" :style="getUser.image ? { backgroundImage: 'url('+getHostname+'/storage/'+getUser.id+'/'+getUser.image+')'} : { backgroundImage: 'url('+getDefaultImage+')'}"></div>
                     </router-link>
@@ -59,13 +59,15 @@ nav {
     height: 60px;
 }
 .bg-img{
-    width: 54px;
-    height: 54px;
+    width: 52px;
+    height: 52px;
+    transition: 0.3s ease;
+    border: 1.5px solid var(--bg-color);
 }
 .a-btn {
     background-color: rgba($color: #ffffff, $alpha: .4);
-    height: 54px;
-    width: 54px;
+    height: 52px;
+    width: 52px;
     &:hover {
         background-color: var(--input-hover);
     }
@@ -77,10 +79,22 @@ nav {
         right: 17px;
     }
 }
-.u-a span {
-    max-width: 110px;
-}
+
 .u-a {
     background-color: transparent;
+    span {
+        max-width: 110px;
+    }
+    &:hover {
+        .bg-img {
+            border-color: var(--primary-color);
+        }
+    }
+    &:active {
+        .bg-img{
+            transform: scale(0.98);      
+        }
+    }   
+
 }
 </style>

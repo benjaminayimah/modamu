@@ -7,7 +7,8 @@ import newUser from './modules/newUser'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
+    // hostname: 'http://localhost:8000',
+    hostname: 'http://18.169.170.75',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     device: null,
@@ -29,7 +30,7 @@ export default createStore({
       {id: 2, name: 'Google pay'},
       {id: 3, name: 'Apple pay'},
     ],
-    events_near: [],
+    events_near: { events: [], images: []},
     registered_events: [],
     attendees: []
   },
@@ -87,6 +88,7 @@ export default createStore({
       state.events = payload.events
       state.images = payload.images
       state.attendees = payload.attendees
+      state.registered_events = payload.registered
 
       this.commit('updateLocalStorage', payload.user)
     },
@@ -113,14 +115,12 @@ export default createStore({
       state.current_location = payload
     },
     addNearByEvent(state, payload) {
-      state.events_near = payload.events
-      state.images = payload.images
+      state.events_near = payload
     },
 
   },
   actions: {
     async getAuthUser(state) {  
-      // state.commit('setLoader')          
         try {
           const res = await axios.post(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
@@ -139,6 +139,9 @@ export default createStore({
     },
     async fetchThisEvent(state, payload) {  
       return await axios.post(this.getters.getHostname+'/api/fetch-this-event/'+payload +'?token='+ this.getters.getToken)    
+    },
+    async fetchThisRegisteredEvent(state, payload) {  
+      return await axios.get(this.getters.getHostname+'/api/fetch-this-registered-event/'+payload+ '/?token='+ this.getters.getToken)    
     },
     logoutAuth(state){
       // state.commit('setLoader') 

@@ -97,9 +97,9 @@ const routes = [
         ]
       },
       { path: '/events-near-you', name: 'EventsNear', component: EventsNear},
-      { path: '/booking-event', name: 'BookingSelectKids', component: BookingSelectKids},
+      { path: '/booking-event/:event_id/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
       { path: '/registered-events', name: 'RegisteredEvents', component: RegisteredEvents},
-      { path: '/track-event/:name', name: 'TrackEvent', component: TrackEvent},
+      { path: '/track-event/:id/:name', name: 'TrackEvent', component: TrackEvent},
 
 
 

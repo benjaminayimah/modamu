@@ -13,7 +13,7 @@
                 <input class="form-control" type="text" data-type="icon" data-color="light" placeholder="Search events...">
             </div>
         </div>
-        <div v-if="events_near.length" class="flx gap-16">
+        <div v-if="events_near.events.length" class="flx gap-16">
             All ongoing events close to you
             <span class="ft-primary flx ai-c gap-8">
                 <svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 20.101 19.821">
@@ -22,7 +22,7 @@
                 {{ current_location }}
             </span>
         </div>
-        <div class="empty-state flx column jc-c ai-c gap-16" v-if="!events_near.length">
+        <div class="empty-state flx column jc-c ai-c gap-16" v-if="!events_near.events.length">
             <svg xmlns="http://www.w3.org/2000/svg" width="268" height="268" viewBox="0 0 268 268">
                 <circle cx="134" cy="134" r="134" fill="#d7e5ff"/>
                 <circle cx="94.781" cy="94.781" r="94.781" transform="translate(39.219 39.218)" fill="#cadcff"/>
@@ -38,10 +38,9 @@
         </div>
         <div class="results">
             <div class="grid gap-32 fs-09">
-                <events-near-me-lists v-for="event in events_near" :key="event.id" :event="event" :images="images" />
+                <events-near-me-lists v-for="event in events_near.events" :key="event.id" :event="event" :images="events_near.images" />
             </div>
         </div>
-        
     </section>
 </template>
 <script>
@@ -57,7 +56,6 @@ export default {
             hostname: (state) => state.hostname,
             token: (state) => state.token,
             current_location: (state) => state.current_location,
-            images: (state) => state.images
         })
     },
     methods: {

@@ -180,7 +180,7 @@ button, .a-button{
 }
 .form-row{
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 .form-col{
     display: flex;
@@ -537,7 +537,7 @@ a{
 form {
     label {
         font-size: 0.9rem;
-        color: var(--gray);
+        color: var(--ft-dark);
     }
 }
 .price {
