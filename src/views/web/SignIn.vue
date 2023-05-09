@@ -104,6 +104,7 @@ export default {
   methods: {
     submitSignin() {
       this.creating = true
+      this.validation.error ? this.clearErrs() : ''
       axios.post(this.getHostname+'/api/sign-in', this.form)
       .then((res) => {
           this.signinSuccess(res)
@@ -112,6 +113,7 @@ export default {
           if (e.response.status == 401) {
             this.userError.error = true
             this.userError.message = 'Invalid email or password. Please try again or try resetting your password.'
+            this.form.password = ''
           }
           if(e.response.status == 422){
             this.validation.error = true
