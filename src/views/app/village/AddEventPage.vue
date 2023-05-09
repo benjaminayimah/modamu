@@ -267,7 +267,7 @@ button.button-outline{
     padding: 8px 20px;
     background-color: var(--input-hover);
     border-radius: 18px;
-    height: 58px;
+    height: 62px;
     button {
         background-color: transparent;
         color: var(--primary-color);

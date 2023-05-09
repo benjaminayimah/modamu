@@ -25,7 +25,7 @@
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
               <div class="flx-grow-1 bg-white centered br-24" v-if="!events.length">No event found</div>
-              <div class="flx flx-grow-1 column jc-sb gap-16">
+              <div class="flx flx-grow-1 column jc-sb gap-16" v-else>
                 <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
               </div>
             </div>

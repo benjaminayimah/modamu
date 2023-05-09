@@ -7,8 +7,8 @@ import newUser from './modules/newUser'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    hostname: 'http://18.169.170.75',
+    hostname: 'http://localhost:8000',
+    // hostname: 'http://18.169.170.75',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     device: null,

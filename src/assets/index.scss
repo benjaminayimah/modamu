@@ -242,12 +242,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
 }
-// input:-webkit-autofill,
-// input:-webkit-autofill:hover, 
-// input:-webkit-autofill:focus, 
-// input:-webkit-autofill:active  {
-//     -webkit-box-shadow: 0 0 0 40px white inset !important;
-// }
+input[data-color=light]:-webkit-autofill,
+input[data-color=light]:-webkit-autofill:hover, 
+input[data-color=light]:-webkit-autofill:focus, 
+input[data-color=light]:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 40px white inset !important;
+}
 .input-error{
     color: var(--error);
     font-size: 0.8rem;
@@ -262,7 +262,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input-wrapper{
     position: relative;
     input, select {
-        height: var(--input-btn-height);
+        height: 62px;
+        line-height: 2.7;
     }
     input[data-type=icon] {
         padding: 8px 12px 8px 50px;
@@ -295,6 +296,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         fill: var(--dark-gray);
     }
 }
+.hide-pass-active{
+    background-color: var(--bg-color);
+    path{
+        fill: var(--primary-color);
+    }
+  }
 .button-disabled{
     background-color: var(--button-disabled);
     &:hover {
@@ -537,6 +544,7 @@ a{
 form {
     label {
         font-size: 0.9rem;
+        font-weight: 700;
         color: var(--ft-dark);
     }
 }

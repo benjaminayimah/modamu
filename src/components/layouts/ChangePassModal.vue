@@ -8,7 +8,7 @@
                 <div class="form-row column">
                     <label for="current_password">Current password</label>
                     <div class="input-wrapper">
-                        <input v-model="form.current_password" autocomplete="off" class="form-control" type="password" id="current_password" name="password_confirmation" data-color="dark" placeholder="Provide your current password">
+                        <input v-model="form.current_password" autocomplete="new-password" class="form-control" type="password" id="current_password" name="password_confirmation" data-color="dark" placeholder="Provide your current password">
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.current_password">
                         {{ validation.errors.current_password[0] }}
@@ -17,7 +17,7 @@
                 <div class="form-row column">
                     <label for="password">New password</label>
                     <div class="input-wrapper">
-                        <input v-model="form.new_password" autocomplete="off" class="form-control" type="password" id="new_password" name="password" data-color="dark" placeholder="Enter a new password">
+                        <input v-model="form.new_password" autocomplete="new-password" class="form-control" type="password" id="new_password" name="password" data-color="dark" placeholder="Enter a new password">
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.new_password">
                         {{ validation.errors.new_password[0] }}
