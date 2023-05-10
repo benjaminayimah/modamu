@@ -117,6 +117,9 @@ export default createStore({
     addNearByEvent(state, payload) {
       state.events_near = payload
     },
+    setWaitlist(state, payload) {
+      state.wait_lists = payload
+    }
 
   },
   actions: {
@@ -141,8 +144,17 @@ export default createStore({
       return await axios.post(this.getters.getHostname+'/api/fetch-this-event/'+payload +'?token='+ this.getters.getToken)    
     },
     async fetchThisRegisteredEvent(state, payload) {  
-      return await axios.get(this.getters.getHostname+'/api/fetch-this-registered-event/'+payload+ '/?token='+ this.getters.getToken)    
+      return await axios.get(this.getters.getHostname+'/api/fetch-this-registered-event/'+payload+'/?token='+ this.getters.getToken)    
     },
+    async fetchThisKidAndParent(state, payload) {  
+      return await axios.post(this.getters.getHostname+'/api/fetch-this-kid-and-parent?token='+ this.getters.getToken, payload)    
+    },
+    async fetchThisParent(state, payload) {  
+      return await axios.post(this.getters.getHostname+'/api/fetch-this-parent?token='+ this.getters.getToken, payload)    
+    },
+
+    
+    
     logoutAuth(state){
       // state.commit('setLoader') 
         axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
@@ -151,7 +163,6 @@ export default createStore({
         })
     },
     computeCoordinates() {
-
       if (navigator.geolocation) {
         const vm = this
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -159,24 +170,27 @@ export default createStore({
           const lng = position.coords.longitude;
           vm.dispatch('getCucrrentLocation', { lat: lat, lng: lng})
         }, function(error) {
-          console.log(`Error getting location: ${error.message}`);
+          console.log(`Error getting location: ${error.message}`)
         });
       } else {
-        console.log('Geolocation is not supported by this browser.');
+        console.log('Geolocation is not supported by this browser.')
       }
     },
     getCucrrentLocation(state, payload) {
-      const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric'; // Your Google Cloud Platform API key
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${payload.lat},${payload.lng}&key=${apiKey}`;
+      const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric' // Your Google Cloud Platform API key
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${payload.lat},${payload.lng}&key=${apiKey}`
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          const address = data.results[0].formatted_address;
+          const address = data.results[0].formatted_address
           state.commit('setCurrentLocation', address)
         })
         .catch(error => {
           console.log(error); // Handle any errors that occurred
         });
+    },
+    async fetchWaitList() {
+      return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
     }
     // async doFetchKids(url) {
     //   try {

@@ -1,12 +1,12 @@
 <template>
-    <router-link :to="{ name: 'Attendee', params: { id: kid.id, name: kid.name, event:event } }" class="grid-item table-row">
+    <router-link :to="{ name: 'Attendee', params: { id: kid.id, event: kid.event_id, parent: kid.user_id, name: kid.name } }" class="grid-item table-row">
         <div class="table-cell flx ai-c gap-8">
-            <div class="bg-img br-50"></div>
-            <span>Name of child</span>
+            <profile-avatar :id="kid.user_id" :image="kid.photo"/>
+            <span>{{ kid.name }}</span>
         </div>
-        <div class="table-cell flx ai-c">Age</div>
+        <div class="table-cell flx ai-c">{{ calculateAge(kid.dob) }} years</div>
         <div class="table-cell flx jc-sb ai-c">
-            <span class="gender-pill" data-type="male">Male</span>
+            <span class="gender-pill capitalize" :data-type="kid.gender">{{ kid.gender }}</span>
             <span class="ft-primary pd-0-20">
                 View profile
                 <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.715 10">
@@ -20,9 +20,13 @@
     </router-link>
 </template>
 <script>
+import formatDateTime from '@/mixins/formatDateTime'
+import ProfileAvatar from './ProfileAvatar.vue'
 export default {
+  components: { ProfileAvatar },
     name: 'WaitListRow',
-    props: ['kid', 'event']
+    props: ['kid'],
+    mixins: [formatDateTime]
 }
 </script>
 <style lang="scss" scoped>
@@ -44,4 +48,9 @@ $radius: 30px;
     height: 55px;
     padding: 8px 50px;
 }
+.bg-img{
+    height: 42px;
+    width: 42px;
+}
+
 </style>

@@ -188,7 +188,7 @@ export default {
             form: {
                 event_name: '',
                 address: '',
-                date:  new Date().toISOString().slice(0, 10),
+                date: new Date().toISOString().slice(0, 10),
                 start_time: '',
                 end_time: '',
                 amount: '',
@@ -205,7 +205,6 @@ export default {
             this.startSubmit()
             axios.post(this.getHostname+'/api/event?token=' + this.getToken, this.form)
             .then((res) => {
-                console.log(res.data)
                 this.submitSuccess(res.data)
             }).catch((e) => {
                 this.endSubmit()

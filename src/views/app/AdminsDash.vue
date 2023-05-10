@@ -2,7 +2,7 @@
     <section class="flx gap-32">
         <div class="left flx column gap-32">
             <div class="flx column gap-40">
-                <h1>Good day Jason</h1>
+                <h1>Good day {{ computedFirstName(getUser.name) }}</h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <button class="button-secondary">View all events</button>
             </div>
@@ -87,11 +87,13 @@
     </section>
 </template>
 <script>
+import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters } from 'vuex';
 export default {
     name: 'AdminsDash',
+    mixins: [userNameMixin],
     computed: {
-        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents'])
+        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser'])
     }
 }
 </script>

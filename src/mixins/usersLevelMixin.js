@@ -9,7 +9,7 @@ export default {
             else if(this.is_subadmin)
             type = 'Sub admin'
             else if(this.is_parent)
-            type = this.getUser.relationship
+            type = this.user.relationship
             else if(this.is_village)
             type = 'Village'
             return type

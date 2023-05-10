@@ -7,13 +7,18 @@
             </div>
             <div>Events your kids are billed to attend.</div>
         </div>
-        <div class="grid col-4 gap-32">
+        <div class="centered bg-white br-16 pd-32" v-if="!registered_events.length">
+            <h4 class="mb-16">No events yet</h4>
+            <div>Your booked events would appear here.</div>
+        </div>
+        <div v-else  class="grid col-4 gap-32">
             <registered-event-list v-for="event in registered_events" :key="event.id" :event="event" />
         </div>
     </section>
 </template>
 
 <script>
+// import { callApi } from '@/api';
 import { mapState } from 'vuex';
 import RegisteredEventList from '../../../components/includes/app/RegisteredEventList.vue';
 export default {
@@ -25,7 +30,20 @@ export default {
             // token: (state) => state.token,
             // hostname: (state) => state.hostname
         })
-    }
+    },
+    // methods: {
+    //     async fetchRegisteredEvents() {
+    //         try {
+    //             const data = await callApi(this.hostname+'/api/parent-fetch-registered-event?token='+this.token);
+    //             console.log(data)
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    // },
+    // mounted() {
+    //     this.fetchRegisteredEvents()
+    // }
 }
 </script>
 

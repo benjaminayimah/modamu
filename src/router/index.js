@@ -10,7 +10,7 @@ import SignUp from '@/views/web/SignUp.vue'
 import SignUpVillage from '@/views/web/SignUpVillage.vue'
 import ForgotPassword from '@/views/web/ForgotPassword.vue'
 import Profile from '@/views/app/Profile.vue'
-import KidsProfile from '@/components/layouts/ProfileViewKids.vue'
+import KidsProfile from '@/components/layouts/ProfileViewKidDetail.vue'
 import AddEventPage from '@/views/app/village/AddEventPage.vue'
 import Events from '@/views/app/Events.vue'
 import OngoingEvents from '@/views/app/EventsOngoing.vue'
@@ -78,8 +78,8 @@ const routes = [
       ]
       },
       { path: '/event/:id/:name', name: 'DetailedEvent', component: DetailedEvent },
-      { path: '/event/attendee/:id/:name/:event', name: 'Attendee', component: Attendee },
-      { path: '/parent', name: 'ViewParentProfile', component: ViewParentProfile },
+      { path: '/event/attendee/:id/:event/:parent/:name', name: 'Attendee', component: Attendee },
+      { path: '/parent/:event/:parent_id/:kid/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/villages', name: 'Villages', component: Villages },
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/request-code', name: 'RequestCode', component: RequestCode},
@@ -97,7 +97,7 @@ const routes = [
         ]
       },
       { path: '/events-near-you', name: 'EventsNear', component: EventsNear},
-      { path: '/booking-event/:event_id/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
+      { path: '/booking-event/:event_id/:village/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
       { path: '/registered-events', name: 'RegisteredEvents', component: RegisteredEvents},
       { path: '/track-event/:id/:name', name: 'TrackEvent', component: TrackEvent},
 

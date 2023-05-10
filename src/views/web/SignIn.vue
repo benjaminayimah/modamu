@@ -104,7 +104,7 @@ export default {
   methods: {
     submitSignin() {
       this.creating = true
-      this.validation.error ? this.clearErrs() : ''
+      this.validation.error || this.userError.error ? this.clearErrs() : ''
       axios.post(this.getHostname+'/api/sign-in', this.form)
       .then((res) => {
           this.signinSuccess(res)

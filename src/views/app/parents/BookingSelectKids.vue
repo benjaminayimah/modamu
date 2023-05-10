@@ -27,7 +27,6 @@
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    {{ $route.params.event_name + '-' + $route.params.event_id + '-'+ $route.params.event_price }}
                     <button @click="submitSelected" class="button-primary w-100">Make payment</button>
                 </div>
             </div>
@@ -52,10 +51,7 @@ export default {
     data() {
         return {
             selected: [],
-            error: false,
-            event: {
-                amount: 100
-            }
+            error: false
         }
     },
     methods: {
@@ -71,15 +67,13 @@ export default {
         submitSelected() {
             this.clrError ? this.clrError() : ''
             if(this.checkSelection()){
-                axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, event_id: this.$route.params.event_id} )
+                axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id} )
                 .then((res) => {
                     console.log(res.data)
                 }).catch((err) => {
                     console.log(err.response.data)
                 })
             }
-            
-
         },
         checkSelection() {
             if(!this.selected.length) {

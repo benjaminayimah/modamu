@@ -5,38 +5,20 @@
                 <profile-avatar :image="kid.photo" :id="id"/>
                 <div class="flx column ai-c">
                     <div class="name text-ellipsis">{{ kid.name }}</div>
-                    <div class="flx gap-4 gray age"><span>{{ computeAge(kid.dob) }}</span><span>years old</span></div>
+                    <div class="flx gap-4 gray age"><span>{{ calculateAge(kid.dob) }}</span><span>years old</span></div>
                 </div>
             </div>
         </router-link>
     </li>
 </template>
 <script>
+import formatDateTime from '@/mixins/formatDateTime';
 import ProfileAvatar from './ProfileAvatar.vue'
 export default {
     components: { ProfileAvatar },
     name: 'KidsList',
     props: ['kid', 'id', 'noClick'],
-    methods: {
-        computeAge(date) {
-            const currentDate = new Date();
-            const dob = new Date(date)
-            const birthYear = dob.getFullYear();
-            const birthMonth = dob.getMonth();
-            const birthDay = dob.getDate();
-
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth();
-            const currentDay = currentDate.getDate();
-
-            let age = currentYear - birthYear;
-
-            if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
-                age--;
-            }
-            return age;
-        }
-    }
+    mixins: [formatDateTime]
 }
 </script>
 <style lang="scss" scoped>
@@ -60,8 +42,8 @@ a{
     padding: 20px;
     display: block;
     border-radius: inherit;
-    border: 1px solid transparent;
-    transition: 0.2s ease;
+    border: 1px solid var(--bg-color);
+    transition: .06s linear !important;
 }
 .bg-img{
     height: 80px;
@@ -72,7 +54,7 @@ a{
     font-size: 0.9rem;
 }
 .router-link-exact-active:not(.no-hover){
-    background-color: rgba(1, 115, 255, 0.1) !important;
+    background-color: #fff !important;
     border-color: var(--primary-color);
 }
 </style>

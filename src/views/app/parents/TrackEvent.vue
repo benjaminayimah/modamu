@@ -87,7 +87,6 @@ export default {
         fetchThisRegisteredEvent() {
             this.$store.dispatch('fetchThisRegisteredEvent', this.$route.params.id)
             .then((res) => {
-                console.log(res.data)
                 this.attendees = res.data.attendees
                 this.booking = res.data.booking
                 this.event = res.data.event

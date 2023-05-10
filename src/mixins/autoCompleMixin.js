@@ -14,7 +14,6 @@ export default {
             this.form.address = address.name
             this.form.latitude = address.geometry.location.lat()
             this.form.longitude = address.geometry.location.lng()
-            console.log(address.name)
 
         })
     }

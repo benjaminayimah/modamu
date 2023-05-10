@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Waiting list</h1>
-                <span class="count-info count-primary">230</span>
+                <span class="count-info count-primary">{{ wait_lists.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -22,7 +22,10 @@
                     <h4 class="table-cell">Gender</h4>
                     <div></div>
                 </div>
-                <wait-list-row v-for="waitlist in wait_lists" :key="waitlist.id" :kid="waitlist" :event="'event'"/>
+                <div v-if="!wait_lists.length" class="bg-white pd-24 br-16 centered">
+                    No item in waiting list
+                </div>
+                <wait-list-row v-else v-for="waitlist in wait_lists" :key="waitlist.id"  :kid="waitlist"/>
             </div>
         </div>
     </section>
@@ -31,13 +34,24 @@
 import { mapState } from 'vuex';
 import WaitListRow from '../../components/includes/app/WaitListRow.vue'
 export default {
-  components: { WaitListRow },
-  name: 'WaitList',
-  computed: mapState({
-    wait_lists: (state) => state.wait_lists
-  })
-
-
+    components: { WaitListRow },
+    name: 'WaitList',
+    computed: mapState({
+        wait_lists: (state) => state.wait_lists
+    }),
+    methods: {
+        fetchWaitList() {
+            this.$store.dispatch('fetchWaitList')
+            .then((res) => {
+                this.$store.commit('setWaitlist', res.data.attendees)
+            }).catch((err) => {
+                console.log(err.response.data)
+            })
+        }
+    },
+    mounted() {
+        this.fetchWaitList()
+    }
 }
 </script>
 <style lang="scss" scoped>

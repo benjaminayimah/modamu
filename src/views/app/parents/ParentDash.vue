@@ -2,7 +2,7 @@
     <section class="flx column gap-16">
       <div class="top-row flx gap-32">
         <div class="wl-sec flx column gap-40">
-          <h1>Good day {{ computedName }},</h1>
+          <h1>Good day {{ computedFirstName(user.name) }},</h1>
           <div>At modamu we bring the fun to your kids easily so browse through our events catalogue close to you and begin the fun.</div>
           <button @click="goToEvents" class="button-secondary">See events close to you</button>
         </div>

@@ -26,7 +26,7 @@
                         <i class="bg-primary br-50"></i>
                     </router-link>
                     <router-link to="/profile" class="flx gap-16 ai-c u-a">
-                        <span class="text-ellipsis">{{ computedName }}</span>
+                        <span class="text-ellipsis">{{ computedFirstName(getUser.name) }}</span>
                         <div class="bg-img br-50" :style="getUser.image ? { backgroundImage: 'url('+getHostname+'/storage/'+getUser.id+'/'+getUser.image+')'} : { backgroundImage: 'url('+getDefaultImage+')'}"></div>
                     </router-link>
                 </div>
