@@ -14,19 +14,56 @@
                 </svg>
             </span>
         </div>
-        <div class="flx jc-c">
-            <button class="button-primary">Accept</button>
+        <div>
+            <button @click.prevent="doAccept" class="button-primary gap-8">
+                <spinner v-if="submitting" v-bind:size="20" v-bind:white="true" />
+                 <span>{{ submitting ? 'Processing...' : 'Accept'}}</span>
+            </button>
         </div>
     </router-link>
 </template>
 <script>
+import { mapState } from 'vuex'
+import { postApi } from '@/api'
 import formatDateTime from '@/mixins/formatDateTime'
 import ProfileAvatar from './ProfileAvatar.vue'
+import Spinner from '../Spinner.vue'
 export default {
-  components: { ProfileAvatar },
+    components: { ProfileAvatar, Spinner },
     name: 'WaitListRow',
+    computed: {
+        ...mapState({
+            hostname: (state) => state.hostname,
+            token: (state) => state.token
+        })
+    },
     props: ['kid'],
-    mixins: [formatDateTime]
+    mixins: [formatDateTime],
+    data() {
+        return {
+            submitting: false,
+        }
+    },
+    methods: {
+        async doAccept() {
+            this.startSpinner()
+            try {
+                const res = await postApi(this.hostname+'/api/accept-this-attendee?token='+this.token, { kid: this.kid.id, event: this.kid.event_id});
+                console.log(res.data)
+                this.$store.commit('updateWaitlist', res.data.attendee)
+                this.stopSpinner()
+            } catch (error) {
+                console.error(error);
+                this.stopSpinner()
+            }
+        },
+        startSpinner() {
+            this.submitting = true
+        },
+        stopSpinner() {
+            this.submitting = false
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -43,10 +80,6 @@ $radius: 30px;
             border-bottom-right-radius: $radius;
         }
     }
-}
-.button-primary {
-    height: 55px;
-    padding: 8px 50px;
 }
 .bg-img{
     height: 42px;

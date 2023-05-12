@@ -18,7 +18,7 @@
 </template>
 
 <script>
-// import { callApi } from '@/api';
+import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import RegisteredEventList from '../../../components/includes/app/RegisteredEventList.vue';
 export default {
@@ -27,23 +27,23 @@ export default {
     computed: {
         ...mapState({
             registered_events: (state) => state.registered_events,
-            // token: (state) => state.token,
-            // hostname: (state) => state.hostname
+            token: (state) => state.token,
+            hostname: (state) => state.hostname
         })
     },
-    // methods: {
-    //     async fetchRegisteredEvents() {
-    //         try {
-    //             const data = await callApi(this.hostname+'/api/parent-fetch-registered-event?token='+this.token);
-    //             console.log(data)
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    // },
-    // mounted() {
-    //     this.fetchRegisteredEvents()
-    // }
+    methods: {
+        async fetchRegisteredEvents() {
+            try {
+                const res = await getApi(this.hostname+'/api/parent-fetch-registered-event?token='+this.token);
+                this.$store.commit('setRegisteredEvents', res.data.registered)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    },
+    mounted() {
+        this.fetchRegisteredEvents()
+    }
 }
 </script>
 

@@ -21,7 +21,6 @@ import Attendee from '@/views/app/village/AttendeeProfile.vue'
 import ViewParentProfile from '@/views/app/village/ViewParentProfile.vue'
 import Villages from '@/views/app/Villages.vue'
 import WaitList from '@/views/app/WaitList.vue'
-import RequestCode from '@/views/app/RequestCode.vue'
 import Message from '@/views/app/Message.vue'
 import MessageDetail from '@/views/app/MessageDetail.vue'
 import Notification from '@/views/app/Notification.vue'
@@ -36,6 +35,8 @@ import TrackEvent from '@/views/app/parents/TrackEvent.vue'
 import AdminDashOngoingTab from '@/components/layouts/AdminDashOngoingTab.vue'
 import AdminDashUpcomingTab from '@/components/layouts/AdminDashUpcomingTab.vue'
 import AdminDashPastTab from '@/components/layouts/AdminDashPastTab.vue'
+import ParentVerifyCode from '@/views/app/parents/ParentVerifyCode.vue'
+import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
 
 
 
@@ -82,7 +83,6 @@ const routes = [
       { path: '/parent/:event/:parent_id/:kid/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/villages', name: 'Villages', component: Villages },
       { path: '/waitlists', name: 'WaitList', component: WaitList },
-      { path: '/request-code', name: 'RequestCode', component: RequestCode},
       { path: '/messages', component: Message,
       children: [
         { path: '/messages/:name/:id', name: 'MessageDetail', component: MessageDetail },
@@ -100,6 +100,9 @@ const routes = [
       { path: '/booking-event/:event_id/:village/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
       { path: '/registered-events', name: 'RegisteredEvents', component: RegisteredEvents},
       { path: '/track-event/:id/:name', name: 'TrackEvent', component: TrackEvent},
+      { path: '/verify-code-and-checkout', name: 'ParentVerifyCode', component: ParentVerifyCode},
+      { path: '/code-verification', name: 'VillageVerifyCode', component: VillageVerifyCode},
+
 
 
 

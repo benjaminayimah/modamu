@@ -43,7 +43,7 @@ export default {
         fetchWaitList() {
             this.$store.dispatch('fetchWaitList')
             .then((res) => {
-                this.$store.commit('setWaitlist', res.data.attendees)
+                this.$store.commit('setWaitlist', res.data.waitlist)
             }).catch((err) => {
                 console.log(err.response.data)
             })

@@ -5,10 +5,8 @@
             <h4 class="table-cell">Duration</h4>
             <h4 class="table-cell">Kids in attendance</h4>
         </div>
-        <div v-if="!events.length">
-            <div class="flx column ai-c gap-24">
-                <h4>There are no ongoing events</h4>
-            </div>
+        <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
+            <div>There are no ongoing events</div>
         </div>
         <event-row v-for="event in events" :key="event.id" :event="event" :dashboard="dashboard"/>
     </div>

@@ -1,10 +1,10 @@
 <template>
-    <router-link :to="{ name: 'Attendee', params: { id: kid.id, name: kid.name, event:event } }" class="flx jc-sb">
+    <router-link :to="{ name: 'Attendee', params: { id: kid.id, name: kid.name, event: event, parent:kid.user_id } }" class="flx jc-sb">
         <div class="flx ai-c gap-8">
-            <div class="bg-img br-50"></div>
+            <profile-avatar :id="kid.user_id" :image="kid.photo" />
             <div>
-                <div>Name of kid</div>
-                <span class="gray fs-09">12 years</span>
+                <div>{{ kid.name }}</div>
+                <span class="gray fs-09">{{ calculateAge(kid.dob)}} years</span>
             </div>
         </div>
         <span class="flx gap-8 ai-c fs-09">
@@ -16,9 +16,13 @@
     </router-link>
 </template>
 <script>
+import formatDateTime from '@/mixins/formatDateTime';
+import ProfileAvatar from './ProfileAvatar.vue'
 export default {
+  components: { ProfileAvatar },
     name: 'KidsRow',
-    props: ['kid', 'event']
+    props: ['kid', 'event'],
+    mixins: [formatDateTime]
 }
 </script>
 <style lang="scss" scoped>

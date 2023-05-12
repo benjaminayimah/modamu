@@ -1,9 +1,9 @@
 <template>
-    <section id="villages">
+    <section>
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
-                <h1 class="title">Waiting list</h1>
-                <span class="count-info count-primary">230</span>
+                <h1 class="title">Verify & checkout kids</h1>
+                <span class="count-info count-primary">{{ attendees.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -22,20 +22,55 @@
                     <h4 class="table-cell">Gender</h4>
                     <div></div>
                 </div>
-                <request-list-row v-for="waitlist in wait_lists" :key="waitlist.id" :kid="waitlist" :event="'event'"/>
+                <div v-if="!attendees.length" class="bg-white pd-24 br-16 centered">
+                    No attendees found
+                </div>
+                <request-list-row v-for="kid in attendees" :key="kid.id" :kid="kid" @check-in="checkIn"/>
             </div>
         </div>
     </section>
 </template>
 <script>
+import { getApi } from '@/api';
+import { postApi } from '@/api';
 import { mapState } from 'vuex';
-import RequestListRow from '../../components/includes/app/RequestListRow.vue'
+import RequestListRow from '@/components/includes/app/RequestListRow.vue';
 export default {
-  components: { RequestListRow },
-  name: 'RequestCode',
-  computed: mapState({
-    wait_lists: (state) => state.wait_lists
-  })
+    components: { RequestListRow },
+    name: 'VillageVerifyCode',
+    computed: {
+        ...mapState({
+            hostname: (state) => state.hostname,
+            token: (state) => state.token
+        })
+    },
+    data() {
+        return {
+            attendees: []
+        }
+    },
+    methods: {
+        async fetchAttendees() {
+            try {
+                const res = await getApi(this.hostname+'/api/village-fetch-attendees?token='+this.token);
+                this.attendees = res.data.attendees
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async checkIn(payload) {
+            try {
+                const res = await postApi(this.hostname+'/api/check-in-kid?token='+this.token, payload);
+                const i = this.attendees.findIndex(x => x.id === res.data.id)
+                this.attendees.splice(i, 1, res.data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    },
+    mounted() {
+        this.fetchAttendees()
+    }
 
 
 }

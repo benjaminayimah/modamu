@@ -51,7 +51,6 @@
                 <div class="flx column">
                     <button class="button-primary">Add card</button>
                 </div>
-
             </form>
         </div>
     </section>

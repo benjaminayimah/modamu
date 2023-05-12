@@ -16,7 +16,7 @@ export default createStore({
     windowHeight: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     addModal: false,
-    forms: {kids: false, editProfile: false, changePass: false, addtoGallery: false, id: ''},
+    forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, id: '', user: {} },
     kids: [],
     events: [],
     images: [],
@@ -59,10 +59,15 @@ export default createStore({
         state.forms.changePass = true
       }else if(payload == 'add-to-gallery') {
         state.forms.addtoGallery = true
+      }else if(payload == 'verify-code') {
+        state.forms.verifyCode = true
       }
     },
     setTempID(state, payload) {
       state.forms.id = payload
+    },
+    setTempUser(state, payload) {
+      state.forms.user = payload
     },
     activateModal(state) {
       state.addModal = true
@@ -88,9 +93,11 @@ export default createStore({
       state.events = payload.events
       state.images = payload.images
       state.attendees = payload.attendees
-      state.registered_events = payload.registered
 
       this.commit('updateLocalStorage', payload.user)
+    },
+    setRegisteredEvents(state, payload) {
+      state.registered_events = payload
     },
     updateUser(state, payload) {
       state.user = payload
@@ -98,6 +105,9 @@ export default createStore({
     },
     updateLocalStorage(state, payload) {
       localStorage.setItem('user', JSON.stringify(payload));
+    },
+    updateWaitlist(state, payload) {
+      state.wait_lists = state.wait_lists.filter(data => data.id != payload)
     },
     setKids(state, payload) {
       state.kids = payload
@@ -125,9 +135,8 @@ export default createStore({
   actions: {
     async getAuthUser(state) {  
         try {
-          const res = await axios.post(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
+          const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
-          // console.log(res.data)
           // state.commit('unSetLoader')
 
         } catch (e) {
@@ -269,8 +278,6 @@ export default createStore({
     getDevice: (state) => state.device,
     getWindowWidth: (state) => state.windowWidth,
     getWindowHeight: (state) => state.windowHeight,
-    getModal: (state) => state.addModal,
-    getForms: (state) => state.forms,
     getKids: (state) => state.kids,
     
 

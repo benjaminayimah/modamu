@@ -6,9 +6,9 @@
         </div>
         <div class="table-cell flx gap-8 ai-c"><span>{{ duration(event.start_time, event.end_time) }}</span><span>hours</span></div>
         <div class="table-cell flx jc-sb ai-c">
-            <div class="relative h-100">
+            <div class="relative h-100 flx ai-c">
                 <span v-if="!computedAttendees.length">No Attendees yet</span>
-                <div v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" class="bg-img attendees br-50"></div>
+                <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
             <span v-if="!dashboard" class="ft-primary pd-0-20">
@@ -63,11 +63,6 @@ a {
     height: 40px;
     width: 40px;
 }
-.attendees{
-    width: 40px;
-    border: 1px solid #fff;
-    background-color: #444;
-}
 .counter{
     background-color: #fff;
     height: 40px;
@@ -81,6 +76,8 @@ a {
     position: absolute;
 }
 .attendees{
+    width: 40px;
+    border: 1px solid #fff;
     &:nth-child(2) {
         background-color: #de1a1a;
         transform: translateX(15px);

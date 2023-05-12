@@ -241,19 +241,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$completionWidth: 440px;
 section {
     padding: $profileSecPadding 0;
 }
 .add-event-card{
     width: 80%
-}
-.completed-card{
-    width: $completionWidth;
-    padding: 50px;
-}
-.comp-text{
-    width: calc($completionWidth - 120px);
 }
 .input-error{
     font-size: 0.9rem;

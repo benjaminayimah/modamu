@@ -130,12 +130,12 @@
                     <input class="form-control" type="text" data-type="icon" data-color="dark" placeholder="Search Kids by name...">
                 </div>
                 <div class="kids-view">
-                    <div class="empty centered" v-if="!kids.length">
+                    <div class="empty centered" v-if="!computedAttendees.length">
                         No kids attending yet
                     </div>
                     <div v-else class="kids">
                         <div class="kid-row">
-                            <kids-row v-for="kid in kids" :key="kid.id" :kid="kid" :event="$route.params.id" />
+                            <kids-row v-for="kid in computedAttendees" :key="kid.id" :kid="kid" :event="$route.params.id" />
                         </div>
                     </div>
                 </div>
@@ -166,6 +166,9 @@ export default {
             return true
             else
             return false
+        },
+        computedAttendees() {
+            return this.kids.length ? this.kids.filter(data => data.event_id == this.$route.params.id) : ''
         }
     },
     data () {
@@ -188,9 +191,10 @@ export default {
             this.$store.dispatch('fetchThisEvent', this.$route.params.id)
             .then((res) => {
                 this.event = res.data.event
-                this.kids = res.data.kids
+                this.kids = res.data.attendees
                 this.images = res.data.images
                 this.village = res.data.user
+
             }).catch((err) => {
                 console.log(err.response.data)
             })

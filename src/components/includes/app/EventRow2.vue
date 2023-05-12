@@ -7,9 +7,9 @@
         <div class="table-cell flx gap-8 ai-c">{{ format_date(event.date) }}</div>
         <div class="table-cell flx gap-8 ai-c">{{ format_time(event.start_time) }}</div>
         <div class="table-cell flx jc-sb ai-c">
-            <div class="relative h-100">
+            <div class="relative h-100 flx ai-c">
                 <span v-if="!computedAttendees.length">No Attendees yet</span>
-                <div v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" class="bg-img attendees br-50"></div>
+                <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
             <span v-if="!dashboard" class="ft-primary pd-0-20">
@@ -67,11 +67,7 @@ a {
     height: 40px;
     width: 40px;
 }
-.attendees{
-    width: 40px;
-    border: 1px solid #fff;
-    background-color: #444;
-}
+
 .counter{
     background-color: #fff;
     height: 40px;
@@ -83,23 +79,22 @@ a {
 }
 .attendees, .counter{
     position: absolute;
+    background-color: var(--bg-color);
 }
 .attendees{
+    width: 40px;
+    border: 1px solid #fff;
     &:nth-child(2) {
-        background-color: #de1a1a;
         transform: translateX(15px);
     }
     &:nth-child(3) {
-        background-color: #1c1fe2;
         transform: translateX(30px);
     }
     &:nth-child(4) {
-        background-color: #cc0fe0;
         transform: translateX(45px);
 
     }
     &:nth-child(5) {
-        background-color: #e7ca10;
         transform: translateX(60px);
     }
 }

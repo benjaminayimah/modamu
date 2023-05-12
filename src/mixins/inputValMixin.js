@@ -4,7 +4,11 @@ export default {
             validation: {
                 error: false,
                 errors: '',
-            }
+            },
+            userError: {
+                error: false,
+                message: ''
+            },
         }
     },
     methods: {

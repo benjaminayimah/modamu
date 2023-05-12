@@ -1,10 +1,10 @@
 <template>
     <transition name="fade">
-        <backdrop v-if="getModal" />
+        <backdrop v-if="addModal" />
     </transition>
     <transition name="fade">
-        <section v-if="getModal">
-            <div id="modal" class="relative" :style="{ maxHeight: getWindowHeight-80 +'px', minHeight: 200 + 'px' }">
+        <section v-if="addModal">
+            <div id="modal" class="relative" :style="{ maxHeight: windowHeight-80 +'px', minHeight: 200 + 'px' }">
                 <div class="modal-top relative">
                     <button @click="$store.commit('closeModal')" class="br-50">
                         <svg xmlns="http://www.w3.org/2000/svg" height="14.683" viewBox="0 0 14.647 14.683">
@@ -18,22 +18,31 @@
             </div>
         </section>
     </transition>
-    <add-kids-modal v-if="getForms.kids" />
-    <profile-edit-modal v-else-if="getForms.editProfile" />
-    <change-pass-modal v-else-if="getForms.changePass"/>
-    <add-to-gallery v-else-if="getForms.addtoGallery" />
+    <add-kids-modal v-if="forms.kids" />
+    <profile-edit-modal v-else-if="forms.editProfile" />
+    <change-pass-modal v-else-if="forms.changePass"/>
+    <add-to-gallery v-else-if="forms.addtoGallery" />
+    <verify-code-modal v-else-if="forms.verifyCode" />
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import VerifyCodeModal from '@/views/app/village/VerifyCodeModal.vue';
+import { mapState } from 'vuex';
 import Backdrop from '../includes/Backdrop.vue';
 import AddKidsModal from './AddKidsModal.vue';
 import AddToGallery from './AddToGallery.vue';
 import ChangePassModal from './ChangePassModal.vue';
 import ProfileEditModal from './ProfileEditModal.vue';
 export default {
-  components: { AddKidsModal, Backdrop, ProfileEditModal, ChangePassModal, AddToGallery },
+    components: { AddKidsModal, Backdrop, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal },
     name: 'NewModal',
-    computed: mapGetters(['getWindowHeight', 'getModal', 'getForms'])
+    computed: {
+        ...mapState({
+            forms: (state) => state.forms,
+            windowHeight: (state) => state.windowHeight,
+            addModal: (state) => state.addModal
+
+        })
+    } 
 }
 </script>
 <style lang="scss" scoped>

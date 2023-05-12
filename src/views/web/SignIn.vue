@@ -94,10 +94,6 @@ export default {
         name: '',
         email: '',
       },
-      userError: {
-        error: false,
-        message: ''
-      },
       creating: false,
     }
   },
