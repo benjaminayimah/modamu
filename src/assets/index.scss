@@ -38,6 +38,9 @@
     --allergies: #FFF7B0
 }
 $profileSecPadding: 20px;
+html {
+    background-color: var(--bg-color);
+}
 body{
   margin: 0;
   overflow-x: hidden;
@@ -46,7 +49,6 @@ body{
   font-family: var(--font);
   font-size: 16px;
   color: var(--dark);
-  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
 }
@@ -814,7 +816,7 @@ $completionWidth: 440px;
     color: var(--ft-dark);
 }
 .gender-pill{
-    padding: 6px 16px;
+    padding: 8px 12px;
     border-radius: 32px;
     color: var(--ft-white);
     font-size: 0.9rem;

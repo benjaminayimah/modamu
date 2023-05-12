@@ -19,7 +19,10 @@
         </svg>
         {{ kid.status == '0' ? 'Check in' : 'Check out' }}
     </button>
-    <button v-else @click.prevent="" class="button-primary button-disabled w-100" disabled="true">
+    <button v-else @click.prevent="" class="button-primary button-disabled w-100 gap-8" disabled="true">
+        <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 19.724 15.104">
+            <path d="M30.054,13.974l-1.612-1.658a.347.347,0,0,0-.256-.11h0a.333.333,0,0,0-.256.11L16.754,23.573l-4.067-4.067a.354.354,0,0,0-.513,0l-1.63,1.63a.365.365,0,0,0,0,.522l5.129,5.129a1.622,1.622,0,0,0,1.072.522,1.7,1.7,0,0,0,1.062-.5h.009L30.063,14.5A.392.392,0,0,0,30.054,13.974Z" transform="translate(-10.434 -12.206)" fill="#fff"/>
+        </svg>
         Picked up
     </button>
 </div>

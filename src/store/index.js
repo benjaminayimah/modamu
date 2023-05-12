@@ -7,8 +7,8 @@ import newUser from './modules/newUser'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    // hostname: 'http://18.169.170.75',
+    // hostname: 'http://localhost:8000',
+    hostname: 'https://modamu-api.rancroftdev.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     device: null,
@@ -20,10 +20,18 @@ export default createStore({
     kids: [],
     events: [],
     images: [],
-    messages: [],
+    messages: [
+      {id: 1, name: 'Lorem ipsum'},
+      {id: 2, name: 'Ipsum lorem'},
+      {id: 3, name: 'Lorem ipsum'},
+    ],
     villages: [],
     wait_lists: [],
-    notificaions: [],
+    notificaions: [
+      {id: 1, name: 'Lorem ipsum'},
+      {id: 2, name: 'Ipsum lorem'},
+      {id: 3, name: 'Lorem ipsum'},
+    ],
     payments: [],
     payment_methods: [
       {id: 1, name: 'Debit/Credit card'},
@@ -129,6 +137,13 @@ export default createStore({
     },
     setWaitlist(state, payload) {
       state.wait_lists = payload
+    },
+    setAttendees(state, payload) {
+      state.attendees = payload
+    },
+    updateAttendees(state, payload) {
+      const i = state.attendees.findIndex(x => x.id === payload.id)
+      state.attendees.splice(i, 1, payload)
     }
 
   },

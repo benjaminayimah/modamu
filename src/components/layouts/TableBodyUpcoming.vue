@@ -9,7 +9,7 @@
         <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
             <div>There are no upcominng events</div>
         </div>
-        <event-row-2 v-for="event in events" :key="event.id" :event="event" :dashboard="dashboard" />
+        <event-row-2 v-for="event in events.slice(0, 3)" :key="event.id" :event="event" :dashboard="dashboard" />
     </div>
 </template>
 

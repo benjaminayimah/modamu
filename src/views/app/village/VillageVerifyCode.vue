@@ -41,19 +41,15 @@ export default {
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
-            token: (state) => state.token
+            token: (state) => state.token,
+            attendees: (state) => state.attendees
         })
-    },
-    data() {
-        return {
-            attendees: []
-        }
     },
     methods: {
         async fetchAttendees() {
             try {
                 const res = await getApi(this.hostname+'/api/village-fetch-attendees?token='+this.token);
-                this.attendees = res.data.attendees
+                this.$store.commit('setAttendees', res.data.attendees)
             } catch (error) {
                 console.error(error);
             }
@@ -61,8 +57,7 @@ export default {
         async checkIn(payload) {
             try {
                 const res = await postApi(this.hostname+'/api/check-in-kid?token='+this.token, payload);
-                const i = this.attendees.findIndex(x => x.id === res.data.id)
-                this.attendees.splice(i, 1, res.data)
+                this.$store.commit('updateAttendees', res.data)
             } catch (error) {
                 console.error(error);
             }

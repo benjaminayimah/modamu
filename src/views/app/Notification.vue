@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Notificaions</h1>
-                <span class="count-info count-primary">230</span>
+                <span class="count-info count-primary">{{ notificaions.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -13,6 +13,9 @@
                 </i>
                 <input class="form-control" type="text" data-type="icon" data-color="light" placeholder="Search villages...">
             </div>
+        </div>
+        <div v-if="!notificaions.length" class="bg-white mt-24 pd-24 br-16 centered">
+            No Notificaions
         </div>
         <div class="flx gap-24 column">
             <notification-list v-for="notification in notificaions" :key="notification.id" :notification="notification" />

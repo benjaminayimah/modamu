@@ -58,9 +58,8 @@
                         <span>23</span>
                     </div>
                     <div class="flx gap-32">
-                        <div class="bg-white br-16 flx-grow-1 top-evt">1</div>
-                        <div class="bg-white br-16 flx-grow-1 top-evt">2</div>
-                        <div class="bg-white br-16 flx-grow-1 top-evt">3</div>
+                        <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!me.length">No event found</div>
+                        <dash-todays-event-list v-for="event in me" :key="event.id" />
                     </div>
                 </div>
                 <div class="flx-grow-1 flx column gap-16">
@@ -89,11 +88,18 @@
 <script>
 import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters } from 'vuex';
+import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 export default {
+  components: { DashTodaysEventList },
     name: 'AdminsDash',
     mixins: [userNameMixin],
     computed: {
         ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser'])
+    },
+    data() {
+        return {
+            me: []
+        }
     }
 }
 </script>

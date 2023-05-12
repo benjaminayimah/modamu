@@ -4,7 +4,7 @@
             <div class="title-row flx jc-sb">
                 <div class="flx gap-8 ai-c">
                     <h1 class="title">Messages</h1>
-                    <span class="count-info count-primary">230</span>
+                    <span class="count-info count-primary">{{ messages.length }}</span>
                 </div>
                 <button class="toggle-btn br-50">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 13.974 13.974">
@@ -12,7 +12,10 @@
                     </svg>
                 </button>
             </div>
-            <div class="flx column gap-16 message-body">
+            <div v-if="!messages.length" class="bg-white mt-24 pd-24 br-16 centered">
+                    No Messages
+            </div>
+            <div v-else class="flx column gap-16 message-body">
                 <message-lists v-for="message in messages" :key="message.id" :message="message"/>
             </div>
         </div>

@@ -63,7 +63,8 @@ export default {
                 const res = await postApi(this.hostname+'/api/check-out-kid?token='+this.token, { id: this.kid.id, event: this.kid.event_id, checkout_code: this.form.code});
                 this.creating = false
                 if(!res.data.error) {
-                    location.reload()
+                    this.$store.commit('updateAttendees', res.data)
+                    this.$store.commit('closeModal')
                 }
                 if(res.data.error) {
                     this.userError.error = true
