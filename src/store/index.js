@@ -175,7 +175,7 @@ export default createStore({
           //   body: 'Error loading store! Please check your internet connection'
           // }
           // state.commit('showAlert', newPayload)
-          // state.commit('destroyToken') 
+          state.commit('destroyToken') 
         }      
     },
     async fetchThisEvent(state, payload) {  
