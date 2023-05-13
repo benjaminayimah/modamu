@@ -261,12 +261,11 @@ aside{
     width: 60%;
     min-width: 230px;
     display: none;
-    height: 100vh;
-    border-top-right-radius: 24px;
-    border-bottom-right-radius: 24px;
+    height: calc(100vh - 40px);
+    border-radius: 24px;
+    margin: 20px;
     nav {
         gap: 16px;
-        height: 100%;
         a {
             gap: 12px;
             height: 60px;
