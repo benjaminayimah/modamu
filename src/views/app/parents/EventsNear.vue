@@ -76,6 +76,9 @@ export default {
             .then((res) => {
                 this.$store.commit('addNearByEvent', res.data)
             }).catch((err) => {
+                if(err.error == 'Token expired!') {
+                    this.$store.commit('destroyToken')
+                }
                 console.log(err.response.data)
             })
         },

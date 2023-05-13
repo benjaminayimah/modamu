@@ -324,7 +324,7 @@ aside{
             margin-top: 20px;
         }
         #logo_wrapper{
-            padding: 0 16px;
+            padding: 0 10px;
             svg {
                 height: 35px;
             }
