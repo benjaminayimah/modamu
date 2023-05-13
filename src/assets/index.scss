@@ -265,6 +265,9 @@ input[data-color=light]:-webkit-autofill:active  {
     position: relative;
     input, select {
         height: 62px;
+        // line-height: 2.7;
+    }
+    input[type=date], input[type=time] {
         line-height: 2.7;
     }
     input[data-type=icon] {

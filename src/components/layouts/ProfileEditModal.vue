@@ -60,7 +60,7 @@
                         {{ validation.errors.ocupation[0] }}
                     </span>
                 </div>
-                <div class="form-row column">
+                <!-- <div class="form-row column">
                     <label for="address">Address</label>
                     <div class="input-wrapper">
                         <input v-model="form.address" class="form-control" type="text" name="address" data-color="dark">
@@ -68,7 +68,7 @@
                     <span class="input-error" v-if="validation.error && validation.errors.address">
                         {{ validation.errors.address[0] }}
                     </span>
-                </div>
+                </div> -->
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
                 <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
@@ -99,7 +99,7 @@ export default {
                 phone_number: '',
                 emergency_number: '',
                 ocupation: '',
-                address: '',
+                // address: '',
                 tempImage: null,
             },
             creating: false,

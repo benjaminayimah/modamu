@@ -163,6 +163,7 @@ export default {
             let stored = JSON.parse(localStorage.getItem('newUser'));
             stored.kids.push(res);
             localStorage.setItem('newUser', JSON.stringify(stored));
+            this.$store.commit('closeModal')
         },
         resetForm() {
             this.clrOldfile()
@@ -184,5 +185,8 @@ export default {
 button.button-outline{
     height: 46px;
     padding: 8px 17px;
+}
+input[type=date] {
+    line-height: 1.8 !important;
 }
 </style>
