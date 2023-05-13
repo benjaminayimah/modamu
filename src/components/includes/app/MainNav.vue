@@ -267,7 +267,7 @@ aside{
     }
     nav {
         gap: 16px;
-        height: 95%;
+        height: 92%;
         a {
             gap: 16px;
             height: 60px;
