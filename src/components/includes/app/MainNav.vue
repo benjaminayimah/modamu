@@ -261,9 +261,7 @@ aside{
     width: 60%;
     min-width: 230px;
     display: none;
-    height: calc(100vh - 40px);
-    border-radius: 24px;
-    margin: 20px;
+    height: 100vh;
     nav {
         gap: 16px;
         a {
