@@ -146,10 +146,7 @@ aside{
     position: fixed;
     bottom: 0;
     top: 0;
-    height: calc(100vh - var(--dash-padding) *2);
     padding: var(--aside-padding);
-    border-radius: 40px;
-    margin: var(--dash-padding);
     z-index: 101;
     *{
         transition: 0.3s ease-out width;
@@ -166,6 +163,9 @@ aside{
 }
 .tablet aside, .desktop aside {
     left: 0;
+    margin: var(--dash-padding);
+    border-radius: 40px;
+    height: calc(100vh - var(--dash-padding) *2);
     &:hover {
         border-radius: 24px;
         padding-left: calc(var(--aside-padding)*2);
@@ -258,10 +258,12 @@ aside{
 }
 .mobile aside {
     left: 0;
-    border-radius: 24px;
-    width: 50%;
+    width: 60%;
     min-width: 230px;
     display: none;
+    height: 100vh;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
     nav {
         gap: 16px;
         height: 100%;
