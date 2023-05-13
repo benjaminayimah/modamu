@@ -108,9 +108,12 @@ button {
     padding: 16px;
     background-color: transparent;
 }
-@container (inline-size < 517px) {
+@container (inline-size <= 548px) {
     span {
         display: none
+    }
+    .gap-50{
+        gap: 30px
     }
 }
 </style>
