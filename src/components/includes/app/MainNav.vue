@@ -258,10 +258,13 @@ aside{
 }
 .mobile aside {
     left: 0;
-    width: 60%;
-    min-width: 230px;
+    width: 70%;
+    min-width: 270px;
     display: none;
     height: 100vh;
+    .nav-wrapper, .nav-grp{
+        gap: 8px;
+    }
     nav {
         gap: 16px;
         a {
