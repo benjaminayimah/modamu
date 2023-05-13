@@ -689,9 +689,6 @@ form {
     border-radius: 24px;
     color: var(--ft-white);
 }
-.mobile{
-    margin: 20px
-}
 .kids-profile-view {
     .bg-img {
         height: 120px;
@@ -841,8 +838,21 @@ $completionWidth: 440px;
     }
 }
 
+//mobile
+.mobile{
+    margin: 0;
+    padding: 20px;
+    #top_nav {
+        padding: 0 0 8px 0;
+    }
+    #mobile_menu_toggle {
+        
+    }
+}
+
 //tablet
 .tablet {
+    padding: 0 3.5%;
     
 }
 

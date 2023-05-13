@@ -7,10 +7,11 @@ import newUser from './modules/newUser'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    hostname: 'https://modamu-api.rancroftdev.com',
+    hostname: 'http://localhost:8000',
+    // hostname: 'https://modamu-api.rancroftdev.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
+    menu: false,
     device: null,
     windowWidth: '',
     windowHeight: '',
@@ -48,7 +49,7 @@ export default createStore({
       let winWidth = window.innerWidth
       state.windowHeight = window.innerHeight
       state.windowWidth = winWidth
-      if(winWidth < 500){
+      if(winWidth < 600){
         state.device = 'mobile'
       }else if(winWidth > appWidth){
         state.device = 'desktop'
@@ -144,7 +145,20 @@ export default createStore({
     updateAttendees(state, payload) {
       const i = state.attendees.findIndex(x => x.id === payload.id)
       state.attendees.splice(i, 1, payload)
+    },
+    toggleMenu(state) {
+      state.menu = !state.menu
     }
+    // toggleMenu() {
+    //   const menu = document.querySelector('#menus')
+    //   const backdrop = document.querySelector('.backdrop')
+    //   const button = document.querySelector('#mobile_menu_toggle')
+    //   menu.classList.toggle('expanded')
+    //   backdrop.classList.toggle('expanded')
+    //   const expanded = menu.getAttribute('aria-expanded') === 'true' || false;
+    //   menu.setAttribute('aria-expanded', !expanded)
+    //   button.setAttribute('aria-expanded', !expanded)
+    // }
 
   },
   actions: {
@@ -215,7 +229,7 @@ export default createStore({
     },
     async fetchWaitList() {
       return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
-    }
+    },
     // async doFetchKids(url) {
     //   try {
     //     const data =  await axios.post(url+'?token='+this.getters.getToken)
@@ -294,6 +308,8 @@ export default createStore({
     getWindowWidth: (state) => state.windowWidth,
     getWindowHeight: (state) => state.windowHeight,
     getKids: (state) => state.kids,
+    getMenu: (state) => state.menu
+
     
 
   },

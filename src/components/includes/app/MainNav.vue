@@ -1,26 +1,25 @@
 <template>
-    <aside>
+    <transition name="fade">
+        <backdrop v-if="getMenu" @click="$store.commit('toggleMenu')" />
+    </transition>
+    <aside id="menus" :class="{ 'expanded' : getMenu }">
         <nav class="main-wrapper flx column jc-sb">
             <div class="flx column nav-wrapper">
                 <div class="flx column nav-grp">
                     <li>
                         <router-link :to="{ name: 'AdminDashboard' }">
-                            <!-- <div> -->
                             <svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 20.098 20.098">
                                 <path d="M-3273.508-685.9a10.982,10.982,0,0,1-2.32-.186,2.725,2.725,0,0,1-1.407-.7,2.736,2.736,0,0,1-.693-1.4,10.935,10.935,0,0,1-.187-2.319,10.952,10.952,0,0,1,.187-2.321,2.728,2.728,0,0,1,.7-1.405,2.723,2.723,0,0,1,1.4-.693,10.934,10.934,0,0,1,2.32-.186,10.935,10.935,0,0,1,2.32.187,2.735,2.735,0,0,1,1.4.694,2.723,2.723,0,0,1,.694,1.405,10.982,10.982,0,0,1,.187,2.32,11,11,0,0,1-.186,2.319,2.735,2.735,0,0,1-.694,1.406,2.737,2.737,0,0,1-1.406.694A10.982,10.982,0,0,1-3273.508-685.9Zm0-7.537a9.439,9.439,0,0,0-1.956.146,1.266,1.266,0,0,0-.583.242,1.262,1.262,0,0,0-.245.586,9.584,9.584,0,0,0-.146,1.957,9.567,9.567,0,0,0,.146,1.955,1.343,1.343,0,0,0,.244.586,1.261,1.261,0,0,0,.584.243,9.626,9.626,0,0,0,1.957.147,9.623,9.623,0,0,0,1.956-.147,1.342,1.342,0,0,0,.585-.244,1.342,1.342,0,0,0,.243-.584,9.62,9.62,0,0,0,.146-1.956,9.605,9.605,0,0,0-.147-1.957,1.262,1.262,0,0,0-.242-.582,1.341,1.341,0,0,0-.586-.245A9.439,9.439,0,0,0-3273.508-693.439Zm-10.886,7.537a11,11,0,0,1-2.32-.186,2.736,2.736,0,0,1-1.406-.694,2.733,2.733,0,0,1-.694-1.406,10.977,10.977,0,0,1-.187-2.319,11,11,0,0,1,.186-2.32,2.726,2.726,0,0,1,.7-1.407,2.733,2.733,0,0,1,1.4-.693,10.944,10.944,0,0,1,2.32-.187,10.951,10.951,0,0,1,2.321.187,2.728,2.728,0,0,1,1.405.7,2.726,2.726,0,0,1,.693,1.4,10.989,10.989,0,0,1,.187,2.32,10.989,10.989,0,0,1-.186,2.319,2.739,2.739,0,0,1-.694,1.406,2.728,2.728,0,0,1-1.4.694A11,11,0,0,1-3284.394-685.9Zm0-7.537a9.451,9.451,0,0,0-1.956.146,1.342,1.342,0,0,0-.585.244,1.261,1.261,0,0,0-.244.584,9.625,9.625,0,0,0-.146,1.957,9.6,9.6,0,0,0,.147,1.956,1.337,1.337,0,0,0,.243.585,1.341,1.341,0,0,0,.584.244,9.635,9.635,0,0,0,1.957.146,9.635,9.635,0,0,0,1.957-.147,1.267,1.267,0,0,0,.582-.242,1.344,1.344,0,0,0,.245-.586,9.643,9.643,0,0,0,.146-1.956,9.642,9.642,0,0,0-.147-1.957,1.265,1.265,0,0,0-.242-.582,1.263,1.263,0,0,0-.585-.245A9.451,9.451,0,0,0-3284.394-693.439Zm10.886-3.35a10.987,10.987,0,0,1-2.32-.186,2.725,2.725,0,0,1-1.407-.7,2.736,2.736,0,0,1-.693-1.4,10.959,10.959,0,0,1-.187-2.32,10.961,10.961,0,0,1,.187-2.321,2.737,2.737,0,0,1,.694-1.4,2.725,2.725,0,0,1,1.405-.694,10.982,10.982,0,0,1,2.32-.186,10.983,10.983,0,0,1,2.319.186,2.736,2.736,0,0,1,1.406.694,2.734,2.734,0,0,1,.694,1.405,11,11,0,0,1,.187,2.32,11.009,11.009,0,0,1-.186,2.319,2.736,2.736,0,0,1-.694,1.405,2.737,2.737,0,0,1-1.406.694A10.982,10.982,0,0,1-3273.508-696.789Zm0-7.537a9.625,9.625,0,0,0-1.957.147,1.264,1.264,0,0,0-.582.242,1.338,1.338,0,0,0-.245.586,9.589,9.589,0,0,0-.146,1.956,9.587,9.587,0,0,0,.146,1.956,1.34,1.34,0,0,0,.244.585,1.261,1.261,0,0,0,.584.243,9.626,9.626,0,0,0,1.957.147,9.623,9.623,0,0,0,1.956-.147,1.342,1.342,0,0,0,.585-.244,1.341,1.341,0,0,0,.243-.584,9.63,9.63,0,0,0,.146-1.957,9.62,9.62,0,0,0-.147-1.957,1.336,1.336,0,0,0-.243-.584,1.342,1.342,0,0,0-.585-.243A9.624,9.624,0,0,0-3273.508-704.325Zm-10.886,7.537a11,11,0,0,1-2.32-.186,2.736,2.736,0,0,1-1.406-.694,2.735,2.735,0,0,1-.694-1.4,11,11,0,0,1-.187-2.32,11.009,11.009,0,0,1,.186-2.32,2.737,2.737,0,0,1,.694-1.405,2.735,2.735,0,0,1,1.405-.694,10.994,10.994,0,0,1,2.32-.187,11,11,0,0,1,2.32.186,2.728,2.728,0,0,1,1.406.7,2.735,2.735,0,0,1,.693,1.4,11.008,11.008,0,0,1,.187,2.321,11,11,0,0,1-.186,2.319,2.738,2.738,0,0,1-.694,1.406,2.728,2.728,0,0,1-1.4.694A11,11,0,0,1-3284.394-696.789Zm0-7.537a9.632,9.632,0,0,0-1.957.147,1.34,1.34,0,0,0-.583.243,1.339,1.339,0,0,0-.244.584,9.63,9.63,0,0,0-.146,1.957,9.621,9.621,0,0,0,.147,1.957,1.336,1.336,0,0,0,.243.584,1.341,1.341,0,0,0,.584.244,9.635,9.635,0,0,0,1.957.146,9.635,9.635,0,0,0,1.957-.147,1.267,1.267,0,0,0,.582-.242,1.34,1.34,0,0,0,.245-.586,9.653,9.653,0,0,0,.146-1.956,9.658,9.658,0,0,0-.147-1.958,1.338,1.338,0,0,0-.244-.583,1.264,1.264,0,0,0-.584-.244A9.638,9.638,0,0,0-3284.394-704.325Z" transform="translate(3289 706)" fill="#fff"/>
                             </svg>
                             <span>Dashboard</span>
-                            <!-- </div> -->
                         </router-link>
                     </li>
                     <li v-if="is_village">
                         <router-link :to="{ name: 'AddEventPage' }">
-                            <!-- <div> -->
                             <svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 20 20">
                                 <path d="M-3266.055-837.995a1.029,1.029,0,0,1-1.021-1.034l.048-7.944-7.944-.048a1.028,1.028,0,0,1-1.022-1.034,1.028,1.028,0,0,1,1.034-1.021l7.944.048.048-7.944a1.028,1.028,0,0,1,1.034-1.021,1.027,1.027,0,0,1,1.021,1.034l-.048,7.944,7.945.048a1.029,1.029,0,0,1,1.021,1.034,1.028,1.028,0,0,1-1.034,1.022l-7.944-.048-.048,7.944a1.03,1.03,0,0,1-1.03,1.022Z" transform="translate(3275.994 857.994)" fill="#fff"/>
                             </svg>
                             <span>Add event</span>
-                            <!-- </div> -->
                         </router-link>
                     </li>
                     <li>
@@ -132,9 +131,11 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import Backdrop from '../Backdrop.vue';
 export default {
+  components: { Backdrop },
     name: 'MainNav',
-    computed: mapGetters(['is_super', 'is_admin', 'is_parent', 'is_village'])
+    computed: mapGetters(['is_super', 'is_admin', 'is_parent', 'is_village', 'getMenu'])
 }
 </script>
 <style lang="scss" scoped>
@@ -143,14 +144,13 @@ $colapseGap: 16px;
 aside{
     background-color: var(--bg-dark);
     position: fixed;
-    left: 0;
     bottom: 0;
     top: 0;
     height: calc(100vh - var(--dash-padding) *2);
     padding: var(--aside-padding);
     border-radius: 40px;
     margin: var(--dash-padding);
-    z-index: 95;
+    z-index: 101;
     *{
         transition: 0.3s ease-out width;
     }
@@ -160,6 +160,12 @@ aside{
         -ms-overflow-style: none; 
         scrollbar-width: none; 
     }
+    a {
+        position: relative;
+    }
+}
+.tablet aside, .desktop aside {
+    left: 0;
     &:hover {
         border-radius: 24px;
         padding-left: calc(var(--aside-padding)*2);
@@ -196,59 +202,100 @@ aside{
             }
         }
     }
-}
-nav{
-    display: flex;
-    height: 100%;
-    width: var(--nav-width);
-    padding: 8vh 0 2vh;
-    color: var(--ft-white);
-    *{
-        transition: inherit;
-    }
-    .nav-wrapper{
-        gap: 8px;
-    }
-    .nav-grp{
-        gap: $colapseGap;
-    }
-    li {
+    nav{
         display: flex;
-        gap: $colapseGap;
-    }
-    label {
-        color: var(--light-gray);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        display: none;
-        margin-top: 4px;
-        margin-bottom: 8px;
-        margin-left: 24px;
-    }
-    a{
-        flex-grow: 1;
-        display: flex;
-        width: inherit;
-        height: 40px;
-        border-radius: 16px;
-        align-items: center;
-        justify-content: center;
-        transition: 100ms background-color linear;
-        span {
+        height: 100%;
+        width: var(--nav-width);
+        padding: 8vh 0 2vh;
+        color: var(--ft-white);
+        *{
+            transition: inherit;
+        }
+        .nav-wrapper{
+            gap: 8px;
+        }
+        .nav-grp{
+            gap: $colapseGap;
+        }
+        li {
+            display: flex;
+            gap: $colapseGap;
+        }
+        label {
+            color: var(--light-gray);
+            font-size: 0.75rem;
+            text-transform: uppercase;
             display: none;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 15px;
-            animation: fadeIn 1s;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            margin-left: 24px;
         }
-        i{
-            position: absolute;
-        }
-        &:hover{
-            background-color: rgba($color: #ffffff, $alpha: .1);
+        a{
+            flex-grow: 1;
+            display: flex;
+            width: inherit;
+            height: 40px;
+            border-radius: 16px;
+            align-items: center;
+            justify-content: center;
+            transition: 100ms background-color linear;
+            span {
+                display: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 15px;
+                animation: fadeIn 1s;
+            }
+            i{
+                position: absolute;
+            }
+            &:hover{
+                background-color: rgba($color: #ffffff, $alpha: .1);
+            }
         }
     }
+}
+.mobile aside {
+    left: 0;
+    border-radius: 24px;
+    width: 50%;
+    min-width: 230px;
+    display: none;
+    nav {
+        gap: 16px;
+        height: 100%;
+        a {
+            gap: 12px;
+            height: 60px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            color: var(--ft-white);
+            i{
+                position: relative;
+            }
+            div{
+                justify-content: flex-start;
+                width: calc($navWidth - 48px);
+            }
+        }
+        span {
+            animation: fadeInSlide 0.6s;
+        }
+        label {
+            display: none;
+        }
+    }
+}
+.expanded{
+    display: block !important;
+    animation: fadeInSlideRight 0.4s;
+}
+
+@keyframes fadeInSlideRight {
+  from { opacity: 0; transform: translateX(-100px);}
+  to { opacity: 1; display: block; transform: translateX(0)}
 }
 
 @keyframes fadeIn {
@@ -261,7 +308,21 @@ nav{
 }
 .desktop, .tablet {
     .router-link-active{
-        background-color: var(--primary-color);
+        background-color: var(--primary-color) !important;
+    }
+}
+.mobile {
+    .router-link-active{
+        &::before {
+            content: '';
+            width: 4px;
+            background-color: var(--primary-color);
+            position: absolute;
+            height: 50%;
+            border-radius: 2px;
+            left: -8px;
+
+        }
     }
 }
 </style>

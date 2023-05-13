@@ -1,8 +1,13 @@
 <template>
-    <nav class="sticky-top">
+    <nav class="sticky-top" id="top_nav">
         <div class="flx jc-sb ai-c nav-wrapper">
-            <div>
-                <div class="flx ai-c gap-8 text-ellipsis">
+            <div class="flx">
+                <button @click.prevent="$store.commit('toggleMenu')" aria-expanded="false" aria-controls="menus" v-if="device == 'mobile'" id="mobile_menu_toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="17" viewBox="0 0 22 17">
+                        <path d="M-3700.5-596a1.5,1.5,0,0,1-1.5-1.5,1.5,1.5,0,0,1,1.5-1.5h19a1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5Zm0-7a1.5,1.5,0,0,1-1.5-1.5,1.5,1.5,0,0,1,1.5-1.5h19a1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5Zm0-7a1.5,1.5,0,0,1-1.5-1.5,1.5,1.5,0,0,1,1.5-1.5h19a1.5,1.5,0,0,1,1.5,1.5,1.5,1.5,0,0,1-1.5,1.5Z" transform="translate(3702 613)" fill="#1c1c1c"/>
+                    </svg>
+                </button>
+                <div v-else class="flx ai-c gap-8 text-ellipsis">
                     <h3>Hi, welcome</h3>
                     <span>Let's get you up to speed</span>
                 </div>
@@ -43,13 +48,15 @@ export default {
     computed: {
         ...mapGetters(['getDefaultImage', 'getUser', 'getHostname']),
         ...mapState({
-            user: (state) => state.user
+            user: (state) => state.user,
+            device: (state) => state.device
         })
     }
 }
 </script>
 <style lang="scss" scoped>
 nav {
+    container-type: inline-size;
     background-color: var(--bg-color);
     top: 0;
     padding: 32px 0 16px 0;
@@ -96,5 +103,14 @@ nav {
         }
     }   
 
+}
+button {
+    padding: 16px;
+    background-color: transparent;
+}
+@container (inline-size < 517px) {
+    span {
+        display: none
+    }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <main class="home" :class="getDevice">
-    <main-nav v-if="getDevice != 'mobile'" />
+    <main-nav/>
     <top-nav-bar />
     <router-view />
   </main>
@@ -49,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 main {
   position: relative;
-  margin-left: calc(var(--nav-width) + var(--dash-padding)*2 + var(--aside-padding)*2);
+  margin-left: calc(var(--nav-width) + var(--dash-padding)*2 + var(--aside-padding));
   padding: 0 7%;
 }
 </style>
