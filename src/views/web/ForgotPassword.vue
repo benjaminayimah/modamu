@@ -37,10 +37,11 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
 import WelcomeBanner from '@/components/includes/web/WelcomeBanner.vue'
 import { mapGetters } from 'vuex'
 import inputValMixin from '@/mixins/inputValMixin'
-import Spinner from '@/components/includes/Spinner.vue'
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '@/components/includes/Spinner.vue'));
 export default {
   components: { WelcomeBanner, Spinner },
     name: 'ForgotPassword',

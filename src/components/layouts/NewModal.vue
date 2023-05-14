@@ -25,13 +25,16 @@
     <verify-code-modal v-else-if="forms.verifyCode" />
 </template>
 <script>
-import VerifyCodeModal from '@/views/app/village/VerifyCodeModal.vue';
+import { defineAsyncComponent } from 'vue';
 import { mapState } from 'vuex';
-import Backdrop from '../includes/Backdrop.vue';
-import AddKidsModal from './AddKidsModal.vue';
-import AddToGallery from './AddToGallery.vue';
-import ChangePassModal from './ChangePassModal.vue';
-import ProfileEditModal from './ProfileEditModal.vue';
+const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '@/views/app/village/VerifyCodeModal.vue'));
+const Backdrop = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '@/components/includes/Backdrop.vue'));
+const AddKidsModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AddKidsModal.vue'));
+const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AddToGallery.vue'));
+const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './ChangePassModal.vue'));
+const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './ProfileEditModal.vue'));
+
+
 export default {
     components: { AddKidsModal, Backdrop, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal },
     name: 'NewModal',

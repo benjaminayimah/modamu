@@ -94,12 +94,13 @@
   </section>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 import WelcomeBanner from '../../components/includes/web/WelcomeBanner.vue';
 import passwordToggleMixin from '../../mixins/passwordToggle';
 import inputValMixin from '../../mixins/inputValMixin';
-import Spinner from '../../components/includes/Spinner.vue';
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../../components/includes/Spinner.vue'));
 import autoCompleMixin from '../../mixins/autoCompleMixin';
 export default {
   components: { WelcomeBanner, Spinner },

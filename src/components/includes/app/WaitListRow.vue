@@ -23,11 +23,12 @@
     </router-link>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue'
 import { mapState } from 'vuex'
 import { postApi } from '@/api'
 import formatDateTime from '@/mixins/formatDateTime'
 import ProfileAvatar from './ProfileAvatar.vue'
-import Spinner from '../Spinner.vue'
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../Spinner.vue'));
 export default {
     components: { ProfileAvatar, Spinner },
     name: 'WaitListRow',

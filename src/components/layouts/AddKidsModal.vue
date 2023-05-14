@@ -73,11 +73,12 @@
     </teleport>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue';
 import axios from 'axios'
 import { mapGetters } from 'vuex';
 import validationMixin from '../../mixins/validationMixin'
 import tempImageUploadMixin from '../../mixins/tempImageUpload';
-import Spinner from '../includes/Spinner';
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../includes/Spinner'));
 import Avatar from '../includes/Avatar'
 export default {
   components: { Avatar, Spinner },

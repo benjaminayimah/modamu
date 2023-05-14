@@ -142,8 +142,10 @@
     </aside>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue';
 import { mapGetters } from 'vuex';
-import Backdrop from '../Backdrop.vue';
+const Backdrop = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../Backdrop.vue'));
+
 export default {
   components: { Backdrop },
     name: 'MainNav',
@@ -346,8 +348,6 @@ aside{
         }
     }
 }
-
-
 @keyframes fadeIn {
   from { opacity: 0}
   to { opacity: 1; display: block}

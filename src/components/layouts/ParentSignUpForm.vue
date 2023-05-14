@@ -77,10 +77,11 @@
     </div>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue';
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import inputValMixin from '../../mixins/inputValMixin'
-import Spinner from '../includes/Spinner.vue'
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../includes/Spinner'));
 import passwordToggleMixin from '../../mixins/passwordToggle'
 export default {
   components: { Spinner },

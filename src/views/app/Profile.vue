@@ -5,9 +5,10 @@
     </section>
 </template>
 <script>
+import { defineAsyncComponent } from 'vue';
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 import ProfileLeft from '../../components/layouts/ProfileLeft.vue'
-import ProfileRight from '../../components/layouts/ProfileRight.vue'
+const ProfileRight = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../../components/layouts/ProfileRight.vue'));
 export default {
   components: { ProfileLeft, ProfileRight },
     name: 'ProfilePage',

@@ -3,9 +3,10 @@
     <admins-dash v-else/>
 </template>
 <script>
-import ParentDash from './parents/ParentDash.vue'
+import { defineAsyncComponent } from 'vue';
+const ParentDash = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './parents/ParentDash.vue'));
+const AdminsDash = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AdminsDash.vue'));
 import { mapGetters } from 'vuex';
-import AdminsDash from './AdminsDash.vue';
 export default {
   name: 'DashboardHome',
   components: { ParentDash, AdminsDash },
