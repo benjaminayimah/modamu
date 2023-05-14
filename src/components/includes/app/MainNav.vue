@@ -166,6 +166,9 @@ aside{
         -ms-overflow-style: none; 
         scrollbar-width: none; 
     }
+    nav{
+        padding: 16px 0;
+    }
     a {
         position: relative;
         display: flex;
@@ -189,7 +192,6 @@ aside{
     nav{
         height: 100%;
         width: var(--nav-width);
-        padding: 16px 0;
         color: var(--ft-white);
         *{
             transition: inherit;
@@ -291,7 +293,6 @@ aside{
         nav {
             gap: 16px;
             height: 92%;
-            padding: 24px 0;
             a {
                 border-radius: 16px;
                 gap: 16px;
