@@ -283,11 +283,12 @@ aside{
     }
 }
 .mobile aside {
-    left: 0;
-    width: 70%;
+    left: calc((-100vw - 150px));
+    width: calc(100vw - 150px);
     min-width: 270px;
-    display: none;
     height: 100vh;
+    transition: 0.3s ease-out;
+    visibility: hidden;
     .nav-wrapper, .nav-grp{
         gap: 4px;
     }
@@ -318,9 +319,6 @@ aside{
         svg {
             height: 24px;
         }
-        span {
-            animation: fadeInSlide 0.6s;
-        }
         label {
             display: none;
         }
@@ -336,8 +334,9 @@ aside{
     }
 }
 .expanded{
-    display: block !important;
-    animation: fadeInSlideRight 0.4s;
+    left: 0 !important;
+    visibility: visible !important;
+    // animation: fadeInSlideRight 0.4s;
 }
 
 @keyframes fadeInSlideRight {
