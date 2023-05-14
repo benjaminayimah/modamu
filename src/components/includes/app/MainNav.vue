@@ -2,7 +2,7 @@
     <transition name="fade">
         <backdrop v-if="getMenu" @click="$store.commit('toggleMenu')" />
     </transition>
-    <aside id="menus" :class="{ 'expanded' : getMenu }">
+    <aside id="menus" :class="{ 'expanded' : getMenu }" class="flx">
         <nav class="flx column jc-sb">
             <div class="flx column gap-32">
                 <div id="logo_wrapper">
@@ -124,7 +124,6 @@
                     </li>
                 </div>
             </div>
-            
             <li>
                 <a href="#" @click.prevent="$store.dispatch('logoutAuth')">
                     <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 22.043 24">
@@ -155,7 +154,7 @@ aside{
     position: fixed;
     bottom: 0;
     top: 0;
-    padding: var(--aside-padding);
+    padding: 32px var(--aside-padding);
     z-index: 101;
     *{
         transition: 0.3s ease-out width;
@@ -165,9 +164,6 @@ aside{
         display: none;
         -ms-overflow-style: none; 
         scrollbar-width: none; 
-    }
-    nav{
-        padding: 16px 0;
     }
     a {
         position: relative;
@@ -197,14 +193,13 @@ aside{
             transition: inherit;
         }
         .nav-wrapper{
-            gap: 8px;
+            gap: $colapseGap;
         }
         .nav-grp{
             gap: $colapseGap;
         }
         li {
-            display: flex;
-            gap: $colapseGap;
+            // display: flex;
         }
         label {
             color: var(--light-gray);
@@ -284,7 +279,7 @@ aside{
         left: calc((-100vw - 120px));
         width: calc(100vw - 120px);
         min-width: 270px;
-        height: 100vh;
+        height: 100svh;
         transition: 0.3s ease-out;
         visibility: hidden;
         .nav-wrapper, .nav-grp{
@@ -292,7 +287,6 @@ aside{
         }
         nav {
             gap: 16px;
-            height: 92%;
             a {
                 border-radius: 16px;
                 gap: 16px;
@@ -325,7 +319,7 @@ aside{
             #logo_wrapper{
                 padding: 0 10px;
                 svg {
-                    height: 35px;
+                    height: 32px;
                 }
             }
         }
