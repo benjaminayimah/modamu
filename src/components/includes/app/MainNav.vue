@@ -284,8 +284,8 @@ aside{
 }
 .mobile {
     aside {
-        left: calc((-100vw - 150px));
-        width: calc(100vw - 150px);
+        left: calc((-100vw - 120px));
+        width: calc(100vw - 120px);
         min-width: 270px;
         height: 100vh;
         transition: 0.3s ease-out;
