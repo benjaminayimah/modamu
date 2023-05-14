@@ -313,6 +313,10 @@ aside{
                 width: calc($navWidth - 48px);
             }
         }
+        span {
+            transform: translateX(20px);
+            transition: 0.6s ease-out;
+        }
         path {
             fill: #9fa0a4;
         }
@@ -337,6 +341,9 @@ aside{
     left: 0 !important;
     visibility: visible !important;
     // animation: fadeInSlideRight 0.4s;
+    span {
+        transform: translateX(0) !important;
+    }
 }
 
 @keyframes fadeInSlideRight {
