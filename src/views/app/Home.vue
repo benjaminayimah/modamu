@@ -2,7 +2,7 @@
   <main class="home" :class="getDevice">
     <main-nav/>
     <top-nav-bar />
-    <!-- <router-view /> -->
+    <router-view />
   </main>
 </template>
 

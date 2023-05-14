@@ -850,9 +850,19 @@ $completionWidth: 440px;
     #top_nav {
         padding: 0 0 8px 0;
     }
-    #mobile_menu_toggle {
-        
+    .dashboard-main {
+        height: unset;
+        .col-2{
+            grid-template-columns: 1fr;
+        }
+        .top-row{
+            flex-direction: column;
+        }
+        .button-secondary {
+            width: 100%;
+        }
     }
+   
 }
 
 //tablet

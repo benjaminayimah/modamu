@@ -1,5 +1,5 @@
 <template>
-    <section class="flx column gap-16">
+    <section class="flx column gap-16 dashboard-main">
       <div class="top-row flx gap-32">
         <div class="wl-sec flx column gap-40">
           <h1>Good day {{ computedFirstName(user.name) }},</h1>
