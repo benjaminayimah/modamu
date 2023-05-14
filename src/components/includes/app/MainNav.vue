@@ -171,6 +171,9 @@ aside{
     }
     a {
         position: relative;
+        &:active {
+            background-color: rgba($color: #ffffff, $alpha: .08);
+        }
     }
 }
 .tablet aside, .desktop aside {
@@ -286,15 +289,16 @@ aside{
     display: none;
     height: 100vh;
     .nav-wrapper, .nav-grp{
-        gap: 8px;
+        gap: 4px;
     }
     nav {
         gap: 16px;
         height: 92%;
         padding: 24px 0;
         a {
+            border-radius: 16px;
             gap: 16px;
-            height: 60px;
+            height: 66px;
             padding: 0 16px;
             display: flex;
             align-items: center;
