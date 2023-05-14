@@ -315,7 +315,7 @@ aside{
                 }
             }
             span {
-                transform: translateX(20px);
+                transform: translateX(-50px);
                 transition: 0.6s ease;
             }
             path {
@@ -341,7 +341,6 @@ aside{
     .expanded{
         left: 0 ;
         visibility: visible;
-        // animation: fadeInSlideRight 0.4s;
         span {
             transform: translateX(0);
         }
@@ -349,17 +348,12 @@ aside{
 }
 
 
-@keyframes fadeInSlideRight {
-  from { opacity: 0; transform: translateX(-100px);}
-  to { opacity: 1; display: block; transform: translateX(0)}
-}
-
 @keyframes fadeIn {
   from { opacity: 0}
   to { opacity: 1; display: block}
 }
 @keyframes fadeInSlide {
-  from { opacity: 0; transform: translateX(10px);}
+  from { opacity: 0; transform: translateX(-10px);}
   to { opacity: 1; display: block; transform: translateX(0)}
 }
 .desktop, .tablet {
