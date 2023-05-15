@@ -886,7 +886,7 @@ $completionWidth: 440px;
     margin: 0;
     padding: var(--mobile-body-padding);
     #top_nav {
-        padding: 0;
+        padding: 06px 0;
     }
     .dashboard-main {
         height: unset;
@@ -905,6 +905,7 @@ $completionWidth: 440px;
         margin: 0 calc(-1 * var(--mobile-body-padding));
         scroll-padding-inline: 20px;
         padding: 0 20px;
+        gap: 16px;
     }
    
 }
