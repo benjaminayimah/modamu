@@ -9,7 +9,7 @@
             <div class="flx-grow-1 pd-20 br-24 bg-white" id="dash_notification">
                 <div class="mb-24 flx ai-c jc-sb">
                     Notifications
-                    <a class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
+                    <router-link :to="{ name: 'Notification'}" class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</router-link>
                 </div>
                 <div class="m--8">
                     <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, 3)" :key="notification.id" :notification="notification" />
