@@ -1,5 +1,5 @@
 <template>
-    <section class="flx gap-50">
+    <section class="flx gap-50 profile">
         <profile-left />
         <profile-right v-if="is_parent" />
     </section>

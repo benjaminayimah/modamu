@@ -740,8 +740,15 @@ form {
 .pd-32{
     padding: 32px;
 }
-.overflow-x-scroll-hidden {
+.overflow-x-scroll {
     overflow-x: auto;
+    overscroll-behavior-inline: contain;
+}
+.overflow-y-scroll{
+    overflow-y: auto;
+    overscroll-behavior-inline: contain;
+}
+.scroll-hidden {
     &::-webkit-scrollbar {
         display: none;
         -ms-overflow-style: none; 
@@ -751,11 +758,10 @@ form {
 .ov-hidden-x {
     overflow-x: hidden;
 }
-.h-scroll {
-    overscroll-behavior-inline: contain;
+.scroll-snap {
     scroll-snap-type: inline mandatory;
-  }
-  .h-scroll > * {
+}
+.scroll-snap > * {
     scroll-snap-align: start;
 }
 #event_table{
@@ -931,7 +937,7 @@ $completionWidth: 440px;
             margin-top: 8px;
         }
     }
-    .h-scroll{
+    .scroll-snap{
         margin: 0 calc(-1 * var(--mobile-body-padding));
         scroll-padding-inline: 20px;
         padding: 0 20px;
@@ -943,6 +949,28 @@ $completionWidth: 440px;
     #mobile_menu_toggle{
         margin-left: -16px;
     }
+    .profile{
+        flex-direction: column;
+    }
+    .main-content-card {
+        width: 100%;
+        min-width: 100%;
+    }
+    .kids-column {
+        flex-direction: row;
+    }
+    .kids-profile-view{
+        position: fixed;
+        inset: 0 0 0 0;
+        z-index: 200;
+        padding: 40px 20px;
+        border-radius: 0;
+    }
+    .kid-body{
+        height: 100%;
+        padding-bottom: 60px;
+    }
+    
    
 }
 

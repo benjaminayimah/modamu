@@ -17,19 +17,22 @@
                     <span>Edit this child</span>
                 </a>
             </div>
-            <div>
+            <div class="kid-body overflow-y-scroll scroll-hidden">
                 <profile-kid-body-content :kid="computeThisKid" />
             </div>
         </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import ProfileKidBodyContent from './ProfileKidBodyContent.vue';
 export default {
     components: { ProfileKidBodyContent },
     name: 'KidsProfileView',
     computed: {
         ...mapGetters(['getUser', 'getKids']),
+        ...mapState({
+            device: (state) => state.device
+        }),
         computeThisKid() {
             return this.getKids.length ? this.getKids.find(kid => kid.id == this.$route.params.id) : ''
         }
@@ -43,6 +46,12 @@ export default {
         goBack() {
             this.$router.push('/profile')
         }
+    },
+    mounted() {
+        this.device == 'mobile' ? document.body.classList.add('fixed-body') : ''
+    },
+    unmounted() {
+        document.body.classList.remove('fixed-body')
     }
 }
 </script>

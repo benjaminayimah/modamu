@@ -9,7 +9,14 @@
         <div class="flx column gap-24 top-row-col-2">
           <div class="grid col-2 gap-24">
             <div class="stats-card bg-white pd-20 br-24">
-              <div>Your kids</div>
+              <div class="mb-24 flx ai-c jc-sb">
+                  Your kids
+                  <a href="" class="gray fs-09 see-all">See all</a>
+              </div>
+              <div class="stack-cards relative">
+                  <profile-avatar v-for="kid in kids" :key="kid.id" :id="null" :image="null" class="absolute" />
+                  <span class="fw-700 counter br-24">+2</span>
+              </div>
             </div>
             <div class="pd-20 ft-white stats-card bg-dark br-24 column flx jc-sb">
               <div class="flx gap-8 ai-c">
@@ -40,7 +47,7 @@
             <div>Ongoing events would appear here</div>
           </div>
         </div>
-        <div v-else class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll-hidden h-scroll">
+        <div v-else class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
         </div>
       </div>
@@ -52,8 +59,9 @@ import userNameMixin from '../../../mixins/userNameMixin';
 import DashEventList from '../../../components/includes/app/DashEventList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 import DashMsgAndNoti from '@/components/includes/app/DashMsgAndNoti.vue';
+import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue';
 export default {
-    components: { DashEventList, DashTodaysEventList, DashMsgAndNoti },
+    components: { DashEventList, DashTodaysEventList, DashMsgAndNoti, ProfileAvatar },
     name: 'ParentDash',
     mixins: [userNameMixin],
     computed: {
@@ -61,6 +69,15 @@ export default {
         events: (state) => state.events,
         user: (state) => state.user,
     })
+  },
+  data() {
+    return {
+      kids: [
+          {id: 1},
+          {id: 2},
+          {id: 3}
+      ]
+    }
   },
   methods: {
     goToEvents() {
@@ -74,12 +91,6 @@ section {
   padding: 32px 0;
   height: calc(100vh - 108px);
 }
-// .top-row{
-//    flex-basis: 60%; 
-// }
-// .wl-sec{
-//   flex-basis: 20%;
-// }
 .top-row {
   grid-template-columns: .5fr .8fr 1fr;
 }
@@ -88,10 +99,8 @@ h1 {
 }
 .stats-card {
   height: 150px;
+  min-width: 170px;
 }
-// .top-row-col-2{
-//   max-width: 470px;
-// }
 .i-pin::before {
   background-color: #fff;
 }
@@ -105,5 +114,26 @@ h1 {
 .button-secondary{
     width: 85%;
     min-width: 200px;
+}
+.stack-cards {
+    --height: 48px;
+    height: var(--height);
+    .bg-img{
+        height: var(--height);
+        width: var(--height);
+        border: 2px solid var(--bg-white);
+        &:nth-child(2) {
+            transform: translateX(30px);
+        }
+        &:nth-child(3) {
+            transform: translateX(60px);
+        }
+    }
+    .counter{
+        transform: translateX(90px);
+        background-color: var(--bg-white);
+        display: inline-block;
+        padding: 15px;
+    }
 }
 </style>

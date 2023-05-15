@@ -19,7 +19,7 @@
         <div class="right flx column flx-grow-1 gap-32">
             <div class="top-right flx column gap-16">
                 <h4>Status reports</h4>
-                <div class="grid col-4 gap-32 reports overflow-x-scroll-hidden h-scroll">
+                <div class="grid col-4 gap-32 reports overflow-x-scroll scroll-hidden scroll-snap">
                     <div class="flx-grow-1 bg-dark pd-20 br-24 flx column gap-8 ft-white">
                         <div class="fw-700 w-90">Parents registered to events</div>
                         <div class="fs-08 flx jc-sb ai-c">
@@ -31,7 +31,7 @@
                             </i>
                         </div>
                         <div class="stack-cards relative">
-                            <div v-for="parent in registered_parents" :key="parent.id" class="bg-img br-50 absolute"></div>
+                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" class="absolute" />
                             <span class="fw-700 counter br-24">+2,450</span>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             </i>
                         </div>
                         <div class="stack-cards relative">
-                            <div v-for="parent in registered_parents" :key="parent.id" class="bg-img br-50 absolute"></div>
+                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" class="absolute" />
                             <span class="fw-700 counter br-24">+450</span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <span>23</span>
                     </div>
                     <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!events.length">No event found</div>
-                    <div class="grid col-3 gap-32 top-events overflow-x-scroll-hidden h-scroll" v-else>
+                    <div class="grid col-3 gap-32 top-events overflow-x-scroll scroll-hidden scroll-snap" v-else>
                         <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
                     </div>
                 </div>
@@ -102,8 +102,9 @@ import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters, mapState } from 'vuex';
 import NotificationList from '@/components/includes/app/NotificationList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
+import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue';
 export default {
-  components: { DashTodaysEventList, NotificationList },
+  components: { DashTodaysEventList, NotificationList, ProfileAvatar },
     name: 'AdminsDash',
     mixins: [userNameMixin],
     computed: {
@@ -168,7 +169,6 @@ h1 {
         height: var(--height);
         width: var(--height);
         border: 2px solid var(--bg-dark);
-        background-color: var(--bg-color);
         &:nth-child(2) {
             transform: translateX(30px);
         }

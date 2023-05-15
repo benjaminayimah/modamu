@@ -74,20 +74,16 @@ export default {
     width: 40px;
     border: 1px solid #fff;
     &:nth-child(2) {
-        background-color: #de1a1a;
         transform: translateX(15px);
     }
     &:nth-child(3) {
-        background-color: #1c1fe2;
         transform: translateX(30px);
     }
     &:nth-child(4) {
-        background-color: #cc0fe0;
         transform: translateX(45px);
 
     }
     &:nth-child(5) {
-        background-color: #e7ca10;
         transform: translateX(60px);
     }
 }
