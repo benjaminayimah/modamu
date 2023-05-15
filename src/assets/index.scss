@@ -80,7 +80,7 @@ body{
 }
 .see-all {
     display: block;
-    padding: 8px;
+    padding: 8px 0;
     &:hover {
         color: var(--primary-color);
     }
