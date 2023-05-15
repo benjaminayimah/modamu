@@ -22,7 +22,7 @@ a {
     background-color: #eeeff2;
     padding: 20px;
     border: 1px solid transparent;
-    transition: 0.2s all ease;
+    transition: var(--input-btn-transition);
     svg{
         visibility: hidden;
     }

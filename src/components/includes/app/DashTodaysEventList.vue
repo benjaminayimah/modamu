@@ -42,4 +42,11 @@ h5 {
     background-color: rgba($color: #59E9AD, $alpha: .3);
     height: 32px;
 }
+a {
+    transition: var(--input-btn-transition);
+    &:hover {
+        background-color: var(--input-hover);
+
+    }
+}
 </style>

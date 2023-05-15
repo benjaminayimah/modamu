@@ -29,7 +29,7 @@
     --radius-24: 24px;
     --input-btn-radius: 18px;
     --input-btn-height: 58px;
-    --input-btn-transition: 0.2s all;
+    --input-btn-transition: 0.2s all ease;
     --log-side-padding: 10%;
     --dash-padding: 24px;
     --nav-width: 40px;
@@ -795,11 +795,15 @@ form {
         background-color: #fff;
         height: 54px;
         border-radius: 50px;
+        transition: var(--input-btn-transition);
         span{
             background-color: #aaabb0;
             padding: 3px 8px;
             font-size: 0.8rem;
             color: var(--ft-white);
+        }
+        &:hover:not(.router-link-exact-active) {
+            background-color: var(--input-hover);
         }
     }
 
@@ -890,6 +894,12 @@ $completionWidth: 440px;
     -webkit-line-clamp: 2;
     line-height: 1.4;
 }
+.row-hover {
+    transition: var(--input-btn-transition);
+    &:hover {
+        background-color: rgba(1, 115, 255, 0.08) !important;
+    }
+}
 
 //mobile
 .mobile{
@@ -927,6 +937,9 @@ $completionWidth: 440px;
     }
     #dash_notification{
         display: none;
+    }
+    #mobile_menu_toggle{
+        margin-left: -16px;
     }
    
 }

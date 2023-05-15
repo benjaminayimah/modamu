@@ -76,7 +76,7 @@
                 </div>
                 <div class="flx-grow-1 flx column gap-16">
                     <div class="flx gap-16 event-tab">
-                        <router-link :to="{ name: 'AdminDashboard'}" class="flx gap-8 ai-c active">
+                        <router-link :to="{ name: 'AdminDashboard'}" class="flx gap-8 ai-c">
                             Ongoing events
                             <span class="br-16">{{ getOngoingEvents.length }}</span>
                         </router-link>

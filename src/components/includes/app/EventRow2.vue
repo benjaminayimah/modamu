@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.name}}" class="table-row grid-item" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
+    <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.name}}" class="table-row grid-item row-hover " :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
         <div class="table-cell flx gap-8 ai-c">
             <profile-avatar :id="user.id" :image="computedImage.image"/>
             <span class="wrap-text wrap-line-1">{{ event.name }}</span>
@@ -8,7 +8,7 @@
         <div class="table-cell flx gap-8 ai-c">{{ format_time(event.start_time) }}</div>
         <div class="table-cell flx jc-sb ai-c">
             <div class="relative h-100 flx ai-c">
-                <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees yet</span>
+                <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees</span>
                 <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
@@ -58,11 +58,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-a {
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.6);
-    }
-}
 .bg-img {
     height: 40px;
     width: 40px;

@@ -1,5 +1,5 @@
 <template>
-    <a href="#" class="grid gap-8 bg-white" :class="notification.read ? 'read' : 'not-read'">
+    <a href="#" class="grid gap-8 bg-white row-hover" :class="notification.read ? 'read' : 'not-read'">
         <span class="relative flx ai-c"></span>
         <div class="wrap-text wrap-line-2">
             Your children have been accepted and taking off the waiting lists domamu vehicle has been sent to pick them up.
@@ -16,7 +16,7 @@ export default {
 a{
     padding: 32px;
     max-width: 500px;
-    transition: 0.2s ease;
+    transition: var(--input-btn-transition);
     span {
         &::before {
             content: '';
@@ -24,9 +24,6 @@ a{
             width: 10px;
             border-radius: 5px;
         }
-    }
-    &:hover {
-        background-color: rgba(1, 115, 255, 0.1);
     }
 }
 

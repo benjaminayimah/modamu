@@ -2,7 +2,7 @@
     <section>
        <div class="flx jc-sb mb-32">
             <div class="flx gap-40 event-tab">
-                <router-link :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }" class="flx gap-8 ai-c active">
+                <router-link :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }" class="flx gap-8 ai-c">
                     Ongoing events
                     <span class="br-16">{{ getOngoingEvents.length }}</span>
                 </router-link>

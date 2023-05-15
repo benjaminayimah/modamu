@@ -1,6 +1,6 @@
 <template>
     <li>
-        <router-link :to="{ name: 'MessageDetail', params: { id: message.id, name: message.name}}" href="" class="flx gap-8 bg-white br-16">
+        <router-link :to="{ name: 'MessageDetail', params: { id: message.id, name: message.name}}" href="" class="flx gap-8 bg-white br-16 row-hover ">
             <profile-avatar :id="null" :image="null" />
             <div class="flx column gap-8 ms">
                 <label class="wrap-text wrap-line-1">{{ message.name }}</label>
@@ -35,10 +35,7 @@ export default {
 a {
     padding: 10px;
     border: 1px solid transparent;
-    transition: 0.2s ease;
-    &:hover {
-        background-color: rgba(1, 115, 255, 0.1);
-    }
+    transition: var(--input-btn-transition);
 }
 .ms {
     width: calc(100% - 122px);
