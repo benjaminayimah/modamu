@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="right flx column flx-grow-1 gap-32 ov-hidden ">
+        <div class="right flx column flx-grow-1 gap-32">
             <div class="top-right flx column gap-16">
                 <h4>Status reports</h4>
                 <div class="grid col-4 gap-32 reports overflow-x-scroll-hidden h-scroll">

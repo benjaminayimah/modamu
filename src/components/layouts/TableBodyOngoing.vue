@@ -8,16 +8,24 @@
         <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
             <div>There are no ongoing events</div>
         </div>
-        <event-row v-for="event in events.slice(0, 3)" :key="event.id" :event="event" :dashboard="dashboard"/>
-        <div class="text-center gray" v-if="events.length > 3"><router-link class="see-all" :to="{ name: 'PastEvents', params: { name: 'past-events'} }">See more</router-link></div>
+        <event-row v-for="event in computedEvents" :key="event.id" :event="event" :dashboard="dashboard"/>
+        <div class="text-center gray" v-if="dashboard && events.length > 3"><router-link class="see-all" :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }">See more</router-link></div>
     </div>
 </template>
 <script>
 import EventRow from '../includes/app/EventRow.vue'
 export default {
-  components: { EventRow },
+    components: { EventRow },
     name: 'TableBodyOngoing',
-    props: ['events', 'dashboard']
+    props: ['events', 'dashboard'],
+    computed: {
+        computedEvents() {
+            if(this.dashboard)
+            return this.events.slice(0, 3)
+            else
+            return this.events
+        }
+    }
 }
 </script>
 

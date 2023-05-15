@@ -8,6 +8,8 @@ import TableBodyOngoing from './TableBodyOngoing.vue';
 export default {
   components: { TableBodyOngoing },
     name: 'AdminDashOngingTab',
-    computed: mapGetters(['getOngoingEvents'])
+    computed: {
+      ...mapGetters(['getOngoingEvents'])
+    }
 }
 </script>

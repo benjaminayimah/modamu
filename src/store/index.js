@@ -276,10 +276,10 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const startDate = new Date(element.date+'T'+element.start_time)
-        const endDate = new Date(element.date+'T'+element.end_time)
+        const startDate = new Date(element.event.date+'T'+element.event.start_time)
+        const endDate = new Date(element.event.date+'T'+element.event.end_time)
         if (currentDateTime > startDate && currentDateTime < endDate) {
-          newEvent.push(element)
+          newEvent.push(element.event)
         }
         
       })
@@ -290,9 +290,9 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const startDate = new Date(element.date+'T'+element.start_time)
+        const startDate = new Date(element.event.date+'T'+element.event.start_time)
         if (currentDateTime < startDate) {
-          newEvent.push(element)
+          newEvent.push(element.event)
         }
       })
       return newEvent
@@ -302,9 +302,9 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const endDate = new Date(element.date+'T'+element.end_time)
+        const endDate = new Date(element.event.date+'T'+element.event.end_time)
         if (currentDateTime > endDate) {
-          newEvent.push(element)
+          newEvent.push(element.event)
         }
       })
       return newEvent

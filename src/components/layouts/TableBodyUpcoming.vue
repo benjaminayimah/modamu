@@ -9,8 +9,8 @@
         <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
             <div>There are no upcominng events</div>
         </div>
-        <event-row-2 v-for="event in events.slice(0, 3)" :key="event.id" :event="event" :dashboard="dashboard" />
-        <div class="text-center gray" v-if="events.length > 3"><router-link class="see-all" :to="{ name: 'PastEvents', params: { name: 'past-events'} }">See more</router-link></div>
+        <event-row-2 v-for="event in computedEvents" :key="event.id" :event="event" :dashboard="dashboard" />
+        <div class="text-center gray" v-if="dashboard && events.length > 3"><router-link class="see-all" :to="{ name: 'UpcomingEvents', params: { name: 'upcoming-events'} }">See more</router-link></div>
     </div>
 </template>
 
@@ -19,7 +19,15 @@ import EventRow2 from '../includes/app/EventRow2.vue'
 export default {
     components: { EventRow2 },
     name: 'TableBodyUpcoming',
-    props: ['events', 'dashboard']
+    props: ['events', 'dashboard'],
+    computed: {
+        computedEvents() {
+            if(this.dashboard == true)
+            return this.events.slice(0, 3)
+            else
+            return this.events
+        }
+    }
 }
 </script>
 

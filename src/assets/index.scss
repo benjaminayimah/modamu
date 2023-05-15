@@ -746,8 +746,8 @@ form {
         scrollbar-width: none; 
     }
 }
-.ov-hidden {
-    overflow: hidden;
+.ov-hidden-x {
+    overflow-x: hidden;
 }
 .h-scroll {
     overscroll-behavior-inline: contain;
@@ -759,7 +759,7 @@ form {
 #event_table{
     .grid {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 2px;
     }
     .grid-item{
         background-color: #fff;
