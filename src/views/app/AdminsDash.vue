@@ -63,8 +63,8 @@
                         <h4>Today's top events</h4>
                         <span>23</span>
                     </div>
-                    <div class="grid col-3 gap-32">
-                        <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!events.length">No event found</div>
+                    <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!events.length">No event found</div>
+                    <div class="grid col-3 gap-32" v-else>
                         <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
                     </div>
                 </div>
