@@ -1,7 +1,7 @@
 <template>
     <section class="flx gap-32 dashboard-main">
-        <div class="left flx column gap-32">
-            <div class="flx column gap-40">
+        <div class="left flx column gap-32 admin-wl-sec">
+            <div class="flx column gap-40 wl-sec">
                 <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(getUser.name) }}</h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <button class="button-secondary">View all events</button>
@@ -16,11 +16,11 @@
                 </div>
             </div>
         </div>
-        <div class="right flx column flx-grow-1 gap-32">
+        <div class="right flx column flx-grow-1 gap-32 ov-hidden ">
             <div class="top-right flx column gap-16">
                 <h4>Status reports</h4>
-                <div class="grid col-4 flx-grow-1 gap-32">
-                    <div class="flx-grow-1 bg-dark pd-20 br-24 flx column jc-sb ft-white">
+                <div class="grid col-4 gap-32 reports overflow-x-scroll-hidden h-scroll">
+                    <div class="flx-grow-1 bg-dark pd-20 br-24 flx column gap-8 ft-white">
                         <div class="fw-700 w-90">Parents registered to events</div>
                         <div class="fs-08 flx jc-sb ai-c">
                             <span>Up 20% from last week</span>
@@ -30,7 +30,10 @@
                                 </svg>
                             </i>
                         </div>
-                        <div></div>
+                        <div class="stack-cards relative">
+                            <div v-for="parent in registered_parents" :key="parent.id" class="bg-img br-50 absolute"></div>
+                            <span class="fw-700 counter br-24">+2,450</span>
+                        </div>
                     </div>
                     <div class="flx-grow-1 bg-dark pd-20 br-24 flx column jc-sb ft-white">
                         <div class="fw-700 w-90">Kids registered to events</div>
@@ -42,7 +45,10 @@
                                 </svg>
                             </i>
                         </div>
-                        <div></div>
+                        <div class="stack-cards relative">
+                            <div v-for="parent in registered_parents" :key="parent.id" class="bg-img br-50 absolute"></div>
+                            <span class="fw-700 counter br-24">+450</span>
+                        </div>
                     </div>
                     <div class="flx-grow-1 bg-white pd-20 br-24 flx jc-sb column">
                         <div class="fw-700 fs-2r">234</div>
@@ -109,7 +115,12 @@ export default {
     },
     data() {
         return {
-            me: []
+            me: [],
+            registered_parents: [
+                {id: 1},
+                {id: 2},
+                {id: 3}
+            ]
         }
     }
 }
@@ -142,5 +153,30 @@ h1 {
 }
 #event_table{
     padding: 12px 24px;
+}
+.reports > *{
+    min-width: 200px;
+}
+.stack-cards {
+    --height: 48px;
+    height: var(--height);
+    .bg-img{
+        height: var(--height);
+        width: var(--height);
+        border: 2px solid var(--bg-dark);
+        background-color: var(--bg-color);
+        &:nth-child(2) {
+            transform: translateX(30px);
+        }
+        &:nth-child(3) {
+            transform: translateX(60px);
+        }
+    }
+    .counter{
+        transform: translateX(90px);
+        background-color: var(--bg-dark);
+        display: inline-block;
+        padding: 15px;
+    }
 }
 </style>

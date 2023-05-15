@@ -40,7 +40,7 @@
             <div>Ongoing events would appear here</div>
           </div>
         </div>
-        <div v-else class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll-hidden">
+        <div v-else class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll-hidden h-scroll">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
         </div>
       </div>
@@ -95,14 +95,11 @@ h1 {
 .i-pin::before {
   background-color: #fff;
 }
+
 .bottom-row{
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory;
   .event-list{
-    scroll-snap-align: start;
     min-width: 230px;
     min-height: 230px;
-
   }
 }
 .button-secondary{

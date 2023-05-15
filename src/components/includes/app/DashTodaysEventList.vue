@@ -8,7 +8,7 @@
             </div>
         </div>
         <div></div>
-        <div class="count-info fs-08 centered fw-700">In progress</div>
+        <div class="count-info fs-08 centered fw-700 text-ellipsis">In progress</div>
     </router-link>
 </template>
 

@@ -746,6 +746,16 @@ form {
         scrollbar-width: none; 
     }
 }
+.ov-hidden {
+    overflow: hidden;
+}
+.h-scroll {
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+  }
+  .h-scroll > * {
+    scroll-snap-align: start;
+}
 #event_table{
     .grid {
         grid-template-columns: 1fr;
@@ -891,13 +901,13 @@ $completionWidth: 440px;
     .dashboard-main {
         padding-top: 8px;
         height: unset;
+        flex-direction: column;
         h1 {
             font-size: 1.2rem;
         }
         .wl-sec{
             gap: 12px;
         }
-        
         .col-2{
             grid-template-columns: 1fr;
         }
@@ -906,9 +916,10 @@ $completionWidth: 440px;
         }
         .button-secondary {
             width: 100%;
+            margin-top: 8px;
         }
     }
-    .bottom-row{
+    .h-scroll{
         margin: 0 calc(-1 * var(--mobile-body-padding));
         scroll-padding-inline: 20px;
         padding: 0 20px;
@@ -920,6 +931,21 @@ $completionWidth: 440px;
 //tablet
 .tablet {
     padding: 0 3.5%;
+    .dashboard-main {
+        flex-direction: column;
+        height: unset;
+    }
+    .admin-wl-sec{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        h1 {
+            font-size: 2rem;
+            line-height: unset;
+        }
+        button {
+            width: 100%;
+        }
+    }
 
     
 }
