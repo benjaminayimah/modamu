@@ -314,9 +314,6 @@ export default createStore({
     getWindowHeight: (state) => state.windowHeight,
     getKids: (state) => state.kids,
     getMenu: (state) => state.menu
-
-    
-
   },
   modules: {
     data,
