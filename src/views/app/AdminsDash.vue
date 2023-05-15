@@ -63,9 +63,9 @@
                         <h4>Today's top events</h4>
                         <span>23</span>
                     </div>
-                    <div class="flx gap-32">
-                        <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!me.length">No event found</div>
-                        <dash-todays-event-list v-for="event in me" :key="event.id" />
+                    <div class="grid col-3 gap-32">
+                        <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!events.length">No event found</div>
+                        <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
                     </div>
                 </div>
                 <div class="flx-grow-1 flx column gap-16">
@@ -103,7 +103,8 @@ export default {
     computed: {
         ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser']),
         ...mapState({
-            notifications: (state) => state.notifications
+            notifications: (state) => state.notifications,
+            events: (state) => state.events,
         })
     },
     data() {
@@ -142,5 +143,4 @@ h1 {
 #event_table{
     padding: 12px 24px;
 }
-
 </style>

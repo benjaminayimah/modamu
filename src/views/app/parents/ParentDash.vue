@@ -53,23 +53,14 @@ import DashEventList from '../../../components/includes/app/DashEventList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 import DashMsgAndNoti from '@/components/includes/app/DashMsgAndNoti.vue';
 export default {
-  components: { DashEventList, DashTodaysEventList, DashMsgAndNoti },
+    components: { DashEventList, DashTodaysEventList, DashMsgAndNoti },
     name: 'ParentDash',
     mixins: [userNameMixin],
     computed: {
       ...mapState({
         events: (state) => state.events,
         user: (state) => state.user,
-      })
-    },
-    data () {
-    return {
-      topEvts: [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-      ]
-    }
+    })
   },
   methods: {
     goToEvents() {
