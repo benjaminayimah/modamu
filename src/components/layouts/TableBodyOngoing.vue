@@ -1,9 +1,9 @@
 <template>
 <div class="grid table-body">
         <div class="grid-item table-head" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
-            <h4 class="table-cell">Event name</h4>
-            <h4 class="table-cell">Duration</h4>
-            <h4 class="table-cell">Kids in attendance</h4>
+            <h4 class="table-cell wrap-text wrap-line-1">Event name</h4>
+            <h4 class="table-cell wrap-text wrap-line-1">Duration</h4>
+            <h4 class="table-cell wrap-text wrap-line-1">Kids in attendance</h4>
         </div>
         <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
             <div>There are no ongoing events</div>

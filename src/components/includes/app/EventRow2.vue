@@ -2,13 +2,13 @@
     <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.name}}" class="table-row grid-item" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
         <div class="table-cell flx gap-8 ai-c">
             <profile-avatar :id="user.id" :image="computedImage.image"/>
-            <span>{{ event.name }}</span>
+            <span class="wrap-text wrap-line-1">{{ event.name }}</span>
         </div>
         <div class="table-cell flx gap-8 ai-c">{{ format_date(event.date) }}</div>
         <div class="table-cell flx gap-8 ai-c">{{ format_time(event.start_time) }}</div>
         <div class="table-cell flx jc-sb ai-c">
             <div class="relative h-100 flx ai-c">
-                <span v-if="!computedAttendees.length">No Attendees yet</span>
+                <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees yet</span>
                 <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
