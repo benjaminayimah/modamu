@@ -3,8 +3,8 @@
         <div class="flx gap-8">
             <profile-avatar :id="event.event.user_id" :image="computedImage.image" />
             <div class="flx column jc-c gap-4">
-                <h5>{{ event.event.name }}</h5>
-                <div class="gray fs-08">{{ event.village  }}</div>
+                <h5 class="wrap-text wrap-line-1">{{ event.event.name }}</h5>
+                <div class="gray fs-08 wrap-text wrap-line-1">{{ event.village  }}</div>
             </div>
         </div>
         <div></div>

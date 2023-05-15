@@ -199,7 +199,7 @@ aside{
             gap: $colapseGap;
         }
         li {
-            // display: flex;
+            display: flex;
         }
         label {
             color: var(--light-gray);

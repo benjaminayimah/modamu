@@ -35,7 +35,8 @@
     --nav-width: 40px;
     --aside-padding: 20px;
     --illness: #F795FF;
-    --allergies: #FFF7B0
+    --allergies: #FFF7B0;
+    --mobile-body-padding: 20px;
 }
 $profileSecPadding: 20px;
 html {
@@ -76,6 +77,11 @@ body{
 }
 .ft-transparent{
     color: rgba(255, 255, 255, 0.6);
+}
+.see-all {
+    &:hover {
+        color: var(--primary-color);
+    }
 }
 $pinWidth: 20px;
 $pinBeforeW: 8px;
@@ -358,6 +364,9 @@ input[data-color=light]:-webkit-autofill:active  {
 .flx-end{
     justify-content: flex-end;
 }
+.ai-fe {
+    align-items: flex-end;
+}
 .flx-col {
     display: flex;
     flex-direction: column;
@@ -399,9 +408,14 @@ input[data-color=light]:-webkit-autofill:active  {
     display: grid;
     place-items: center;
 }
-
 .m-0{
     margin: 0;
+}
+.m--10{
+    margin: 0 -10px;
+}
+.m--8{
+    margin: 0 -8px;
 }
 .mb-0{
     margin-bottom: 0;
@@ -703,6 +717,9 @@ form {
 .table-cell {
     padding: 0 8px;
 }
+.pd-0{
+    padding: 0;
+}
 .pd-0-20{
     padding: 0 20px;
 }
@@ -720,6 +737,14 @@ form {
 }
 .pd-32{
     padding: 32px;
+}
+.overflow-x-scroll-hidden {
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none; 
+        scrollbar-width: none; 
+    }
 }
 #event_table{
     .grid {
@@ -842,25 +867,44 @@ $completionWidth: 440px;
         background-color: var(--seconday-hover);
     }
 }
+.wrap-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wrap-line-1 {
+    -webkit-line-clamp: 1
+}
+.wrap-line-2 {
+    -webkit-line-clamp: 2;
+    line-height: 1.4;
+}
 
 //mobile
 .mobile{
     margin: 0;
-    padding: 20px;
+    padding: var(--mobile-body-padding);
     #top_nav {
-        padding: 0;
+        padding: var(--);
     }
     .dashboard-main {
         height: unset;
+        
         .col-2{
             grid-template-columns: 1fr;
         }
         .top-row{
-            flex-direction: column;
+            grid-template-columns: 1fr;
         }
         .button-secondary {
             width: 100%;
         }
+    }
+    .bottom-row{
+        margin: 0 calc(-1 * var(--mobile-body-padding));
+        scroll-padding-inline: 20px;
+        padding: 0 20px;
     }
    
 }
@@ -868,6 +912,7 @@ $completionWidth: 440px;
 //tablet
 .tablet {
     padding: 0 3.5%;
+
     
 }
 

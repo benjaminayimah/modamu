@@ -7,8 +7,8 @@
             </div>
         </div>
         <div>
-            <h4 class="mb-4">{{ event.event.name }}</h4>
-            <span class="gray fs-09">{{ event.village }}</span>
+            <h4 class="wrap-text wrap-line-1">{{ event.event.name }}</h4>
+            <span class="gray fs-09 wrap-text wrap-line-1">{{ event.village }}</span>
         </div>
     </router-link>
 </template>

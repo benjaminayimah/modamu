@@ -2,8 +2,8 @@
     <section id="villages">
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
-                <h1 class="title">Notificaions</h1>
-                <span class="count-info count-primary">{{ notificaions.length }}</span>
+                <h1 class="title">Notifications</h1>
+                <span class="count-info count-primary">{{ notifications.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -14,11 +14,11 @@
                 <input class="form-control" type="text" data-type="icon" data-color="light" placeholder="Search villages...">
             </div>
         </div>
-        <div v-if="!notificaions.length" class="bg-white mt-24 pd-24 br-16 centered">
+        <div v-if="!notifications.length" class="bg-white mt-24 pd-24 br-16 centered">
             No Notificaions
         </div>
         <div class="flx gap-24 column">
-            <notification-list v-for="notification in notificaions" :key="notification.id" :notification="notification" />
+            <notification-list class="br-24" v-for="notification in notifications" :key="notification.id" :notification="notification" />
         </div>
     </section>
 </template>
@@ -29,7 +29,7 @@ export default {
   components: { NotificationList },
   name: 'NotificationPage',
   computed: mapState({
-    notificaions: (state) => state.notificaions
+    notifications: (state) => state.notifications
   })
 
 

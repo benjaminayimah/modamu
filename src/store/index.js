@@ -25,13 +25,18 @@ export default createStore({
       {id: 1, name: 'Lorem ipsum'},
       {id: 2, name: 'Ipsum lorem'},
       {id: 3, name: 'Lorem ipsum'},
+      {id: 4, name: 'Ipsum lorem'},
+      {id: 5, name: 'Lorem ipsum'},
     ],
     villages: [],
     wait_lists: [],
-    notificaions: [
+    notifications: [
       {id: 1, name: 'Lorem ipsum'},
       {id: 2, name: 'Ipsum lorem'},
       {id: 3, name: 'Lorem ipsum'},
+      {id: 4, name: 'Lorem ipsum'},
+      {id: 5, name: 'Ipsum lorem'},
+      {id: 6, name: 'Lorem ipsum'},
     ],
     payments: [],
     payment_methods: [

@@ -10,7 +10,7 @@
             <div>There are no past events</div>
         </div>
         <event-row-2 v-for="event in events.slice(0, 3)" :key="event.id" :event="event" :dashboard="dashboard" />
-        <div class="see-more text-center gray" v-if="events.length > 3"><router-link :to="{ name: 'PastEvents', params: { name: 'past-events'} }">See more</router-link></div>
+        <div class="text-center gray" v-if="events.length > 3"><router-link class="see-all" :to="{ name: 'PastEvents', params: { name: 'past-events'} }">See more</router-link></div>
     </div>
 </template>
 
@@ -29,14 +29,5 @@ export default {
 }
 .grid-col-dash {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.see-more{
-    padding: 0 8px;
-    a {
-        &:hover {
-            color: var(--primary-color);
-        }
-    }
-
 }
 </style>
