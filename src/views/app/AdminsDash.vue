@@ -142,4 +142,5 @@ h1 {
 #event_table{
     padding: 12px 24px;
 }
+
 </style>
