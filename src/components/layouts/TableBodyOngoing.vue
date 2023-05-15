@@ -9,6 +9,7 @@
             <div>There are no ongoing events</div>
         </div>
         <event-row v-for="event in events.slice(0, 3)" :key="event.id" :event="event" :dashboard="dashboard"/>
+        <div class="text-center gray" v-if="events.length > 3"><router-link class="see-all" :to="{ name: 'PastEvents', params: { name: 'past-events'} }">See more</router-link></div>
     </div>
 </template>
 <script>
