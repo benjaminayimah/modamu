@@ -886,10 +886,17 @@ $completionWidth: 440px;
     margin: 0;
     padding: var(--mobile-body-padding);
     #top_nav {
-        padding: 06px 0;
+        padding: 6px 0;
     }
     .dashboard-main {
+        padding-top: 8px;
         height: unset;
+        h1 {
+            font-size: 1.2rem;
+        }
+        .wl-sec{
+            gap: 12px;
+        }
         
         .col-2{
             grid-template-columns: 1fr;
