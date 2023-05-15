@@ -41,7 +41,7 @@
           </div>
         </div>
         <div v-else class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll-hidden">
-          <dash-event-list class="event-list" v-for="event in events.slice(0, 6)" :key="event.id"  :event="event"/>
+          <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
         </div>
       </div>
     </section>

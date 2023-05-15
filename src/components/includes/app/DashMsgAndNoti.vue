@@ -3,7 +3,7 @@
         <div class="pd-20 bg-white br-24">
             <div class="mb-24 flx ai-c jc-sb">
                 Messages
-                <a href="" class="gray fs-09 see-all">See all (10)</a>
+                <a href="" class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
             </div>
             <div class="m--10">
                 <message-lists class="mb-8" v-for="message in messages.slice(0, computedMsgSlice)" :key="message.id" :message="message"/>
@@ -12,7 +12,7 @@
         <div class="pd-20 bg-white br-24">
             <div class="mb-24 flx ai-c jc-sb">
                 Notifications
-                <a class="gray fs-09 see-all">See all (10)</a>
+                <a class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
             </div>
             <div class="m--8">
                 <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, computedNotiSlice)" :key="notification.id" :notification="notification" />

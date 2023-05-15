@@ -2,12 +2,18 @@
     <section class="flx gap-32 dashboard-main">
         <div class="left flx column gap-32">
             <div class="flx column gap-40">
-                <h1>Good day {{ computedFirstName(getUser.name) }}</h1>
+                <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(getUser.name) }}</h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <button class="button-secondary">View all events</button>
             </div>
             <div class="flx-grow-1 pd-20 br-24 bg-white">
-                <div>Notifications</div>
+                <div class="mb-24 flx ai-c jc-sb">
+                    Notifications
+                    <a class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
+                </div>
+                <div class="m--8">
+                    <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, 3)" :key="notification.id" :notification="notification" />
+                </div>
             </div>
         </div>
         <div class="right flx column flx-grow-1 gap-32">
@@ -87,14 +93,18 @@
 </template>
 <script>
 import userNameMixin from '@/mixins/userNameMixin';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
+import NotificationList from '@/components/includes/app/NotificationList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 export default {
-  components: { DashTodaysEventList },
+  components: { DashTodaysEventList, NotificationList },
     name: 'AdminsDash',
     mixins: [userNameMixin],
     computed: {
-        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser'])
+        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser']),
+        ...mapState({
+            notifications: (state) => state.notifications
+        })
     },
     data() {
         return {
