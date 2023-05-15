@@ -281,6 +281,8 @@ aside{
         height: 100dvh;
         transition: 0.3s ease-out;
         visibility: hidden;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
         .nav-wrapper, .nav-grp{
             gap: 4px;
         }
