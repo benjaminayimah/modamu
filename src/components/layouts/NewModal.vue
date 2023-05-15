@@ -27,12 +27,12 @@
 <script>
 import { defineAsyncComponent } from 'vue';
 import { mapState } from 'vuex';
-const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '@/views/app/village/VerifyCodeModal.vue'));
-const Backdrop = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '@/components/includes/Backdrop.vue'));
-const AddKidsModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AddKidsModal.vue'));
-const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AddToGallery.vue'));
-const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './ChangePassModal.vue'));
-const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './ProfileEditModal.vue'));
+import Backdrop from '@/components/includes/Backdrop.vue'
+const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: VerifyCodeModal */ '@/views/app/village/VerifyCodeModal.vue'));
+const AddKidsModal = defineAsyncComponent(() => import(/* webpackChunkName: AddKidsModal */ './AddKidsModal.vue'));
+const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: AddToGallery */ './AddToGallery.vue'));
+const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: ChangePassModal */ './ChangePassModal.vue'));
+const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ './ProfileEditModal.vue'));
 
 
 export default {

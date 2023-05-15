@@ -136,9 +136,8 @@
     </aside>
 </template>
 <script>
-import { defineAsyncComponent } from 'vue';
 import { mapGetters } from 'vuex';
-const Backdrop = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../Backdrop.vue'));
+import Backdrop from '../Backdrop.vue';
 
 export default {
   components: { Backdrop },

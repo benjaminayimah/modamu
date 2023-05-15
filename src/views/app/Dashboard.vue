@@ -4,8 +4,8 @@
 </template>
 <script>
 import { defineAsyncComponent } from 'vue';
-const ParentDash = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './parents/ParentDash.vue'));
-const AdminsDash = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './AdminsDash.vue'));
+const ParentDash = defineAsyncComponent(() => import(/* webpackChunkName: ParentDash */ './parents/ParentDash.vue'));
+const AdminsDash = defineAsyncComponent(() => import(/* webpackChunkName: AdminsDash */ './AdminsDash.vue'));
 import { mapGetters } from 'vuex';
 export default {
   name: 'DashboardHome',

@@ -84,7 +84,7 @@ import axios from 'axios'
 import { mapGetters } from 'vuex';
 import validationMixin from '../../mixins/validationMixin'
 import tempImageUploadMixin from '../../mixins/tempImageUpload';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../includes/Spinner'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../includes/Spinner'));
 import Avatar from '../includes/Avatar'
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 export default {

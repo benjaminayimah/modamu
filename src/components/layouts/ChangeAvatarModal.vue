@@ -28,7 +28,7 @@
 import { defineAsyncComponent } from 'vue';
 import axios from 'axios'
 import { mapGetters } from 'vuex';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../includes/Spinner'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../includes/Spinner'));
 import tempImageUploadMixin from '../../mixins/tempImageUpload';
 import Avatar from '../includes/Avatar';
 export default {

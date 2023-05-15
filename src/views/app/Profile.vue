@@ -8,7 +8,7 @@
 import { defineAsyncComponent } from 'vue';
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 import ProfileLeft from '../../components/layouts/ProfileLeft.vue'
-const ProfileRight = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../../components/layouts/ProfileRight.vue'));
+const ProfileRight = defineAsyncComponent(() => import(/* webpackChunkName: ProfileRight */ '../../components/layouts/ProfileRight.vue'));
 export default {
   components: { ProfileLeft, ProfileRight },
     name: 'ProfilePage',

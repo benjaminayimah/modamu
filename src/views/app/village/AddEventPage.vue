@@ -171,7 +171,7 @@ import axios from 'axios';
 import { mapGetters, mapState } from 'vuex';
 import inputValMixin from '../../../mixins/inputValMixin';
 import tempImageUploadMixin from '../../../mixins/tempImageUpload';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../../../components/includes/Spinner.vue'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../../../components/includes/Spinner.vue'));
 import Avatar from '../../../components/includes/Avatar';
 import autoCompleMixin from '../../../mixins/autoCompleMixin';
 export default {

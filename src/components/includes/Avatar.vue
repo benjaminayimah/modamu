@@ -19,7 +19,7 @@
 </template>
 <script>
 import { defineAsyncComponent } from 'vue';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ './Spinner.vue'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ './Spinner.vue'));
 export default {
   components: { Spinner },
     name: 'AvatarImage',

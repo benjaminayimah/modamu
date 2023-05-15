@@ -36,7 +36,7 @@ import { defineAsyncComponent } from 'vue';
 import axios from 'axios'
 import { mapGetters } from 'vuex';
 import validationMixin from '../../mixins/validationMixin'
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../includes/Spinner'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../includes/Spinner'));
 export default {
   components: { Spinner },
     name: 'ChangePassModal',

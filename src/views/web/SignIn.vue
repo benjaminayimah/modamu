@@ -82,7 +82,7 @@ import axios from 'axios'
 import { mapGetters } from 'vuex'
 import inputValMixin from '../../mixins/inputValMixin'
 import WelcomeBanner from '../../components/includes/web/WelcomeBanner.vue';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Backdrop */ '../../components/includes/Spinner.vue'));
+const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../../components/includes/Spinner.vue'));
 import passwordToggleMixin from '../../mixins/passwordToggle';
 export default {
   components: { WelcomeBanner, Spinner },
