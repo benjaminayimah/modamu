@@ -278,7 +278,7 @@ aside{
         left: calc((-100vw - 120px));
         width: calc(100vw - 120px);
         min-width: 270px;
-        height: 100svh;
+        height: 100dvh;
         transition: 0.3s ease-out;
         visibility: hidden;
         .nav-wrapper, .nav-grp{
