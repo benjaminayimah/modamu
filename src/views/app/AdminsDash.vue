@@ -156,6 +156,7 @@ h1 {
 }
 .reports > *{
     min-width: 200px;
+    height: 170px;
 }
 .stack-cards {
     --height: 48px;
