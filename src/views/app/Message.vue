@@ -47,9 +47,7 @@ section {
     // border-right: 1px solid #e3e5ef;
     padding-right: 16px;
 }
-.message-right{
-    // background-color: #fff;
-}
+
 button.toggle-btn{
     height: 45px;
     width: 45px;

@@ -1,6 +1,6 @@
 <template>
     <div class="grid col-2 gap-32">
-        <div class="pd-20 bg-white br-24">
+        <div class="pd-20 bg-white br-24" id="dash_message">
             <div class="mb-24 flx ai-c jc-sb">
                 Messages
                 <a href="" class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
@@ -9,7 +9,7 @@
                 <message-lists class="mb-8" v-for="message in messages.slice(0, computedMsgSlice)" :key="message.id" :message="message"/>
             </div>
         </div>
-        <div class="pd-20 bg-white br-24">
+        <div class="pd-20 bg-white br-24" id="dash_notification">
             <div class="mb-24 flx ai-c jc-sb">
                 Notifications
                 <a class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>

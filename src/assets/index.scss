@@ -925,6 +925,9 @@ $completionWidth: 440px;
         padding: 0 20px;
         gap: 16px;
     }
+    #dash_notification{
+        display: none;
+    }
    
 }
 
@@ -951,9 +954,7 @@ $completionWidth: 440px;
 }
 
 //desktop
-.desktop{
-    
-}
+
 
 
 //transitions

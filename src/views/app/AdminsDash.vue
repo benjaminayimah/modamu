@@ -6,7 +6,7 @@
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <button class="button-secondary">View all events</button>
             </div>
-            <div class="flx-grow-1 pd-20 br-24 bg-white">
+            <div class="flx-grow-1 pd-20 br-24 bg-white" id="dash_notification">
                 <div class="mb-24 flx ai-c jc-sb">
                     Notifications
                     <a class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</a>
