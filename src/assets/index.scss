@@ -1034,7 +1034,7 @@ $completionWidth: 440px;
             width: inherit;
         }
     }
-    .grid-col-notdash{
+    .grid-col-notdash, .grid-col-dash{
         grid-template-columns: 1.5fr 1fr 1fr;
     }
     .events-top-row{

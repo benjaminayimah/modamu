@@ -77,15 +77,15 @@
                 <div class="flx-grow-1 flx column gap-16">
                     <div class="flx gap-16 event-tab">
                         <router-link :to="{ name: 'AdminDashboard'}" class="flx gap-8 ai-c">
-                            Ongoing events
+                            <div class="wrap-text wrap-line-1">Ongoing events</div>
                             <span class="br-16">{{ getOngoingEvents.length }}</span>
                         </router-link>
                         <router-link :to="{ name: 'AdminDashUpcomingEvent'}" class="flx gap-8 ai-c">
-                            Upcoming events
+                            <div class="wrap-text wrap-line-1">Upcoming events</div>                          
                             <span class="br-16">{{ getUpcomingEvents.length }}</span>
                         </router-link>
                         <router-link :to="{ name: 'AdminDashPastEvent'}" class="flx gap-8 ai-c">
-                            Past events
+                            <div class="wrap-text wrap-line-1">Past events</div>
                             <span class="br-16">{{ getPastEvents.length }}</span>
                         </router-link>
                     </div>
