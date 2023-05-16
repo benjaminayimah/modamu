@@ -11,7 +11,7 @@
                 Event info
             </h3>
         </div>
-        <div class="flx gap-60">
+        <div class="flx gap-60 row-column">
             <div class="main-content-card details">
                 <div class="grid gallery mb-16 gap-16">
                     <div class="grid-item image-1 bg-img" :style="images[0] ? { backgroundImage: 'url('+hostname+'/storage/'+village.id+'/'+images[0].image +')'} : ''">

@@ -968,6 +968,10 @@ $completionWidth: 440px;
     .main-content-card {
         width: 100%;
         min-width: 100%;
+        padding: 20px;
+        .details{
+            flex-basis: 100%;
+        }
     }
     .kids-column {
         flex-direction: row;
@@ -1042,6 +1046,9 @@ $completionWidth: 440px;
             height: 45px;
             padding: 6px 8px;
         }
+    }
+    .row-column{
+        flex-direction: column;
     }
     
     
