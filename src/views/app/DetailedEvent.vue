@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="flx column gap-24 relative">
-                    <div class="flx jc-sb ai-c">
+                    <div class="flx jc-sb ai-c first-row">
                         <div class="flx gap-8 ai-c avatar-wrapper">
                             <profile-avatar :id="village.id" :image="village.image"/>
                             <h1>{{ event.name }}</h1>
@@ -110,7 +110,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 20 20">
                             <path d="M-3266.055-837.995a1.029,1.029,0,0,1-1.021-1.034l.048-7.944-7.944-.048a1.028,1.028,0,0,1-1.022-1.034,1.028,1.028,0,0,1,1.034-1.021l7.944.048.048-7.944a1.028,1.028,0,0,1,1.034-1.021,1.027,1.027,0,0,1,1.021,1.034l-.048,7.944,7.945.048a1.029,1.029,0,0,1,1.021,1.034,1.028,1.028,0,0,1-1.034,1.022l-7.944-.048-.048,7.944a1.03,1.03,0,0,1-1.03,1.022Z" transform="translate(3275.994 857.994)" fill="#fff"/>
                         </svg>
-                        Add Pictures to event gallery
+                        <span id="add"></span>
                     </button>
                     <button v-else @click="bookNow " class="button-primary absolute gap-8 book-now" :class="{ 'button-disabled' : pastEvent }" :disabled="pastEvent ? true : false">
                         Book now
@@ -219,7 +219,58 @@ section {
 }
 .details{
     flex-basis: 55%;
+    container-type: inline-size;
 }
+@container( inline-size <= 540px) {
+    .gallery{
+        height: 200px;
+    }
+    .first-row{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .button-primary{
+        position: relative;
+    }
+    h1 {
+        font-size: 1.1rem
+    }
+    .avatar-wrapper{
+
+    }
+}
+
+@container( inline-size > 540px) {
+    .gallery{
+        height: 300px;
+    }
+
+}
+@container( inline-size <= 380px) {
+    #add::after{
+        content: 'Add Pictures to gallery';
+    }
+    .gallery{
+        height: 130px;
+    }
+    .grid {
+        gap: 8px
+    }
+    .grid-item {
+        border-radius: 8px
+    }
+}
+@container( inline-size <= 220px) {
+    #add::after{
+        content: 'Add to gallery';
+    }
+}
+@container( inline-size > 380px) {
+    #add::after{
+        content: 'Add Pictures to event gallery';
+    }
+}
+
 .grid-item{
     background-color: var(--bg-color);
     border-radius: 16px;
@@ -236,7 +287,6 @@ section {
     }
 }
 .grid {
-    gap: 0.8rem;
     grid-template-columns: 1.2fr 1.5fr 1fr;
 }
 .image-1 {
@@ -245,9 +295,7 @@ section {
 .image-4 {
     grid-column: span 2;
 }
-.gallery{
-    height: 300px;
-}
+
 .avatar-wrapper{
     .bg-img{
         height: 50px;
@@ -260,6 +308,7 @@ label {
 }
 .title{
     flex-basis: 30%;
+    min-width: 130px;
 }
 .value{
     font-weight: 600;

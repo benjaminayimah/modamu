@@ -3,8 +3,8 @@
         <backdrop v-if="addModal" />
     </transition>
     <transition name="fade">
-        <section v-if="addModal">
-            <div id="modal" class="relative" :style="{ maxHeight: windowHeight-80 +'px', minHeight: 200 + 'px' }">
+        <section v-if="addModal" class="modal-section">
+            <div id="modal" class="relative" >
                 <div class="modal-top relative">
                     <button @click="$store.commit('closeModal')" class="br-50">
                         <svg xmlns="http://www.w3.org/2000/svg" height="14.683" viewBox="0 0 14.647 14.683">
@@ -43,21 +43,50 @@ export default {
             forms: (state) => state.forms,
             windowHeight: (state) => state.windowHeight,
             addModal: (state) => state.addModal
-
-        })
+        }),
+        computedHeight() {
+            return this.windowHeight
+        }
     } 
 }
 </script>
 <style lang="scss" scoped>
 section{
     position: fixed;
-    width: 500px;
     height: auto;
     left: 50%;
     transform: translateX(-50%);
     top: 0;
     z-index: 101;
     padding: 40px 0;
+    width: 500px;
+}
+@media screen and (max-width: 590px){
+    section{
+        width: 430px;
+    }
+    .modal-content{
+        padding: 32px 0 40px 0 !important;
+
+    }
+}
+@media screen and (max-width: 430px){
+    section{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+    }
+    .modal-body{
+        padding: 0 !important;
+        height: inherit;
+    }
+    #modal{
+        height: 100%;
+        border-radius: 0 !important;
+    }
+    button {
+        top: 10px !important;
+    }
 }
 #modal{
     background-color: #fff;
@@ -65,6 +94,8 @@ section{
     border-radius: 24px;
     padding: 0 32px;
     overflow-y: auto;
+    max-height: calc(v-bind(computedHeight) - 80px);
+    min-height: calc(v-bind(computedHeight) + 200px);
     &::-webkit-scrollbar {
         display: none;
         -ms-overflow-style: none; 
