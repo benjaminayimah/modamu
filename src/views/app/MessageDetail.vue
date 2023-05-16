@@ -1,8 +1,8 @@
 <template>
     <div class="flx right-container">
         <div class="chat br-24 column flx jc-sb flx-grow-1">
-            <div class="chat-top chat-padd br-16 ai-c jc-sb flx">
-                <div class="flx gap-4">
+            <div class="chat-top chat-padd br-16 jc-sb ai-c flx">
+                <div class="flx gap-4 ai-c">
                     <a href="#" @click.prevent="$router.go(-1)"  class="centered br-50 back">
                         <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8.414 14.828">
                             <path d="M7,1,1,7l6,6" transform="translate(0 0.414)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
