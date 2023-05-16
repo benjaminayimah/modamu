@@ -11,7 +11,7 @@
                 <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
-            <span v-if="!dashboard" class="ft-primary pd-0-20">
+            <span v-if="!dashboard" class="ft-primary pd-0-20 see-details">
                 See details
                 <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.715 10">
                     <path d="M1.533,10a.715.715,0,0,1-.505-1.22L4.808,5,1.028,1.22A.715.715,0,1,1,2.038.21L6.324,4.495a.715.715,0,0,1,0,1.011L2.038,9.791A.712.712,0,0,1,1.533,10Z" transform="translate(-0.818 0)" fill="#87a5ff"/>
@@ -86,5 +86,14 @@ export default {
     &:nth-child(5) {
         transform: translateX(60px);
     }
+}
+a{
+    container-type: inline-size
+}
+@container( inline-size <= 720px) {
+    .see-details{
+        display: none
+    }
+
 }
 </style>

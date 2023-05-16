@@ -106,7 +106,4 @@ a{
     }
 
 }
-@container( inline-size <= 520px) {
-    grid-template-columns: 1.5fr 1fr 1fr;
-}
 </style>
