@@ -9,7 +9,7 @@
                 </a>
                 <button @click="doOpenParent" class="flx gap-8 ai-c br-32 bg-transparent">
                     <profile-avatar :image="null" :id="null"/>
-                    <strong>Parent name</strong>
+                    <strong class="wrap-text wrap-line-1">Parent name</strong>
                 </button>
             </div>
             <div class="chat-body chat-padd flx-grow-1">
@@ -51,7 +51,8 @@ export default {
     computed: {
         ...mapGetters(['getUser']),
         ...mapState({
-            messages: (state) => state.messages
+            messages: (state) => state.messages,
+            device: (state) => state.device
         }),
     },
     data() {
@@ -66,6 +67,12 @@ export default {
         doOpenParent() {
             this.openDetails = true
         }
+    },
+    mounted() {
+        this.device == 'mobile' ? document.body.classList.add('fixed-body') : ''
+    },
+    unmounted() {
+        document.body.classList.remove('fixed-body')
     }
 }
 </script>

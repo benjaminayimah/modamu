@@ -61,7 +61,7 @@
             <div class="flx column ai-c">
                 <h4 class="mb-24">Registered kids</h4>
                 <div class="img-stack-holder w-100 relative">
-                    <div v-for="kid in registered_kids.slice(0, 3)" :key="kid.id" class="bg-img"></div>
+                    <profile-avatar v-for="kid in registered_kids.slice(0, 3)" :key="kid.id" />
                     <div v-if="registered_kids.length > 3" class="counter bg-white centered">+{{ registered_kids.length - 3 }}</div>
                 </div>
             </div>
@@ -87,12 +87,6 @@ export default {
                 {id: 1},
             ]
         }
-    },
-    mounted() {
-        console.log('open')
-    },
-    unmounted() {
-        console.log('close')
     }
 }
 </script>
