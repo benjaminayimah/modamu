@@ -105,7 +105,7 @@ export default {
 .profile-body{
     height: 100%;
     overflow-y: auto;
-    padding: 32px 0;
+    padding: 16px 0 32px 0 ;
     overflow-y: auto;
     &::-webkit-scrollbar {
         display: none;

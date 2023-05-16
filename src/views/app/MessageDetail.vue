@@ -1,16 +1,23 @@
 <template>
     <div class="flx right-container">
         <div class="chat br-24 column flx jc-sb flx-grow-1">
-            <div class="chat-top chat-padd br-16 flx gap-4 ai-c">
-                <a href="#" @click.prevent="$router.go(-1)"  class="centered br-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8.414 14.828">
-                        <path d="M7,1,1,7l6,6" transform="translate(0 0.414)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            <div class="chat-top chat-padd br-16 ai-c jc-sb flx">
+                <div class="flx gap-4">
+                    <a href="#" @click.prevent="$router.go(-1)"  class="centered br-50 back">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8.414 14.828">
+                            <path d="M7,1,1,7l6,6" transform="translate(0 0.414)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </a>
+                    <button @click="doOpenParent" class="flx gap-8 ai-c br-32 bg-transparent">
+                        <profile-avatar :image="null" :id="null"/>
+                        <strong class="wrap-text wrap-line-1">Parent name</strong>
+                    </button>
+                </div>
+                <a href="#" @click.prevent=""  class="centered br-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="21" viewBox="0 0 5.501 21.604">
+                        <path id="menu" d="M-3377.717-559.421a2.753,2.753,0,0,1,2.75-2.749,2.753,2.753,0,0,1,2.75,2.749,2.754,2.754,0,0,1-2.75,2.75A2.754,2.754,0,0,1-3377.717-559.421Zm1,0a1.752,1.752,0,0,0,1.75,1.751,1.752,1.752,0,0,0,1.75-1.751,1.751,1.751,0,0,0-1.75-1.75A1.751,1.751,0,0,0-3376.716-559.421Zm-1-8.051a2.754,2.754,0,0,1,2.75-2.75,2.754,2.754,0,0,1,2.75,2.75,2.753,2.753,0,0,1-2.75,2.75A2.753,2.753,0,0,1-3377.717-567.473Zm1,0a1.751,1.751,0,0,0,1.75,1.75,1.751,1.751,0,0,0,1.75-1.75,1.752,1.752,0,0,0-1.75-1.75A1.752,1.752,0,0,0-3376.716-567.473Zm-1-8.051a2.754,2.754,0,0,1,2.75-2.75,2.754,2.754,0,0,1,2.75,2.75,2.753,2.753,0,0,1-2.75,2.75A2.753,2.753,0,0,1-3377.717-575.524Zm1,0a1.751,1.751,0,0,0,1.75,1.75,1.751,1.751,0,0,0,1.75-1.75,1.752,1.752,0,0,0-1.75-1.75A1.752,1.752,0,0,0-3376.716-575.524Z" transform="translate(3377.717 578.274)"/>
                     </svg>
                 </a>
-                <button @click="doOpenParent" class="flx gap-8 ai-c br-32 bg-transparent">
-                    <profile-avatar :image="null" :id="null"/>
-                    <strong class="wrap-text wrap-line-1">Parent name</strong>
-                </button>
             </div>
             <div class="chat-body chat-padd flx-grow-1">
                 <div v-if="!messages.length" class="centered">
@@ -120,10 +127,12 @@ export default {
     }
 
 }
+.back{
+    margin-left: -8px;
+}
 a{
     height: var(--img-height);
     width: var(--img-height);
-    margin-left: -8px;
     &:hover {
         background-color: rgba($color: #000000, $alpha: 0.04);
 
