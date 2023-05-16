@@ -73,7 +73,7 @@ button.toggle-btn{
     height: 45px;
     width: 45px;
     padding: 0;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(224, 225, 237, 0.4);
     &:hover {
         background-color: var(--input-hover);
     }
