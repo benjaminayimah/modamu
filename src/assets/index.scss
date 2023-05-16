@@ -214,6 +214,17 @@ input, select, textarea {
     width: 100%;
     font-family: inherit;
 
+
+}
+input, select {
+    height: 62px;
+}
+input[type=search] {
+    background-color: var(--input-hover);
+    height: 54px;
+    &:hover {
+        background-color: #d8dde8;
+    }
 }
 input[type="time"]::-webkit-calendar-picker-indicator,
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -278,10 +289,6 @@ select{
 }
 .input-wrapper{
     position: relative;
-    input, select {
-        height: 62px;
-        // line-height: 2.7;
-    }
     input[type=date], input[type=time] {
         line-height: 2.7;
     }
@@ -1017,6 +1024,25 @@ $completionWidth: 440px;
         right: 20px;
         top: 20px;
     }
+    .completed-card{
+        width: 100%;
+        .comp-text{
+            width: inherit;
+        }
+    }
+    .grid-col-notdash{
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+    .events-top-row{
+        flex-direction: column-reverse
+    }
+    .event-tab{
+        gap: 8px;
+        a {
+            height: 48px;
+        }
+    }
+    
     
 
 
@@ -1041,6 +1067,9 @@ $completionWidth: 440px;
         button {
             width: 100%;
         }
+    }
+    .add-event-card{
+        width: 70%
     }
 
     

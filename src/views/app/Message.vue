@@ -96,12 +96,7 @@ button.toggle-btn{
 .input-wrapper{
     flex: 1 1;
     input {
-        height: 54px;
         padding: 8px 12px 8px 45px;
-        background-color: var(--input-hover);
-        &:hover {
-            background-color: #d8dde8;
-        }
     }
 }
 </style>

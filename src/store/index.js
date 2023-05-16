@@ -180,7 +180,7 @@ export default createStore({
         try {
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
-          console.log(res.data)
+          // console.log(res.data)
           // state.commit('unSetLoader')
 
         } catch (e) {

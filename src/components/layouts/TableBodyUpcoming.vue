@@ -4,28 +4,38 @@
             <h4 class="table-cell wrap-text wrap-line-1">Event name</h4>
             <h4 class="table-cell wrap-text wrap-line-1">Event date</h4>
             <h4 class="table-cell wrap-text wrap-line-1">Event time</h4>
-            <h4 class="table-cell wrap-text wrap-line-1">Registered kids</h4>
+            <h4 v-if="!computedDevice" class="table-cell wrap-text wrap-line-1">Registered kids</h4>
         </div>
         <div v-if="!events.length" class="bg-white pd-24 br-16 centered">
             <div>There are no upcominng events</div>
         </div>
-        <event-row-2 v-for="event in computedEvents" :key="event.id" :event="event" :dashboard="dashboard" />
+        <event-row-2 v-for="event in computedEvents" :key="event.id" :event="event" :dashboard="dashboard" :device="computedDevice" />
         <div class="text-center gray" v-if="dashboard && events.length > 3"><router-link class="see-all" :to="{ name: 'UpcomingEvents', params: { name: 'upcoming-events'} }">See more</router-link></div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import EventRow2 from '../includes/app/EventRow2.vue'
 export default {
     components: { EventRow2 },
     name: 'TableBodyUpcoming',
     props: ['events', 'dashboard'],
     computed: {
+        ...mapState({
+            device: (state) => state.device
+        }),
         computedEvents() {
             if(this.dashboard == true)
             return this.events.slice(0, 3)
             else
             return this.events
+        },
+        computedDevice() {
+            if(this.device == 'mobile')
+            return true
+            else
+            return false
         }
     }
 }

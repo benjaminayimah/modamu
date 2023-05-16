@@ -4,15 +4,19 @@
             <profile-avatar :id="user.id" :image="computedImage.image"/>
             <span class="wrap-text wrap-line-1">{{ event.name }}</span>
         </div>
-        <div class="table-cell flx gap-8 ai-c">{{ format_date(event.date) }}</div>
-        <div class="table-cell flx gap-8 ai-c">{{ format_time(event.start_time) }}</div>
-        <div class="table-cell flx jc-sb ai-c">
+        <div class="table-cell flx gap-8 ai-c">
+            <div class="wrap-text wrap-line-1">{{ format_date(event.date) }}</div>
+        </div>
+        <div class="table-cell flx gap-8 ai-c">
+            <div class="wrap-text wrap-line-1">{{ format_time(event.start_time) }}</div>
+        </div>
+        <div class="table-cell flx jc-sb ai-c attendees-cell" v-if="!device">
             <div class="relative h-100 flx ai-c">
                 <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees</span>
                 <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
             </div>
-            <span v-if="!dashboard" class="ft-primary pd-0-20">
+            <span v-if="!dashboard" class="ft-primary pd-0-20 see-details">
                 See details
                 <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 6.01 10.592">
                     <path d="M1.533.715,5.819,5,1.533,9.286" transform="translate(-0.523 0.295)" fill="none" stroke="#87a5ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.429"/>
@@ -28,7 +32,7 @@ import ProfileAvatar from './ProfileAvatar.vue';
 export default {
   components: { ProfileAvatar },
     name: 'EventRow2',
-    props: ['event', 'dashboard'],
+    props: ['event', 'dashboard', 'device'],
     mixins: [ formatDateTime ],
     computed: {
         ...mapState({
@@ -92,5 +96,17 @@ export default {
     &:nth-child(5) {
         transform: translateX(60px);
     }
+}
+a{
+    container-type: inline-size
+}
+@container( inline-size <= 720px) {
+    .see-details{
+        display: none
+    }
+
+}
+@container( inline-size <= 520px) {
+    grid-template-columns: 1.5fr 1fr 1fr;
 }
 </style>
