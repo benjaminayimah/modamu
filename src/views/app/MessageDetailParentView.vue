@@ -129,24 +129,18 @@ export default {
     }
     height: 65px;
     .bg-img{
-        &:nth-child(1) {
-            background-color: #de1a1a;
+        &:nth-child(2) {
             transform: translateX(50px);
         }
-        &:nth-child(2) {
-            background-color: #1c1fe2;
-            transform: translateX(100px);
-        }
         &:nth-child(3) {
-            background-color: #cc0fe0;
-            transform: translateX(150px);
+            transform: translateX(100px);
 
         }
     }
 }
 
 .counter{
-    transform: translateX(200px);
+    transform: translateX(150px);
 }
 .close-btn {
     position: absolute;
