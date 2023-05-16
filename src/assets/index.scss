@@ -54,6 +54,9 @@ body{
   display: flex;
   justify-content: center;
 }
+.bg-transparent {
+    background-color: transparent;
+}
 .bg-primary {
     background-color: var(--primary-color);
 }
@@ -725,6 +728,9 @@ form {
 .pd-0-20{
     padding: 0 20px;
 }
+.pd-4{
+    padding: 4px;
+}
 .pd-8{
     padding: 8px;
 }
@@ -961,7 +967,7 @@ $completionWidth: 440px;
     }
     .kids-profile-view{
         position: fixed;
-        inset: 0 0 0 0;
+        inset: 0;
         z-index: 91;
         padding: 40px 20px;
         border-radius: 0;
@@ -987,6 +993,32 @@ $completionWidth: 440px;
         width: 100%;
         padding-right: 0;
     }
+    .chat, .u-profile{
+        border-radius: 0;
+        position: fixed;
+        inset: 0;
+        width: 100%;
+    }
+    .chat {
+        z-index: 91;
+    }
+    .u-profile{
+        z-index: 92;
+        padding: 0 20px;
+        background-color: #fff;
+    }
+    .right-container{
+        height: unset;
+    }
+    .chat-padd{
+        padding: 8px 14px;
+    }
+    .close-btn{
+        right: 20px;
+        top: 20px;
+    }
+    
+
 
     
    
