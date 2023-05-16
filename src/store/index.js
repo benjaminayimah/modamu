@@ -27,6 +27,15 @@ export default createStore({
       {id: 3, name: 'Lorem ipsum'},
       {id: 4, name: 'Ipsum lorem'},
       {id: 5, name: 'Lorem ipsum'},
+      {id: 6, name: 'Lorem ipsum'},
+      {id: 7, name: 'Lorem ipsum'},
+      {id: 8, name: 'Lorem ipsum'},
+      {id: 9, name: 'Lorem ipsum'},
+      {id: 10, name: 'Lorem ipsum'},
+      {id: 11, name: 'Lorem ipsum'},
+      {id: 12, name: 'Lorem ipsum'},
+
+
     ],
     villages: [],
     wait_lists: [],
@@ -171,6 +180,7 @@ export default createStore({
         try {
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
+          console.log(res.data)
           // state.commit('unSetLoader')
 
         } catch (e) {
