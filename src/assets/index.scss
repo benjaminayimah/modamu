@@ -201,42 +201,19 @@ button, .a-button{
     gap: 6px;
     flex-direction: column;
 }
-.form-control{
-    font-family: inherit;
-}
-.form-control[data-color=light], .form-control[data-color=dark] {
-    display: block;
-    font-size: 1rem;
-    width: 100%;
-    border: 1px transparent solid;
-    border-radius: var(--input-btn-radius);
-    background-clip: padding-box;
+input, select, textarea {
     appearance: none;
     outline: 0;
+    display: block;
+    background-clip: padding-box;
+    border: 1px transparent solid;
     transition: var(--input-btn-transition);
-    &:hover {
-        background-color: var(--input-hover);
-    }
-    &:focus {
-        border: 1px var(--primary-color) solid;
-        background-color: var(--bg-white);
-    }
-    &::placeholder{
-        color: var(--gray);
-    }
-}
-.form-control[data-color=light] {
-    background-color: var(--input-bg);
-}
-.form-control[data-color=dark] {
-    background-color: var(--light-gray);
-}
-select{
-    background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 24px center/8px 10px no-repeat;
-    text-transform: capitalize;
-}
-.capitalize {
-    text-transform: capitalize;
+    border-radius: var(--input-btn-radius);
+    padding: 16px 24px;
+    font-size: 1rem;
+    width: 100%;
+    font-family: inherit;
+
 }
 input[type="time"]::-webkit-calendar-picker-indicator,
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -262,6 +239,32 @@ input[data-color=light]:-webkit-autofill:focus,
 input[data-color=light]:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 40px white inset !important;
 }
+.form-control[data-color=light], .form-control[data-color=dark] {
+    &:hover {
+        background-color: var(--input-hover);
+    }
+    &:focus {
+        border: 1px var(--primary-color) solid;
+        background-color: var(--bg-white);
+    }
+    &::placeholder{
+        color: var(--gray);
+    }
+}
+.form-control[data-color=light] {
+    background-color: var(--input-bg);
+}
+.form-control[data-color=dark] {
+    background-color: var(--light-gray);
+}
+select{
+    background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 24px center/8px 10px no-repeat;
+    text-transform: capitalize;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+
 .input-error{
     color: var(--error);
     font-size: 0.8rem;
@@ -284,9 +287,6 @@ input[data-color=light]:-webkit-autofill:active  {
     }
     input[data-type=icon] {
         padding: 8px 12px 8px 50px;
-    }
-    input, select, textarea{
-        padding: 16px 24px;
     }
     i,span{
         position: absolute;

@@ -30,7 +30,7 @@ export default {
     width: 48px;
 }
 .highlight{
-    flex: 1 1 100%;
+    flex: 1 1;
 }
 .count-info{
     height: 19px;
