@@ -8,7 +8,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$dimension: 200px;
+$dimension: 180px;
 .loader {
   width: $dimension;
   height: $dimension;
@@ -42,5 +42,5 @@ $dimension: 200px;
     opacity: 0;
   }
 }
-    
+   
 </style>
