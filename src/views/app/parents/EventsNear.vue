@@ -88,7 +88,9 @@ export default {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     const userLat = position.coords.latitude
                     const userLng = position.coords.longitude
-                    vm.searchEvents(userLat, userLng)
+                    setTimeout(() => {
+                        vm.searchEvents(userLat, userLng)
+                    }, 3000);
                 })
             } else {
                 console.log("Geolocation is not supported by this browser.");

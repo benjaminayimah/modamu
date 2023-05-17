@@ -30,6 +30,7 @@ $dimension: 180px;
 }
 .loader::after {
   animation-delay: 1s;
+  opacity: 0;
 }
 
 @keyframes animloader {
