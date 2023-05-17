@@ -1062,12 +1062,12 @@ $completionWidth: 440px;
     .row-column{
         flex-direction: column;
     }
-    #waiting_list_table{
+    #waiting_list_table, #village_checkout{
         .grid-item {
             grid-template-columns: 1.2fr 1fr 1fr 0.8fr
         }
         .table-cell:nth-child(3) {
-            justify-content: center;
+            justify-content: flex-end;
         }
     }
     .col-4 {
@@ -1076,13 +1076,13 @@ $completionWidth: 440px;
     .mt--32{
         margin-top: 0;
     }
-    .gap-50 {
+    .gap-50, .gap-70 {
         gap: 32px;
     }
     .select-kids-body{
         height: 100%;
     }
-    .payment-calc{
+    .payment-calc, .body-container{
         width: 100%;
     }
     .select-kids-container {
@@ -1101,6 +1101,9 @@ $completionWidth: 440px;
             width: 100%;
         }
     }
+    .col-2 {
+        grid-template-columns: 1fr;
+    } 
     
     
 

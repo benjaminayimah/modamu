@@ -2,11 +2,13 @@
     <router-link :to="{ name: 'Attendee', params: { id: kid.id, event: kid.event_id, parent: kid.user_id, name: kid.name } }" class="grid-item table-row">
         <div class="table-cell flx ai-c gap-8">
             <profile-avatar :id="kid.user_id" :image="kid.photo" />
-            <span>{{ kid.name }}</span>
+            <span class="wrap-text wrap-line-1">{{ kid.name }}</span>
         </div>
-        <div class="table-cell flx ai-c">{{ calculateAge(kid.dob )}} years</div>
+        <div class="table-cell flx ai-c">
+            <span class="wrap-text wrap-line-1">{{ calculateAge(kid.dob )}} years</span>
+        </div>
         <div class="table-cell flx jc-sb ai-c">
-            <span class="gender-pill capitalize" :data-type="kid.gender">{{ kid.gender }}</span>
+            <span class="gender-pill capitalize" :data-type="kid.gender">{{ computedGender }}</span>
         </div>
         <div class="flx jc-c">
             <button v-if="kid.status != '3'" @click.prevent="doChecking" class="button-primary gap-8" :class="{ 'check-out' : kid.status == '2'}">
@@ -25,13 +27,25 @@
     </router-link>
 </template>
 <script>
+import { mapState } from 'vuex';
 import formatDateTime from '@/mixins/formatDateTime';
 import ProfileAvatar from './ProfileAvatar.vue'
 export default {
-  components: { ProfileAvatar },
+    components: { ProfileAvatar },
     name: 'RequestListRow',
     mixins: [formatDateTime],
     props: ['kid'],
+    computed: {
+        ...mapState ({
+            device: (state) => state.device
+        }),
+        computedGender() {
+            if(this.device == 'mobile')
+            return this.kid.gender.charAt(0)
+            else
+            return this.kid.gender
+        }
+    },
     methods: {
         doChecking() {
             const payload = { id: this.kid.id, event: this.kid.event_id}
@@ -62,5 +76,16 @@ $radius: 30px;
 .bg-img {
     height: 42px;
     width: 42px;
+}
+a{
+    container-type: inline-size
+}
+@container( inline-size <= 720px) {
+    .table-row{
+        button {
+            margin-left: 8px
+        }
+    }
+
 }
 </style>
