@@ -36,7 +36,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('computeCoordinates')
-    this.$store.commit('startLoader')
     // if (navigator.geolocation) {
     //     const vm = this
     //     navigator.geolocation.getCurrentPosition(function(position) {
