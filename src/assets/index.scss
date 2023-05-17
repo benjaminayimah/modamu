@@ -936,13 +936,13 @@ $completionWidth: 440px;
 
 //mobile
 .mobile{
+    padding: 0;
     margin: 0;
-    padding: var(--mobile-body-padding);
     #top_nav {
-        padding: 6px 0;
+        padding: 8px 20px;
     }
     .dashboard-main {
-        padding-top: 8px;
+        padding: 8px 20px 32px 20px;
         height: unset;
         flex-direction: column;
         h1 {
