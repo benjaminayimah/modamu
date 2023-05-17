@@ -18,8 +18,11 @@
         </div>
         <div>
             <button @click.prevent="doAccept" class="button-primary gap-8">
+                <svg v-if="!submitting" xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 19.724 15.104">
+                    <path d="M30.054,13.974l-1.612-1.658a.347.347,0,0,0-.256-.11h0a.333.333,0,0,0-.256.11L16.754,23.573l-4.067-4.067a.354.354,0,0,0-.513,0l-1.63,1.63a.365.365,0,0,0,0,.522l5.129,5.129a1.622,1.622,0,0,0,1.072.522,1.7,1.7,0,0,0,1.062-.5h.009L30.063,14.5A.392.392,0,0,0,30.054,13.974Z" transform="translate(-10.434 -12.206)" fill="#fff"/>
+                </svg>
                 <spinner v-if="submitting" v-bind:size="20" v-bind:white="true" />
-                 <span>{{ submitting ? 'Processing...' : 'Accept'}}</span>
+                <span class="text">{{ submitting ? 'Processing...' : 'Accept'}}</span>
             </button>
         </div>
     </router-link>
@@ -98,7 +101,7 @@ a{
     container-type: inline-size
 }
 @container( inline-size <= 720px) {
-    .see-details{
+    .see-details, .text{
         display: none
     }
     .table-row{

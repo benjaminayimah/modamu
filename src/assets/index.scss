@@ -1064,11 +1064,9 @@ $completionWidth: 440px;
     }
     #waiting_list_table, #village_checkout{
         .grid-item {
-            grid-template-columns: 1.2fr 1fr 1fr 0.8fr
+            grid-template-columns: 2fr 1.1fr 0.8fr 0.8fr
         }
-        .table-cell:nth-child(3) {
-            justify-content: flex-end;
-        }
+        
     }
     .col-4 {
         grid-template-columns: 1fr;

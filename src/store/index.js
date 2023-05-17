@@ -130,7 +130,7 @@ export default createStore({
       localStorage.setItem('user', JSON.stringify(payload));
     },
     updateWaitlist(state, payload) {
-      state.wait_lists = state.wait_lists.filter(data => data.id != payload)
+      state.wait_lists = state.wait_lists.filter(data => data.id != payload.attendee && data.event_id == payload.event)
     },
     setKids(state, payload) {
       state.kids = payload
