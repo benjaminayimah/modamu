@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
         <div class="title-row">
             <h1 class="title mb-24">Verify & checkout</h1>
             <div class="flx ai-c gap-16">

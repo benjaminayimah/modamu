@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
         <div class="title-row flx gap-24 ai-c">
             <a class="flx gap-8 ai-c" href="#" @click.prevent="$router.go(-1)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 8.414 14.828">

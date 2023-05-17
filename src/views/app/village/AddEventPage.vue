@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
         <div class="title-row">
             <h1 class="title">Add New Event</h1>
         </div>

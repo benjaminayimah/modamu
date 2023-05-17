@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-8 column">
                 <h1 class="title">Events close to you</h1>

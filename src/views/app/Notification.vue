@@ -1,5 +1,5 @@
 <template>
-    <section id="villages">
+    <section class="section-main">
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Notifications</h1>
