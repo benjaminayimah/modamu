@@ -8,7 +8,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-$dimension: 24px;
+$dimension: 20px;
 
 .loader {
   border: 2px solid #f3f3f3; /* Light grey */

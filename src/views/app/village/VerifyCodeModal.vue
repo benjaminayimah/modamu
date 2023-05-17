@@ -30,10 +30,9 @@
     </teleport>
 </template>
 <script>
-import { defineAsyncComponent } from 'vue'
 import { postApi } from '@/api'
 import userNameMixin from '@/mixins/userNameMixin'
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '@/components/includes/Spinner.vue'));
+import Spinner from '@/components/includes/Spinner.vue'
 import inputValMixin from '@/mixins/inputValMixin'
 import { mapState } from 'vuex'
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue'

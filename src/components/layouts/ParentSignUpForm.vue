@@ -77,11 +77,10 @@
     </div>
 </template>
 <script>
-import { defineAsyncComponent } from 'vue';
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import inputValMixin from '../../mixins/inputValMixin'
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../includes/Spinner'));
+import Spinner from '../includes/Spinner'
 import passwordToggleMixin from '../../mixins/passwordToggle'
 export default {
   components: { Spinner },

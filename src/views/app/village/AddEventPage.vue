@@ -153,12 +153,11 @@
     </section>
 </template>
 <script>
-import { defineAsyncComponent } from 'vue';
 import axios from 'axios';
 import { mapGetters, mapState } from 'vuex';
 import inputValMixin from '../../../mixins/inputValMixin';
 import tempImageUploadMixin from '../../../mixins/tempImageUpload';
-const Spinner = defineAsyncComponent(() => import(/* webpackChunkName: Spinner */ '../../../components/includes/Spinner.vue'));
+import Spinner from '../../../components/includes/Spinner.vue'
 import Avatar from '../../../components/includes/Avatar';
 export default {
   components: { Spinner, Avatar },
