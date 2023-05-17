@@ -24,8 +24,8 @@
                 <button @click="goToEvent" class="button-primary w-100">Track event</button>
             </div>
         </div>
-        <div v-else class="flx gap-50 select-kids-body">
-            <div class="select-kids-container flx column gap-32">
+        <div v-else class="flx gap-50 select-kids-body row-column">
+            <div class="select-kids-container flx column gap-32 scroll-snap overflow-y-scroll scroll-hidden">
                 <booking-select-kids-list v-for="kid in kids" :key="kid.id" :kid="kid" :selected="selected" @emmitSelect="doSelection"/>
             </div>
             <div class="payment-calc flx-end column flx">
@@ -135,12 +135,6 @@ section {
     height: 100%;
     flex-basis: 300px;
     padding: 20px 0;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        display: none;
-        -ms-overflow-style: none; 
-        scrollbar-width: none; 
-    }
 }
 .payment-calc{
     width: 600px;

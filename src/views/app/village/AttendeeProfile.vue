@@ -11,7 +11,7 @@
                 Kid's profile
             </h3>
         </div>
-        <div class="flx gap-50">
+        <div class="flx gap-50 row-column">
             <div class="main-content-card kid-profile flx column gap-24">
                 <profile-kid-body-content :kid="thisKid"/>
             </div>
@@ -57,12 +57,20 @@
     </section>
 </template>
 <script>
+import { postApi } from '@/api'
+import { mapState } from 'vuex'
 import ProfileKidBodyContent from '@/components/layouts/ProfileKidBodyContent.vue'
 import KidsList from '../../../components/includes/app/KidsList.vue'
 import ProfileAvatar from '../../../components/includes/app/ProfileAvatar.vue'
 export default {
     components: { ProfileAvatar, KidsList, ProfileKidBodyContent },
     name: 'AttendeeProfile',
+    computed: {
+        ...mapState({
+            token: (state) => state.token,
+            hostname: (state) => state.hostname
+        })
+    },
     data() {
         return {
             thisKid: '',
@@ -72,16 +80,17 @@ export default {
         }
     },
     methods: {
-        fetchThisKidAndParent() {
-            this.$store.dispatch('fetchThisKidAndParent', {kid: this.$route.params.id, parent: this.$route.params.parent, event: this.$route.params.event})
-            .then((res) => {
+        async fetchThisKidAndParent() {
+            try {
+                const res = await postApi(this.hostname +'/api/fetch-this-kid-and-parent?token=' + this.token, {kid: this.$route.params.id, parent: this.$route.params.parent, event: this.$route.params.event})
                 this.thisKid = res.data.kid
                 this.parent = res.data.parent
                 this.event = res.data.event
                 this.otherKids = res.data.otherkids
-            }).catch((err) => {
-                console.log(err.response.data)
-            })
+                
+            } catch (error) {
+                console.error(error)
+            }
         },
         goToProfile() {
             this.$router.push({ name: 'ViewParentProfile', params: { event: this.event.id, parent_id: this.parent.id, kid: this.thisKid.name, parent: this.parent.name } })

@@ -14,12 +14,12 @@
                 <input class="form-control" type="search" data-type="icon" placeholder="Search villages...">
             </div>
         </div>
-        <div class="table">
+        <div class="table" id="waiting_list_table">
             <div class="grid gap-8 table-body">
                 <div class="grid-item table-head">
-                    <h4 class="table-cell">Child name </h4>
+                    <h4 class="table-cell wrap-text wrap-line-1">Child name </h4>
                     <h4 class="table-cell">Age</h4>
-                    <h4 class="table-cell">Gender</h4>
+                    <h4 class="table-cell wrap-text wrap-line-1">Gender</h4>
                     <div></div>
                 </div>
                 <div v-if="!wait_lists.length" class="bg-white pd-24 br-16 centered">

@@ -144,8 +144,8 @@
     </section>
 </template>
 <script>
+import { postApi, deleteApi } from '@/api';
 import formatDateTime from '../../mixins/formatDateTime';
-import axios from 'axios';
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 import { mapState } from 'vuex';
 import KidsRow from '../../components/includes/app/KidsRow.vue';
@@ -187,25 +187,25 @@ export default {
             await this.$store.commit('setTempID', this.event.id)
             this.$store.commit('openModal', 'add-to-gallery')
         },
-        fetchThisEvent() {
-            this.$store.dispatch('fetchThisEvent', this.$route.params.id)
-            .then((res) => {
+        async fetchThisEvent() {
+            try {
+                const res = await postApi(this.hostname+'/api/fetch-this-event/'+this.$route.params.id + '?token='+this.token)
                 this.event = res.data.event
                 this.kids = res.data.attendees
                 this.images = res.data.images
                 this.village = res.data.user
-
-            }).catch((err) => {
-                console.log(err.response.data)
-            })
+                
+            } catch (error) {
+                console.error(error)
+            }
         },
-        delImage(id) {
-            axios.delete(this.hostname + '/api/del-this-image/' + id + '?token='+this.token)
-            .then(() => {
+        async delImage(id) {
+            try {
+                await deleteApi(this.hostname+'/api/del-this-image/'+id+ '?token='+this.token)
                 location.reload()
-            }).catch((err) => {
-                console.log(err.response);
-            });
+            } catch (error) {
+                console.error(error)
+            }
         }
     },
     created() {
@@ -236,13 +236,22 @@ section {
         font-size: 1.1rem
     }
     .avatar-wrapper{
-
+        .bg-img {
+            height: 40px;
+            width: 40px
+        }
     }
 }
 
 @container( inline-size > 540px) {
     .gallery{
         height: 300px;
+    }
+    .avatar-wrapper{
+        .bg-img{
+            height: 50px;
+            width: 50px;
+        }
     }
 
 }
@@ -294,13 +303,6 @@ section {
 }
 .image-4 {
     grid-column: span 2;
-}
-
-.avatar-wrapper{
-    .bg-img{
-        height: 50px;
-        width: 50px;
-    }
 }
 
 label {

@@ -2,12 +2,14 @@
     <router-link :to="{ name: 'Attendee', params: { id: kid.id, event: kid.event_id, parent: kid.user_id, name: kid.name } }" class="grid-item table-row">
         <div class="table-cell flx ai-c gap-8">
             <profile-avatar :id="kid.user_id" :image="kid.photo"/>
-            <span>{{ kid.name }}</span>
+            <span class="wrap-text wrap-line-1">{{ kid.name }}</span>
         </div>
-        <div class="table-cell flx ai-c">{{ calculateAge(kid.dob) }} years</div>
+        <div class="table-cell flx ai-c">
+            <span class="wrap-text wrap-line-1">{{ calculateAge(kid.dob) }} years</span>
+        </div>
         <div class="table-cell flx jc-sb ai-c">
-            <span class="gender-pill capitalize" :data-type="kid.gender">{{ kid.gender }}</span>
-            <span class="ft-primary pd-0-20">
+            <span class="gender-pill capitalize" :data-type="kid.gender">{{ computedGender }}</span>
+            <span class="ft-primary pd-0-20 see-details">
                 View profile
                 <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.715 10">
                     <path d="M1.533,10a.715.715,0,0,1-.505-1.22L4.808,5,1.028,1.22A.715.715,0,1,1,2.038.21L6.324,4.495a.715.715,0,0,1,0,1.011L2.038,9.791A.712.712,0,0,1,1.533,10Z" transform="translate(-0.818 0)" fill="#87a5ff"/>
@@ -35,8 +37,15 @@ export default {
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
-            token: (state) => state.token
-        })
+            token: (state) => state.token,
+            device: (state) => state.device
+        }),
+        computedGender() {
+            if(this.device == 'mobile')
+            return this.kid.gender.charAt(0)
+            else
+            return this.kid.gender
+        }
     },
     props: ['kid'],
     mixins: [formatDateTime],
@@ -50,7 +59,6 @@ export default {
             this.startSpinner()
             try {
                 const res = await postApi(this.hostname+'/api/accept-this-attendee?token='+this.token, { kid: this.kid.id, event: this.kid.event_id});
-                console.log(res.data)
                 this.$store.commit('updateWaitlist', res.data.attendee)
                 this.stopSpinner()
             } catch (error) {
@@ -86,5 +94,18 @@ $radius: 30px;
     height: 42px;
     width: 42px;
 }
+a{
+    container-type: inline-size
+}
+@container( inline-size <= 720px) {
+    .see-details{
+        display: none
+    }
+    .table-row{
+        button {
+            margin-left: 8px
+        }
+    }
 
+}
 </style>

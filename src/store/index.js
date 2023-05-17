@@ -193,20 +193,6 @@ export default createStore({
           state.commit('destroyToken') 
         }      
     },
-    async fetchThisEvent(state, payload) {  
-      return await axios.post(this.getters.getHostname+'/api/fetch-this-event/'+payload +'?token='+ this.getters.getToken)    
-    },
-    async fetchThisRegisteredEvent(state, payload) {  
-      return await axios.get(this.getters.getHostname+'/api/fetch-this-registered-event/'+payload+'/?token='+ this.getters.getToken)    
-    },
-    async fetchThisKidAndParent(state, payload) {  
-      return await axios.post(this.getters.getHostname+'/api/fetch-this-kid-and-parent?token='+ this.getters.getToken, payload)    
-    },
-    async fetchThisParent(state, payload) {  
-      return await axios.post(this.getters.getHostname+'/api/fetch-this-parent?token='+ this.getters.getToken, payload)    
-    },
-
-    
     
     logoutAuth(state){
       // state.commit('setLoader') 

@@ -72,10 +72,18 @@
     </section>
 </template>
 <script>
+import { getApi } from '@/api'
+import { mapState } from 'vuex'
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue'
 export default {
-  components: { ProfileAvatar },
+    components: { ProfileAvatar },
     name: 'TrackEvent',
+    computed: {
+        ...mapState({
+            hostname: (state) => state.hostname,
+            token: (state) => state.token
+        })
+    },
     data () {
         return {
             attendees: [],
@@ -84,15 +92,15 @@ export default {
         }
     },
     methods: {
-        fetchThisRegisteredEvent() {
-            this.$store.dispatch('fetchThisRegisteredEvent', this.$route.params.id)
-            .then((res) => {
+        async fetchThisRegisteredEvent() {
+            try {
+                const res = await getApi(this.hostname+'/api/fetch-this-registered-event/'+this.$route.params.id + '?token='+this.token)
                 this.attendees = res.data.attendees
                 this.booking = res.data.booking
                 this.event = res.data.event
-            }).catch((err) => {
-                console.log(err.response.data)
-            })
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
     mounted() {

@@ -19,8 +19,7 @@
     </section>
 </template>
 <script>
-import { getApi } from '@/api';
-import { postApi } from '@/api';
+import { postApi, getApi } from '@/api';
 import { mapState } from 'vuex';
 import ParentCheckoutList from '@/components/includes/app/ParentCheckoutList.vue';
 export default {

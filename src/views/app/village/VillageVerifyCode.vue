@@ -31,8 +31,7 @@
     </section>
 </template>
 <script>
-import { getApi } from '@/api';
-import { postApi } from '@/api';
+import { postApi, getApi } from '@/api';
 import { mapState } from 'vuex';
 import RequestListRow from '@/components/includes/app/RequestListRow.vue';
 export default {
