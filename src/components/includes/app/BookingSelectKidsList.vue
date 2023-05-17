@@ -8,7 +8,7 @@
         <div class="flx flx-grow-1 column ai-c gap-8 br-24 kids-card bg-white">
             <profile-avatar :image="kid.photo" :id="kid.user_id"/>
             <div class="flx column ai-c">
-                <div class="name text-ellipsis">{{ kid.name }}</div>
+                <div class="name wrap-text wrap-line-1 text-center">{{ kid.name }}</div>
                 <div class="flx gap-4 gray age"><span>12</span><span>years old</span></div>
             </div>
         </div>
