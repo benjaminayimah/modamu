@@ -33,7 +33,7 @@
                     <span v-if="error" class="input-error">Make a selection first</span>
                     <div class="flx jc-sb ai-c">
                         <h4>Amount to be paid</h4>
-                        <span class="price br-24">Price per child {{ $route.params.event_price }}</span>
+                        <span class="price br-24">Price per child ${{ $route.params.event_price }}</span>
                     </div>
                     <div class="flx jc-sb total-row br-16">
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
