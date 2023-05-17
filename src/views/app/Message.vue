@@ -1,5 +1,5 @@
 <template>
-    <section id="messages" class="flx gap-8">
+    <section id="messages" class="flx gap-8 section-main">
         <div class="message-left h-100">
             <div class="title-row">
                 <div class="flx jc-sb ai-c gap-8">

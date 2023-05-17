@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
        <div class="flx jc-sb mb-32 gap-16 events-top-row">
             <div class="flx gap-16 event-tab">
                 <router-link :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }" class="flx gap-8 ai-c">

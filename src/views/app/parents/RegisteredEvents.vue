@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="section-main">
         <div class="title-row">
             <div class="flx gap-16 ai-c mb-24">
                 <h1 class="title">Track events</h1>
