@@ -1,5 +1,6 @@
 <template>
-  <main class="home" :class="getDevice">
+  <main class="home" :class="device">
+    <lottie-loader v-if="loader" class="lottie" />
     <main-nav/>
     <top-nav-bar />
     <router-view />
@@ -7,13 +8,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import LottieLoader from '@/components/includes/LottieLoader.vue';
+import { mapState } from 'vuex';
 import MainNav from '../../components/includes/app/MainNav.vue'
 import TopNavBar from '../../components/includes/app/TopNavBar.vue';
 export default {
-  components: { MainNav, TopNavBar },
+  components: { MainNav, TopNavBar, LottieLoader },
   name: 'HomePage',
-  computed: mapGetters(['getDevice']),
+  computed: {
+    ...mapState({
+      device: (state) => state.device,
+      loader: (state) => state.loader
+    })
+  },
   methods: {
     // getCucrrentLocation(payload) {
     //   const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric'; // Your Google Cloud Platform API key
@@ -31,6 +38,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('computeCoordinates')
+    this.$store.commit('startLoader')
     // if (navigator.geolocation) {
     //     const vm = this
     //     navigator.geolocation.getCurrentPosition(function(position) {
@@ -51,5 +59,10 @@ main {
   position: relative;
   margin-left: calc(var(--nav-width) + var(--dash-padding)*2 + var(--aside-padding));
   padding: 0 7%;
+}
+.lottie {
+  position: fixed;
+  top: 48vh;
+  left: 50vw;
 }
 </style>

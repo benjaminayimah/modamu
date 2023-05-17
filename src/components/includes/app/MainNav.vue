@@ -154,7 +154,7 @@ aside{
     bottom: 0;
     top: 0;
     padding: 32px var(--aside-padding);
-    z-index: 101;
+    z-index: 91;
     *{
         transition: 0.3s ease-out width;
     }

@@ -13,6 +13,7 @@ export default createStore({
     current_location: '',
     menu: false,
     device: null,
+    loader: false,
     windowWidth: '',
     windowHeight: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
@@ -160,6 +161,12 @@ export default createStore({
       const i = state.attendees.findIndex(x => x.id === payload.id)
       state.attendees.splice(i, 1, payload)
     },
+    startLoader(state) {
+      state.loader = true
+    },
+    stopLoader(state) {
+      state.loader = false
+    },
     toggleMenu(state) {
       state.menu = !state.menu
     }
@@ -180,6 +187,7 @@ export default createStore({
         try {
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
+          state.commit('stopLoader')
           // console.log(res.data)
           // state.commit('unSetLoader')
 

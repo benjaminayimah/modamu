@@ -37,6 +37,7 @@ export default {
             try {
                 const res = await getApi(this.hostname+'/api/parent-fetch-attendees?token='+this.token);
                 this.$store.commit('setAttendees', res.data.attendees)
+                this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
@@ -52,6 +53,7 @@ export default {
     },
     created() {
         this.fetchAttendees()
+        this.$store.commit('startLoader')
     }
 }
 </script>
