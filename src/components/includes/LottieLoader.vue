@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
       <vue-lottie :options="lottieOptions" :width="40" :height="40" />
 </template>
   
@@ -21,4 +21,4 @@
     },
   };
   </script>
-  
+   -->

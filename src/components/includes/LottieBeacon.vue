@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <vue-lottie :options="lottieOptions" :width="180" :height="180" />
 </template>
 <script>
@@ -19,4 +19,4 @@ export default {
     };
   },
 };
-</script>
+</script> -->

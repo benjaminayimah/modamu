@@ -1,6 +1,5 @@
 <template>
   <main class="home" :class="device">
-    <lottie-loader v-if="loader" class="lottie" />
     <main-nav/>
     <top-nav-bar />
     <router-view />
@@ -8,12 +7,11 @@
 </template>
 
 <script>
-import LottieLoader from '@/components/includes/LottieLoader.vue';
 import { mapState } from 'vuex';
 import MainNav from '../../components/includes/app/MainNav.vue'
 import TopNavBar from '../../components/includes/app/TopNavBar.vue';
 export default {
-  components: { MainNav, TopNavBar, LottieLoader },
+  components: { MainNav, TopNavBar  },
   name: 'HomePage',
   computed: {
     ...mapState({
