@@ -936,6 +936,9 @@ $completionWidth: 440px;
 
 //mobile
 .mobile{
+    #overlay{
+        z-index: 91;
+    }
     padding: 0;
     margin: 0;
     #top_nav {
