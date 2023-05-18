@@ -1,5 +1,4 @@
 <template>
-  <welcome-banner v-if="getWindowWidth >= 990" v-bind:img="getImage" v-bind:window="getWindowWidth" />
   <section class="wc-section">
     <div class="wc-title">
       <h1 class="fs-2r">Register Village</h1>
@@ -96,16 +95,15 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
-import WelcomeBanner from '../../components/includes/web/WelcomeBanner.vue';
 import passwordToggleMixin from '../../mixins/passwordToggle';
 import inputValMixin from '../../mixins/inputValMixin';
 import Spinner from '../../components/includes/Spinner.vue'
 import autoCompleMixin from '../../mixins/autoCompleMixin';
 export default {
-  components: { WelcomeBanner, Spinner },
+  components: { Spinner },
   name: 'SignUpVillage',
   mixins: [ passwordToggleMixin, inputValMixin, autoCompleMixin],
-  computed: mapGetters(['getWindowWidth', 'getImage', 'getHostname']),
+  computed: mapGetters(['getHostname']),
   data () {
     return {
       form: {

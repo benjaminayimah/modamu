@@ -1,5 +1,4 @@
 <template>
-  <welcome-banner v-if="getWindowWidth >= 990"  v-bind:img="getImage" v-bind:window="getWindowWidth"/>
   <section class="wc-section">
     <div class="wc-title">
       <h1 class="fs-2r">Login</h1>
@@ -80,14 +79,13 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import inputValMixin from '../../mixins/inputValMixin'
-import WelcomeBanner from '../../components/includes/web/WelcomeBanner.vue';
 import Spinner from '../../components/includes/Spinner.vue'
 import passwordToggleMixin from '../../mixins/passwordToggle';
 export default {
-  components: { WelcomeBanner, Spinner },
+  components: { Spinner },
   name: 'SignIn',
   mixins: [inputValMixin, passwordToggleMixin],
-  computed: mapGetters(['getImage', 'getWindowWidth', 'getHostname']),
+  computed: mapGetters(['getImage', 'getHostname']),
   data () {
     return {
       form: {

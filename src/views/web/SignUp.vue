@@ -1,6 +1,5 @@
 <template>
-    <welcome-banner v-if="getWindowWidth >= 990 && !getNewUser.active" v-bind:img="getImage" v-bind:window="getWindowWidth" />
-    <section v-else-if="getNewUser.active" class="sign-up-progress">
+    <section v-if="getNewUser.active" class="sign-up-progress">
       <div class="flx column gap-32 flx-grow-1 wrap">
         <div class="flx column gap-16 title">
           <h1 class="fs-2r">{{ getNewUser.data.heading }}</h1>
@@ -26,12 +25,11 @@ import { mapGetters } from 'vuex';
 import TriggerAddKidsForm from '../../components/layouts/TriggerAddKidsForm.vue';
 import ParentDetailsForm from '../../components/layouts/ParentDetailsForm.vue';
 import ParentSignUpForm from '../../components/layouts/ParentSignUpForm.vue';
-import WelcomeBanner from '../../components/includes/web/WelcomeBanner.vue'
 export default {
-  components: { WelcomeBanner, ParentSignUpForm, ParentDetailsForm, TriggerAddKidsForm },
+  components: { ParentSignUpForm, ParentDetailsForm, TriggerAddKidsForm },
   name: 'SignUp',
   computed: {
-    ...mapGetters(['getWindowWidth', 'getImage', 'getNewUser']),
+    ...mapGetters(['getNewUser']),
     computedProgressWidth() {
       return this.getNewUser.data.progress + '%'
     }

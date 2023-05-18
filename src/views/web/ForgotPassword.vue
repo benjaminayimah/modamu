@@ -1,5 +1,4 @@
 <template>
-    <welcome-banner v-if="getWindowWidth >= 990"  :img="getImage" :window="getWindowWidth" />
         <section class="wc-section">
     <div class="wc-title">
       <h1 class="fs-2r">Forgot password</h1>
@@ -37,15 +36,12 @@
 </template>
 
 <script>
-import WelcomeBanner from '@/components/includes/web/WelcomeBanner.vue'
-import { mapGetters } from 'vuex'
 import inputValMixin from '@/mixins/inputValMixin'
 import Spinner from '@/components/includes/Spinner.vue'
 export default {
-  components: { WelcomeBanner, Spinner },
+  components: { Spinner },
     name: 'ForgotPassword',
     mixins: [inputValMixin],
-    computed: mapGetters(['getImage', 'getWindowWidth']),
     data () {
     return {
       form: {
