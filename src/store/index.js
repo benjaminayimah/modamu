@@ -203,7 +203,7 @@ export default createStore({
     },
     
     logoutAuth(state){
-      // state.commit('setLoader') 
+      state.commit('startLoader') 
         axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
         .then(()=> {
           state.commit('destroyToken')

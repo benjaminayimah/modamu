@@ -1,6 +1,8 @@
 <template>
   <main class="home" :class="device">
-    <lottie-loader v-if="loader" class="lottie" />
+    <div v-if="loader" class="loader-container">
+      <lottie-loader />
+    </div>
     <main-nav/>
     <top-nav-bar />
     <router-view />
@@ -64,5 +66,15 @@ main {
   position: fixed;
   top: 48vh;
   left: 50vw;
+}
+
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
