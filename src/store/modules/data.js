@@ -11,7 +11,7 @@ export default {
             {id: 3, name: 'prefer not to say'}
         ],
         defaultImage: require('@/assets/images/default-avatar.png'),
-        image: require('@/assets/images/welcome_img_2.jpg'),
+        image: require('@/assets/images/welcome_banner.jpg'),
     },
     mutations: {
         setTempData(state, payload) {
