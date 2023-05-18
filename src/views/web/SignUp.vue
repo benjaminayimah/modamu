@@ -29,7 +29,7 @@ export default {
   components: { ParentSignUpForm, ParentDetailsForm, TriggerAddKidsForm },
   name: 'SignUp',
   computed: {
-    ...mapGetters(['getNewUser']),
+    ...mapGetters(['getNewUser', 'getWindowWidth']),
     computedProgressWidth() {
       return this.getNewUser.data.progress + '%'
     }
