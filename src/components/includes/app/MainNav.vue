@@ -187,11 +187,12 @@ aside{
     #icon {
         animation: fadeIn 1s;
         display: block;
+        margin-top: 5px;
     }
-        #logo_wrapper{
-            display: flex;
-            justify-content: center;
-        }
+    #logo_wrapper{
+        display: flex;
+        justify-content: center;
+    }
     nav{
         height: 100%;
         width: var(--nav-width);
