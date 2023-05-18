@@ -1,5 +1,6 @@
 <template>
   <main class="home" :class="device">
+    <lottie-loader v-if="loader" class="lottie" />
     <main-nav/>
     <top-nav-bar />
     <router-view />
@@ -7,11 +8,12 @@
 </template>
 
 <script>
+import LottieLoader from '@/components/includes/LottieLoader.vue';
 import { mapState } from 'vuex';
 import MainNav from '../../components/includes/app/MainNav.vue'
 import TopNavBar from '../../components/includes/app/TopNavBar.vue';
 export default {
-  components: { MainNav, TopNavBar  },
+  components: { MainNav, TopNavBar, LottieLoader },
   name: 'HomePage',
   computed: {
     ...mapState({
@@ -36,6 +38,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('computeCoordinates')
+    this.$store.commit('startLoader')
     // if (navigator.geolocation) {
     //     const vm = this
     //     navigator.geolocation.getCurrentPosition(function(position) {
