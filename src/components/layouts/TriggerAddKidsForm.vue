@@ -1,8 +1,6 @@
 <template>
     <div class="flx jc-c">
-        <svg v-if="newUser.completed" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 100 100">
-            <path d="M53.375,3.375a50,50,0,1,0,50,50A49.992,49.992,0,0,0,53.375,3.375Zm25.6,36.178L46.837,71.837h-.024a4.341,4.341,0,0,1-2.788,1.322,4.208,4.208,0,0,1-2.812-1.37L27.75,58.327a.958.958,0,0,1,0-1.37l4.279-4.279a.929.929,0,0,1,1.346,0L44.048,63.351,73.375,33.808a.949.949,0,0,1,.673-.288h0a.873.873,0,0,1,.673.288l4.207,4.351A.948.948,0,0,1,78.976,39.553Z" transform="translate(-3.375 -3.375)" fill="#2ECE8B"/>
-        </svg>
+        <completed-anime v-if="newUser.completed" />
         <svg id="kids" v-else-if="newUser.kids.length == 0" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 194.5 143">
             <g transform="translate(-1444 -339)">
                 <g>
@@ -32,14 +30,15 @@
         <h1>Completed!!!</h1>
         <div class="text-center gray">Your sign up is completed successfully. You can now proceed to your dashbard.</div>
     </div>
-
     <button v-if="newUser.kids.length == 0 && !newUser.completed" class="button-primary w-100"  @click="loginUser">Skip</button>
     <button v-else-if="!newUser.completed" class="button-primary w-100" @click="loginUser">Finish</button>
     <button v-else class="button-primary w-100" @click="goToDashboard">Go to Dashboard</button>
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import CompletedAnime from '../includes/CompletedAnime.vue';
 export default {
+  components: { CompletedAnime },
     name: 'AddKids',
     props: ['newUser'],
     computed: mapGetters(['getHostname', 'getDefaultImage']),
