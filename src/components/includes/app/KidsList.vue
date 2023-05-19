@@ -1,10 +1,10 @@
 <template>
     <li class="bg-white br-24">
-        <router-link class="a-btn" :class="{ 'no-hover' : noClick }" :to="!noClick ? { name: 'KidsProfile', params: { id: kid.id, name:kid.name} }: ''">
+        <router-link class="a-btn" :class="{ 'no-hover' : noClick }" :to="!noClick ? { name: 'KidsProfile', params: { id: kid.id, name: kid.kid_name } }: ''">
             <div class="flx column ai-c gap-8">
-                <profile-avatar :image="kid.photo" :id="id"/>
+                <profile-avatar :image="kid.photo" :id="kid.user_id"/>
                 <div class="flx column ai-c">
-                    <div class="name text-ellipsis">{{ kid.name }}</div>
+                    <div class="name text-ellipsis">{{ kid.kid_name }}</div>
                     <div class="flx gap-4 gray age"><span>{{ calculateAge(kid.dob) }}</span><span>years old</span></div>
                 </div>
             </div>
@@ -17,7 +17,7 @@ import ProfileAvatar from './ProfileAvatar.vue'
 export default {
     components: { ProfileAvatar },
     name: 'KidsList',
-    props: ['kid', 'id', 'noClick'],
+    props: ['kid', 'noClick'],
     mixins: [formatDateTime]
 }
 </script>
