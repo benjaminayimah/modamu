@@ -45,7 +45,7 @@ export default {
             addModal: (state) => state.addModal
         }),
         computedHeight() {
-            return this.windowHeight
+            return this.windowHeight + 'px'
         }
     } 
 }
@@ -94,8 +94,8 @@ section{
     border-radius: 24px;
     padding: 0 32px;
     overflow-y: auto;
-    max-height: calc(v-bind(computedHeight) - 80px);
-    min-height: calc(v-bind(computedHeight) + 200px);
+    height: calc(v-bind(computedHeight) - 80px);
+    // min-height: calc(v-bind(computedHeight) + 200px);
     &::-webkit-scrollbar {
         display: none;
         -ms-overflow-style: none; 
