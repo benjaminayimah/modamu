@@ -1,10 +1,8 @@
 import axios from 'axios'
 import { createStore } from 'vuex'
-// import router from '@/router'
 import data from './modules/data'
 import newUser from './modules/newUser'
 import { postApi } from '@/api'
-// import window from './modules/window'
 
 export default createStore({
   state: {
