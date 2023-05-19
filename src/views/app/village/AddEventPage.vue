@@ -5,9 +5,7 @@
         </div>
         <div class="flx jc-c">
             <div v-if="completed" class="main-content-card completed-card gap-24 flx column ai-c">
-                <svg xmlns="http://www.w3.org/2000/svg" height="120" viewBox="0 0 100 100">
-                    <path d="M53.375,3.375a50,50,0,1,0,50,50A49.992,49.992,0,0,0,53.375,3.375Zm25.6,36.178L46.837,71.837h-.024a4.341,4.341,0,0,1-2.788,1.322,4.208,4.208,0,0,1-2.812-1.37L27.75,58.327a.958.958,0,0,1,0-1.37l4.279-4.279a.929.929,0,0,1,1.346,0L44.048,63.351,73.375,33.808a.949.949,0,0,1,.673-.288h0a.873.873,0,0,1,.673.288l4.207,4.351A.948.948,0,0,1,78.976,39.553Z" transform="translate(-3.375 -3.375)" fill="#0173ff"/>
-                </svg>
+                <completed-anime />
                 <h2>Successful</h2>
                 <div class="text-center comp-text">
                     Your event has been added successfully and you can easily track and monitor attendance and reports.
@@ -159,8 +157,9 @@ import inputValMixin from '../../../mixins/inputValMixin';
 import tempImageUploadMixin from '../../../mixins/tempImageUpload';
 import Spinner from '../../../components/includes/Spinner.vue'
 import Avatar from '../../../components/includes/Avatar';
+import CompletedAnime from '@/components/includes/CompletedAnime.vue';
 export default {
-  components: { Spinner, Avatar },
+  components: { Spinner, Avatar, CompletedAnime },
     name: 'AddEventPage',
     mixins: [ inputValMixin, tempImageUploadMixin ],
     computed: {
