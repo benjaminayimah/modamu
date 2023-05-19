@@ -41,7 +41,7 @@
                     <div class="input-wrapper">
                         <input v-model="form.dob" class="form-control" type="date" name="dob" id="dob" data-color="dark" placeholder="Your child's full name">
                     </div>
-                    <span class="input-error" v-if="validation.error && validation.errors.date">
+                    <span class="input-error" v-if="validation.error && validation.errors.dob">
                         {{ validation.errors.dob[0] }}
                     </span>
                 </div>
