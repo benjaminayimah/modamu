@@ -22,7 +22,7 @@
                 <div class="flx jc-sb gap-8">
                     <div>
                         <div class="gray mb-8 fs-09">Event name</div>
-                        <div><strong>{{ event.name }}</strong></div>
+                        <div><strong>{{ event.event_name }}</strong></div>
                     </div>
                     <div>
                         <div class="gray mb-8 fs-09">Address</div>
@@ -98,12 +98,14 @@ export default {
                 this.attendees = res.data.attendees
                 this.booking = res.data.booking
                 this.event = res.data.event
+                this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchThisRegisteredEvent()
     }
 }

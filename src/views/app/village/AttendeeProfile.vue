@@ -39,7 +39,7 @@
                             </div>
                             <span>{{ parent.emergency_number }}</span>
                         </div>
-                        <a href="#" @click.prevent="goToProfile" class="button-primary gap-8 w-100 a-button a-btn">
+                        <a href="#" @click.prevent="goToParentProfile" class="button-primary gap-8 w-100 a-button a-btn">
                             Parents profile
                             <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.714 10">
                                 <path d="M1.533,10a.714.714,0,0,1-.505-1.219L4.809,5,1.028,1.22A.714.714,0,0,1,2.038.21L6.324,4.5a.714.714,0,0,1,0,1.01L2.038,9.791A.712.712,0,0,1,1.533,10Z" transform="translate(-0.819 -0.001)" fill="#fff"/>
@@ -82,21 +82,24 @@ export default {
     methods: {
         async fetchThisKidAndParent() {
             try {
-                const res = await postApi(this.hostname +'/api/fetch-this-kid-and-parent?token=' + this.token, {kid: this.$route.params.id, parent: this.$route.params.parent, event: this.$route.params.event})
+                const res = await postApi(this.hostname +'/api/fetch-this-kid-and-parent?token=' + this.token, { id: this.$route.params.id })
                 this.thisKid = res.data.kid
                 this.parent = res.data.parent
                 this.event = res.data.event
                 this.otherKids = res.data.otherkids
+                console.log(res.data)
+                this.$store.commit('stopLoader')
                 
             } catch (error) {
                 console.error(error)
             }
         },
-        goToProfile() {
-            this.$router.push({ name: 'ViewParentProfile', params: { event: this.event.id, parent_id: this.parent.id, kid: this.thisKid.name, parent: this.parent.name } })
+        goToParentProfile() {
+            this.$router.push({ name: 'ViewParentProfile', params: { event: this.event.id, parent_id: this.parent.id, kid: this.thisKid.kid_name, parent: this.parent.name } })
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchThisKidAndParent()
     }
 }

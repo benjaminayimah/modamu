@@ -30,11 +30,32 @@
     </section>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { getApi } from '@/api';
+import { mapGetters, mapState } from 'vuex';
 export default {
     name: 'EventsPage',
     computed: {
-        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents'])
+        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents']),
+        ...mapState({
+            token: (state) => state.token,
+            hostname: (state) => state.hostname
+        })
+    },
+    methods: {
+        async fetchAllEvents() {
+            try {
+                const res = await getApi(this.hostname+'/api/village-user-fetch-events/?token='+this.token)
+                this.$store.commit('setEvents', res.data)
+                console.log(res.data)
+                // this.$store.commit('stopLoader')
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    },
+    mounted() {
+        // this.$store.commit('startLoader')
+        this.fetchAllEvents()
     }
 
 }

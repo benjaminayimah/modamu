@@ -1,14 +1,14 @@
 <template>
-    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.event.id, name: event.event.name }}" class="flx column gap-8">
-        <div class="bg-img relative br-24" :style="computedImage ? { backgroundImage: 'url('+hostname+'/storage/'+event.event.user_id+'/'+computedImage.image+')'} : ''">
+    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.id, name: event.event_name }}" class="flx column gap-8">
+        <div class="bg-img relative br-24" :style="computedImage ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+computedImage.image+')'} : ''">
             <div class="overlay absolute w-100 flx jc-sb">
                 <span class="price br-24 fs-08">Ongoing</span>
-                <h4 class="ft-white">${{ event.event.amount }}</h4>
+                <h4 class="ft-white">${{ event.amount }}</h4>
             </div>
         </div>
         <div>
-            <h4 class="wrap-text wrap-line-1">{{ event.event.name }}</h4>
-            <span class="gray fs-09 wrap-text wrap-line-1">{{ event.village }}</span>
+            <h4 class="wrap-text wrap-line-1">{{ event.event_name }}</h4>
+            <span class="gray fs-09 wrap-text wrap-line-1">{{ event.name }}</span>
         </div>
     </router-link>
 </template>
@@ -23,7 +23,7 @@ export default {
             hostname: (state) => state.hostname
         }),
         computedImage() {
-            return this.images.find(image => image.event_id == this.event.event.id) || null
+            return this.images.find(image => image.event_id == this.event.id) || null
         }
     }
 }

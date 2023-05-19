@@ -2,7 +2,7 @@
         <div class="grid-item-outline br-24 bg-white">
             <div class="flx jc-sb mb-16">
                 <div>
-                    <div class="name mb-4"><strong>{{ event.event.name }}</strong></div>
+                    <div class="name mb-4"><strong>{{ event.event.event_name }}</strong></div>
                     <div class="address">{{ event.event.address }}</div>
                 </div>
                 <button @click.prevent="goToEvent" class="button-primary">View details</button>
@@ -38,7 +38,6 @@ export default {
     computed: {
         ...mapState({
             kids: (state) => state.kids,
-            user: (state) => state.user,
             hostname: (state) => state.hostname,
         }),
         computedImage() {
@@ -58,7 +57,7 @@ export default {
     },
     methods: {
         goToEvent() {
-            this.$router.push({ name: 'DetailedEvent',  params: {id: this.event.event.id, name: this.event.event.name }})
+            this.$router.push({ name: 'DetailedEvent',  params: {id: this.event.event.id, name: this.event.event.event_name }})
         }
     }
 }

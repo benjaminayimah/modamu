@@ -25,28 +25,32 @@
                 <div v-if="!wait_lists.length" class="bg-white pd-24 br-16 centered">
                     No item in waiting list
                 </div>
-                <wait-list-row v-else v-for="waitlist in wait_lists" :key="waitlist.id"  :kid="waitlist"/>
+                <wait-list-row v-else v-for="waitlist in wait_lists" :key="waitlist.id"  :attendee="waitlist"/>
             </div>
         </div>
     </section>
 </template>
 <script>
+import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import WaitListRow from '../../components/includes/app/WaitListRow.vue'
 export default {
     components: { WaitListRow },
     name: 'WaitList',
     computed: mapState({
-        wait_lists: (state) => state.wait_lists
+        wait_lists: (state) => state.wait_lists,
+        hostname: (state) => state.hostname,
+        token: (state) => state.token
     }),
     methods: {
-        fetchWaitList() {
-            this.$store.dispatch('fetchWaitList')
-            .then((res) => {
+        async fetchWaitList() {
+            try {
+                const res = await getApi(this.hostname+'/api/bookings/?token='+this.token)
                 this.$store.commit('setWaitlist', res.data.waitlist)
-            }).catch((err) => {
-                console.log(err.response.data)
-            })
+                console.log(res.data)
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
     mounted() {

@@ -101,12 +101,15 @@ export default {
                 const res = await postApi(this.hostname+'/api/fetch-this-parent?token='+ this.token, { parent: this.$route.params.parent_id, event: this.$route.params.event })
                 this.parent = res.data.parent
                 this.kids = res.data.kids
+                this.$store.commit('stopLoader')
+
             } catch (error) {
                 console.error(error)
             }
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchThisParent()
     }
 }

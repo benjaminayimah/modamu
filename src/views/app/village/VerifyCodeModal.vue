@@ -2,11 +2,11 @@
     <teleport to="#modal_content">
         <div>
             <div class="modal-title flx column ai-c gap-8 mb-32">
-                <h3 id="modal_title">Verify {{ computedFirstName(kid.name) }}'s code</h3>
-                <div>Enter {{ computedFirstName(kid.name) }}'s checkout code to verify</div>
+                <h3 id="modal_title">Verify {{ computedFirstName(attendee.kid_name) }}'s code</h3>
+                <div>Enter {{ computedFirstName(attendee.kid_name) }}'s checkout code to verify</div>
             </div>
             <div class="flx jc-c mb-32">
-                <profile-avatar :id="kid.user_id" :image="kid.photo" />
+                <profile-avatar :id="attendee.user_id" :image="attendee.photo" />
             </div>
             <div v-if="userError.error" class="invalid-credentials mb-24 text-center">
                 <span>{{ userError.message }}</span>
@@ -42,7 +42,7 @@ export default {
     mixins: [inputValMixin, userNameMixin],
     computed: {
         ...mapState({
-            kid: (state) => state.forms.user,
+            attendee: (state) => state.forms.user,
             token: (state) => state.token,
             hostname: (state) => state.hostname
         })
@@ -60,7 +60,7 @@ export default {
             this.validation.error || this.userError.error ? this.clearErrs() : ''
             this.creating = true
             try {
-                const res = await postApi(this.hostname+'/api/check-out-kid?token='+this.token, { id: this.kid.id, event: this.kid.event_id, checkout_code: this.form.code});
+                const res = await postApi(this.hostname+'/api/check-out-kid?token='+this.token, { id: this.attendee.id, checkout_code: this.form.code});
                 this.creating = false
                 if(!res.data.error) {
                     this.$store.commit('updateAttendees', res.data)

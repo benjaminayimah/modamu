@@ -1,10 +1,10 @@
 <template>
-    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.event.id, name: event.event.name }}" class="bg-white ai-c br-16 pd-8 flx jc-sb">
+    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.id, name: event.event_name }}" class="bg-white ai-c br-16 pd-8 flx jc-sb">
         <div class="flx gap-8">
-            <profile-avatar :id="event.event.user_id" :image="computedImage.image" />
+            <profile-avatar :id="event.user_id" :image="computedImage.image" />
             <div class="flx column jc-c gap-4">
-                <h5 class="wrap-text wrap-line-1">{{ event.event.name }}</h5>
-                <div class="gray fs-08 wrap-text wrap-line-1">{{ event.village  }}</div>
+                <h5 class="wrap-text wrap-line-1">{{ event.event_name }}</h5>
+                <div class="gray fs-08 wrap-text wrap-line-1">{{ event.name  }}</div>
             </div>
         </div>
         <div></div>
@@ -24,7 +24,7 @@ export default {
             images: (state) => state.images,
         }),
         computedImage() {
-            return this.images.find(image => image.event_id == this.event.event.id) || null
+            return this.images.find(image => image.event_id == this.event.id) || null
         }
     }
 }

@@ -13,13 +13,13 @@
         </div>
         <div v-else class="body-container">
             <div class="grid col-2 gap-70">
-                <parent-checkout-list v-for="kid in attendees" :key="kid.id" :kid="kid" @check-in="checkIn" />
+                <parent-checkout-list v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn" />
             </div>
         </div>
     </section>
 </template>
 <script>
-import { postApi, getApi } from '@/api';
+import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import ParentCheckoutList from '@/components/includes/app/ParentCheckoutList.vue';
 export default {
@@ -36,24 +36,19 @@ export default {
         async fetchAttendees() {
             try {
                 const res = await getApi(this.hostname+'/api/parent-fetch-attendees?token='+this.token);
-                this.$store.commit('setAttendees', res.data.attendees)
+                this.$store.commit('setAttendees', res.data)
                 this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
         },
         async checkIn(payload) {
-            try {
-                const res = await postApi(this.hostname+'/api/check-in-kid?token='+this.token, payload)
-                this.$store.commit('updateAttendees', res.data)
-            } catch (error) {
-                console.error(error);
-            }
+            this.$store.dispatch('checkInAttendee', payload)
         }
     },
-    created() {
-        this.fetchAttendees()
+    mounted() {
         this.$store.commit('startLoader')
+        this.fetchAttendees()
     }
 }
 </script>

@@ -4,34 +4,34 @@
             <div class="flx gap-16 column">
                 <div class="row">
                     <span>Event name</span>
-                    <div><strong>{{ event.event.name }}</strong></div>
+                    <div><strong>{{ event.event_name }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Event date</span>
-                    <div><strong>{{ format_date(event.event.date) }}</strong></div>
+                    <div><strong>{{ format_date(event.date) }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Starts</span>
-                    <div><strong>{{ event.event.start_time }}</strong></div>
+                    <div><strong>{{ event.start_time }}</strong></div>
                 </div>
             </div>
             <div class="flx gap-16 column">
                 <div class="row">
                     <span>Event address</span>
-                    <div><strong>{{ event.event.address }}</strong></div>
+                    <div><strong>{{ event.address }}</strong></div>
                 </div>
                 <div class="row">
                     <span>Ends</span>
-                    <div><strong>{{ event.event.end_time }}</strong></div>
+                    <div><strong>{{ event.end_time }}</strong></div>
                 </div>
             </div>
         </div>
         <div class="flx jc-sb">
             <div class="flx gap-8 ai-c">
-                <i class="br-50" :class="event.booking.accepted ? 'accepted' : 'pending'"></i>
-                <span class="capitalize">{{event.booking.accepted ? 'accepted' : 'pending' }}</span>
+                <i class="br-50" :class="event.accepted ? 'accepted' : 'pending'"></i>
+                <span class="capitalize">{{event.accepted ? 'accepted' : 'pending' }}</span>
             </div>
-            <button @click="trackEvent" class="button-primary" :class="{ 'button-disabled' : !event.booking.accepted }" :disabled="!event.booking.accepted ? true : false">Track</button>
+            <button @click="trackEvent" class="button-primary" :class="{ 'button-disabled' : !event.accepted }" :disabled="!event.accepted ? true : false">Track</button>
         </div>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     mixins: [formatDateTime],
     methods: {
         trackEvent() {
-            this.$router.push({ name: 'TrackEvent', params: { id: this.event.event.id, name: this.event.event.name}})
+            this.$router.push({ name: 'TrackEvent', params: { id: this.event.id, name: this.event.event_name}})
         }
     }
 }

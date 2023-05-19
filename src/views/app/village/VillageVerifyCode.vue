@@ -25,13 +25,13 @@
                 <div v-if="!attendees.length" class="bg-white pd-24 br-16 centered">
                     No attendees found
                 </div>
-                <request-list-row v-for="kid in attendees" :key="kid.id" :kid="kid" @check-in="checkIn"/>
+                <request-list-row v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn"/>
             </div>
         </div>
     </section>
 </template>
 <script>
-import { postApi, getApi } from '@/api';
+import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import RequestListRow from '@/components/includes/app/RequestListRow.vue';
 export default {
@@ -48,21 +48,18 @@ export default {
         async fetchAttendees() {
             try {
                 const res = await getApi(this.hostname+'/api/village-fetch-attendees?token='+this.token);
-                this.$store.commit('setAttendees', res.data.attendees)
+                this.$store.commit('setAttendees', res.data)
+                this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
         },
         async checkIn(payload) {
-            try {
-                const res = await postApi(this.hostname+'/api/check-in-kid?token='+this.token, payload);
-                this.$store.commit('updateAttendees', res.data)
-            } catch (error) {
-                console.error(error);
-            }
+            this.$store.dispatch('checkInAttendee', payload)
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchAttendees()
     }
 

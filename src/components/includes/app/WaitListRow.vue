@@ -1,14 +1,14 @@
 <template>
-    <router-link :to="{ name: 'Attendee', params: { id: kid.id, event: kid.event_id, parent: kid.user_id, name: kid.name } }" class="grid-item table-row">
+    <router-link :to="{ name: 'Attendee', params: { id: attendee.id, name: attendee.kid_name } }" class="grid-item table-row">
         <div class="table-cell flx ai-c gap-8">
-            <profile-avatar :id="kid.user_id" :image="kid.photo"/>
-            <span class="wrap-text wrap-line-1">{{ kid.name }}</span>
+            <profile-avatar :id="attendee.user_id" :image="attendee.photo"/>
+            <span class="wrap-text wrap-line-1">{{ attendee.kid_name }}</span>
         </div>
         <div class="table-cell flx ai-c">
-            <span class="wrap-text wrap-line-1">{{ calculateAge(kid.dob) }} years</span>
+            <span class="wrap-text wrap-line-1">{{ calculateAge(attendee.dob) }} years</span>
         </div>
         <div class="table-cell flx jc-sb ai-c">
-            <span class="gender-pill capitalize" :data-type="kid.gender">{{ computedGender }}</span>
+            <span class="gender-pill capitalize" :data-type="attendee.gender">{{ computedGender }}</span>
             <span class="ft-primary pd-0-20 see-details">
                 View profile
                 <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.715 10">
@@ -44,12 +44,12 @@ export default {
         }),
         computedGender() {
             if(this.device == 'mobile')
-            return this.kid.gender.charAt(0)
+            return this.attendee.gender.charAt(0)
             else
-            return this.kid.gender
+            return this.attendee.gender
         }
     },
-    props: ['kid'],
+    props: ['attendee'],
     mixins: [formatDateTime],
     data() {
         return {
@@ -60,8 +60,8 @@ export default {
         async doAccept() {
             this.startSpinner()
             try {
-                const res = await postApi(this.hostname+'/api/accept-this-attendee?token='+this.token, { kid: this.kid.id, event: this.kid.event_id});
-                this.$store.commit('updateWaitlist', res.data.attendee)
+                const res = await postApi(this.hostname+'/api/accept-this-attendee?token='+this.token, { id: this.attendee.id});
+                this.$store.commit('updateWaitlist', res.data)
                 this.stopSpinner()
             } catch (error) {
                 console.error(error);

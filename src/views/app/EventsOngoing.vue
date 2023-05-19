@@ -9,7 +9,7 @@
 import { mapGetters } from 'vuex';
 import TableBodyOngoing from '../../components/layouts/TableBodyOngoing.vue';
 export default {
-  components: { TableBodyOngoing },
+    components: { TableBodyOngoing },
     name: 'OngoingEvents',
     computed: {
         ...mapGetters(['getOngoingEvents'])

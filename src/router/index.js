@@ -79,7 +79,7 @@ const routes = [
       ]
       },
       { path: '/event/:id/:name', name: 'DetailedEvent', component: DetailedEvent },
-      { path: '/event/attendee/:id/:event/:parent/:name', name: 'Attendee', component: Attendee },
+      { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
       { path: '/parent/:event/:parent_id/:kid/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/villages', name: 'Villages', component: Villages },
       { path: '/waitlists', name: 'WaitList', component: WaitList },

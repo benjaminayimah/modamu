@@ -3,12 +3,13 @@ import { createStore } from 'vuex'
 // import router from '@/router'
 import data from './modules/data'
 import newUser from './modules/newUser'
+import { postApi } from '@/api'
 // import window from './modules/window'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    hostname: 'https://modamu-api.rancroftdev.com',
+    hostname: 'http://localhost:8000',
+    // hostname: 'https://modamu-api.rancroftdev.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -131,7 +132,7 @@ export default createStore({
       localStorage.setItem('user', JSON.stringify(payload));
     },
     updateWaitlist(state, payload) {
-      state.wait_lists = state.wait_lists.filter(data => data.id != payload.attendee && data.event_id == payload.event)
+      state.wait_lists = state.wait_lists.filter(data => data.id != payload.id )
     },
     setKids(state, payload) {
       state.kids = payload
@@ -158,7 +159,7 @@ export default createStore({
       state.attendees = payload
     },
     updateAttendees(state, payload) {
-      const i = state.attendees.findIndex(x => x.id === payload.id)
+      const i = state.attendees.findIndex(x => x.id == payload.id)
       state.attendees.splice(i, 1, payload)
     },
     startLoader(state) {
@@ -169,7 +170,16 @@ export default createStore({
     },
     toggleMenu(state) {
       state.menu = !state.menu
-    }
+    },
+
+    //village set all events
+    setEvents(state, payload) {
+      state.events = payload.events
+      state.images = payload.images
+      state.attendees = payload.attendees
+    },
+
+    
     // toggleMenu() {
     //   const menu = document.querySelector('#menus')
     //   const backdrop = document.querySelector('.backdrop')
@@ -188,7 +198,7 @@ export default createStore({
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
           state.commit('stopLoader')
-          // console.log(res.data)
+          console.log(res.data)
           // state.commit('unSetLoader')
 
         } catch (e) {
@@ -236,9 +246,17 @@ export default createStore({
           console.log(error); // Handle any errors that occurred
         });
     },
-    async fetchWaitList() {
-      return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
-    },
+    async checkInAttendee(state, payload) {
+      try {
+          const res = await postApi(this.getters.getHostname+'/api/check-in-kid?token='+this.getters.getToken, { id: payload });
+          state.commit('updateAttendees', res.data)
+      } catch (error) {
+          console.error(error);
+      }
+    }
+    // async fetchWaitList() {
+    //   return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
+    // },
     // async doFetchKids(url) {
     //   try {
     //     const data =  await axios.post(url+'?token='+this.getters.getToken)
@@ -280,10 +298,10 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const startDate = new Date(element.event.date+'T'+element.event.start_time)
-        const endDate = new Date(element.event.date+'T'+element.event.end_time)
+        const startDate = new Date(element.date+'T'+element.start_time)
+        const endDate = new Date(element.date+'T'+element.end_time)
         if (currentDateTime > startDate && currentDateTime < endDate) {
-          newEvent.push(element.event)
+          newEvent.push(element)
         }
         
       })
@@ -294,9 +312,9 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const startDate = new Date(element.event.date+'T'+element.event.start_time)
+        const startDate = new Date(element.date+'T'+element.start_time)
         if (currentDateTime < startDate) {
-          newEvent.push(element.event)
+          newEvent.push(element)
         }
       })
       return newEvent
@@ -306,9 +324,9 @@ export default createStore({
       let newEvent = []
       const currentDateTime = new Date()
       events.forEach(element => {
-        const endDate = new Date(element.event.date+'T'+element.event.end_time)
+        const endDate = new Date(element.date+'T'+element.end_time)
         if (currentDateTime > endDate) {
-          newEvent.push(element.event)
+          newEvent.push(element)
         }
       })
       return newEvent

@@ -1,8 +1,8 @@
 <template>
-    <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.name}}" class="table-row grid-item row-hover" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
+    <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.event_name}}" class="table-row grid-item row-hover" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
         <div class="table-cell flx gap-8 ai-c">
-            <profile-avatar :id="user.id" :image="computedImage.image"/>
-            <span class="wrap-text wrap-line-1">{{ event.name }}</span>
+            <profile-avatar :id="event.user_id" :image="computedImage.image"/>
+            <span class="wrap-text wrap-line-1">{{ event.event_name }}</span>
         </div>
         <div class="table-cell flx gap-8 ai-c"><span>{{ duration(event.start_time, event.end_time) }}</span><span>hours</span></div>
         <div class="table-cell flx jc-sb ai-c">
@@ -30,7 +30,6 @@ export default {
     computed: {
         ...mapState({
             images: (state) => state.images,
-            user: (state) => state.user,
             attendees: (state) => state.attendees,
             computedImage() {
                 return this.images.length ? this.images.filter(data => data.event_id == this.event.id)[0] : ''

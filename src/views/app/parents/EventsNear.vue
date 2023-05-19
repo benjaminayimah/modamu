@@ -23,7 +23,7 @@
                 {{ current_location }}
             </span>
         </div>
-        <div v-if="events_near.events.length">
+        <div v-if="events_near.events.length && !load">
             <div class="flx gap-16">
                 All events close to you
                 <span class="ft-primary flx ai-c gap-8">

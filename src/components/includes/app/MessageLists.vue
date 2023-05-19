@@ -36,6 +36,7 @@ export default {
     height: 19px;
     width: 28px;
     padding: 0;
+    margin-top: -4px;
 }
 a {
     padding: 10px;

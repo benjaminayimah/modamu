@@ -4,7 +4,7 @@
 </div>
 <div class="flx column gap-16">
     <div class="flx jc-sb">
-        <h3>{{ kid.name }}</h3>
+        <h3>{{ kid.kid_name }}</h3>
         <span class="gray">{{ calculateAge(kid.dob)}} years</span>
     </div>
     <span v-if="kid.about">About <span>{{ computedFirstName(kid.name) }}</span></span>
@@ -20,7 +20,7 @@
             </svg>
             <label>Name</label>
         </div>
-        <span class="capitalize">{{ kid.name }}</span>
+        <span class="capitalize">{{ kid.kid_name }}</span>
     </div>
     <div class="flx jc-sb br-16 info-row ai-c">
         <div class="flx gap-8">

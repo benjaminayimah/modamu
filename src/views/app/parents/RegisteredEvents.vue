@@ -35,13 +35,16 @@ export default {
         async fetchRegisteredEvents() {
             try {
                 const res = await getApi(this.hostname+'/api/parent-fetch-registered-event?token='+this.token);
-                this.$store.commit('setRegisteredEvents', res.data.registered)
+                this.$store.commit('setRegisteredEvents', res.data)
+                console.log(res.data)
+                this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchRegisteredEvents()
     }
 }
