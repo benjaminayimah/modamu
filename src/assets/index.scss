@@ -1107,6 +1107,11 @@ $completionWidth: 440px;
     } 
     .kids-column{
         flex-wrap: wrap;
+        flex-basis: 100%;
+        li {
+            width: unset;
+            flex: 1 1;
+        }
     }
     
     
