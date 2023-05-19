@@ -8,8 +8,8 @@ import { postApi } from '@/api'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    // hostname: 'https://modamu-api.rancroftdev.com',
+    // hostname: 'http://localhost:8000',
+    hostname: 'https://modamu-api.rancroftdev.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
