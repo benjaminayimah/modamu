@@ -1105,6 +1105,9 @@ $completionWidth: 440px;
     .col-2 {
         grid-template-columns: 1fr;
     } 
+    .kids-column{
+        flex-wrap: wrap;
+    }
     
     
 
