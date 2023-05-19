@@ -128,7 +128,7 @@ section {
 }
 
 .select-kids-body{
-    height: calc(100vh - 248px);
+    height: calc(100vh - 268px);
 }
 .select-kids-container{
     height: 100%;
