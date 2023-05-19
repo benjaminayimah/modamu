@@ -69,6 +69,7 @@ section{
         padding: 32px 0 40px 0 !important;
 
     }
+    
 }
 @media screen and (max-width: 430px){
     section{
@@ -81,7 +82,7 @@ section{
         height: inherit;
     }
     #modal{
-        height: 100%;
+        height: 100% !important;
         border-radius: 0 !important;
     }
     button {
