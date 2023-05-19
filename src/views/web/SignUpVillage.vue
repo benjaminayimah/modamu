@@ -92,7 +92,7 @@
         <router-link :to="{ name: 'SignIn' }">Login</router-link>
       </div>
     </div>
-    <div v-else class="completed">
+    <div v-else class="completed text-center">
       <div class="flx ai-c column gap-16">
           <completed-anime />
           <div class="flx ai-c column gap-32">
