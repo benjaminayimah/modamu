@@ -4,13 +4,15 @@
             <h1 class="title">Add New Event</h1>
         </div>
         <div class="flx jc-c">
-            <div v-if="completed" class="main-content-card completed-card gap-24 flx column ai-c">
+            <div v-if="completed" class="main-content-card completed-card flx column ai-c">
                 <completed-anime />
-                <h2>Successful</h2>
-                <div class="text-center comp-text">
-                    Your event has been added successfully and you can easily track and monitor attendance and reports.
+                <div class="flx column gap-24 ai-c">
+                    <h2>Successful</h2>
+                    <div class="text-center comp-text">
+                        Your event has been added successfully and you can easily track and monitor attendance and reports.
+                    </div>
+                    <button @click="goToEvent" class="button-primary w-100">Track</button>
                 </div>
-                <button @click="goToEvent" class="button-primary w-100">Track</button>
             </div>
             <div v-else class="main-content-card add-event-card">
                 <div class="flx jc-c">

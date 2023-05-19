@@ -13,13 +13,15 @@
             </div>
         </div>
         <div v-if="completed" class="flx jc-c">
-            <div class="main-content-card completed-card gap-24 flx column ai-c">
+            <div class="main-content-card completed-card flx column ai-c">
                 <completed-anime />
-                <h2>{{ successTitle }}</h2>
-                <div class="text-center comp-text">
-                    {{ successMsg }}
+                <div class="flx column ai-c gap-24">
+                    <h2>{{ successTitle }}</h2>
+                    <div class="text-center comp-text">
+                        {{ successMsg }}
+                    </div>
+                    <button @click="goToEvent" class="button-primary w-100">Track event</button>
                 </div>
-                <button @click="goToEvent" class="button-primary w-100">Track event</button>
             </div>
         </div>
         <div v-else class="flx gap-50 select-kids-body row-column">

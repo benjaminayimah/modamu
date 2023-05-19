@@ -93,7 +93,7 @@
       </div>
     </div>
     <div v-else class="completed text-center">
-      <div class="flx ai-c column gap-16">
+      <div class="flx ai-c column">
           <completed-anime />
           <div class="flx ai-c column gap-32">
             <h1>Welcome on board!!!</h1>
