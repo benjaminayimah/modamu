@@ -84,10 +84,12 @@ export default {
         fetchNearByEvents: function() {
             this.loaderOn()
             const vm = this
+            const vms = this.$store
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     const userLat = position.coords.latitude
                     const userLng = position.coords.longitude
+                    vms.dispatch('getCucrrentLocation', { lat: userLat, lng: userLng})
                     setTimeout(() => {
                         vm.searchEvents(userLat, userLng)
                     }, 3000);

@@ -196,8 +196,6 @@ export default createStore({
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
           state.commit('stopLoader')
-          console.log(res.data)
-          // state.commit('unSetLoader')
 
         } catch (e) {
           // state.commit('unSetLoader')
@@ -216,20 +214,6 @@ export default createStore({
         .then(()=> {
           state.commit('destroyToken')
         })
-    },
-    computeCoordinates() {
-      if (navigator.geolocation) {
-        const vm = this
-        navigator.geolocation.getCurrentPosition(function(position) {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          vm.dispatch('getCucrrentLocation', { lat: lat, lng: lng})
-        }, function(error) {
-          console.log(`Error getting location: ${error.message}`)
-        });
-      } else {
-        console.log('Geolocation is not supported by this browser.')
-      }
     },
     getCucrrentLocation(state, payload) {
       const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric' // Your Google Cloud Platform API key
