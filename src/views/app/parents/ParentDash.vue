@@ -83,6 +83,9 @@ export default {
     goToEvents() {
       this.$router.push({ name: 'EventsNear' })
     }
+  },
+  mounted() {
+    this.$store.dispatch('computeCoordinates')
   }
 }
 </script>
