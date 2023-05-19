@@ -36,8 +36,6 @@ export default createStore({
       {id: 10, name: 'Lorem ipsum'},
       {id: 11, name: 'Lorem ipsum'},
       {id: 12, name: 'Lorem ipsum'},
-
-
     ],
     villages: [],
     wait_lists: [],
