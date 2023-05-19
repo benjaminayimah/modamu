@@ -1152,7 +1152,7 @@ $completionWidth: 440px;
     .gap-60{
         gap: 30px;
     }
-    .col-4 {
+    .col-4:not(.reports) {
         grid-template-columns: 1fr 1fr;
     }
    
