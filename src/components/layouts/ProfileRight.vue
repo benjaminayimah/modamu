@@ -14,7 +14,7 @@
     <div class="flx gap-50">
         <div class="kids-column flx column gap-16">
             <div v-if="!getKids.length">Not found</div>
-            <kids-list v-for="kid in getKids" :key="kid.id" :kid="kid" :id="getUser.id"/>
+            <kids-list v-for="kid in getKids" :key="kid.id" :kid="kid"/>
         </div>
         <router-view></router-view>
     </div>
@@ -30,7 +30,7 @@ export default {
     computed: {
         ...mapGetters(['getKids', 'getToken', 'getHostname', 'getUser']),
     },
-    created() {
+    mounted() {
         this.fetchKids()
     },
     methods: {
