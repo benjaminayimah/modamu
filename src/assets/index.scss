@@ -1114,6 +1114,9 @@ $completionWidth: 440px;
             flex: 1 1;
         }
     }
+    .chat-bubble{
+        max-width: 90%;
+    }
     
     
     
@@ -1154,6 +1157,9 @@ $completionWidth: 440px;
     }
     .col-4:not(.reports) {
         grid-template-columns: 1fr 1fr;
+    }
+    .chat-bubble{
+        max-width: 80%;
     }
    
     
