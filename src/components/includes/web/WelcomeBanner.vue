@@ -41,7 +41,8 @@ section{
         z-index: 10;
         padding: 8%;
         h1{
-            font-size: 2.5rem;
+            font-size: clamp(1.2rem, 1vw + 1.5rem, 2.5rem);
+            line-height: 1.3;
         }
     }
     #logo{ 

@@ -23,7 +23,7 @@
                         {{ validation.errors.new_password[0] }}
                     </span>
                 </div>
-                <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submitting...' : 'Submit password'}}</span>
                 </button>  

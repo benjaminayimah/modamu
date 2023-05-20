@@ -3,9 +3,9 @@
         <router-link :to="{ name: 'MessageDetail', params: { id: message.id, name: message.name }}" href="" class="flx gap-8 bg-white br-16 relative" :class="{ 'new-chat' : message.unread_count > 0}">
             <profile-avatar :id="null" :image="null" />
             <div class="flx column gap-8 ms flx-grow-1">
-                <div class="flx jc-sb">
+                <div class="flx jc-sb ai-c">
                     <label class="wrap-text wrap-line-1">{{ message.name }}</label>
-                    <span class="gray fs-08">{{ message.updated_at }}</span>
+                    <span class="gray fs-08 wrap-text wrap-line-1">{{ message.updated_at }}</span>
                 </div>
                 <div class="flx jc-sb">
                     <span class="fs-09 wrap-text wrap-line-1 gray highlight">{{ message.preview }}</span>

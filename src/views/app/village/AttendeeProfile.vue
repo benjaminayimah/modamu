@@ -89,7 +89,6 @@ export default {
                 this.otherKids = res.data.otherkids
                 console.log(res.data)
                 this.$store.commit('stopLoader')
-                
             } catch (error) {
                 console.error(error)
             }
