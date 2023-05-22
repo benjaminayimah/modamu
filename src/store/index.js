@@ -236,7 +236,7 @@ export default createStore({
         try {
             const res = await getApi(this.getters.getHostname+'/api/fetch-messages?token='+this.getters.getToken);
             state.commit('setMessages', res.data)
-            state.commit('stoptLoader')
+            state.commit('stopLoader')
         } catch (error) {
             console.error(error)
         }
