@@ -15,7 +15,7 @@
             </div>
         </div>
         <div v-if="!notifications.length" class="bg-white mt-24 pd-24 br-16 centered">
-            No Notificaions
+            No Notifications
         </div>
         <div class="flx gap-24 column">
             <notification-list class="br-24" v-for="notification in notifications" :key="notification.id" :notification="notification" />
