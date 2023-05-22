@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     this.$store.commit('startLoader')
+    this.$store.dispatch('fetchMessages')
     // if (navigator.geolocation) {
     //     const vm = this
     //     navigator.geolocation.getCurrentPosition(function(position) {

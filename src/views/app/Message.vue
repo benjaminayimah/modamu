@@ -26,10 +26,10 @@
                 </div>
             </div>
             <div v-if="!messages.length" class="bg-white mt-24 pd-24 br-16 centered">
-                    No Messages
+                No Messages
             </div>
             <div v-else class="flx column gap-16 message-body">
-                <message-lists v-for="message in messages" :key="message.id" :message="message"/>
+                <message-lists v-for="data in messages" :key="data.message.id" :data="data"/>
             </div>
         </div>
         <div class="message-right h-100 flx-grow-1">
@@ -43,9 +43,11 @@ import MessageLists from '../../components/includes/app/MessageLists.vue'
 export default {
     components: { MessageLists },
     name: 'MessagePage',
-    computed: mapState({
-        messages: (state) => state.messages
-    }),
+    computed: {
+        ...mapState({
+            messages: (state) => state.messages
+        })
+    },
     data () {
         return {
             searchToggle: false
@@ -55,6 +57,9 @@ export default {
         toggleSearch() {
             this.searchToggle = !this.searchToggle
         }
+    },
+    mounted () {
+        this.$store.dispatch('fetchMessages')
     }
 }
 </script>

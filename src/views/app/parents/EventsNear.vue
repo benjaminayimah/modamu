@@ -92,7 +92,7 @@ export default {
                     vms.dispatch('getCucrrentLocation', { lat: userLat, lng: userLng})
                     setTimeout(() => {
                         vm.searchEvents(userLat, userLng)
-                    }, 3000);
+                    }, 1000);
                 })
             } else {
                 console.log("Geolocation is not supported by this browser.");

@@ -31,7 +31,7 @@
           </div>
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
-              <div class="flx-grow-1 bg-white centered br-24" v-if="!events.length">No event found</div>
+              <div class="flx-grow-1 bg-white centered br-24 pd-20" v-if="!events.length">No event found</div>
               <div class="flx flx-grow-1 column jc-sb gap-16" v-else>
                 <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
               </div>
@@ -41,7 +41,7 @@
       </div>
       <div class="flx column flx-grow-1 gap-16">
         <h4>Ongoing events</h4>
-        <div v-if="!events.length" class="centered h-100 flx-grow-1 bg-white br-24 pd-20">
+        <div v-if="!events.length" class="centered flx-grow-1 bg-white br-24 pd-20">
           <div class="flx ai-c column gap-8">
             <h4>No ongoing events</h4>
             <div>Ongoing events would appear here</div>
@@ -58,7 +58,7 @@ import { mapState } from 'vuex';
 import userNameMixin from '../../../mixins/userNameMixin';
 import DashEventList from '../../../components/includes/app/DashEventList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
-import DashMsgAndNoti from '@/components/includes/app/DashMsgAndNoti.vue';
+import DashMsgAndNoti from '@/components/layouts/DashMsgAndNoti.vue';
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue';
 export default {
     components: { DashEventList, DashTodaysEventList, DashMsgAndNoti, ProfileAvatar },

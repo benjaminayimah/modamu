@@ -4,17 +4,9 @@
             <div class="flx column gap-40 wl-sec">
                 <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(getUser.name) }}</h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
-                <button class="button-secondary">View all events</button>
+                <router-link to="/notifications" class="button-secondary a-button a-btn">View all events</router-link>
             </div>
-            <div class="flx-grow-1 pd-20 br-24 bg-white" id="dash_notification">
-                <div class="mb-24 flx ai-c jc-sb">
-                    Notifications
-                    <router-link :to="{ name: 'Notification'}" class="gray fs-09 see-all wrap-text wrap-line-1">See all(10)</router-link>
-                </div>
-                <div class="m--8">
-                    <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, 3)" :key="notification.id" :notification="notification" />
-                </div>
-            </div>
+            <dash-notification-card />
         </div>
         <div class="right flx column flx-grow-1 gap-32">
             <div class="top-right flx column gap-16">
@@ -100,11 +92,11 @@
 <script>
 import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters, mapState } from 'vuex';
-import NotificationList from '@/components/includes/app/NotificationList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue';
+import DashNotificationCard from '@/components/layouts/DashNotificationCard.vue'
 export default {
-  components: { DashTodaysEventList, NotificationList, ProfileAvatar },
+  components: { DashTodaysEventList, ProfileAvatar, DashNotificationCard },
     name: 'AdminsDash',
     mixins: [userNameMixin],
     computed: {

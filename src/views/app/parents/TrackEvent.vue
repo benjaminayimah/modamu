@@ -14,8 +14,10 @@
         </div>
         <div class="flx gap-16 column mt-32">
             <div class="track-event-list flx column gap-24 bg-white br-24">
-                <div class="gray fs-09">Your kids in this event</div>
+                <div v-if="attendees.length > 0" class="gray fs-09">Your kids in this event</div>
+                <div v-else class="fs-09">Your kids have been picked-up and deleted</div>
                 <div class="relative img-stacks">
+                    <button class="del-btn" v-if="attendees.length == 0" @click="$store.dispatch('deleteRegistered', booking.id)">Delete this card</button>
                     <profile-avatar class="attendees" v-for="kid in attendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                     <span v-if="attendees.length > 5" class="counter flx jc-c">+{{ attendees.length - 5 }}</span>
                 </div>

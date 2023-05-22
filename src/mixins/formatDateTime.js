@@ -15,6 +15,12 @@ export default {
               return `${km.toFixed(1)}km`;
             }
         },
+        ago_time(time) {
+          moment(time).fromNow(); 
+        },
+        format_minutes(time) {
+          moment(time).format('LT'); 
+        },
         calculateAge(dateOfBirth) {
             const dob = new Date(dateOfBirth);
             const now = new Date();

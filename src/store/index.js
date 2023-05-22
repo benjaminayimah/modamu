@@ -2,7 +2,8 @@ import axios from 'axios'
 import { createStore } from 'vuex'
 import data from './modules/data'
 import newUser from './modules/newUser'
-import { postApi } from '@/api'
+import { deleteApi, getApi, postApi } from '@/api'
+import router from '@/router'
 
 export default createStore({
   state: {
@@ -21,28 +22,10 @@ export default createStore({
     kids: [],
     events: [],
     images: [],
-    messages: [
-      { id: 1, name: 'John Doe', preview: 'Hi there, i would love to enquire about i would love to enquire about', unread_count: 2, updated_at: 'Now'},
-      { id: 2, name: 'Keith Daves', preview: 'About i would love to enquire about', unread_count: 3, updated_at: '5 mins ago'},
-      { id: 3, name: 'Armanda Jones', preview: 'I would love to enquire about i would love to enquire about', unread_count: 3, updated_at: '1 hour ago'},
-      { id: 4, name: 'Tyller Lockwook', preview: 'Hello, i would love to enquire about i would love to enquire about', unread_count: 0, updated_at: 'Yesturday'},
-      { id: 5, name: 'Katherine Pears', preview: 'Enquire about i would Hi there, i would love to enquire about i would love to enquire about', read: true},
-      { id: 6, name: 'Caroline Forbes', preview: 'love Hi there, i would love to enquire about i would love to enquire about', unread_count: 0, updated_at: 'Yesturday'},
-      { id: 7, name: 'Dorothy Samuels', preview: 'There, i would love to enquire about i would love to enquire about', unread_count: 0, updated_at: 'Yesturday'},
-      { id: 8, name: 'Bonnie Bernette', preview: 'About to i would love to enquire about i would  to enquire about', unread_count: 1, updated_at: '15/05/23'},
-      { id: 9, name: 'Piers Morgan', preview: 'Your there, i would love to enquire about i would love to enquire about', unread_count: 0, updated_at: '12/05/23'},
-      { id: 10, name: 'Nicholas Cage', preview: 'Hey you ther, i would love to enquire about i would love to enquire about', unread_count: 0, updated_at: '10/05/23'},
-    ],
+    messages: [],
     villages: [],
     wait_lists: [],
-    notifications: [
-      {id: 1, name: 'Lorem ipsum'},
-      {id: 2, name: 'Ipsum lorem'},
-      {id: 3, name: 'Lorem ipsum'},
-      {id: 4, name: 'Lorem ipsum'},
-      {id: 5, name: 'Ipsum lorem'},
-      {id: 6, name: 'Lorem ipsum'},
-    ],
+    notifications: [],
     payments: [],
     payment_methods: [
       {id: 1, name: 'Debit/Credit card'},
@@ -128,6 +111,13 @@ export default createStore({
     updateWaitlist(state, payload) {
       state.wait_lists = state.wait_lists.filter(data => data.id != payload.id )
     },
+    setMessages(state, payload) {
+      state.messages = payload
+    },
+    updateMessages(state, payload) {
+      const i = state.messages.findIndex(x => x.message.id == payload.id)
+      state.messages[i].message = payload
+    },
     setKids(state, payload) {
       state.kids = payload
     },
@@ -155,6 +145,13 @@ export default createStore({
     updateAttendees(state, payload) {
       const i = state.attendees.findIndex(x => x.id == payload.id)
       state.attendees.splice(i, 1, payload)
+    },
+    deleteAttendees(state, payload) {
+      state.attendees =  state.attendees.filter(item => item.id != payload)
+    },
+    deleteRegistered(state, payload) {
+      state.registered_events =  state.registered_events.filter(item => item.id != payload)
+      router.go(-1)
     },
     startLoader(state) {
       state.loader = true
@@ -231,7 +228,33 @@ export default createStore({
       } catch (error) {
           console.error(error);
       }
-    }
+    },
+    async fetchMessages(state) {
+        try {
+            const res = await getApi(this.getters.getHostname+'/api/fetch-messages?token='+this.getters.getToken);
+            state.commit('setMessages', res.data)
+        } catch (error) {
+            console.error(error)
+        }
+      },
+      async deleteAttendee(state, payload) {
+        try {
+            const res = await deleteApi(this.getters.getHostname+'/api/bookings/'+payload+'?token='+this.getters.getToken);
+            state.commit('deleteAttendees', res.data)
+        } catch (error) {
+            console.error(error);
+        }
+      },
+      async deleteRegistered(state, payload) {
+        try {
+            const res = await deleteApi(this.getters.getHostname+'/api/delete-registered-finish-event/'+payload+'?token='+this.getters.getToken);
+            state.commit('deleteRegistered', res.data)
+        } catch (error) {
+            console.error(error);
+        }
+      },
+
+      
     // async fetchWaitList() {
     //   return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
     // },
@@ -313,7 +336,7 @@ export default createStore({
     getWindowWidth: (state) => state.windowWidth,
     getWindowHeight: (state) => state.windowHeight,
     getKids: (state) => state.kids,
-    getMenu: (state) => state.menu
+    getMenu: (state) => state.menu,
   },
   modules: {
     data,

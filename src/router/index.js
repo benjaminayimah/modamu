@@ -86,7 +86,7 @@ const routes = [
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,
       children: [
-        { path: '/messages/:name/:id', name: 'MessageDetail', component: MessageDetail },
+        { path: '/messages/:id/:name/:to', name: 'MessageDetail', component: MessageDetail },
       ]
       },
       { path: '/notifications', name: 'Notification', component: Notification },
