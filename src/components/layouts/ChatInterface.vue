@@ -39,7 +39,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import { postApi } from '@/api';
 import { mapState } from 'vuex';
