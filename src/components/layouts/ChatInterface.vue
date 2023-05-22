@@ -68,8 +68,11 @@ export default {
             try {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,
                 { chat: this.form.chat, message_id: this.message_id, to: this.to })
-                this.$store.commit('updateMessages', res.data.message)
-                this.form.message_id == 0 ? this.$store.commit('setMessages', res.data.messages) : ''
+                if(this.form.message_id == 0) {
+                    this.$store.commit('setMessages', res.data.messages)
+                }else {
+                    this.$store.commit('updateMessages', res.data.message)
+                }
                 this.$emit('add-to-chat', res.data.chat)
                 this.form.chat = ''
             } catch (error) {
