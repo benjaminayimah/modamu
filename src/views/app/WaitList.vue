@@ -45,7 +45,7 @@ export default {
     methods: {
         async fetchWaitList() {
             try {
-                const res = await getApi(this.hostname+'/api/bookings/?token='+this.token)
+                const res = await getApi(this.hostname+'/api/bookings?token='+this.token)
                 this.$store.commit('setWaitlist', res.data.waitlist)
                 console.log(res.data)
             } catch (error) {
