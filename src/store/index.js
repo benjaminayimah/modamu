@@ -115,8 +115,10 @@ export default createStore({
       state.messages = payload
     },
     updateMessages(state, payload) {
-      const i = state.messages.findIndex(x => x.message.id == payload.id)
-      state.messages[i].message = payload
+      if (state.messages.length) {
+        const i = state.messages.findIndex(x => x.message.id == payload.id)
+        state.messages[i].message = payload
+      }
     },
     setKids(state, payload) {
       state.kids = payload

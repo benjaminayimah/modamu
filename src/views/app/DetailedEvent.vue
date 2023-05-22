@@ -46,7 +46,7 @@
                 <div class="flx column gap-24 relative">
                     <div class="flx jc-sb ai-c first-row">
                         <div class="flx gap-8 ai-c avatar-wrapper">
-                            <profile-avatar :id="event.user_id" :image="is_village ? user.image : null"/>
+                            <profile-avatar :id="event.user_id" :image="event.image"/>
                             <h1>{{ event.event_name }}</h1>
                         </div>
                         <div class="flx gap-8 ai-c">
@@ -157,8 +157,7 @@ export default {
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
-            token: (state) => state.token,
-            user: (state) => state.user
+            token: (state) => state.token
         }),
         pastEvent() {
             const currentDateTime = new Date()
