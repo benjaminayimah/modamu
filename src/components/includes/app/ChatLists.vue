@@ -63,11 +63,17 @@ export default {
     margin-bottom: 4px;
 }
 .guest{
-    background-color: #646773;
     border-bottom-left-radius: 0;
+    color: var(--ft-dark);
+    border: 1px #fff solid;
+    background-color: #F0F5FF;
+    path {
+        fill: var(--ft-dark)
+    }
 }
 .host {
-    background-color: #0966d7;
     border-bottom-right-radius: 0;
+    background: linear-gradient(266.81deg, #0173FF 2.53%, #70b0ff 99.07%);
+
 }
 </style>
