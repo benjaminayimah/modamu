@@ -59,17 +59,19 @@ export default {
         return {
             form: {
                 chat: '',
-                message_id: '',
+                message_id: 0,
                 to: ''
             }
         }
     },
     methods: {
         async doSubmit() {
+            this.message_id == 0 ? '' : this.form.message_id = this.message_id
             try {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,
-                { chat: this.form.chat, message_id: this.message_id, to: this.to })
+                { chat: this.form.chat, message_id: this.form.message_id, to: this.to })
                 if(this.form.message_id == 0) {
+                    this.$store.commit('setMessages', res.data.messages)
                     this.form.message_id = res.data.message.id
                 }else {
                     this.$store.commit('updateMessages', res.data.message)
@@ -79,7 +81,7 @@ export default {
             } catch (error) {
                 console.error(error)
             }
-        }
+        },
     },
 }
 </script>
