@@ -47,13 +47,14 @@ export default {
             try {
                 const res = await getApi(this.hostname+'/api/bookings?token='+this.token)
                 this.$store.commit('setWaitlist', res.data.waitlist)
-                console.log(res.data)
+                this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);
             }
         }
     },
     mounted() {
+        this.$store.commit('startLoader')
         this.fetchWaitList()
     }
 }

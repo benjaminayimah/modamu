@@ -232,25 +232,31 @@ export default createStore({
       }
     },
     async fetchMessages(state) {
+        state.commit('startLoader')
         try {
             const res = await getApi(this.getters.getHostname+'/api/fetch-messages?token='+this.getters.getToken);
             state.commit('setMessages', res.data)
+            state.commit('stoptLoader')
         } catch (error) {
             console.error(error)
         }
       },
       async deleteAttendee(state, payload) {
+        state.commit('startLoader')
         try {
             const res = await deleteApi(this.getters.getHostname+'/api/bookings/'+payload+'?token='+this.getters.getToken);
             state.commit('deleteAttendees', res.data)
+            state.commit('stopLoader')
         } catch (error) {
             console.error(error);
         }
       },
       async deleteRegistered(state, payload) {
+        state.commit('startLoader')
         try {
             const res = await deleteApi(this.getters.getHostname+'/api/delete-registered-finish-event/'+payload+'?token='+this.getters.getToken);
             state.commit('deleteRegistered', res.data)
+            state.commit('stopLoader')
         } catch (error) {
             console.error(error);
         }
