@@ -70,7 +70,6 @@ export default {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,
                 { chat: this.form.chat, message_id: this.message_id, to: this.to })
                 if(this.form.message_id == 0) {
-                    this.$store.commit('setMessages', res.data.messages)
                     this.form.message_id = res.data.message.id
                 }else {
                     this.$store.commit('updateMessages', res.data.message)
