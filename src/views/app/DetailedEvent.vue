@@ -151,7 +151,7 @@ import { mapState } from 'vuex';
 import KidsRow from '../../components/includes/app/KidsRow.vue';
 import ProfileAvatar from '../../components/includes/app/ProfileAvatar.vue';
 export default {
-  components: { KidsRow, ProfileAvatar },
+    components: { KidsRow, ProfileAvatar },
     name: 'DetailedEvent',
     mixins: [usersLevelMixin, formatDateTime],
     computed: {
