@@ -680,6 +680,20 @@ form {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
+.email-sent{
+    p {
+        font-weight: 500;
+    }
+    a{
+        margin-left: 5px;
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
 @media screen and (max-width: 1120px){
     .wc-section{
         padding: 0 10%;

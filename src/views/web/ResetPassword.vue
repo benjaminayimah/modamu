@@ -1,20 +1,21 @@
 <template>
   <section class="wc-section">
-      <div class="wc-title">
-        <h1 class="fs-2r">Almost done!</h1>
-        <span>Enter your new password</span>
+      <div class="wc-title text-center">
+        <completed-anime v-if="successful" />
+        <h1 class="fs-2r text-center">{{ successful ? 'Successful!' : 'Almost there!' }}</h1>
+        <span v-if="!successful">Enter your new password</span>
       </div>
-      <form  @submit.prevent="doSubmit">
+      <form v-if="!successful"  @submit.prevent="doSubmit">
         <div v-if="userError.error" class="invalid-credentials">
           <span>{{ userError.message }}</span>
         </div>
         <div class="form-row column">
             <label for="new_password">New password</label>
             <div class="input-wrapper">
-                <input v-model="form.new_password" autocomplete="new-password" class="form-control" type="password" id="new_password" name="new_password" data-color="light" placeholder="Enter a new password">
+                <input v-model="form.password" autocomplete="new-password" class="form-control" type="password" id="password" name="password" data-color="light" placeholder="Enter a new password">
             </div>
-            <span class="input-error" v-if="validation.error && validation.errors.new_password">
-                {{ validation.errors.new_password[0] }}
+            <span class="input-error" v-if="validation.error && validation.errors.password">
+                {{ validation.errors.password[0] }}
             </span>
         </div>
         <div class="form-row column">
@@ -31,7 +32,11 @@
           <span>{{ creating ? 'Please wait...' : 'Continue'}}</span>
         </button>
       </form>
-      <div class="flx column gap-4 ai-c acc-footer">
+        <div v-else class="email-sent text-center">
+            <p>The password for the account <strong>{{ email }}</strong>, has been changed.</p>
+            <p><span>You can now sign into your modamu account with your new password. </span><router-link :to="{ name: 'SignIn' }" >Sign in now</router-link></p>
+        </div>
+      <div v-if="!successful" class="flx column gap-4 ai-c acc-footer">
         <p>
           <router-link :to="{ name: 'SignIn' }">Back to Sign in</router-link>
         </p>
@@ -44,8 +49,9 @@ import { mapState } from 'vuex';
 import { postApi } from '@/api';
 import inputValMixin from '@/mixins/inputValMixin';
 import Spinner from '@/components/includes/Spinner.vue';
+import CompletedAnime from '@/components/includes/CompletedAnime.vue';
 export default {
-    components: { Spinner },
+    components: { Spinner, CompletedAnime },
     name: 'ResetPassword',
     mixins: [inputValMixin],
     computed: {
@@ -56,7 +62,7 @@ export default {
     data() {
         return {
             form: {
-                new_password: '',
+                password: '',
                 password_confirmation: '',
                 token: ''
             },
@@ -64,7 +70,9 @@ export default {
                 error: false,
                 message: ''
             },
-            creating: false
+            email: '',
+            creating: false,
+            successful: false
         }
     },
     methods: {
@@ -73,7 +81,11 @@ export default {
             this.creating = true
             try {
                 const res = await postApi(this.hostname + '/api/do-reset-password', this.form)
-                console.log(res.data)
+                if(res.data) {
+                    this.email = res.data
+                    this.successful = true
+                    console.log(res.data)
+                }
                 this.creating = false
             } catch (error) {
                 this.creating = false

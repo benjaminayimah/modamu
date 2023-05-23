@@ -39,7 +39,7 @@
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    <button @click="submitSelected" class="button-primary w-100">Make payment</button>
+                    <button @click="makePayment" class="button-primary w-100">Make payment</button>
                 </div>
             </div>
         </div>
@@ -71,6 +71,18 @@ export default {
         }
     },
     methods: {
+        makePayment() {
+            this.clrError ? this.clrError() : ''
+            if(this.checkSelection()){
+                axios.post(this.hostname + '/api/make-payment?token='+this.token )
+                .then((res) => {
+                    console.log(res.data)
+                    this.completed = true
+                }).catch((err) => {
+                    console.log(err.response.data)
+                })
+            }
+        },
         doSelection(payload) {
             this.clrError ? this.clrError() : ''
             const exists = this.selected.filter(id => id == payload)
@@ -93,6 +105,7 @@ export default {
                 })
             }
         },
+
         checkSelection() {
             if(!this.selected.length) {
                 this.errorMsg()

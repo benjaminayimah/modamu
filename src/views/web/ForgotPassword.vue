@@ -95,18 +95,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.email-sent{
-    p {
-        font-weight: 500;
-    }
-    a{
-        margin-left: 5px;
-        color: var(--primary-color);
-        font-weight: 600;
-        text-decoration: none;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-}
 </style>
