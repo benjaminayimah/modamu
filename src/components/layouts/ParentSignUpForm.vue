@@ -109,6 +109,10 @@ export default {
             this.validation.error = true
             this.validation.errors = e.response.data.errors
           }
+          if (e.response.status == 503) {
+            this.userError.error = true
+            this.userError.message = 'Our system is currently down for upgrade. Please try again later. Sorry for the inconvenience.'
+          }
         })
       },
       signupSuccess(res) {
