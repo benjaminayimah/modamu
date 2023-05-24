@@ -4,6 +4,9 @@
       <span>Create an account to get start get access to our full features.</span>
     </div>
     <form @submit.prevent="submitSignUp">
+      <div v-if="userError.error" class="invalid-credentials response-message">
+        <span>{{ userError.message }}</span>
+      </div>
       <div class="form-row column">
         <label for="email">Email</label>
         <div class="input-wrapper">
