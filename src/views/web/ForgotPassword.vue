@@ -5,7 +5,7 @@
         <span v-if="!emailSent">Enter your email to continue</span>
       </div>
       <form v-if="!emailSent" @submit.prevent="doSubmit">
-        <div v-if="userError.error" class="invalid-credentials">
+        <div v-if="userError.error" class="invalid-credentials response-message">
           <span>{{ userError.message }}</span>
         </div>
         <div class="form-row column">

@@ -6,7 +6,7 @@
         <span v-if="!successful">Enter your new password</span>
       </div>
       <form v-if="!successful"  @submit.prevent="doSubmit">
-        <div v-if="userError.error" class="invalid-credentials">
+        <div v-if="userError.error" class="invalid-credentials response-message">
           <span>{{ userError.message }}</span>
         </div>
         <div class="form-row column">
@@ -84,7 +84,6 @@ export default {
                 if(res.data) {
                     this.email = res.data
                     this.successful = true
-                    console.log(res.data)
                 }
                 this.creating = false
             } catch (error) {

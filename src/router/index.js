@@ -10,6 +10,7 @@ import SignUp from '@/views/web/SignUp.vue'
 import SignUpVillage from '@/views/web/SignUpVillage.vue'
 import ForgotPassword from '@/views/web/ForgotPassword.vue'
 import ResetPassword from '@/views/web/ResetPassword.vue'
+import AccountActivation from '@/views/web/AccountActivation'
 import Profile from '@/views/app/Profile.vue'
 import KidsProfile from '@/components/layouts/ProfileViewKidDetail.vue'
 import AddEventPage from '@/views/app/village/AddEventPage.vue'
@@ -117,6 +118,7 @@ const routes = [
 
 
 
+
     ]
   },
   { 
@@ -129,6 +131,7 @@ const routes = [
       { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword},
       { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword},
       { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
+      { path: '/account-activation/:token', name: 'AccountActivation', component: AccountActivation}
     ],
   },
 ]

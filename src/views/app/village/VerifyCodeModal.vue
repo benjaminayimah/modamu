@@ -8,7 +8,7 @@
             <div class="flx jc-c mb-32">
                 <profile-avatar :id="attendee.user_id" :image="attendee.photo" />
             </div>
-            <div v-if="userError.error" class="invalid-credentials mb-24 text-center">
+            <div v-if="userError.error" class="invalid-credentials response-message mb-24 text-center">
                 <span>{{ userError.message }}</span>
             </div>
             <form @submit.prevent="submitCode" class="flx column gap-24">

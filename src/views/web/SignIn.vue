@@ -5,7 +5,7 @@
       <span>Enter your credentials to login.</span>
     </div>
     <form @submit.prevent="submitSignin">
-      <div v-if="userError.error" class="invalid-credentials">
+      <div v-if="userError.error" class="invalid-credentials response-message">
         <span>{{ userError.message }}</span>
       </div>
       <div class="form-row column">
@@ -113,13 +113,16 @@ export default {
             this.validation.error = true
             this.validation.errors = e.response.data.errors
           }
+          if (e.response.status == 503) {
+            this.userError.error = true
+            this.userError.message = 'Our system is currently down for upgrade. Please try again later. Sorry for the inconvenience.'
+          }
         })
     },
     async signinSuccess(res) {
       this.creating = false
       await this.$store.commit('signInSuccess', res.data.token)
       this.$router.push({ name: 'AdminDashboard'})
-
     }
   }
 }
