@@ -69,9 +69,9 @@
         <span>Don't have an account? </span>
         <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
       </div>
-      <p>
+      <!-- <p>
         <span>Do you own a village? </span><router-link :to="{ name: 'SignUpVillage' }">Register your village</router-link>
-      </p>
+      </p> -->
     </div>
   </section>
 </template>
