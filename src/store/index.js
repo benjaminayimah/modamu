@@ -7,8 +7,9 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    hostname: 'https://modamu-api.rancroftdev.com',
+    hostname: 'http://localhost:8000',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    appHostname: 'http://localhost:8080',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -49,6 +50,17 @@ export default createStore({
       }else{
         state.device = 'tablet'
       }
+    },
+    async showModal() {
+      await this.commit('callShowModal')
+    },
+    callShowModal() {
+      const modal = document.querySelector('#main_modal')
+      modal.showModal()
+    },
+    hideModal() {
+      const modal = document.querySelector('#main_modal')
+      modal.close()
     },
     async openModal(state, payload) {
       await this.commit('activateModal')
