@@ -39,7 +39,9 @@
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    <button @click="makePayment" class="button-primary w-100">Make payment</button>
+                    <button @click="makePayment" class="button-primary w-100">
+                        Make payment
+                    </button>
                 </div>
             </div>
         </div>
@@ -59,6 +61,7 @@ export default {
             kids: (state) => state.kids,
             hostname: (state) => state.hostname,
             token: (state) => state.token,
+            appHostname: (state) => state.appHostname
         })
     },
     data() {
@@ -73,13 +76,16 @@ export default {
     methods: {
         makePayment() {
             this.clrError ? this.clrError() : ''
+            const url = this.appHostname + this.$router.currentRoute.value.path
+            console.log(url)
             if(this.checkSelection()){
-                axios.post(this.hostname + '/api/make-payment?token='+this.token )
+                axios.post(this.hostname + '/api/make-payment?token='+this.token, { event_name: 'New event', amount: this.selected.length * this.$route.params.event_price, url: url})
                 .then((res) => {
-                    console.log(res.data)
-                    this.completed = true
+                    console.log(res)
+                    // this.completed = true
+                    location.href = res.data
                 }).catch((err) => {
-                    console.log(err.response.data)
+                    console.log(err)
                 })
             }
         },
