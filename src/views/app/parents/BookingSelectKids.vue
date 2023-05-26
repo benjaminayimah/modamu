@@ -12,19 +12,7 @@
                 <span class="gray">Select kids you want to attend this event</span>
             </div>
         </div>
-        <div v-if="completed" class="flx jc-c">
-            <div class="main-content-card completed-card flx column ai-c">
-                <completed-anime />
-                <div class="flx column ai-c gap-24">
-                    <h2>{{ successTitle }}</h2>
-                    <div class="text-center comp-text">
-                        {{ successMsg }}
-                    </div>
-                    <button @click="goToEvent" class="button-primary w-100">Track event</button>
-                </div>
-            </div>
-        </div>
-        <div v-else class="flx gap-50 select-kids-body row-column">
+        <div class="flx gap-50 select-kids-body row-column">
             <div class="select-kids-container flx column gap-32 scroll-snap overflow-y-scroll scroll-hidden">
                 <booking-select-kids-list v-for="kid in kids" :key="kid.id" :kid="kid" :selected="selected" @emmitSelect="doSelection"/>
             </div>
@@ -39,8 +27,9 @@
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    <button @click="makePayment" class="button-primary w-100">
-                        Make payment
+                    <button @click="submitBooking" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : processing }" :disabled="processing ? true : false">
+                        <spinner v-if="processing" v-bind:size="20" v-bind:white="true" />
+                        <span>{{ processing ? 'Initiating payment...' : 'Pay & Book Event'}}</span>
                     </button>
                 </div>
             </div>
@@ -52,9 +41,9 @@
 import axios from 'axios';
 import { mapState } from 'vuex';
 import BookingSelectKidsList from '../../../components/includes/app/BookingSelectKidsList.vue';
-import CompletedAnime from '@/components/includes/CompletedAnime.vue';
+import Spinner from '@/components/includes/Spinner.vue';
 export default {
-  components: { BookingSelectKidsList, CompletedAnime },
+  components: { BookingSelectKidsList, Spinner },
     name: 'BookingSelectKids',
     computed: {
         ...mapState({
@@ -70,25 +59,11 @@ export default {
             error: false,
             completed: false,
             successTitle: '',
-            successMsg: ''
+            successMsg: '',
+            processing: false
         }
     },
     methods: {
-        makePayment() {
-            this.clrError ? this.clrError() : ''
-            const url = this.appHostname + this.$router.currentRoute.value.path
-            console.log(url)
-            if(this.checkSelection()){
-                axios.post(this.hostname + '/api/make-payment?token='+this.token, { event_name: 'New event', amount: this.selected.length * this.$route.params.event_price, url: url})
-                .then((res) => {
-                    console.log(res)
-                    // this.completed = true
-                    location.href = res.data
-                }).catch((err) => {
-                    console.log(err)
-                })
-            }
-        },
         doSelection(payload) {
             this.clrError ? this.clrError() : ''
             const exists = this.selected.filter(id => id == payload)
@@ -98,16 +73,20 @@ export default {
                 this.selected.push(payload)
             }
         },
-        submitSelected() {
+        submitBooking() {
+            // axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
             this.clrError ? this.clrError() : ''
             if(this.checkSelection()){
-                axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id} )
+                this.processing = true;
+                const url = this.appHostname + '/booking-event'
+                axios.post(this.hostname + '/api/make-payment?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
                 .then((res) => {
-                    this.successTitle = res.data.title
-                    this.successMsg = res.data.msg
-                    this.completed = true
+                    console.log(res)
+                    // this.completed = true
+                    location.href = res.data
+                    // this.processing = false;
                 }).catch((err) => {
-                    console.log(err.response.data)
+                    console.log(err)
                 })
             }
         },
@@ -131,9 +110,6 @@ export default {
             } catch (error) {
                 console.error('Error:', error);
             }
-        },
-        goToEvent() {
-            this.$router.push({name: 'RegisteredEvents'})
         }
     },
     created() {

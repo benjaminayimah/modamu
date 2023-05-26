@@ -36,22 +36,8 @@
                     <div class="input-wrapper">
                         <input class="form-control" type="tel" name="phone_number" data-color="dark">
                     </div>
-                </div><div class="form-row column">
-                    <label for="phone">Phone number</label>
-                    <div class="input-wrapper">
-                        <input class="form-control" type="tel" name="phone_number" data-color="dark">
-                    </div>
-                </div><div class="form-row column">
-                    <label for="phone">Phone number</label>
-                    <div class="input-wrapper">
-                        <input class="form-control" type="tel" name="phone_number" data-color="dark">
-                    </div>
-                </div><div class="form-row column">
-                    <label for="phone">Phone number</label>
-                    <div class="input-wrapper">
-                        <input class="form-control" type="tel" name="phone_number" data-color="dark">
-                    </div>
                 </div>
+                
                 <div v-if="is_parent" class="form-row column">
                     <label for="emergency_number">Emergency number</label>
                     <div class="input-wrapper">
@@ -109,7 +95,7 @@ dialog {
     background-color: rgba($color: #000000, $alpha: 0.5);
 }
 .modal-top{
-    
+    border-bottom: 1px solid var(--bg-color);
     button {
         height: 48px;
         width: 48px;

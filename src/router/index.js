@@ -32,6 +32,8 @@ import SelectPayment from '@/views/app/parents/SelectPayment.vue'
 import AddPayment from '@/views/app/parents/AddPayment.vue'
 import EventsNear from '@/views/app/parents/EventsNear.vue'
 import BookingSelectKids from '@/views/app/parents/BookingSelectKids.vue'
+import BookingSuccess from '@/views/app/parents/BookingSuccess.vue'
+import BookingCanceled from '@/views/app/parents/BookingCanceled.vue'
 import RegisteredEvents from '@/views/app/parents/RegisteredEvents.vue'
 import TrackEvent from '@/views/app/parents/TrackEvent.vue'
 import AdminDashOngoingTab from '@/components/layouts/AdminDashOngoingTab.vue'
@@ -100,6 +102,8 @@ const routes = [
       },
       { path: '/events-near-you', name: 'EventsNear', component: EventsNear},
       { path: '/booking-event/:event_id/:village/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
+      { path: '/booking-event/success/:session_id', name: 'BookingSuccess', component: BookingSuccess },
+      { path: '/booking-event/canceled/:session_id', name: 'BookingCanceled', component: BookingCanceled },
       { path: '/registered-events', name: 'RegisteredEvents', component: RegisteredEvents},
       { path: '/track-event/:id/:name', name: 'TrackEvent', component: TrackEvent},
       { path: '/verify-code-and-checkout', name: 'ParentVerifyCode', component: ParentVerifyCode},
