@@ -109,6 +109,7 @@ svg{
         width: 60vw;
         .wrap{
             flex-direction: column-reverse;
+            gap: 16px;
         }
         .title{
             max-width: 100%;
