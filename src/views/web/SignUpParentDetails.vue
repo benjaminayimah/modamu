@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="">
+    <form @submit.prevent="" class="flx column gap-28 flx-grow-1">
       <div class="form-row column">
         <label for="phone">Phone number</label>
         <div class="input-wrapper">
@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="form-row column">
-        <label for="emergencyPhone">Emergency number *</label>
+        <label for="emergencyPhone">Emergency number*</label>
         <div class="input-wrapper">
           <input v-model="form.emergency_number" class="form-control" type="tel" name="emergencyPhone" id="emergencyPhone" data-color="light" placeholder="222-333-5555">
         </div>
@@ -16,7 +16,7 @@
         </span>
       </div>
       <div class="form-row column">
-        <label for="relationship">Relationship *</label>
+        <label for="relationship">Relationship*</label>
         <div class="input-wrapper">
             <select v-model="form.relationship" name="relationship" id="relationship" class="form-control" data-color="light">
                 <option value="" selected>Select relationship</option>

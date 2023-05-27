@@ -16,7 +16,7 @@
             </div>
             <form @submit.prevent="" class="flx column gap-24">
                 <div class="form-row column">
-                    <label for="name">Child's name</label>
+                    <label for="name">Child's name*</label>
                     <div class="input-wrapper">
                         <input v-model="form.name" class="form-control" type="text" name="name" id="name" data-color="dark" placeholder="Your child's full name">
                     </div>
@@ -25,7 +25,7 @@
                     </span>
                 </div>
                 <div class="form-row column">
-                    <label for="gender">Gender</label>
+                    <label for="gender">Gender*</label>
                     <div class="input-wrapper">
                         <select v-model="form.gender" name="gender" id="gender" class="form-control" data-color="dark">
                             <option value="" selected>Select gender</option>
@@ -37,7 +37,7 @@
                     </span>
                 </div>
                 <div class="form-row column">
-                    <label for="dob">Date of birth *</label>
+                    <label for="dob">Date of birth*</label>
                     <div class="input-wrapper">
                         <input v-model="form.dob" class="form-control" type="date" name="dob" id="dob" data-color="dark" placeholder="Your child's full name">
                     </div>

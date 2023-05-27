@@ -507,6 +507,9 @@ select{
 .gap-24{
     gap: 24px;
 }
+.gap-28{
+    gap: 28px;
+}
 .gap-32{
     gap: 32px;
 }
@@ -715,6 +718,9 @@ form {
     }
 }
 @media screen and (max-width: 989px){
+    .vh-100{
+        height: unset;
+    }
     #welcome_main{
         display: flex;
         flex-direction: column;
@@ -722,7 +728,7 @@ form {
         align-items: center;
         justify-content: space-around;
     }
-    .wc-section, .signup-progres-container {
+    .wc-section {
         padding: 0;
         width: 60%;
         .wrap{
@@ -731,12 +737,12 @@ form {
         .title{
             max-width: 100%;
         }
+        section {
+            padding: 0;
+        }
     }
     .wc-section{
         flex-grow: 1;
-    }
-    .signup-progres-container {
-        flex-direction: column;
     }
    
 }

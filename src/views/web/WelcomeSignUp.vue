@@ -1,6 +1,6 @@
 <template>
-    <div class="w-100 flx ai-c jc-c vh-100">
-        <div class="flx ai-cflx-grow-1 signup-progres-container gap-50">
+    <div class="w-100 flx ai-c jc-c vh-100 pd-32">
+        <div class="flx ai-cflx-grow-1 signup-progress-container gap-50">
             <section v-if="getNewUser.active" class="sign-up-progress flx-1">
                 <div class="flx column gap-32 flx-grow-1 wrap">
                     <div class="flx column gap-16 title">
@@ -43,8 +43,14 @@
 }
 </script>
 <style lang="scss" scoped>
+section {
+    padding: 0 5vw;
+}
 h1 {
     color: var(--primary-color);
+    font-size: clamp(1.1rem, 1vw + 1rem, 2rem);
+    line-height: 1.3;
+    
 }
 .footer{
     span {
@@ -56,12 +62,16 @@ h1 {
 svg{
     width: 100%;
 }
-.signup-progres-container{
+.signup-progress-container{
     width: 80vw;
+    height: 100%;
 }
-  
 .title{
     max-width: 60%;
+}
+.flx-1{
+    display: flex;
+    align-items: center;
 }
 .progress-bar{
     width: 100%;
@@ -83,4 +93,39 @@ svg{
       // transform: translate(20%, -98%);
     }
 }
-  </style>
+@media screen and (max-width: 1120px){
+    .signup-progress-container {
+        section {
+            padding: 2vw;
+        }
+    }
+}
+@media screen and (max-width: 989px){
+    .vh-100{
+        height: unset;
+    }
+    .signup-progress-container {
+        padding: 0;
+        width: 60vw;
+        .wrap{
+            flex-direction: column-reverse;
+        }
+        .title{
+            max-width: 100%;
+        }
+        section {
+            padding: 0;
+        }
+    }
+    .signup-progress-container {
+        flex-direction: column;
+    }
+   
+}
+@media screen and (max-width: 640px){
+    .signup-progress-container{
+        width: 100vw;
+    }
+}
+
+</style>
