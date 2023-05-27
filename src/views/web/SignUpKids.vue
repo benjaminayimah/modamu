@@ -18,7 +18,7 @@
                     </g>
                 </g>
             </svg>
-            <div class="flx w-100 gap-4 jc-c kids-wrapper" v-else>
+            <div class="flx w-100 gap-4 jc-c" v-else>
                 <div v-for="kid in getNewUser.kids.slice(0, 4)" :key="kid.id" :class="getNewUser.kids.length > 1 ? 'bd-3-img' : 'bd-0-img'" class="bg-img br-50" :style="kid.photo ? { backgroundImage: 'url('+getHostname+'/storage/'+getNewUser.id+'/'+kid.photo+')'} : { backgroundImage: 'url('+getDefaultImage+')'}" :title="kid.name"></div>
                 <div v-if="getNewUser.kids.length > 4" class="bg-img br-50 flx centered count">+{{ getNewUser.kids.length - 4 }}</div>
             </div>
@@ -69,6 +69,8 @@ $imgHeight: 80px;
 .bg-white{
     padding: 50px 32px;
     height: 85%;
+    width: 100%;
+    container-type: inline-size;
 }
 #kids{
     width: 100%;
@@ -91,9 +93,6 @@ $imgHeight: 80px;
     height: $imgHeight;
     width: $imgHeight;
 }
-.kids-wrapper{
-    flex-wrap: wrap;
-}
 button.button-primary, .text-center{
     width: 80%;
 }
@@ -102,6 +101,16 @@ button.button-primary, .text-center{
         width: 100%;
     }
 }
+@container(inline-size < 350px) {
+    $imgHeight: 65px;
+    .bd-3-img, .count{
+        height: $imgHeight;
+        width: $imgHeight;
+    }
+}
+// @media screen and (max-width: 409px){
+    
+// }
 button {
     flex-shrink: 0;
 }
