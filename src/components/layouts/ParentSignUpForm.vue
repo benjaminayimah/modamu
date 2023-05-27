@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="wc-title">
       <h1 class="fs-2r">Sign up</h1>
       <span>Create an account to get start get access to our full features.</span>
@@ -61,18 +61,6 @@
         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
         <span>{{ creating ? 'Signing up...' : 'Sign up'}}</span>
       </button>
-      <!-- <div class="or"><div><span>Or</span></div></div>
-      <button class="button-outline w-100 gap-8">
-        <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 31.341 32.021">
-          <g id="Google__G__Logo" transform="translate(26.754 -39.239)">
-            <path d="M.576,52.268a18.55,18.55,0,0,0-.254-3.029H-14.754v6.017h8.632a7.433,7.433,0,0,1-3.2,4.777v4h5.15A15.654,15.654,0,0,0,.576,52.268Z" transform="translate(4.011 3.342)" fill="#4285f4"/>
-            <path d="M-11.174,66.484A15.251,15.251,0,0,0-.594,62.6l-5.15-4a9.659,9.659,0,0,1-5.43,1.548,9.562,9.562,0,0,1-8.979-6.618h-5.31v4.123A15.987,15.987,0,0,0-11.174,66.484Z" transform="translate(0.431 4.776)" fill="#34a853"/>
-            <path d="M-19.723,56.093a9.291,9.291,0,0,1-.507-3.055,9.652,9.652,0,0,1,.507-3.055V45.859h-5.31a15.825,15.825,0,0,0-1.721,7.178,15.825,15.825,0,0,0,1.721,7.178Z" transform="translate(0 2.213)" fill="#fbbc05"/>
-            <path d="M-11.174,45.577a8.687,8.687,0,0,1,6.137,2.4l4.563-4.563a15.308,15.308,0,0,0-10.7-4.176,15.987,15.987,0,0,0-14.29,8.833l5.31,4.123A9.562,9.562,0,0,1-11.174,45.577Z" transform="translate(0.431)" fill="#ea4335"/>
-          </g>
-        </svg>
-        Sign up with Google
-      </button> -->
     </form>
     <div class="flx gap-4 jc-c fw-700 acc-footer">
       <div>Already have an account?</div>
@@ -80,13 +68,12 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex'
+
 import inputValMixin from '../../mixins/inputValMixin'
 import Spinner from '../includes/Spinner'
 import passwordToggleMixin from '../../mixins/passwordToggle'
 export default {
-  components: { Spinner },
+    components: { Spinner },
     name: 'ParentSignUpForm',
     computed: mapGetters(['getHostname']),
     mixins: [inputValMixin, passwordToggleMixin],
@@ -124,4 +111,4 @@ export default {
       }
     }
 }
-</script>
+</script> -->

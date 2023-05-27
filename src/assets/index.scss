@@ -386,6 +386,9 @@ select{
 .fs-07{
     font-size: .7rem;
 }
+.flx-1 {
+    flex: 1 1;
+}
 
 .flx{
     display: flex;
@@ -553,6 +556,9 @@ select{
 .h-100{
     height: 100%;
 }
+.vh-100 {
+    height: 100vh;
+}
 .sticky-top{
     position: sticky;
     -webkit-position: sticky;
@@ -708,11 +714,6 @@ form {
         padding: 0 10%;
     }
 }
-@media only screen and (min-width: 990px) {
-    .sign-up-progress{
-        padding: 0 10%;
-    }
-}
 @media screen and (max-width: 989px){
     #welcome_main{
         display: flex;
@@ -721,7 +722,7 @@ form {
         align-items: center;
         justify-content: space-around;
     }
-    .wc-section, .sign-up-progress{
+    .wc-section, .signup-progres-container {
         padding: 0;
         width: 60%;
         .wrap{
@@ -734,16 +735,15 @@ form {
     .wc-section{
         flex-grow: 1;
     }
+    .signup-progres-container {
+        flex-direction: column;
+    }
    
 }
 @media screen and (max-width: 640px){
-    .wc-section, .sign-up-progress{
+    .wc-section{
         width: 100%;
     }
-}
-.sign-up-progress{
-    display: flex;
-    align-items: center;
 }
 
 //App

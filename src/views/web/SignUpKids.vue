@@ -1,7 +1,7 @@
 <template>
     <div class="flx jc-c">
-        <completed-anime v-if="newUser.completed" />
-        <svg id="kids" v-else-if="newUser.kids.length == 0" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 194.5 143">
+        <completed-anime v-if="getNewUser.completed" />
+        <svg id="kids" v-else-if="getNewUser.kids.length == 0" xmlns="http://www.w3.org/2000/svg" height="150" viewBox="0 0 194.5 143">
             <g transform="translate(-1444 -339)">
                 <g>
                     <path d="M-1958,145a31.8,31.8,0,0,1-12.455-2.515,31.9,31.9,0,0,1-10.172-6.858,31.893,31.893,0,0,1-6.858-10.171A31.8,31.8,0,0,1-1990,113a31.816,31.816,0,0,1,2.426-12.244,31.9,31.9,0,0,1,6.629-10.061,31.925,31.925,0,0,1,9.858-6.905,31.756,31.756,0,0,1,12.113-2.775,69.645,69.645,0,0,0,3.874,13.768,69.926,69.926,0,0,0,6.46,12.461,70.466,70.466,0,0,0,8.733,10.841,70.5,70.5,0,0,0,10.692,8.908,32.088,32.088,0,0,1-11.595,13A31.9,31.9,0,0,1-1958,145Z" transform="translate(3434 337)" fill="#ffba02"/>
@@ -18,30 +18,30 @@
             </g>
         </svg>
         <div class="flx w-100 gap-4 jc-c kids-wrapper" v-else>
-            <div v-for="kid in newUser.kids" :key="kid.id" class="bg-img br-50" :style="kid.photo ? { backgroundImage: 'url('+getHostname+'/storage/'+newUser.id+'/'+kid.photo+')'} : { backgroundImage: 'url('+getDefaultImage+')'}" :title="kid.name"></div>
+            <div v-for="kid in getNewUser.kids" :key="kid.id" class="bg-img br-50" :style="kid.photo ? { backgroundImage: 'url('+getHostname+'/storage/'+getNewUser.id+'/'+kid.photo+')'} : { backgroundImage: 'url('+getDefaultImage+')'}" :title="kid.name"></div>
         </div>
     </div>
-    <div v-if="!newUser.completed" class="flx ai-c column gap-16">
+    <div v-if="!getNewUser.completed" class="flx ai-c column gap-16">
         <h1>Add kids</h1>
         <div class="text-center gray">Add as many kids as you wish. You also have the ability to edit their personal information at anytime.</div>
-        <button class="button-outline rounded-outl" @click="$store.commit('openModal', 'kids')">{{ newUser.kids.length > 0 ? 'Add more' : 'Add your kids' }}</button>
+        <button class="button-outline rounded-outl" @click="$store.commit('openModal', 'kids')">{{ getNewUser.kids.length > 0 ? 'Add more' : 'Add your kids' }}</button>
     </div>
     <div v-else class="flx ai-c column gap-16">
         <h1>Completed!!!</h1>
         <div class="text-center gray">Your sign up is completed successfully. You can now proceed to your dashbard.</div>
     </div>
-    <button v-if="newUser.kids.length == 0 && !newUser.completed" class="button-primary w-100"  @click="loginUser">Skip</button>
-    <button v-else-if="!newUser.completed" class="button-primary w-100" @click="loginUser">Finish</button>
+    <button v-if="getNewUser.kids.length == 0 && !getNewUser.completed" class="button-primary w-100"  @click="loginUser">Skip</button>
+    <button v-else-if="!getNewUser.completed" class="button-primary w-100" @click="loginUser">Finish</button>
     <button v-else class="button-primary w-100" @click="goToDashboard">Go to Dashboard</button>
 </template>
+
 <script>
+import CompletedAnime from '@/components/includes/CompletedAnime.vue';
 import { mapGetters } from 'vuex';
-import CompletedAnime from '../includes/CompletedAnime.vue';
 export default {
-  components: { CompletedAnime },
+    components: { CompletedAnime },
     name: 'AddKids',
-    props: ['newUser'],
-    computed: mapGetters(['getHostname', 'getDefaultImage']),
+    computed: mapGetters(['getHostname', 'getDefaultImage', 'getNewUser']),
     data() {
         return {
             token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null

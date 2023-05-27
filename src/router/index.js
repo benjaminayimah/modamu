@@ -7,7 +7,9 @@ import Dashboard from '@/views/app/Dashboard.vue'
 import Welcome from '@/views/web/WelcomeView.vue'
 import SignIn from '@/views/web/SignIn.vue'
 import SignUp from '@/views/web/SignUp.vue'
-import SignUpVillage from '@/views/web/SignUpVillage.vue'
+import SignUpProgress from '@/views/web/WelcomeSignUp.vue'
+import SignUpParentDetails from '@/views/web/SignUpParentDetails.vue'
+import SignUpKids from '@/views/web/SignUpKids.vue'
 import ForgotPassword from '@/views/web/ForgotPassword.vue'
 import ResetPassword from '@/views/web/ResetPassword.vue'
 import AccountActivation from '@/views/web/AccountActivation'
@@ -131,13 +133,21 @@ const routes = [
     children: [
       { path: '/signin', name: 'SignIn', component: SignIn},
       { path: '/signup', name: 'SignUp', component: SignUp},
-      { path: '/signup-village', name: 'SignUpVillage', component: SignUpVillage},
       { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword},
       { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword},
-      { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
-      { path: '/account-activation/:token', name: 'AccountActivation', component: AccountActivation}
+      { path: '/account-activation/:token', name: 'AccountActivation', component: AccountActivation},
     ],
   },
+  {
+    path: '/signup/u/details', component: SignUpProgress,
+    meta: {requiresNewUser: true},
+    children: [
+      { path: '/signup/u/details', name: 'SignUpParentDetails', component: SignUpParentDetails },
+      { path: '/signup/u/kids', name: 'SignUpKids', component: SignUpKids }
+    ]
+  },
+  { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
+  
 ]
 
 const router = createRouter({
@@ -161,9 +171,17 @@ router.beforeEach((to, from, next) => {
     } else{
       next()
     }
-  } else {
+  }else if (to.matched.some(record => record.meta.requiresNewUser)) {
+    if (!store.getters.newUser) {
+      next({
+        name: 'SignIn'
+      })
+    } else{
+      next()
+    }
+  }
+  else {
     next()
   }
 })
-
 export default router

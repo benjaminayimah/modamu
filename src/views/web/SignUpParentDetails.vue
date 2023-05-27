@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
     <form @submit.prevent="">
       <div class="form-row column">
         <label for="phone">Phone number</label>
@@ -33,17 +33,18 @@
           <input v-model="form.ocupation" class="form-control" type="text" name="ocupation" id="ocupation" data-color="light" placeholder="What's your occupation">
         </div>
       </div>
-    </form>
     <button class="button-primary w-100" @click="submitSignUp">Next</button>      
+    </form>
 </template>
+
 <script>
 import axios from 'axios'
-import inputValMixin from '../../mixins/inputValMixin'
 import { mapGetters } from 'vuex';
+import inputValMixin from '@/mixins/inputValMixin';
 export default {
-  name: 'ParentSignUpMore',
-  mixins: [inputValMixin],
-  computed: mapGetters(['getRole', 'getHostname']),
+    name: 'ParentDetails',
+    mixins: [inputValMixin],
+    computed: mapGetters(['getRole', 'getHostname']),
   data () {
     return {
       form: {
@@ -62,7 +63,6 @@ export default {
         .then((res) => {
           this.signupSuccess(res)
         }).catch((e) => {
-          console.log(e.response)
           this.creating = false
           if(e.response.status == 422){
             this.validation.error = true
@@ -70,11 +70,17 @@ export default {
           }
         })
       },
-      signupSuccess(res) {
+      async signupSuccess(res) {
         this.creating = false
         this.clearErrs()
-        this.$store.commit('updateNewUser', res.data)
+        await this.$store.commit('updateNewUser', res.data)
+        this.$router.push({ name: 'SignUpKids' })
+
       }
   }
 }
-</script> -->
+</script>
+
+<style>
+
+</style>

@@ -37,7 +37,7 @@
                     </span>
                 </div>
                 <div class="form-row column">
-                    <label for="dob">Date of birth</label>
+                    <label for="dob">Date of birth *</label>
                     <div class="input-wrapper">
                         <input v-model="form.dob" class="form-control" type="date" name="dob" id="dob" data-color="dark" placeholder="Your child's full name">
                     </div>
