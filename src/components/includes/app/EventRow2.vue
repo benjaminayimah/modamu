@@ -11,10 +11,10 @@
             <div class="wrap-text wrap-line-1">{{ event.start_time }}</div>
         </div>
         <div class="table-cell flx jc-sb ai-c attendees-cell" v-if="!device">
-            <div class="relative h-100 flx ai-c">
+            <div class="h-100 flx ai-c stack-cards">
                 <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees</span>
-                <profile-avatar v-else class="attendees" v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
-                <span v-if="computedAttendees.length > 5" class="counter flx">+{{ computedAttendees.length - 5 }}</span>
+                <profile-avatar v-else v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
+                <span v-if="computedAttendees.length > 5" class="counter centered bg-img">+{{ computedAttendees.length - 5 }}</span>
             </div>
             <span v-if="!dashboard" class="ft-primary pd-0-20 see-details">
                 See details
@@ -63,37 +63,8 @@ export default {
 .bg-img {
     height: 40px;
     width: 40px;
-}
-
-.counter{
-    background-color: #fff;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 32px;
-    transform: translateX(75px);
-}
-.attendees, .counter{
-    position: absolute;
-    background-color: var(--bg-color);
-}
-.attendees{
-    width: 40px;
     border: 1px solid #fff;
-    &:nth-child(2) {
-        transform: translateX(15px);
-    }
-    &:nth-child(3) {
-        transform: translateX(30px);
-    }
-    &:nth-child(4) {
-        transform: translateX(45px);
 
-    }
-    &:nth-child(5) {
-        transform: translateX(60px);
-    }
 }
 a{
     container-type: inline-size

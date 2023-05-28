@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    appHostname: 'http://localhost:8080',
-    // hostname: 'https://modamu-api.rancroftdev.com',
-    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    // hostname: 'http://localhost:8000',
+    // appHostname: 'http://localhost:8080',
+    hostname: 'https://modamu-api.rancroftdev.com',
+    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -108,6 +108,7 @@ export default createStore({
       state.events = payload.events
       state.images = payload.images
       state.attendees = payload.attendees
+      state.kids = payload.kids
 
       this.commit('updateLocalStorage', payload.user)
     },
@@ -348,6 +349,18 @@ export default createStore({
       events.forEach(element => {
         const endDate = new Date(element.date+'T'+element.end_time)
         if (currentDateTime > endDate) {
+          newEvent.push(element)
+        }
+      })
+      return newEvent
+    },
+    getTodaysEvents(state) {
+      const events = state.events
+      let newEvent = []
+      const currentDateTime = new Date().toLocaleDateString()
+      events.forEach(element => {
+        const startDate = new Date(element.date).toLocaleDateString()
+        if (currentDateTime == startDate) {
           newEvent.push(element)
         }
       })

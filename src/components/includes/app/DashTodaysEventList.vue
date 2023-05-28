@@ -8,7 +8,7 @@
             </div>
         </div>
         <div></div>
-        <div class="count-info fs-08 centered fw-700 text-ellipsis">In progress</div>
+        <div class="count-info fs-08 centered fw-700 text-ellipsis capitalize" :class="computeStatus">{{ computeStatus }}</div>
     </router-link>
 </template>
 
@@ -25,6 +25,14 @@ export default {
         }),
         computedImage() {
             return this.images.find(image => image.event_id == this.event.id) || null
+        },
+        computeStatus() {
+            const currentDateTime = new Date()
+            const startDate = new Date(this.event.date+'T'+this.event.start_time)
+            if (currentDateTime < startDate)
+            return 'upcoming'
+            else
+            return 'ongoing'
         }
     }
 }
@@ -39,7 +47,6 @@ h5 {
     margin: 0;
 }
 .count-info{
-    background-color: rgba($color: #59E9AD, $alpha: .3);
     height: 32px;
 }
 a {

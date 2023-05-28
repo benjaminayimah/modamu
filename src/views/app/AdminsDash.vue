@@ -22,9 +22,9 @@
                                 </svg>
                             </i>
                         </div>
-                        <div class="stack-cards relative">
-                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" class="absolute" />
-                            <span class="fw-700 counter br-24">+2,450</span>
+                        <div class="stack-cards">
+                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" />
+                            <div class="fw-700 bg-img counter br-24">+2,450</div>
                         </div>
                     </div>
                     <div class="flx-grow-1 bg-dark pd-20 br-24 flx column jc-sb ft-white">
@@ -37,13 +37,13 @@
                                 </svg>
                             </i>
                         </div>
-                        <div class="stack-cards relative">
-                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" class="absolute" />
-                            <span class="fw-700 counter br-24">+450</span>
+                        <div class="stack-cards">
+                            <profile-avatar v-for="parent in registered_parents" :key="parent.id" :id="null" :image="null" />
+                            <div class="fw-700 bg-img counter br-24">+450</div>
                         </div>
                     </div>
                     <div class="flx-grow-1 bg-white pd-20 br-24 flx jc-sb column">
-                        <div class="fw-700 fs-2r">234</div>
+                        <div class="fw-700 fs-2r">{{ events.length }}</div>
                         <span>Events coming up this week</span>
                     </div>
                     <div class="flx-grow-1 bg-primary ft-white pd-20 br-24 flx jc-sb column">
@@ -59,11 +59,18 @@
                 <div class="flx column gap-16">
                     <div class="flx gap-16">
                         <h4>Today's top events</h4>
-                        <span>23</span>
+                        <span>{{ getTodaysEvents.length }}</span>
                     </div>
-                    <div class="flx-grow-1 bg-white centered br-16 top-evt" v-if="!events.length">No event found</div>
-                    <div class="grid col-3 gap-32 top-events overflow-x-scroll scroll-hidden scroll-snap" v-else>
-                        <dash-todays-event-list v-for="event in events.slice(0, 3)" :key="event.id" :event="event" />
+                    <div class="grid col-3 gap-32 top-events overflow-x-scroll scroll-hidden scroll-snap">
+                        <dash-todays-event-list v-for="event in getTodaysEvents.slice(0, 3)" :key="event.id" :event="event" />
+                        <div v-if="getTodaysEvents.length < 3" class="centered bg-white br-16 pd-16">
+                            <router-link :to="{ name: 'AddEventPage' }" class="a-btn flx gap-8 ai-c">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 0 20 20">
+                                    <path d="M-3266.055-837.995a1.029,1.029,0,0,1-1.021-1.034l.048-7.944-7.944-.048a1.028,1.028,0,0,1-1.022-1.034,1.028,1.028,0,0,1,1.034-1.021l7.944.048.048-7.944a1.028,1.028,0,0,1,1.034-1.021,1.027,1.027,0,0,1,1.021,1.034l-.048,7.944,7.945.048a1.029,1.029,0,0,1,1.021,1.034,1.028,1.028,0,0,1-1.034,1.022l-7.944-.048-.048,7.944a1.03,1.03,0,0,1-1.03,1.022Z" transform="translate(3275.994 857.994)" fill="#000"/>
+                                </svg>
+                                Add new
+                            </router-link>
+                        </div>
                     </div>
                 </div>
                 <div class="flx-grow-1 flx column gap-16">
@@ -100,7 +107,7 @@ export default {
     name: 'AdminsDash',
     mixins: [userNameMixin],
     computed: {
-        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser']),
+        ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser', 'getTodaysEvents']),
         ...mapState({
             notifications: (state) => state.notifications,
             events: (state) => state.events,
@@ -161,18 +168,10 @@ h1 {
         height: var(--height);
         width: var(--height);
         border: 2px solid var(--bg-dark);
-        &:nth-child(2) {
-            transform: translateX(30px);
-        }
-        &:nth-child(3) {
-            transform: translateX(60px);
-        }
     }
     .counter{
-        transform: translateX(90px);
         background-color: var(--bg-dark);
-        display: inline-block;
-        padding: 15px;
+        padding: 14px;
     }
 }
 </style>

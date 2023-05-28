@@ -60,9 +60,9 @@
             </div>
             <div class="flx column ai-c">
                 <h4 class="mb-24">Registered kids</h4>
-                <div class="img-stack-holder w-100 relative">
+                <div class="stack-cards">
                     <profile-avatar v-for="kid in registered_kids.slice(0, 3)" :key="kid.id" />
-                    <div v-if="registered_kids.length > 3" class="counter bg-white centered">+{{ registered_kids.length - 3 }}</div>
+                    <div v-if="registered_kids.length > 3" class="counter bg-img bg-white centered br-50">+{{ registered_kids.length - 3 }}</div>
                 </div>
             </div>
             <button class="button-primary">View more</button>
@@ -113,28 +113,12 @@ export default {
         scrollbar-width: none; 
     }
 }
-.img-stack-holder{
-    .bg-img, .counter {
+.stack-cards{
+    .bg-img {
         height: 60px;
         width: 60px;
-        border-radius: 50%;
-        position: absolute;
         border: 2px solid #fff;
     }
-    height: 65px;
-    .bg-img{
-        &:nth-child(2) {
-            transform: translateX(50px);
-        }
-        &:nth-child(3) {
-            transform: translateX(100px);
-
-        }
-    }
-}
-
-.counter{
-    transform: translateX(150px);
 }
 .close-btn {
     position: absolute;
