@@ -5,7 +5,7 @@
                 <h3 id="modal_title">Add your child</h3>
             </div>
             <div class="flx ai-c column gap-16 mb-24">
-                <avatar v-bind:status="status" v-bind:hostname="getHostname" v-bind:id="id" @deleteTemp="deltmp"/>
+                <avatar :status="status" :hostname="getHostname" :id="id" @deleteTemp="deltmp"/>
                 <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
                 <button @click.prevent="uploadClick('avatar_img')" class="button-outline rounded-outl gap-8">
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 28 28">
@@ -80,9 +80,23 @@ import tempImageUploadMixin from '../../mixins/tempImageUpload';
 import Spinner from '../includes/Spinner';
 import Avatar from '../includes/Avatar'
 export default {
-  components: { Avatar, Spinner },
+    components: { Avatar, Spinner },
     name: 'AddKidsForm',
-    computed: mapGetters(['getGender', 'getHostname', 'getDefaultImage']),
+    computed: {
+        ...mapGetters(['getGender', 'getHostname', 'getDefaultImage', 'auth', 'getToken', 'getUser']),
+        token() {
+            if(this.auth)
+            return this.getToken
+            else
+            return JSON.parse(localStorage.getItem('newUser')).status.remember_token
+        },
+        id() {
+            if(this.auth)
+            return this.getUser.id
+            else
+            return JSON.parse(localStorage.getItem('newUser')).status.id 
+        }
+    },
     mixins: [ validationMixin, tempImageUploadMixin ],
     data() {
         return {
@@ -94,44 +108,44 @@ export default {
                 about: '',
                 tempImage: null,
             },
-            token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null,
-            id: JSON.parse(localStorage.getItem('newUser')).status.id || null,
+            // token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null,
+            // id: JSON.parse(localStorage.getItem('newUser')).status.id || null,
             creating: false,
         }
     },
     methods: {
         
-        uploadTemp() {
-            this.startLoader()
-            if (this.imageStatus.active) {
-                this.clrError();
-            }
-            let file = this.$refs.img.files[0];
-            if(file) {
-                if (!(file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg")) {
-                    return this.showError("Unsupported file. The file type must be \"png, jpg or jpeg\"");
-                }else {
-                    if (this.checksize(file.size)) {
-                        let formData = new FormData()
-                        formData.append('image', file);
-                        axios.post(this.getHostname + "/api/temp-upload?token=" + this.token, formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        }).then((res) => {
-                            this.stopLoader()
-                            this.afterTempUpload(res.data.image)
-                        }).catch((err) => {
-                            this.stopLoader()
-                            console.log(err.response);
-                        });
+        // uploadTemp() {
+        //     this.startLoader()
+        //     if (this.imageStatus.active) {
+        //         this.clrError();
+        //     }
+        //     let file = this.$refs.img.files[0];
+        //     if(file) {
+        //         if (!(file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg")) {
+        //             return this.showError("Unsupported file. The file type must be \"png, jpg or jpeg\"");
+        //         }else {
+        //             if (this.checksize(file.size)) {
+        //                 let formData = new FormData()
+        //                 formData.append('image', file);
+        //                 axios.post(this.getHostname + "/api/temp-upload?token=" + this.token, formData, {
+        //                     headers: {
+        //                         'Content-Type': 'multipart/form-data'
+        //                     }
+        //                 }).then((res) => {
+        //                     this.stopLoader()
+        //                     this.afterTempUpload(res.data.image)
+        //                 }).catch((err) => {
+        //                     this.stopLoader()
+        //                     console.log(err.response);
+        //                 });
 
-                    }else {
-                        return this.showError('This file is too large. The file size must be less than 1MB');
-                    }
-                }
-            }
-        },
+        //             }else {
+        //                 return this.showError('This file is too large. The file size must be less than 1MB');
+        //             }
+        //         }
+        //     }
+        // },
         deltmp() {
             this.startLoader()
             axios.delete(this.getHostname + "/api/del-temp-upload/" + this.id + '?token=' + this.token)
@@ -146,7 +160,7 @@ export default {
             this.creating = true
             axios.post(this.getHostname+'/api/kid-details?token=' + this.token, this.form)
             .then((res) => {
-                this.signupSuccess(res.data.kid)
+                this.auth ? this.addToKids(res.data.kid) : this.signupSuccess(res.data.kid)
             }).catch((e) => {
                 this.creating = false
                 if(e.response.status == 422){
@@ -163,6 +177,10 @@ export default {
             let stored = JSON.parse(localStorage.getItem('newUser'));
             stored.kids.push(res);
             localStorage.setItem('newUser', JSON.stringify(stored));
+            this.$store.commit('closeModal')
+        },
+        async addToKids(payload) {
+            await this.$store.commit('addToKids', payload)
             this.$store.commit('closeModal')
         },
         resetForm() {

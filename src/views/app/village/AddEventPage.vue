@@ -165,9 +165,10 @@ export default {
     name: 'AddEventPage',
     mixins: [ inputValMixin, tempImageUploadMixin ],
     computed: {
-        ...mapGetters(['getHostname', 'getToken']),
+        ...mapGetters(['getHostname']),
         ...mapState({
-            user: (state) => state.user
+            user: (state) => state.user,
+            token: (state) => state.token
         })
     },
     data() {
@@ -189,7 +190,7 @@ export default {
     methods: {
         doSubmit() {
             this.startSubmit()
-            axios.post(this.getHostname+'/api/event?token=' + this.getToken, this.form)
+            axios.post(this.getHostname+'/api/event?token=' + this.token, this.form)
             .then((res) => {
                 this.submitSuccess(res.data)
             }).catch((e) => {

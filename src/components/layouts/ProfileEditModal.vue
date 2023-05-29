@@ -80,7 +80,7 @@
 </template>
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import validationMixin from '../../mixins/validationMixin'
 import tempImageUploadMixin from '../../mixins/tempImageUpload';
 import Spinner from '../includes/Spinner'
@@ -89,7 +89,12 @@ import usersLevelMixin from '../../mixins/usersLevelMixin';
 export default {
   components: { Avatar, Spinner },
     name: 'ProfileEditModal',
-    computed: mapGetters(['getHostname', 'getDefaultImage', 'getToken', 'getUser']),
+    computed: {
+        ...mapGetters(['getHostname', 'getDefaultImage', 'getUser']),
+        ...mapState({
+            token: (state) => state.token
+        })
+    },
     mixins: [ validationMixin, usersLevelMixin, tempImageUploadMixin ],
     data() {
         return {
@@ -111,7 +116,7 @@ export default {
     methods: {
         preloadForEdit() {
             this.startLoader()
-            axios.post(this.getHostname+'/api/set-temp-update?token=' + this.getToken )
+            axios.post(this.getHostname+'/api/set-temp-update?token=' + this.token )
             .then((res) => {
                 this.stopLoader()
                 this.setData(res.data.image)
@@ -148,7 +153,7 @@ export default {
         },
         doSubmit() {
             this.creating = true
-            axios.put(this.getHostname+'/api/sign-in/' + this.getUser.id + '?token=' + this.getToken, this.form)
+            axios.put(this.getHostname+'/api/sign-in/' + this.getUser.id + '?token=' + this.token, this.form)
             .then((res) => {
                 this.updateSuccess(res.data.user)
             }).catch((e) => {

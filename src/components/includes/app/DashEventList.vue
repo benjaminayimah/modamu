@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.id, name: event.event_name }}" class="flx column">
+    <router-link :to="{ name: 'DetailedEvent',  params: {id: event.id, name: event.event_name }}" class="flx column br-32">
         <div class="bg-img relative br-24" :style="computedImage ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+computedImage.image+')'} : ''">
             <div class="overlay absolute w-100 flx jc-sb ai-c gap-4">
                 <span class="event-status br-24 fs-08 capitalize" :class="computeStatus">{{ computeStatus }}</span>
@@ -43,6 +43,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a{
+    padding: 12px;
+    transition: 0.2s ease background-color;
+    &:hover {
+        background-color: #e5eaf7;
+    }
+}
 .bg-img{
   flex-basis: 80%;
   background-color: var(--bg-white);

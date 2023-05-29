@@ -4,7 +4,7 @@
             <profile-avatar :id="data.sender.id" :image="data.sender.image" />
             <div class="flx column gap-4 ms flx-grow-1">
                 <div class="flx jc-sb ai-c">
-                    <label class="wrap-text wrap-line-1 fw-600">{{ data.sender.name }}</label>
+                    <label class="wrap-text wrap-line-1 fw-600 fs-09">{{ data.sender.name }}</label>
                     <span class="gray fs-08 wrap-text wrap-line-1">{{ ago_time(data.message.updated_at) }}</span>
                 </div>
                 <div class="flx jc-sb">

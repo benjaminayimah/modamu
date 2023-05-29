@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    // appHostname: 'http://localhost:8080',
-    hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    hostname: 'http://localhost:8000',
+    appHostname: 'http://localhost:8080',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -141,6 +141,9 @@ export default createStore({
       state.events.push(payload.event)
       state.images.push(payload.image)
     },
+    addToKids(state, payload) {
+      state.kids.push(payload)
+    },
     destroyToken(){
       localStorage.removeItem('auth')
       localStorage.removeItem('user')
@@ -218,7 +221,7 @@ export default createStore({
     },
     
     logoutAuth(state){
-      state.commit('startLoader') 
+        state.commit('startLoader') 
         axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
         .then(()=> {
           state.commit('destroyToken')

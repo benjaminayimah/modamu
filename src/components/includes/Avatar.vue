@@ -20,7 +20,7 @@
 <script>
 import Spinner from './Spinner.vue';
 export default {
-  components: { Spinner },
+    components: { Spinner },
     name: 'AvatarImage',
     props: ['status', 'hostname', 'id'],
 }

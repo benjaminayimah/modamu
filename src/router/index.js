@@ -50,11 +50,7 @@ import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
 
 
 
-
-
-
-
-
+import VerifyEmail from '@/views/web/VerifyEmail.vue'
 import Web404View from '@/views/web/Web404View.vue'
 
 
@@ -146,7 +142,9 @@ const routes = [
       { path: '/signup/u/kids', name: 'SignUpKids', component: SignUpKids }
     ]
   },
+  { path: '/new-account-verification/:token', name: 'VerifyEmail', component: VerifyEmail},
   { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
+
   
 ]
 

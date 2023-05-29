@@ -37,13 +37,14 @@ export default {
                     if (this.checksize(file.size)) {
                         let formData = new FormData()
                         formData.append('image', file);
-                        axios.post(this.getHostname + "/api/temp-upload?token=" + this.getToken, formData, {
+                        axios.post(this.getHostname + "/api/temp-upload?token=" + this.token, formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data'
                             }
                         }).then((res) => {
                             this.stopLoader()
                             this.afterTempUpload(res.data.image)
+                            console.log(res)
                         }).catch((err) => {
                             this.stopLoader()
                             console.log(err.response);

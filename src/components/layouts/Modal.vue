@@ -121,8 +121,9 @@ dialog {
 }
 @media screen and (max-width: 430px){
     dialog{
-        width: 100%;
         height: 100vh;
+        max-width: 100%;
+        max-height: 100%;
         border-radius: 0;
     }
 }

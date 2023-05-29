@@ -1,5 +1,5 @@
 <template>
-    <section class="flx column gap-16 dashboard-main">
+    <section class="flx column gap-24 dashboard-main">
       <div class="top-row grid gap-32">
         <div class="wl-sec flx column gap-40">
           <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(user.name) }},</h1>
@@ -38,22 +38,32 @@
           </div>
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
-              <!-- <div class="flx-grow-1 bg-white centered br-24 pd-20" v-if="!events.length">No event found</div> -->
-              <div class="flx flx-grow-1 column jc-sb gap-16">
+              <a v-if="!getTodaysEvents.length" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
+                  <div class="text-center">
+                    <div>Oops! there seems to be no events today.</div>
+                    <div class="gray">No worries, click here to discover upcoming events</div>
+                  </div>
+              </a>
+              <div v-else class="flx flx-grow-1 column jc-sb gap-16">
                 <dash-todays-event-list v-for="event in getTodaysEvents.slice(0, 3)" :key="event.id" :event="event" />
-                <a href="#" v-if="getTodaysEvents.length < 3" class="flx-grow-1 bg-white br-16 centered pd-16">Explore events</a>
+                <a href="#" v-if="getTodaysEvents.length < 3" class="flx-grow-1 bg-white br-16 centered pd-16">
+                  Explore more
+                </a>
               </div>
             </div>
         </div>
         <dash-msg-and-noti />
       </div>
-      <div class="flx column flx-grow-1 gap-16">
+      <div class="flx column flx-grow-1 gap-8">
         <h4>Upcoming events</h4>
-        <div class="gap-32 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
-          <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
-          <div class="explore-banner bg-white br-24 centered pd-16">
+        <div v-if="!events.length" class="flx-grow-1 bg-white br-24 centered pd-16">
             Explore more
-          </div>
+        </div>
+        <div v-else class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
+          <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
+          <a href="#" class="bg-white br-24 centered pd-16">
+            <span class="fs-09 text-center">Explore more</span>
+          </a>
         </div>
       </div>
     </section>
@@ -76,6 +86,11 @@ export default {
         user: (state) => state.user,
         kids: (state) => state.kids
     })
+  },
+  data() {
+    return {
+      me: []
+    }
   },
   methods: {
     goToEvents() {
@@ -103,7 +118,8 @@ h1 {
   background-color: #fff;
 }
 
-.bottom-row, .explore-banner{
+.bottom-row{
+  margin-left: -12px;
   .event-list{
     min-width: 230px;
     min-height: 230px;
