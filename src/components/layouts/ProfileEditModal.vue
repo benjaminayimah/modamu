@@ -1,9 +1,9 @@
 <template>
+    <teleport to="#modal_title">
+        Edit profile
+    </teleport>
     <teleport to="#modal_content">
         <div>
-            <div class="modal-title flx column ai-c gap-8 mb-24">
-                <h3 id="modal_title">Edit profile</h3>
-            </div>
             <div class="flx ai-c column gap-16 mb-24">
                 <avatar :status="status" :hostname="getHostname" :id="getUser.id" @deleteTemp="deltmp" />
                 <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
@@ -70,7 +70,7 @@
                     </span>
                 </div> -->
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submitting...' : 'Submit update'}}</span>
                 </button>  
@@ -87,7 +87,7 @@ import Spinner from '../includes/Spinner'
 import Avatar from '../includes/Avatar'
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 export default {
-  components: { Avatar, Spinner },
+    components: { Avatar, Spinner },
     name: 'ProfileEditModal',
     computed: {
         ...mapGetters(['getHostname', 'getDefaultImage', 'getUser']),

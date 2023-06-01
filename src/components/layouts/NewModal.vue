@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <transition name="fade">
         <backdrop v-if="addModal" />
     </transition>
@@ -23,20 +23,23 @@
     <change-pass-modal v-else-if="forms.changePass"/>
     <add-to-gallery v-else-if="forms.addtoGallery" />
     <verify-code-modal v-else-if="forms.verifyCode" />
+    <add-village-form v-else-if="forms.addVillage" />
 </template>
 <script>
 import { defineAsyncComponent } from 'vue';
 import { mapState } from 'vuex';
 import Backdrop from '@/components/includes/Backdrop.vue'
-const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: VerifyCodeModal */ '@/views/app/village/VerifyCodeModal.vue'));
+const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: VerifyCodeModal */ '@/views/app/parents/VerifyCodeModal.vue'));
 const AddKidsModal = defineAsyncComponent(() => import(/* webpackChunkName: AddKidsModal */ './AddKidsModal.vue'));
-const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: AddToGallery */ './AddToGallery.vue'));
+const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: AddToGallery */ './AddToGalleryModal.vue'));
 const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: ChangePassModal */ './ChangePassModal.vue'));
 const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ './ProfileEditModal.vue'));
+const AddVillageForm = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ '../../views/app/admin/AddVillageForm.vue'));
+
 
 
 export default {
-    components: { AddKidsModal, Backdrop, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal },
+    components: { AddKidsModal, Backdrop, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal, AddVillageForm },
     name: 'NewModal',
     computed: {
         ...mapState({
@@ -126,4 +129,4 @@ section{
 .modal-content{
     padding: 32px;
 }
-</style>
+</style> -->

@@ -10,7 +10,7 @@
         </div>
         <event-row v-for="event in computedEvents" :key="event.id" :event="event" :dashboard="dashboard"/>
         <div class="text-center gray" v-if="dashboard && events.length > 3"><router-link class="see-all" :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }">See more</router-link></div>
-    </div>
+</div>
 </template>
 <script>
 import EventRow from '../includes/app/EventRow.vue'

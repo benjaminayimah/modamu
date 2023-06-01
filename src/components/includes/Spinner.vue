@@ -16,7 +16,7 @@ $dimension: 20px;
   border-radius: 50%;
   width: $dimension;
   height: $dimension;
-  animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

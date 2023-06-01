@@ -1,8 +1,10 @@
 <template>
+    <teleport to="#modal_title">
+        Verify {{ computedFirstName(attendee.kid_name) }}'s code
+    </teleport>
     <teleport to="#modal_content">
         <div>
             <div class="modal-title flx column ai-c gap-8 mb-32">
-                <h3 id="modal_title">Verify {{ computedFirstName(attendee.kid_name) }}'s code</h3>
                 <div>Enter {{ computedFirstName(attendee.kid_name) }}'s checkout code to verify</div>
             </div>
             <div class="flx jc-c mb-32">
@@ -21,7 +23,7 @@
                         {{ validation.errors.checkout_code[0] }}
                     </span>
                 </div>
-                <button @click="checkOut" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button @click="checkOut" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Verifying...' : 'Verify'}}</span>
                 </button> 

@@ -1,5 +1,5 @@
 <template>
-<div class="grid table-body">
+    <div class="grid table-body">
         <div class="grid-item table-head" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
             <h4 class="table-cell wrap-text wrap-line-1">Event name</h4>
             <h4 class="table-cell wrap-text wrap-line-1">Event date</h4>

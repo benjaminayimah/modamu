@@ -24,7 +24,7 @@
                 <input class="form-control" type="search" data-type="icon" placeholder="Search events...">
             </div>
        </div>
-       <div id="event_table">
+       <div id="grid_table">
             <router-view></router-view>
        </div>
     </section>

@@ -12,7 +12,6 @@ import SignUpParentDetails from '@/views/web/SignUpParentDetails.vue'
 import SignUpKids from '@/views/web/SignUpKids.vue'
 import ForgotPassword from '@/views/web/ForgotPassword.vue'
 import ResetPassword from '@/views/web/ResetPassword.vue'
-import AccountActivation from '@/views/web/AccountActivation'
 import Profile from '@/views/app/Profile.vue'
 import KidsProfile from '@/components/layouts/ProfileViewKidDetail.vue'
 import AddEventPage from '@/views/app/village/AddEventPage.vue'
@@ -23,15 +22,18 @@ import PastEvents from '@/views/app/EventsPast.vue'
 import DetailedEvent from '@/views/app/DetailedEvent.vue'
 import Attendee from '@/views/app/village/AttendeeProfile.vue'
 import ViewParentProfile from '@/views/app/village/ViewParentProfile.vue'
-import Villages from '@/views/app/Villages.vue'
+import Villages from '@/views/app/admin/Villages.vue'
+import DetailedVillage from '@/views/app/admin/VillageDetails.vue'
+import Transactions from '@/views/app/admin/Transactions.vue'
+import Parents from '@/views/app/admin/Parents.vue'
 import WaitList from '@/views/app/WaitList.vue'
 import Message from '@/views/app/Message.vue'
 import MessageDetail from '@/views/app/MessageDetails.vue'
 import Notification from '@/views/app/Notification.vue'
-import Payment from '@/views/app/parents/Payment.vue'
-import AllPayments from '@/views/app/parents/AllPayments.vue'
-import SelectPayment from '@/views/app/parents/SelectPayment.vue'
-import AddPayment from '@/views/app/parents/AddPayment.vue'
+// import Payment from '@/views/app/parents/Payment.vue'
+// import AllPayments from '@/views/app/parents/AllPayments.vue'
+// import SelectPayment from '@/views/app/parents/SelectPayment.vue'
+// import AddPayment from '@/views/app/parents/AddPayment.vue'
 import EventsNear from '@/views/app/parents/EventsNear.vue'
 import BookingSelectKids from '@/views/app/parents/BookingSelectKids.vue'
 import BookingSuccess from '@/views/app/parents/BookingSuccess.vue'
@@ -50,7 +52,7 @@ import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
 
 
 
-import VerifyEmail from '@/views/web/VerifyEmail.vue'
+import VerifyAccount from '@/views/web/VerifyAccount.vue'
 import Web404View from '@/views/web/Web404View.vue'
 
 
@@ -82,8 +84,11 @@ const routes = [
       },
       { path: '/event/:id/:name', name: 'DetailedEvent', component: DetailedEvent },
       { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
-      { path: '/parent/:event/:parent_id/:kid/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
+      { path: '/parent/:parent_id/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/villages', name: 'Villages', component: Villages },
+      { path: '/village/:name/:id', name: 'DetailedVillage', component: DetailedVillage },
+      { path: '/transactions', name: 'Transactions', component: Transactions },
+      { path: '/parents', name: 'Parents', component: Parents },
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,
       children: [
@@ -91,13 +96,13 @@ const routes = [
       ]
       },
       { path: '/notifications', name: 'Notification', component: Notification },
-      { path: '/', name: 'Payment', component: Payment,
-      children: [
-        { path: '/payments', name: 'AllPayments', component: AllPayments},
-        { path: '/select-payment', name: 'SelectPayment', component: SelectPayment},
-        { path: '/add-payment/:name', name: 'AddPayment', component: AddPayment},
-        ]
-      },
+      // { path: '/', name: 'Payment', component: Payment,
+      // children: [
+      //   { path: '/payments', name: 'AllPayments', component: AllPayments},
+      //   { path: '/select-payment', name: 'SelectPayment', component: SelectPayment},
+      //   { path: '/add-payment/:name', name: 'AddPayment', component: AddPayment},
+      //   ]
+      // },
       { path: '/events-near-you', name: 'EventsNear', component: EventsNear},
       { path: '/booking-event/:event_id/:village/:event_name/:event_price', name: 'BookingSelectKids', component: BookingSelectKids},
       { path: '/booking-event/success/:session_id', name: 'BookingSuccess', component: BookingSuccess },
@@ -131,18 +136,16 @@ const routes = [
       { path: '/signup', name: 'SignUp', component: SignUp},
       { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword},
       { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword},
-      { path: '/account-activation/:token', name: 'AccountActivation', component: AccountActivation},
     ],
   },
   {
     path: '/signup/u/details', component: SignUpProgress,
-    meta: {requiresNewUser: true},
     children: [
       { path: '/signup/u/details', name: 'SignUpParentDetails', component: SignUpParentDetails },
       { path: '/signup/u/kids', name: 'SignUpKids', component: SignUpKids }
     ]
   },
-  { path: '/new-account-verification/:token', name: 'VerifyEmail', component: VerifyEmail},
+  { path: '/new-account-verification/:token', name: 'VerifyAccount', component: VerifyAccount},
   { path: '/:pathMatch(.*)*', name: 'not-found', component: Web404View },
 
   

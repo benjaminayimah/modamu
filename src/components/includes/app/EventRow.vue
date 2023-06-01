@@ -1,12 +1,12 @@
 <template>
     <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.event_name}}" class="table-row grid-item row-hover" :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
-        <div class="table-cell flx gap-8 ai-c">
+        <div class="table-cell gap-8">
             <profile-avatar :id="event.user_id" :image="computedImage.image"/>
             <span class="wrap-text wrap-line-1">{{ event.event_name }}</span>
         </div>
-        <div class="table-cell flx gap-8 ai-c"><span>{{ duration(event.start_time, event.end_time) }}</span><span>hours</span></div>
-        <div class="table-cell flx jc-sb ai-c">
-            <div class="relative h-100 flx ai-c stack-cards">
+        <div class="table-cell gap-8"><span>{{ duration(event.start_time, event.end_time) }}</span><span>hours</span></div>
+        <div class="table-cell jc-sb">
+            <div class="flx ai-c stack-cards">
                 <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees</span>
                 <profile-avatar v-else v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                 <span v-if="computedAttendees.length > 5" class="counter bg-img centered">+{{ computedAttendees.length - 5 }}</span>

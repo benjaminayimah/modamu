@@ -11,7 +11,7 @@
                     <div class="text-center comp-text">
                         Your event has been added successfully and you can easily track and monitor attendance and reports.
                     </div>
-                    <button @click="goToEvent" class="button-primary w-100">Track</button>
+                    <button @click="goToEvent" class="button-primary w-100 btn-lg">Track</button>
                 </div>
             </div>
             <div v-else class="main-content-card add-event-card">
@@ -143,7 +143,7 @@
                         </span>
                     </div>
                     <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                    <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                    <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                         <span>{{ creating ? 'Creating...' : 'Create event'}}</span>
                     </button> 

@@ -47,7 +47,7 @@
                 </svg>
                 {{ current_location }}
             </span>
-            <button @click="fetchNearByEvents" class="button-primary mt-24">Try searching again</button>
+            <button @click="fetchNearByEvents" class="button-primary mt-24 btn-lg">Try searching again</button>
             <!-- <div class="input-wrapper">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 13.974 13.974">

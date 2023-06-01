@@ -27,7 +27,7 @@
                         <label for="total"><strong>${{ $route.params.event_price * selected.length }}</strong></label>
                         <span id="total">Total amount</span>
                     </div>
-                    <button @click="submitBooking" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : processing }" :disabled="processing ? true : false">
+                    <button @click="submitBooking" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : processing }" :disabled="processing ? true : false">
                         <spinner v-if="processing" v-bind:size="20" v-bind:white="true" />
                         <span>{{ processing ? 'Initiating payment...' : 'Pay & Book Event'}}</span>
                     </button>
@@ -74,23 +74,18 @@ export default {
             }
         },
         submitBooking() {
-            // axios.post(this.hostname + '/api/place-booking?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
             this.clrError ? this.clrError() : ''
             if(this.checkSelection()){
                 this.processing = true;
                 const url = this.appHostname + '/booking-event'
                 axios.post(this.hostname + '/api/make-payment?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
                 .then((res) => {
-                    console.log(res)
-                    // this.completed = true
                     location.href = res.data
-                    // this.processing = false;
                 }).catch((err) => {
                     console.log(err)
                 })
             }
         },
-
         checkSelection() {
             if(!this.selected.length) {
                 this.errorMsg()

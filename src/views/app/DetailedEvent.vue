@@ -51,7 +51,7 @@
                         </div>
                         <div class="flx gap-8 ai-c">
                             <div>Price per child</div>
-                            <span class="price br-24">${{ event.amount }}</span>
+                            <span class="price fw-600 br-24">${{ event.amount }}</span>
                         </div>
                     </div>
                     <div v-if="event.description">
@@ -128,7 +128,7 @@
                     </button>
                 </div>
             </div>
-            <div v-if="is_village" class="main-content-card flx-grow-1">
+            <div v-if="is_village || is_admin" class="main-content-card flx-grow-1">
                 <h4 class="mb-16">
                     In attendance
                 </h4>

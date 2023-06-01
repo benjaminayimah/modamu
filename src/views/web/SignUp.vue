@@ -58,7 +58,7 @@
             {{ validation.errors.password[0] }}
         </span>
       </div>
-      <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+      <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
         <span>{{ creating ? 'Signing up...' : 'Sign up'}}</span>
       </button>
@@ -95,7 +95,7 @@ export default {
         this.creating = true
         axios.post(this.getHostname+'/api/sign-up', this.form)
         .then((res) => {
-          this.signupSuccess(res)
+          this.signupSuccess(res.data)
         }).catch((e) => {
           this.creating = false
           if(e.response.status == 422){
@@ -108,10 +108,12 @@ export default {
           }
         })
       },
-      async signupSuccess(res) {
-        this.creating = false
-        await this.$store.commit('setNewUser', res.data)
-        this.$router.push({ name: 'SignUpParentDetails' })
+      async signupSuccess(payload) {
+        await this.$store.commit('setNewUser', payload)
+        const newUser = localStorage.getItem('newUser')
+        if (newUser) {
+          this.$router.push({ name: 'SignUpParentDetails' })
+        }
       }
     }
 }

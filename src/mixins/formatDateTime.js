@@ -4,6 +4,10 @@ export default {
         format_date(date) {
             return moment(date).format('ddd, MMMM Do YYYY'); 
         },
+        format_date_short(date) {
+          return moment(date).format("MMM Do YY");  
+
+        },
         format_time(time) {
             return moment(time).format('LT'); 
         },

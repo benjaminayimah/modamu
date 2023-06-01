@@ -1,7 +1,7 @@
 import { mapGetters } from "vuex"
 export default {
     computed: {
-        ...mapGetters(['is_super', 'is_subadmin', 'is_village', 'is_parent']),
+        ...mapGetters(['is_super', 'is_subadmin', 'is_village', 'is_parent', 'is_admin']),
         computedAcc() {
             let type = ''
             if(this.is_super)

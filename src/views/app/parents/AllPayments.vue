@@ -2,7 +2,7 @@
     <div class="empty-state flx jc-c ai-c" v-if="!payments.length">
         <div class="text-center br-24 flx jc-c ai-c gap-24 column bg-white">
             <div>No payment method added yet</div>
-            <router-link :to="{ name: 'SelectPayment' }" class="button-primary a-button">Add  new  payment system</router-link>
+            <router-link :to="{ name: 'SelectPayment' }" class="button-primary a-button btn-lg">Add  new  payment system</router-link>
         </div>
     </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
+    <teleport to="#modal_title">
+        Change your password
+    </teleport>
     <teleport to="#modal_content">
         <div>
-            <div class="modal-title flx column ai-c gap-8 mb-32">
-                <h3 id="modal_title">Change your password</h3>
-            </div>
             <form @submit.prevent="submitPass" class="flx column gap-24">
                 <div class="form-row column">
                     <label for="current_password">Current password</label>
@@ -23,7 +23,7 @@
                         {{ validation.errors.new_password[0] }}
                     </span>
                 </div>
-                <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submitting...' : 'Submit password'}}</span>
                 </button>  

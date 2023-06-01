@@ -69,7 +69,7 @@ export default {
     methods: {
         async fetchThisParent() {
             try {
-                const res = await postApi(this.hostname+'/api/fetch-this-parent?token='+ this.token, { parent: this.$route.params.parent_id, event: this.$route.params.event })
+                const res = await postApi(this.hostname+'/api/fetch-this-parent?token='+ this.token, { parent: this.$route.params.parent_id })
                 this.parent = res.data.parent
                 this.kids = res.data.kids
                 this.chats = res.data.chats

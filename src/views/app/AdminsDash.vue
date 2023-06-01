@@ -4,7 +4,7 @@
             <div class="flx column gap-40 wl-sec">
                 <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(getUser.name) }}</h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
-                <router-link to="/notifications" class="button-secondary a-button a-btn">View all events</router-link>
+                <router-link to="/notifications" class="button-secondary a-button a-btn btn-lg">View all events</router-link>
             </div>
             <dash-notification-card />
         </div>
@@ -43,8 +43,11 @@
                         </div>
                     </div>
                     <div class="flx-grow-1 bg-white pd-20 br-24 flx jc-sb column">
-                        <div class="fw-700 fs-2r">{{ events.length }}</div>
-                        <span>Events coming up this week</span>
+                        <div>
+                            <div class="fw-700 fs-2r">{{ events.length }}</div>
+                            <span class="fs-09 gray">Events</span>
+                        </div>
+                        <span>Upcoming events this week</span>
                     </div>
                     <div class="flx-grow-1 bg-primary ft-white pd-20 br-24 flx jc-sb column">
                         <div>
@@ -88,7 +91,7 @@
                             <span class="br-16">{{ getPastEvents.length }}</span>
                         </router-link>
                     </div>
-                    <div id="event_table" class="bg-white br-16 flx-grow-1">
+                    <div id="grid_table" class="bg-white br-16 flx-grow-1">
                         <router-view></router-view>
                     </div>
                 </div>
@@ -115,7 +118,6 @@ export default {
     },
     data() {
         return {
-            me: [],
             registered_parents: [
                 {id: 1},
                 {id: 2},

@@ -11,6 +11,7 @@ export default {
             {id: 3, name: 'prefer not to say'}
         ],
         defaultImage: require('@/assets/images/default-avatar.png'),
+        banner1: require('@/assets/images/modamu_banner.png'),
         image: require('@/assets/images/welcome_banner.jpg'),
     },
     mutations: {
@@ -30,6 +31,7 @@ export default {
         getGender: (state) => state.gender,
         getDefaultImage: (state) => state.defaultImage,
         getImage: (state) => state.image,
+        getBanner1: (state) => state.banner1
 
     },
 }

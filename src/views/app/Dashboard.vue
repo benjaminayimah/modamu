@@ -10,7 +10,11 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'DashboardHome',
   components: { ParentDash, AdminsDash },
-  computed: mapGetters(['is_super', 'is_parent'])
+  computed: mapGetters(['is_parent']),
+  mounted() {
+    this.$store.commit('startLoader')
+    this.$store.dispatch('fetchMessages')
+  }
 }
 </script>
 <style lang="scss" scoped>

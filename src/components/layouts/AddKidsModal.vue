@@ -1,9 +1,9 @@
 <template>
+    <teleport to="#modal_title">
+        Add your child
+    </teleport>
     <teleport to="#modal_content">
         <div>
-            <div class="modal-title flx column ai-c gap-8 mb-24">
-                <h3 id="modal_title">Add your child</h3>
-            </div>
             <div class="flx ai-c column gap-16 mb-24">
                 <avatar :status="status" :hostname="getHostname" :id="id" @deleteTemp="deltmp"/>
                 <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
@@ -64,7 +64,7 @@
                     </span>
                 </div>
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Adding...' : 'Add'}}</span>
                 </button>  
@@ -108,44 +108,10 @@ export default {
                 about: '',
                 tempImage: null,
             },
-            // token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null,
-            // id: JSON.parse(localStorage.getItem('newUser')).status.id || null,
             creating: false,
         }
     },
     methods: {
-        
-        // uploadTemp() {
-        //     this.startLoader()
-        //     if (this.imageStatus.active) {
-        //         this.clrError();
-        //     }
-        //     let file = this.$refs.img.files[0];
-        //     if(file) {
-        //         if (!(file.type == "image/png" || file.type == "image/jpg" || file.type == "image/jpeg")) {
-        //             return this.showError("Unsupported file. The file type must be \"png, jpg or jpeg\"");
-        //         }else {
-        //             if (this.checksize(file.size)) {
-        //                 let formData = new FormData()
-        //                 formData.append('image', file);
-        //                 axios.post(this.getHostname + "/api/temp-upload?token=" + this.token, formData, {
-        //                     headers: {
-        //                         'Content-Type': 'multipart/form-data'
-        //                     }
-        //                 }).then((res) => {
-        //                     this.stopLoader()
-        //                     this.afterTempUpload(res.data.image)
-        //                 }).catch((err) => {
-        //                     this.stopLoader()
-        //                     console.log(err.response);
-        //                 });
-
-        //             }else {
-        //                 return this.showError('This file is too large. The file size must be less than 1MB');
-        //             }
-        //         }
-        //     }
-        // },
         deltmp() {
             this.startLoader()
             axios.delete(this.getHostname + "/api/del-temp-upload/" + this.id + '?token=' + this.token)

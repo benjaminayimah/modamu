@@ -9,7 +9,7 @@
                 Your account has been verified successfully.
             </div>
             <p>
-                <button @click="$router.push({name: 'AdminDashboard'})" class="button-primary w-100 gap-8">Proceed to dashboard</button>
+                <button @click="$router.push({name: 'AdminDashboard'})" class="button-primary w-100 gap-8 btn-lg">Proceed to dashboard</button>
             </p>
         </div>
         <div v-else>
@@ -17,7 +17,7 @@
                 <div class="invalid-credentials response-message mb-32">
                     <span>There was an error during verification. Try again by clicking the button below.</span>
                 </div>
-                <button @click="verifyAccount" class="button-primary w-100 gap-8">Verify account</button>
+                <button @click="verifyAccount" class="button-primary w-100 gap-8 btn-lg">Verify account</button>
             </div>
         </div>
     </section>

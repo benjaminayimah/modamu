@@ -65,7 +65,7 @@
                     <div v-if="registered_kids.length > 3" class="counter bg-img bg-white centered br-50">+{{ registered_kids.length - 3 }}</div>
                 </div>
             </div>
-            <button class="button-primary">View more</button>
+            <button class="button-primary btn-lg">View more</button>
         </div>
     </div>
 </div>

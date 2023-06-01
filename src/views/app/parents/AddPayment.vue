@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="flx column">
-                    <button class="button-primary">Add card</button>
+                    <button class="button-primary btn-lg">Add card</button>
                 </div>
             </form>
         </div>

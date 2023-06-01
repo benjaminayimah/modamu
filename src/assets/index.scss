@@ -156,7 +156,7 @@ button, .a-button{
     align-items: center;
     white-space: nowrap;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: unset;
     font-weight: 700;
     cursor: pointer;
@@ -168,8 +168,18 @@ button, .a-button{
     }
 }
 .button-primary, .button-secondary, .button-outline{
-    height: var(--input-btn-height);
+    // height: var(--input-btn-height);
 }
+.btn-sm {
+    height: 48px;
+}
+.btn-md {
+    height: 52px;
+}
+.btn-lg {
+    height: 58px;
+}
+
 .button-primary {
     background-color: var(--primary-color);
     color: var(--ft-white);
@@ -304,14 +314,17 @@ select{
 .response-message {
     padding: 16px;
     border-radius: 8px;
-    line-height: 1.3;
-    color: var(--ft-white);
+    line-height: 1.4;
+    border: 1px solid;
+    color: var(--ft-dark);
 }
 .invalid-credentials{
-    background-color: var(--error);
+    border-color: var(--error);
+    background-color: #ffe6e6;
 }
 .success-response {
-    background-color: var(--success-green);
+    border-color: var(--success-green);
+    background-color: #e6ffeb;
 }
 .input-wrapper{
     position: relative;
@@ -595,12 +608,15 @@ a{
 a, button {
     -webkit-tap-highlight-color: transparent;
 }
-.bg-img{
+.bg-img, .bg-img-banner{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     flex-shrink: 0;
     background-color: var(--bg-color);
+}
+.w-fc {
+    width: fit-content;
 }
 .fixed-body{
     overflow: hidden; overscroll-behavior-y: none;
@@ -626,7 +642,7 @@ form {
     background-color: var(--success);
     padding: 4px 12px;
     color: #000;
-    font-weight: 600;
+    display: inline-block;
 }
 .upcoming{
     background-color: var(--success);
@@ -790,6 +806,8 @@ form {
 }
 .table-cell {
     padding: 0 8px;
+    display: flex;
+    align-items: center;
 }
 .pd-0{
     padding: 0;
@@ -839,7 +857,11 @@ form {
 .scroll-snap > * {
     scroll-snap-align: start;
 }
-#event_table{
+#grid_table{
+    .see-details{
+        white-space: nowrap;
+        overflow: hidden;
+    }
     .grid {
         grid-template-columns: 1fr;
         gap: 2px;
@@ -959,11 +981,14 @@ $completionWidth: 440px;
     color: var(--ft-white);
     font-size: 0.9rem;
 }
-.gender-pill[data-type=male]{
+.gender-pill[data-type=male], .gender-pill[data-type=father]{
     background: #87A5FF;
 }
-.gender-pill[data-type=female]{
+.gender-pill[data-type=female], .gender-pill[data-type=mother]{
     background: #FF87B2;
+}
+.gender-pill[data-type=guardian]{
+    background: #FFC266;
 }
 .grid-item-outline{
     border: .5px solid #000;
@@ -1163,7 +1188,7 @@ $completionWidth: 440px;
             width: 100%;
         }
     }
-    .col-2 {
+    .col-2, .grid-col-4 {
         grid-template-columns: 1fr;
     } 
     .kids-column{

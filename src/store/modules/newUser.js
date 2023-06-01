@@ -48,9 +48,6 @@ export default {
         }
     },
     getters: {
-        getNewUser: (state) => state.newUser,
-        newUser(){
-            return localStorage.getItem('newUser') !== null
-        },
+        getNewUser: (state) => state.newUser
     },
 }

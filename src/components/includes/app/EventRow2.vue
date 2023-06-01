@@ -1,20 +1,20 @@
 <template>
     <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.event_name}}" class="table-row grid-item row-hover " :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
-        <div class="table-cell flx gap-8 ai-c">
+        <div class="table-cell gap-8">
             <profile-avatar :id="event.user_id" :image="computedImage.image"/>
             <span class="wrap-text wrap-line-1">{{ event.event_name }}</span>
         </div>
-        <div class="table-cell flx gap-8 ai-c">
+        <div class="table-cell gap-8">
             <div class="wrap-text wrap-line-1">{{ format_date(event.date) }}</div>
         </div>
-        <div class="table-cell flx gap-8 ai-c">
+        <div class="table-cell gap-8">
             <div class="wrap-text wrap-line-1">{{ event.start_time }}</div>
         </div>
-        <div class="table-cell flx jc-sb ai-c attendees-cell" v-if="!device">
-            <div class="h-100 flx ai-c stack-cards">
+        <div class="table-cell jc-sb attendees-cell" v-if="!device">
+            <div class="flx ai-c stack-cards" v-if="!nokids">
                 <span class="wrap-text wrap-line-1" v-if="!computedAttendees.length">No Attendees</span>
                 <profile-avatar v-else v-for="kid in computedAttendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
-                <span v-if="computedAttendees.length > 5" class="counter centered bg-img">+{{ computedAttendees.length - 5 }}</span>
+                <span v-if="computedAttendees.length > 5" class="counter centered br-50 bg-img">+{{ computedAttendees.length - 5 }}</span>
             </div>
             <span v-if="!dashboard" class="ft-primary pd-0-20 see-details">
                 See details
@@ -32,7 +32,7 @@ import ProfileAvatar from './ProfileAvatar.vue';
 export default {
   components: { ProfileAvatar },
     name: 'EventRow2',
-    props: ['event', 'dashboard', 'device'],
+    props: ['event', 'dashboard', 'device', 'nokids'],
     mixins: [ formatDateTime ],
     computed: {
         ...mapState({
@@ -64,7 +64,6 @@ export default {
     height: 40px;
     width: 40px;
     border: 1px solid #fff;
-
 }
 a{
     container-type: inline-size

@@ -1,8 +1,8 @@
 <template>
   <section class="wc-section">
-      <div class="wc-title text-center">
-        <completed-anime v-if="successful" />
-        <h1 class="fs-2r text-center">{{ successful ? 'Successful!' : 'Almost there!' }}</h1>
+      <div class="wc-title">
+        <completed-anime class="anime" v-if="successful" />
+        <h1 class="fs-2r">{{ successful ? 'Successful!' : 'Almost there!' }}</h1>
         <span v-if="!successful">Enter your new password</span>
       </div>
       <form v-if="!successful"  @submit.prevent="doSubmit">
@@ -27,12 +27,12 @@
                 {{ validation.errors.password_confirmation[0] }}
             </span>
         </div>
-        <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+        <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
           <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
           <span>{{ creating ? 'Please wait...' : 'Continue'}}</span>
         </button>
       </form>
-        <div v-else class="email-sent text-center">
+        <div v-else class="email-sent">
             <p>The password for the account <strong>{{ email }}</strong>, has been changed.</p>
             <p><span>You can now sign into your modamu account with your new password. </span><router-link :to="{ name: 'SignIn' }" >Sign in now</router-link></p>
         </div>
@@ -107,5 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.anime{
+    margin: 0;
+}
 </style>

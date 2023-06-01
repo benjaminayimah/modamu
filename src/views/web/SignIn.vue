@@ -47,7 +47,7 @@
           <router-link :to="{ name: 'ForgotPassword'}">Forgot your password?</router-link>
         </div>
       </div>
-      <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+      <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
         <span>{{ creating ? 'Signing in...' : 'Sign in'}}</span>
       </button>

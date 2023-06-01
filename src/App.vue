@@ -1,11 +1,12 @@
 <template>
   <router-view/>
-  <new-modal />
+  <modal />
 </template>
 <script>
-import NewModal from './components/layouts/NewModal.vue'
+
+import Modal from './components/layouts/Modal.vue'
 export default {
-  components: { NewModal },
+  components: { Modal },
   name: 'App',
   created() {
     this.$store.commit('computeWindow')

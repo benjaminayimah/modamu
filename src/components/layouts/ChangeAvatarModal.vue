@@ -1,9 +1,9 @@
 <template>
+    <teleport to="#modal_title">
+        Change your photo
+    </teleport>
     <teleport to="#modal_content">
         <div>
-            <div class="modal-title flx column ai-c gap-8 mb-32">
-                <h3 id="modal_title">Change your photo</h3>
-            </div>
             <div class="flx ai-c column gap-16 mb-24">
                 <avatar :status="status" :hostname="getHostname" :id="getUser.id" @deleteTemp="deltmp"/>
                 <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
@@ -16,7 +16,7 @@
             </div>
             <form @submit.prevent="" class="flx column gap-24">
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button @click="doSubmit" class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submitting...' : 'Submit photo'}}</span>
                 </button>  

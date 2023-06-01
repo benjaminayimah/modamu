@@ -98,7 +98,7 @@
           <div class="flx ai-c column gap-32">
             <h1>Welcome on board!!!</h1>
             <div class="text-center">Your sign up is completed successfully. You can now proceed to your dashbard.</div>
-            <button class="button-primary w-100" @click="goToDashboard">Go to Dashboard</button>
+            <button class="button-primary w-100 btn-lg" @click="goToDashboard">Go to Dashboard</button>
           </div>
       </div>
     </div>
@@ -165,5 +165,4 @@ export default {
     font-size: 2rem;
   }
 }
-
 </style>

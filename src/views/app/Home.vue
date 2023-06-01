@@ -22,37 +22,6 @@ export default {
       device: (state) => state.device,
       loader: (state) => state.loader
     })
-  },
-  methods: {
-    // getCucrrentLocation(payload) {
-    //   const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric'; // Your Google Cloud Platform API key
-    //   const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+payload.lat+','+payload.lng+'&key='+apiKey
-    //   fetch(url)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       const address = data.results[0].formatted_address;
-    //       this.$store.commit('setCurrentLocation', address)
-    //     })
-    //     .catch(error => {
-    //       console.log(error); // Handle any errors that occurred
-    //     });
-    // },
-  },
-  mounted() {
-    this.$store.commit('startLoader')
-    this.$store.dispatch('fetchMessages')
-    // if (navigator.geolocation) {
-    //     const vm = this
-    //     navigator.geolocation.getCurrentPosition(function(position) {
-    //       const lat = position.coords.latitude;
-    //       const lng = position.coords.longitude;
-    //       vm.getCucrrentLocation({ lat: lat, lng: lng})
-    //     }, function(error) {
-    //       console.log(`Error getting location: ${error.message}`);
-    //     });
-    //   } else {
-    //     console.log('Geolocation is not supported by this browser.');
-    //   }
   }
 }
 </script>

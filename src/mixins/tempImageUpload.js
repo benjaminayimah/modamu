@@ -44,7 +44,6 @@ export default {
                         }).then((res) => {
                             this.stopLoader()
                             this.afterTempUpload(res.data.image)
-                            console.log(res)
                         }).catch((err) => {
                             this.stopLoader()
                             console.log(err.response);

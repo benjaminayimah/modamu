@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    appHostname: 'http://localhost:8080',
-    // hostname: 'https://modamu-api.rancroftdev.com',
-    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    // hostname: 'http://localhost:8000',
+    // appHostname: 'http://localhost:8080',
+    hostname: 'https://modamu-api.rancroftdev.com',
+    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -20,7 +20,7 @@ export default createStore({
     windowHeight: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     addModal: false,
-    forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, id: '', user: {} },
+    forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
     kids: [],
     events: [],
     images: [],
@@ -36,7 +36,9 @@ export default createStore({
     ],
     events_near: { events: [], images: []},
     registered_events: [],
-    attendees: []
+    attendees: [],
+    bookings: [],
+    parents: []
   },
   mutations: {
     computeWindow(state) {
@@ -52,17 +54,6 @@ export default createStore({
         state.device = 'tablet'
       }
     },
-    async showModal() {
-      await this.commit('callShowModal')
-    },
-    callShowModal() {
-      const modal = document.querySelector('#main_modal')
-      modal.showModal()
-    },
-    hideModal() {
-      const modal = document.querySelector('#main_modal')
-      modal.close()
-    },
     async openModal(state, payload) {
       await this.commit('activateModal')
       document.body.classList.add('fixed-body')
@@ -76,6 +67,8 @@ export default createStore({
         state.forms.addtoGallery = true
       }else if(payload == 'verify-code') {
         state.forms.verifyCode = true
+      }else if(payload == 'add-village') {
+        state.forms.addVillage = true
       }
     },
     setTempID(state, payload) {
@@ -84,11 +77,13 @@ export default createStore({
     setTempUser(state, payload) {
       state.forms.user = payload
     },
-    activateModal(state) {
-      state.addModal = true
+    activateModal() {
+      const modal = document.querySelector('#main_modal')
+      modal.showModal()
     },
     closeModal(state) {
-      state.addModal = false
+      const modal = document.querySelector('#main_modal')
+      modal.close()
       document.body.classList.remove('fixed-body')
       for (let i in state.forms)
       state.forms[i] = false
@@ -108,7 +103,10 @@ export default createStore({
       state.events = payload.events
       state.images = payload.images
       state.attendees = payload.attendees
-      state.kids = payload.kids
+      state.kids = payload.kids,
+      state.villages = payload.villages,
+      state.bookings = payload.bookings,
+      state.parents = payload.parents
 
       this.commit('updateLocalStorage', payload.user)
     },
@@ -140,6 +138,9 @@ export default createStore({
     upadateEvents(state, payload) {
       state.events.push(payload.event)
       state.images.push(payload.image)
+    },
+    updateVillage(state, payload) {
+      state.villages.push(payload)
     },
     addToKids(state, payload) {
       state.kids.push(payload)
@@ -188,8 +189,9 @@ export default createStore({
       state.images = payload.images
       state.attendees = payload.attendees
     },
-
-    
+    setImages(state, payload) {
+      state.images = payload
+    }
     // toggleMenu() {
     //   const menu = document.querySelector('#menus')
     //   const backdrop = document.querySelector('.backdrop')
@@ -374,6 +376,9 @@ export default createStore({
     getWindowHeight: (state) => state.windowHeight,
     getKids: (state) => state.kids,
     getMenu: (state) => state.menu,
+    newUser(){
+      return localStorage.getItem('newUser') !== null
+    },
   },
   modules: {
     data,

@@ -1,13 +1,13 @@
 <template>
     <form @submit.prevent="" class="flx column gap-28 flx-grow-1">
       <div class="form-row column">
-        <label for="phone">Phone number</label>
+        <label for="phone">Phone number*</label>
         <div class="input-wrapper">
           <input v-model="form.phone" class="form-control" type="tel" name="phone" id="phone" data-color="light" placeholder="Eg. 222-333-4444">
         </div>
       </div>
       <div class="form-row column">
-        <label for="emergencyPhone">Emergency number*</label>
+        <label for="emergencyPhone">Emergency number</label>
         <div class="input-wrapper">
           <input v-model="form.emergency_number" class="form-control" type="tel" name="emergencyPhone" id="emergencyPhone" data-color="light" placeholder="222-333-5555">
         </div>
@@ -33,7 +33,7 @@
           <input v-model="form.ocupation" class="form-control" type="text" name="ocupation" id="ocupation" data-color="light" placeholder="What's your occupation">
         </div>
       </div>
-    <button class="button-primary w-100" @click="submitSignUp">Next</button>      
+    <button class="button-primary w-100 btn-lg" @click="submitSignUp">Next</button>      
     </form>
 </template>
 

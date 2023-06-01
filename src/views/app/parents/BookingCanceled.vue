@@ -7,7 +7,7 @@
                 <div class="text-center comp-text">
                     Your payment was canceled and your event has not been booked.
                 </div>
-                <router-link to="/" class="button-primary w-100 a-button a-btn">Go home</router-link>
+                <router-link to="/" class="button-primary w-100 a-button a-btn btn-lg">Go home</router-link>
             </div>
         </div>
     </div>

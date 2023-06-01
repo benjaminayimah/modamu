@@ -22,7 +22,7 @@
               {{ validation.errors.email[0] }}
           </span>
         </div>
-        <button class="button-primary w-100 gap-8" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+        <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
           <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
           <span>{{ creating ? 'Please wait...' : 'Continue'}}</span>
         </button>
@@ -33,7 +33,7 @@
       </div>
       <div v-if="!emailSent" class="flx column gap-4 ai-c acc-footer">
         <p>
-          <router-link :to="{ name: 'SignIn' }">Back to Sign in</router-link>
+          <router-link :to="{ name: 'SignIn' }" class="fw-700">Back to Sign in</router-link>
         </p>
       </div>
   </section>

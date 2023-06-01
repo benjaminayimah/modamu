@@ -11,10 +11,12 @@
 <div class="flx ai-c column gap-16">
     <profile-avatar :image="user.image"  :id="user.id"/>
     <h4>{{ user.name }}</h4>
-    <span class="acc-type br-32">{{ owner ? computedAcc : user.relationship }}</span>
+    <span class="acc-type br-32" v-if="!admin">{{ owner ? computedAcc : user.relationship }}</span>
+    <span class="acc-type br-32" v-else>Village</span>
+
 </div>
 <div class="flx column gap-16">
-    <h4 class="gray text-center">{{ owner ? 'Account information' : 'Parent information' }}</h4>
+    <h4 class="gray text-center">Account information</h4>
     <div class="flx jc-sb br-16 info-row ai-c">
         <div class="flx gap-8">
             <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 19.616 19.782">
@@ -90,9 +92,9 @@
 import ProfileAvatar from '../includes/app/ProfileAvatar.vue'
 import usersLevelMixin from '@/mixins/usersLevelMixin'
 export default {
-  components: { ProfileAvatar },
+    components: { ProfileAvatar },
     name: 'ProfileBodyContent',
-    props: ['user', 'village', 'owner'],
+    props: ['user', 'village', 'owner', 'admin'],
     mixins: [usersLevelMixin]
 }
 </script>

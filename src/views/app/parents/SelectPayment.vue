@@ -5,7 +5,7 @@
             <div class="flx column gap-16">
                 <span v-if="error" class="input-error">Make a selection first</span>
                 <payment-choice v-for="payment in payment_methods"  :key="payment.id" :payment="payment" :selected="selected" @emmitSelect="doSelection" />
-                <button class="button-primary" @click="submitSelected">Select</button>
+                <button class="button-primary btn-lg" @click="submitSelected">Select</button>
             </div>
         </div>
     </section>
