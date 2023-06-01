@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    appHostname: 'http://localhost:8080',
-    // hostname: 'https://modamu-api.rancroftdev.com',
-    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    // hostname: 'http://localhost:8000',
+    // appHostname: 'http://localhost:8080',
+    hostname: 'https://modamu-api.rancroftdev.com',
+    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
