@@ -26,15 +26,15 @@
         <div v-if="!getNewUser.completed" class="flx ai-c column gap-16">
             <h1>Add kids</h1>
             <div class="text-center gray">Add as many kids as you wish. You also have the ability to edit their personal information at anytime.</div>
-            <button class="button-outline rounded-outl" @click="$store.commit('openModal', 'kids')">{{ getNewUser.kids.length > 0 ? 'Add more' : 'Add your kids' }}</button>
+            <button class="button-outline rounded-outl btn-md" @click="$store.commit('openModal', 'kids')">{{ getNewUser.kids.length > 0 ? 'Add more' : 'Add your kids' }}</button>
         </div>
         <div v-else class="flx ai-c column gap-16">
             <h1>Completed!!!</h1>
             <div class="text-center gray">Your sign up is completed successfully. You can now proceed to your dashbard.</div>
         </div>
-        <button v-if="getNewUser.kids.length == 0 && !getNewUser.completed" class="button-primary w-100"  @click="loginUser">Skip</button>
-        <button v-else-if="!getNewUser.completed" class="button-primary w-100" @click="loginUser">Finish</button>
-        <button v-else class="button-primary w-100" @click="goToDashboard">Go to Dashboard</button>
+        <button v-if="getNewUser.kids.length == 0 && !getNewUser.completed" class="button-primary w-100 btn-lg"  @click="loginUser">Skip</button>
+        <button v-else-if="!getNewUser.completed" class="button-primary w-100 btn-lg" @click="loginUser">Finish</button>
+        <button v-else class="button-primary w-100 btn-lg" @click="goToDashboard">Go to Dashboard</button>
     </div>
 </template>
 
