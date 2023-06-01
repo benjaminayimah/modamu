@@ -56,10 +56,7 @@
       </div>
       <div class="flx column flx-grow-1 gap-8">
         <h4>Upcoming events</h4>
-        <div v-if="!events.length" class="flx-grow-1 bg-white br-24 centered pd-16">
-            Explore more
-        </div>
-        <div v-else class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
+        <div class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
           <a href="#" @click.prevent="goToEvents" class="bg-white br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">
               <div class="caption flx column gap-16">
