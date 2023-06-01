@@ -91,7 +91,7 @@
                             <span class="br-16">{{ getPastEvents.length }}</span>
                         </router-link>
                     </div>
-                    <div id="grid_table" class="bg-white br-16 flx-grow-1">
+                    <div id="grid_table" class="bg-white br-16 pd-16 flx-grow-1">
                         <router-view></router-view>
                     </div>
                 </div>
