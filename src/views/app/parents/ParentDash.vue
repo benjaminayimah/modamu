@@ -64,7 +64,7 @@
                   <h2>We’re happy to have you on board</h2>
                   <div>Explore our latest upcoming events</div>
                 </div>
-                <span class="event-status br-24 fs-09 bg-white w-fc">Explore events</span>
+                <span class="explore-btn fw-600 br-24 fs-09 bg-white w-fc">Explore events</span>
               </div>
               <div class="banner-logo flx h-100">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 213.709 52.869">

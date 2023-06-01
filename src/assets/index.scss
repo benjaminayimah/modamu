@@ -205,6 +205,12 @@ button, .a-button{
         transform: scale(0.98);
     }
 }
+.explore-btn{
+    padding: 12px 16px;
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
+    }
+}
 .hide{
     display: none;
 }
