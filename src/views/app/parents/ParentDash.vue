@@ -41,7 +41,7 @@
               <a v-if="!getTodaysEvents.length" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
                   <div class="text-center">
                     <div>Oops! there seems to be no events today.</div>
-                    <div class="gray">No worries, click here to discover upcoming events</div>
+                    <div class="gray">No worries, <span class="ft-dark">click here</span> to discover upcoming events</div>
                   </div>
               </a>
               <div v-else class="flx flx-grow-1 column jc-sb gap-16">
