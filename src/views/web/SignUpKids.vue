@@ -79,7 +79,7 @@ $imgHeight: 80px;
     line-height: 1.5;
 }
 .bg-img{
-    margin-left: -32px;
+    margin-left: -40px;
     &:first-child {
         margin-left: unset;
     }
@@ -113,5 +113,8 @@ button.button-primary, .text-center{
 // }
 button {
     flex-shrink: 0;
+}
+.lottie-animation-container{
+    margin-bottom: -32px;
 }
 </style>

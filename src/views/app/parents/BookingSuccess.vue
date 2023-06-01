@@ -15,7 +15,7 @@
                     <div class="text-center comp-text">
                         Thank you for booking this event. Monitor your response and track your kids by clicking on the 'Track event' button bellow.
                     </div>
-                    <button @click="goToEvent" class="button-primary w-100">Track event</button>
+                    <button @click="goToEvent" class="button-primary w-100 btn-lg">Track event</button>
                 </div>
             </div>
             <div v-else-if="error" class="flx column ai-c gap-16">

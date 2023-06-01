@@ -44,7 +44,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.lottie-animation-container{
+    margin-bottom: -32px;
+}
 </style>
-FailedAnime
