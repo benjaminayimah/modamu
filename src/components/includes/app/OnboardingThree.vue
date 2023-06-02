@@ -8,7 +8,7 @@
             </div>
     </teleport>
     <teleport to="#onboarding_body_content">
-        <p>Drop off your kid(s) at the village while you get to do whatever you want. Take the day off or catch up with forgotten project.</p>
+        <p>Drop off your kid(s) at the village while you get to do whatever you want. Take the day off or catch up with forgotten projects.</p>
     </teleport>
 </template>
     
