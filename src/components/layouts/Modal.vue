@@ -28,7 +28,6 @@ const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: AddT
 const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: ChangePassModal */ './ChangePassModal.vue'));
 const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ './ProfileEditModal.vue'));
 const AddVillageForm = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ '../../views/app/admin/AddVillageForm.vue'));
-
 export default {
     components: { AddKidsModal, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal, AddVillageForm },
     name: 'MainModal',
@@ -43,13 +42,8 @@ export default {
 <style lang="scss" scoped>
 dialog {
     width: 560px;
-    border: 0;
     border-radius: 24px;
     overflow-y: hidden;
-    padding: 0;
-}
-.modal::backdrop {
-    background-color: rgba($color: #000000, $alpha: 0.5);
 }
 .modal-top{
     border-bottom: 1px solid var(--bg-color);

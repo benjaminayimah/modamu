@@ -54,6 +54,15 @@ export default createStore({
         state.device = 'tablet'
       }
     },
+    showOnboardingModal() {
+      const modal = document.querySelector('#onboarding_modal')
+      modal.showModal()
+    },
+    closeOnboardingModal() {
+      const modal = document.querySelector('#onboarding_modal')
+      modal.close()
+      localStorage.setItem('tempOnboarding', true)
+    },
     async openModal(state, payload) {
       await this.commit('activateModal')
       document.body.classList.add('fixed-body')

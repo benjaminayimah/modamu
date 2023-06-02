@@ -98,7 +98,18 @@ export default {
   methods: {
     goToEvents() {
       this.$router.push({ name: 'EventsNear' })
+    },
+    checkOnboarding() {
+      const data = localStorage.getItem('tempOnboarding')
+      if(!data) {
+        setTimeout(() => {
+          this.$store.commit('showOnboardingModal')
+        }, 1000);
+      }
     }
+  },
+  mounted() {
+    this.checkOnboarding()
   }
 }
 </script>

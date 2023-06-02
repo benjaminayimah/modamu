@@ -1,12 +1,14 @@
 <template>
   <router-view/>
   <modal />
+  <modal-onboarding />
 </template>
 <script>
 
 import Modal from './components/layouts/Modal.vue'
+import ModalOnboarding from './components/layouts/ModalOnboarding.vue'
 export default {
-  components: { Modal },
+  components: { Modal, ModalOnboarding },
   name: 'App',
   created() {
     this.$store.commit('computeWindow')
