@@ -20,6 +20,8 @@ export default createStore({
     windowHeight: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     addModal: false,
+    onboardModal: false,
+    mainModal: false,
     forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
     kids: [],
     events: [],
@@ -54,14 +56,19 @@ export default createStore({
         state.device = 'tablet'
       }
     },
-    showOnboardingModal() {
+    async showOnboardingModal() {
+      await this.commit('activateOnboardModal')
       const modal = document.querySelector('#onboarding_modal')
       modal.showModal()
     },
-    closeOnboardingModal() {
+    activateOnboardModal(state) {
+      state.onboardModal = true
+    },
+    closeOnboardingModal(state) {
       const modal = document.querySelector('#onboarding_modal')
       modal.close()
       localStorage.setItem('tempOnboarding', true)
+      state.onboardModal = false
     },
     async openModal(state, payload) {
       await this.commit('activateModal')

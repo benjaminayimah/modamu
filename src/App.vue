@@ -1,14 +1,20 @@
 <template>
   <router-view/>
   <modal />
-  <modal-onboarding />
+  <modal-onboarding v-if="onboardModal" />
 </template>
 <script>
 
 import Modal from './components/layouts/Modal.vue'
+import { mapState } from 'vuex'
 import ModalOnboarding from './components/layouts/ModalOnboarding.vue'
 export default {
   components: { Modal, ModalOnboarding },
+  computed: {
+    ...mapState({
+      onboardModal: (state) => state.onboardModal,
+    })
+  },
   name: 'App',
   created() {
     this.$store.commit('computeWindow')

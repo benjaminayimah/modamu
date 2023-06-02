@@ -44,7 +44,6 @@
     <onboarding-four v-else-if="page == 4"/>
     <onboarding-completed v-else-if="5"/>
 </template>
-
 <script>
 import OnboardingOne from '../includes/app/OnboardingOne.vue';
 import OnboardingTwo from '../includes/app/OnboardingTwo.vue';
