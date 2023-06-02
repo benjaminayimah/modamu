@@ -616,6 +616,12 @@ h1,h2,h3, h4{
 .text-center{
     text-align: center;
 }
+.getting-started{
+    color: var(--primary-color);
+    &:hover {
+        text-decoration: underline;
+    }
+}
 a{
     text-decoration: none;
     color: unset;

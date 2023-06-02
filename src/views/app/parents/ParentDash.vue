@@ -1,9 +1,16 @@
 <template>
     <section class="flx column gap-24 dashboard-main">
       <div class="top-row grid gap-32">
-        <div class="wl-sec flx column gap-40">
+        <div class="wl-sec flx column gap-16">
           <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(user.name) }},</h1>
           <div>At modamu we bring the fun to your kids easily so browse through our events catalogue close to you and begin the fun.</div>
+          <a href="#" @click.prevent="$store.commit('showOnboardingModal')" class="getting-started flx ai-c gap-8 fw-600">
+            Getting started
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 30 30">
+              <path d="M15,24.75,24,18l-9-6.75ZM18,3A15,15,0,1,0,33,18,15.005,15.005,0,0,0,18,3Zm0,27A12,12,0,1,1,30,18,12.016,12.016,0,0,1,18,30Z" transform="translate(-3 -3)" fill="#0173FF"/>
+            </svg>
+
+          </a>
           <button @click="goToEvents" class="button-secondary btn-lg">See events close to you</button>
         </div>
         <div class="flx column gap-24 top-row-col-2">
