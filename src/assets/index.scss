@@ -162,7 +162,6 @@ button, .a-button{
     color: unset;
     font-weight: 700;
     cursor: pointer;
-    padding: 8px 24px;
     border-radius: var(--input-btn-radius);
     transition: var(--input-btn-transition);
     path {
@@ -171,14 +170,38 @@ button, .a-button{
 }
 .btn-sm {
     height: 48px;
+    padding: 8px 20px;
 }
 .btn-md {
     height: 52px;
+    padding: 8px 22px;
 }
 .btn-lg {
     height: 58px;
+    padding: 8px 24px;
 }
-
+button.drop-down{
+    padding: 8px 16px;
+    line-height: 2.2rem;
+    background-color: rgba(224, 225, 237, 0.4);
+    &:hover {
+        background-color: var(--input-hover);
+    }
+}
+.btn-pill{
+    padding: 8px 14px;
+    border-radius: 32px;
+    text-transform: capitalize;
+    border: 1px solid var(--light-gray);
+    &:hover {
+        background-color: rgba(224, 225, 237, 0.4);
+    }
+}
+.active-pill{
+    background-color: var(--bg-dark) !important;
+    color: var(--ft-white) !important;
+    border-color: var(--bg-dark) !important;
+}
 .button-primary {
     background-color: var(--primary-color);
     color: var(--ft-white);
@@ -253,7 +276,7 @@ input, select, textarea {
 input, select {
     height: 62px;
 }
-input[type=search] {
+input[type=search]:not([data-state=location]) {
     background-color: var(--input-hover);
     height: 54px;
     &:hover {
@@ -508,6 +531,9 @@ dialog {
 .mt-8{
     margin-top: 8px;
 }
+.mt-16{
+    margin-top: 16px;
+}
 .mt-24{
     margin-top: 24px;
 }
@@ -615,6 +641,7 @@ h1,h2,h3, h4{
 }
 .getting-started{
     color: var(--primary-color);
+    width: fit-content;
     &:hover {
         text-decoration: underline;
     }

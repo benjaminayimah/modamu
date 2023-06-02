@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'DetailedVillage', params: { name: village.name, id: village.id }}" class="bg-white br-16 flx">
+    <router-link :to="{ name: 'DetailedVillage', params: { name: village.name, id: village.id, filter: 'all' }}" class="bg-white br-16 flx">
         <div class="flx column gap-8 flx-grow-1">
             <div>
                 <label class="gray mb-4">Village name</label>

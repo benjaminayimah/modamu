@@ -86,7 +86,7 @@ const routes = [
       { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
       { path: '/parent/:parent_id/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/villages', name: 'Villages', component: Villages },
-      { path: '/village/:name/:id', name: 'DetailedVillage', component: DetailedVillage },
+      { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
       { path: '/transactions', name: 'Transactions', component: Transactions },
       { path: '/parents', name: 'Parents', component: Parents },
       { path: '/waitlists', name: 'WaitList', component: WaitList },

@@ -62,8 +62,4 @@ a{
     border-bottom-right-radius: 24px;
 
 }
-.ongoing {
-    background-color: #09cc1d;
-    color: #fff;
-}
 </style>

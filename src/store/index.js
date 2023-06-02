@@ -56,17 +56,10 @@ export default createStore({
         state.device = 'tablet'
       }
     },
-    async showOnboardingModal() {
-      await this.commit('activateOnboardModal')
-      const modal = document.querySelector('#onboarding_modal')
-      modal.showModal()
-    },
-    activateOnboardModal(state) {
+    showOnboardingModal(state) {
       state.onboardModal = true
     },
     closeOnboardingModal(state) {
-      const modal = document.querySelector('#onboarding_modal')
-      modal.close()
       localStorage.setItem('tempOnboarding', true)
       state.onboardModal = false
     },

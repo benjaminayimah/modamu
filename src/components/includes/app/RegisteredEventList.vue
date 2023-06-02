@@ -31,7 +31,7 @@
                 <i class="br-50" :class="event.accepted ? 'accepted' : 'pending'"></i>
                 <span class="capitalize">{{event.accepted ? 'accepted' : 'pending' }}</span>
             </div>
-            <button @click="trackEvent" class="button-primary" :class="{ 'button-disabled' : !event.accepted }" :disabled="!event.accepted ? true : false">Track</button>
+            <button @click="trackEvent" class="button-primary btn-sm" :class="{ 'button-disabled' : !event.accepted }" :disabled="!event.accepted ? true : false">Track</button>
         </div>
     </div>
 </template>

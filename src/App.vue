@@ -1,7 +1,7 @@
 <template>
   <router-view/>
-  <modal />
   <modal-onboarding v-if="onboardModal" />
+  <modal />
 </template>
 <script>
 
