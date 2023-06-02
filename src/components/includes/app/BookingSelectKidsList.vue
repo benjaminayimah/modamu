@@ -9,18 +9,20 @@
             <profile-avatar :image="kid.photo" :id="kid.user_id"/>
             <div class="flx column ai-c">
                 <div class="name wrap-text wrap-line-1 text-center">{{ kid.name }}</div>
-                <div class="flx gap-4 gray age"><span>12</span><span>years old</span></div>
+                <div class="flx gap-4 gray age"><span>{{ calculateAge(kid.dob)}}</span><span>years old</span></div>
             </div>
         </div>
     </a>
 </template>
 
 <script>
+import formatDateTime from '@/mixins/formatDateTime'
 import ProfileAvatar from './ProfileAvatar.vue'
 export default {
   components: { ProfileAvatar },
     name: 'BookingSelectKidsList',
     props: ['kid', 'selected'],
+    mixins: [formatDateTime],
     computed: {
         computeSelection() {
             const result = this.selected.filter(id => id == this.kid.id)
