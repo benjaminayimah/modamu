@@ -12,7 +12,7 @@
                 </div>
                 <div class="row">
                     <span>Starts</span>
-                    <div><strong>{{ event.start_time }}</strong></div>
+                    <div><strong>{{ format_time(event.start_time) }}</strong></div>
                 </div>
             </div>
             <div class="flx gap-16 column">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                     <span>Ends</span>
-                    <div><strong>{{ event.end_time }}</strong></div>
+                    <div><strong>{{ format_time(event.end_time) }}</strong></div>
                 </div>
             </div>
         </div>

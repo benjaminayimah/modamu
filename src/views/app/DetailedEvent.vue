@@ -102,7 +102,7 @@
                             <span>Event starts</span>
                         </div>
                         <div class="value">
-                            {{ event.start_time }}
+                            {{ format_time(event.start_time) }}
                         </div>
                     </div>
                     <div class="flx gap-8 ai-c">
@@ -114,7 +114,7 @@
                             <span>Event ends</span>
                         </div>
                         <div class="value">
-                            {{ event.end_time }}
+                            {{ format_time(event.end_time) }}
                         </div>
                     </div>
                     <button @click="setID" v-if="is_village" class="button-primary absolute gap-8" :class="{ 'button-disabled' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
@@ -203,7 +203,6 @@ export default {
                 this.event = res.data.event
                 this.attendees = res.data.attendees
                 this.images = res.data.images
-                console.log(res.data)
             } catch (error) {
                 console.error(error)
             }

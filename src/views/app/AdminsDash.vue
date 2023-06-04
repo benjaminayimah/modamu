@@ -61,7 +61,7 @@
             <div class="flx-grow-1 flx column gap-32">
                 <div class="flx column gap-16">
                     <div class="flx gap-16">
-                        <h4>Today's top events</h4>
+                        <h4>New requests</h4>
                         <span>{{ getTodaysEvents.length }}</span>
                     </div>
                     <div class="grid col-3 gap-32 top-events overflow-x-scroll scroll-hidden scroll-snap">

@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Waiting list</h1>
-                <span class="count-info count-primary">{{ wait_lists.length }}</span>
+                <span class="count-info" :class="wait_lists.length ? 'count-primary' : 'count-secondary'">{{ wait_lists.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -25,17 +25,19 @@
                 <div v-if="!wait_lists.length" class="bg-white pd-24 br-16 centered">
                     No item in waiting list
                 </div>
-                <wait-list-row v-else v-for="waitlist in wait_lists" :key="waitlist.id"  :attendee="waitlist"/>
+                <wait-list-row v-else v-for="waitlist in sort_newest(wait_lists)" :key="waitlist.id"  :attendee="waitlist"/>
             </div>
         </div>
     </section>
 </template>
 <script>
 import { getApi } from '@/api';
+import sortedItemsMixin from '@/mixins/sortedItemsMixin';
 import { mapState } from 'vuex';
 import WaitListRow from '../../components/includes/app/WaitListRow.vue'
 export default {
     components: { WaitListRow },
+    mixins: [sortedItemsMixin],
     name: 'WaitList',
     computed: mapState({
         wait_lists: (state) => state.wait_lists,

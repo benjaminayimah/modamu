@@ -5,7 +5,7 @@
                 <div class="flx jc-sb ai-c gap-8">
                     <div v-if="!searchToggle" class="flx gap-8 ai-c">
                         <h1 class="title">Messages</h1>
-                        <span class="count-info count-primary">{{ messages.length }}</span>
+                        <span class="count-info" :class="messages.length ? 'count-primary' : 'count-secondary'">{{ messages.length }}</span>
                     </div>
                     <div v-else class="input-wrapper">
                         <i>

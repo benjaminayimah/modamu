@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    // appHostname: 'http://localhost:8080',
-    hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    hostname: 'http://localhost:8000',
+    appHostname: 'http://localhost:8080',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -22,6 +22,7 @@ export default createStore({
     addModal: false,
     onboardModal: false,
     mainModal: false,
+    creating: false,
     forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
     kids: [],
     events: [],
@@ -80,6 +81,12 @@ export default createStore({
         state.forms.addVillage = true
       }
     },
+    startSpinner(state) {
+      state.creating = true
+    },
+    stopSpinner(state) {
+      state.creating = false
+    },
     setTempID(state, payload) {
       state.forms.id = payload
     },
@@ -135,6 +142,9 @@ export default createStore({
     setMessages(state, payload) {
       state.messages = payload
     },
+    setNotifications(state, payload) {
+      state.notifications = payload
+    },
     updateMessages(state, payload) {
       if (state.messages.length) {
         const i = state.messages.findIndex(x => x.message.id == payload.id)
@@ -177,6 +187,9 @@ export default createStore({
     },
     deleteAttendees(state, payload) {
       state.attendees =  state.attendees.filter(item => item.id != payload)
+    },
+    deleteNotification(state, payload) {
+      state.notifications =  state.notifications.filter(item => item.id != payload)
     },
     deleteRegistered(state, payload) {
       state.registered_events =  state.registered_events.filter(item => item.id != payload)
@@ -251,13 +264,8 @@ export default createStore({
           console.log(error); // Handle any errors that occurred
         });
     },
-    async checkInAttendee(state, payload) {
-      try {
-          const res = await postApi(this.getters.getHostname+'/api/check-in-kid?token='+this.getters.getToken, { id: payload });
-          state.commit('updateAttendees', res.data)
-      } catch (error) {
-          console.error(error);
-      }
+    async checkInAttendee(state, payload) {  
+      return await postApi(this.getters.getHostname+'/api/check-in-kid?token='+this.getters.getToken, { id: payload })    
     },
     async fetchMessages(state) {
         state.commit('startLoader')
@@ -267,6 +275,24 @@ export default createStore({
             state.commit('stopLoader')
         } catch (error) {
             console.error(error)
+        }
+      },
+      async fetchNotifications(state, payload) {
+        try {
+            const res = await postApi(this.getters.getHostname+'/api/notifications?token='+this.getters.getToken, {read: payload});
+            state.commit('setNotifications', res.data)
+        } catch (error) {
+            console.error(error)
+        }
+      },
+      async deleteThisNotification(state, payload) {
+        state.commit('startLoader')
+        try {
+            const res = await deleteApi(this.getters.getHostname+'/api/notifications/'+payload+'?token='+this.getters.getToken);
+            state.commit('deleteNotification', res.data)
+            state.commit('stopLoader')
+        } catch (error) {
+            console.error(error);
         }
       },
       async deleteAttendee(state, payload) {
@@ -290,7 +316,6 @@ export default createStore({
         }
       },
 
-      
     // async fetchWaitList() {
     //   return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
     // },

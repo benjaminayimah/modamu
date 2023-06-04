@@ -7,9 +7,9 @@
     </button>
     <div class="profile-body flx gap-16 column">
         <div class="flx ai-c column gap-16">
-            <profile-avatar :image="parent.image"  :id="parent.id"/>
+            <profile-avatar :image="user.image"  :id="user.id"/>
             <h4>{{ $route.params.name }}</h4>
-            <span class="acc-type br-32">father</span>
+            <span class="acc-type br-32">{{ computedAcct }}</span>
         </div>
         <div class="flx column gap-16">
             <h4 class="gray text-center">Account information</h4>
@@ -20,7 +20,7 @@
                     </svg>
                     <label>Email</label>
                 </div>
-                <span>{{ parent.email }}</span>
+                <span>{{ user.email }}</span>
             </div>
             <div class="flx jc-sb br-16 info-row ai-c">
                 <div class="flx gap-8">
@@ -29,25 +29,25 @@
                     </svg>
                     <label>Phone number</label>
                 </div>
-                <span>{{ parent.phone || 'n/a' }}</span>
+                <span>{{ user.phone || 'n/a' }}</span>
             </div>
-            <div class="flx jc-sb br-16 info-row ai-c">
+            <div v-if="user.emergency_number" class="flx jc-sb br-16 info-row ai-c">
                 <div class="flx gap-8">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="19" viewBox="0 0 19.001 19">
                         <path d="M-3404.717-700.554a20.176,20.176,0,0,1-5.339-3.641c-.635-.568-1.853-1.762-2.246-2.21l0,0-.008-.009,0,0v0a22.592,22.592,0,0,1-4.123-5.89,5.4,5.4,0,0,1-.566-2.272,3.345,3.345,0,0,1,.609-1.961,4.583,4.583,0,0,1,.439-.566,8.23,8.23,0,0,1,.81-.8,3.932,3.932,0,0,1,2.508-1.1h.029l.029,0a2.539,2.539,0,0,1,1.479.748l0,0a16.284,16.284,0,0,1,1.261,1.478c.229.3.451.6.627.881.088.138.171.276.238.408a1.88,1.88,0,0,1,.169.448,2.662,2.662,0,0,1-.427,1.94l-.025.044-.018.031c-.064.112-.146.235-.218.343l-.007.012a5.121,5.121,0,0,0-.363.6,1.062,1.062,0,0,0-.048.118,9.434,9.434,0,0,0,1.236,2.083,14.171,14.171,0,0,0,2.048,1.987,8.443,8.443,0,0,0,1.507.854,1.085,1.085,0,0,0,.141-.056,5.25,5.25,0,0,0,.621-.369l.011-.006c.1-.066.213-.14.315-.2l.005,0,.033-.018.041-.024a2.719,2.719,0,0,1,1.955-.423,1.868,1.868,0,0,1,.444.165c.131.065.269.145.407.23.276.173.585.39.884.613a15.653,15.653,0,0,1,1.489,1.238l0,0,0,.005,0,0a2.406,2.406,0,0,1,.763,1.514l0,.014v.014a3.768,3.768,0,0,1-1.068,2.452,7.2,7.2,0,0,1-1.391,1.257,3.311,3.311,0,0,1-1.969.614A5.64,5.64,0,0,1-3404.717-700.554Zm-10.344-15.123-.024.034a1.764,1.764,0,0,0-.33,1.065,3.854,3.854,0,0,0,.422,1.612l.007.015.006.015a21.057,21.057,0,0,0,3.844,5.458l.008.009.008.009c.314.362,1.5,1.528,2.12,2.084a18.693,18.693,0,0,0,4.892,3.361l.015.005.014.006c1.3.588,2.148.5,2.71.091l.028-.02.029-.018a5.715,5.715,0,0,0,1.04-.954,2.344,2.344,0,0,0,.688-1.339.877.877,0,0,0-.3-.5l0-.005a14.522,14.522,0,0,0-1.312-1.085c-.28-.209-.551-.4-.775-.538-.114-.07-.206-.122-.276-.158-.043-.022-.068-.031-.075-.034-.251-.049-.457.041-.884.281l-.022.012c-.061.036-.139.087-.25.16l-.018.012a6.568,6.568,0,0,1-.806.469,1.7,1.7,0,0,1-1.282.135l-.017-.005-.016-.007a9.89,9.89,0,0,1-1.908-1.064,15.481,15.481,0,0,1-2.362-2.277l-.009-.011-.009-.012a10.984,10.984,0,0,1-1.5-2.568l0-.011,0-.011a1.654,1.654,0,0,1,.13-1.264,6.4,6.4,0,0,1,.464-.788l.013-.019c.081-.122.136-.206.174-.272l.014-.024c.245-.429.328-.625.281-.858,0-.007-.012-.031-.033-.072-.036-.069-.089-.161-.16-.274-.143-.224-.338-.493-.55-.77a15.425,15.425,0,0,0-1.109-1.307,1.019,1.019,0,0,0-.52-.307,2.565,2.565,0,0,0-1.4.721,6.666,6.666,0,0,0-.65.64c-.085.1-.154.18-.2.246s-.065.088-.07.1,0,0,0,0Zm9.908,8.673h0Zm-11.262-9.495.044-.069-.02.029C-3416.4-716.525-3416.408-716.511-3416.415-716.5Zm4.107,10.085.006.007Zm0,0,0,0Zm12.728-3.876a7.123,7.123,0,0,0-1.945-5.18,7.123,7.123,0,0,0-5.179-1.946.791.791,0,0,1-.792-.791.792.792,0,0,1,.792-.792,8.668,8.668,0,0,1,6.3,2.409,8.668,8.668,0,0,1,2.409,6.3.792.792,0,0,1-.792.792A.792.792,0,0,1-3399.583-710.292Zm-3.166,0a3.787,3.787,0,0,0-3.958-3.958.792.792,0,0,1-.792-.792.791.791,0,0,1,.792-.791,5.36,5.36,0,0,1,5.541,5.541.792.792,0,0,1-.792.792A.792.792,0,0,1-3402.75-710.292Z" transform="translate(3417 719)" fill="#212135"/>
                     </svg>
                     <label>Emergency number</label>
                 </div>
-                <span>{{ parent.emergency_number || 'n/a' }}</span>
+                <span>{{ user.emergency_number }}</span>
             </div>
-            <div class="flx jc-sb br-16 info-row ai-c">
+            <div v-if="user.ocupation" class="flx jc-sb br-16 info-row ai-c">
                 <div class="flx gap-8">
                     <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 19.616 19.782">
                         <path d="M-3493.031-840.589a7.867,7.867,0,0,1-2.582-.621,2.521,2.521,0,0,1-1.275-1.257,4.984,4.984,0,0,1-.343-2.076,4.98,4.98,0,0,1,.343-2.075,2.52,2.52,0,0,1,1.275-1.257,7.887,7.887,0,0,1,2.582-.622,41.066,41.066,0,0,1,4.261-.167,41.066,41.066,0,0,1,4.261.167,7.886,7.886,0,0,1,2.582.622,2.524,2.524,0,0,1,1.275,1.257,4.981,4.981,0,0,1,.343,2.075,4.986,4.986,0,0,1-.343,2.076,2.524,2.524,0,0,1-1.275,1.257,7.87,7.87,0,0,1-2.582.621,40.774,40.774,0,0,1-4.261.167A40.771,40.771,0,0,1-3493.031-840.589Zm.165-6.379a6.7,6.7,0,0,0-2.073.475,1,1,0,0,0-.549.513,3.673,3.673,0,0,0-.2,1.436,3.675,3.675,0,0,0,.2,1.437,1,1,0,0,0,.549.513,6.7,6.7,0,0,0,2.073.475,39.511,39.511,0,0,0,4.1.158,39.481,39.481,0,0,0,4.1-.158,6.7,6.7,0,0,0,2.074-.475,1,1,0,0,0,.549-.513,3.67,3.67,0,0,0,.2-1.437,3.667,3.667,0,0,0-.2-1.436,1,1,0,0,0-.549-.513,6.7,6.7,0,0,0-2.074-.475,39.5,39.5,0,0,0-4.1-.157A39.51,39.51,0,0,0-3492.866-846.968Zm10.842-2.82-1.154-1.236a.769.769,0,0,1,.037-1.087.769.769,0,0,1,1.088.037l.591.634,2.515-2.694a.769.769,0,0,1,1.087-.038.769.769,0,0,1,.037,1.087l-3.076,3.3a.769.769,0,0,1-.562.245A.767.767,0,0,1-3482.024-849.788Zm-11.361-5.47a4.8,4.8,0,0,1,4.615-4.945,4.8,4.8,0,0,1,4.615,4.945,4.794,4.794,0,0,1-4.615,4.945A4.794,4.794,0,0,1-3493.384-855.258Zm1.538,0a3.259,3.259,0,0,0,3.077,3.407,3.259,3.259,0,0,0,3.077-3.407,3.258,3.258,0,0,0-3.077-3.406A3.258,3.258,0,0,0-3491.846-855.258Z" transform="translate(3497.231 860.204)" fill="#212135"/>
                     </svg>
                     <label>Occupation</label>
                 </div>
-                <span>{{ parent.ocupation || 'n/a' }}</span>
+                <span>{{ user.ocupation }}</span>
             </div>
             <div class="flx jc-sb br-16 info-row ai-c">
                 <div class="flx gap-8">
@@ -56,37 +56,71 @@
                     </svg>
                     <label>Address</label>
                 </div>
-                <span>{{ parent.address || 'n/a' }}</span>
+                <span>{{ user.address || 'n/a' }}</span>
             </div>
-            <div class="flx column ai-c">
-                <h4 class="mb-24">Registered kids</h4>
+            <div v-if="!is_parent" class="flx column ai-c gap-24">
+                <h4>Registered kids</h4>
                 <div class="stack-cards">
-                    <profile-avatar v-for="kid in registered_kids.slice(0, 3)" :key="kid.id" />
-                    <div v-if="registered_kids.length > 3" class="counter bg-img bg-white centered br-50">+{{ registered_kids.length - 3 }}</div>
+                    <profile-avatar v-for="kid in registered_kids.slice(0, 4)" :key="kid.id" :id="user.id" :image="kid.photo" />
+                    <div v-if="registered_kids.length > 4" class="counter bg-img bg-white centered br-50">+{{ registered_kids.length - 4 }}</div>
                 </div>
+                <a @click.prevent="goToParentProfile" href="#" class="a-button a-btn button-primary btn-lg w-100">View more</a>
             </div>
-            <button class="button-primary btn-lg">View more</button>
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import { postApi } from '@/api';
+import { mapState } from 'vuex';
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue'
 export default {
     components: { ProfileAvatar },
     name: 'MessageDetailParentView',
-    props: ['parent'],
+    props: ['to_id'],
+    mixins: [usersLevelMixin],
+    computed: {
+        ...mapState({
+            hostname: (state) => state.hostname,
+            token: (state) => state.token
+        }),
+        computedAcct() {
+            const user = this.user.access_level
+            if(user == '0')
+            return 'admin'
+            else if(user == '1')
+            return 'village'
+            else
+            return this.user.relationship
+            
+        }
+    },
     data () {
         return {
-            registered_kids: [
-                {id: 1},
-                {id: 1},
-                {id: 1},
-                {id: 1},
-                {id: 1},
-            ]
+            user: '',
+            registered_kids: []
         }
+    },
+    methods: {
+        async FetchThisUser() {
+            try {
+                const res = await postApi(this.hostname + '/api/fetchThisUser?token='+ this.token, {id: this.to_id})
+                if(res.data) {
+                    this.user = res.data.thisUser
+                    this.registered_kids = res.data.kids
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        },
+        goToParentProfile() {
+            this.$router.push({ name: 'ViewParentProfile', params: { parent_id: this.user.id, parent: this.user.name } })
+        }
+    },
+    mounted() {
+        this.FetchThisUser()
     }
 }
 </script>

@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c jc-sb">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Villages</h1>
-                <span class="count-info count-secondary">{{ villages.length }}</span>
+                <span class="count-info" :class="villages.length ? 'count-primary' : 'count-secondary'">{{ villages.length }}</span>
                 <div class="input-wrapper">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 13.974 13.974">

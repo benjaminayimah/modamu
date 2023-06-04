@@ -4,7 +4,7 @@
             <h1 class="title mb-24">Verify & checkout</h1>
             <div class="flx ai-c gap-16">
                 <h4>Registered kids</h4>
-                <span class="count-info count-primary">{{ attendees.length }}</span>
+                <span class="count-info" :class="attendees.length ? 'count-primary' : 'count-secondary'">{{ attendees.length }}</span>
             </div>
         </div>
         <div v-if="!attendees.length" class="centered bg-white br-16 pd-32" >
@@ -13,7 +13,7 @@
         </div>
         <div v-else class="body-container">
             <div class="grid col-2 gap-70">
-                <parent-checkout-list v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn" />
+                <parent-checkout-list v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn" :creating="creating" />
             </div>
         </div>
     </section>
@@ -32,6 +32,11 @@ export default {
             attendees: (state) => state.attendees
         })
     },
+    data() {
+        return {
+            creating: ''
+        }
+    },
     methods: {
         async fetchAttendees() {
             try {
@@ -42,8 +47,17 @@ export default {
                 console.error(error);
             }
         },
-        async checkIn(payload) {
+        checkIn(payload) {
+            this.creating = payload
             this.$store.dispatch('checkInAttendee', payload)
+            .then((res) => {
+                this.creating = ''
+                if(res.data) {
+                    this.$store.commit('updateAttendees', res.data)
+                }
+            }).catch((err) => {
+                console.log(err.response.data)
+            })
         }
     },
     mounted() {

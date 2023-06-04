@@ -3,7 +3,7 @@
         <div class="title-row">
             <div class="flx gap-16 ai-c mb-24">
                 <h1 class="title">Track events</h1>
-                <span class="count-info count-secondary">{{ registered_events.length }}</span>
+                <span class="count-info" :class="registered_events.length ? 'count-primary' : 'count-secondary'">{{ registered_events.length }}</span>
             </div>
             <div>Events your kids are billed to attend.</div>
         </div>
@@ -36,7 +36,6 @@ export default {
             try {
                 const res = await getApi(this.hostname+'/api/parent-fetch-registered-event?token='+this.token);
                 this.$store.commit('setRegisteredEvents', res.data)
-                console.log(res.data)
                 this.$store.commit('stopLoader')
             } catch (error) {
                 console.error(error);

@@ -1,7 +1,7 @@
 <template>
     <div class="flx right-container">
         <chat-interface :back="true" :chats="chats" :name="$route.params.name" :image="image" :message_id="$route.params.id" :to="$route.params.to" @open-details="doOpenParent" @add-to-chat="addToChat" />
-        <message-detail-parent-view v-if="openDetails" :parent="user" @close="doClose"/>
+        <message-detail-parent-view v-if="openDetails" :to_id="$route.params.to" @close="doClose"/>
     </div>
 </template>
 <script>

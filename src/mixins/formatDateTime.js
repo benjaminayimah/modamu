@@ -9,7 +9,10 @@ export default {
 
         },
         format_time(time) {
-            return moment(time).format('LT'); 
+            return moment(time, 'h:mm:ss').format('LT'); 
+        },
+        format_date_time(date) {
+          return moment(date).format('lll'); 
         },
         format_distance(distance) {
             if (distance < 1000) {
@@ -19,8 +22,8 @@ export default {
               return `${km.toFixed(1)}km`;
             }
         },
-        ago_time(time) {
-          moment(time).fromNow(); 
+        ago_time(date) {
+          return moment(date).startOf('minutes').fromNow(); 
         },
         format_minutes(time) {
           moment(time).format('LT'); 

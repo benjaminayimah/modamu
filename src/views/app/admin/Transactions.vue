@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c jc-sb">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Transactions</h1>
-                <span class="count-info count-secondary">{{ bookings.length }}</span>
+                <span class="count-info" :class="bookings.length ? 'count-primary' : 'count-secondary'">{{ bookings.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>

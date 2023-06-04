@@ -14,6 +14,8 @@ export default {
   mounted() {
     this.$store.commit('startLoader')
     this.$store.dispatch('fetchMessages')
+    this.$store.dispatch('fetchNotifications', 0)
+
   }
 }
 </script>

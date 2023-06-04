@@ -50,13 +50,13 @@ export default {
                         });
 
                     }else {
-                        return this.showError('This file is too large. The file size must be less than 1MB');
+                        return this.showError('This file is too large. The file size must be less than 300KB');
                     }
                 }
             }
         },
         checksize(size) {
-            return size > 1000000 ? false : true
+            return size > 300000 ? false : true
         },
         startLoader() {
             this.status.spin = true

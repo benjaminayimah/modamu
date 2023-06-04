@@ -6,7 +6,7 @@
         </div>
         <div class="flx-grow-1 centered" v-if="!notifications.length">No new notification</div>
         <div v-else class="m--8">
-            <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, computedNotiSlice)" :key="notification.id" :notification="notification" />
+            <notification-list class="pd-8 br-16 mb-4" v-for="notification in notifications.slice(0, computedNotiSlice)" :key="notification.id" :notification="notification" :dashboard="true" />
         </div>
     </div>
 </template>

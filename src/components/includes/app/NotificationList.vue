@@ -1,18 +1,39 @@
 <template>
-    <a href="#" class="grid gap-8 bg-white row-hover" :class="notification.read ? 'read' : 'not-read'">
-        <span class="relative flx ai-c"></span>
-        <div class="wrap-text wrap-line-2">
-            Your children have been accepted and taking off the waiting lists domamu vehicle has been sent to pick them up.
+    <router-link :to="{ name: 'Notification' }" class="flx column gap-8 bg-white" :class="{ 'no-hover' : !dashboard }">
+        <div class="flx gap-16">
+            <span v-if="!notification.read" class="relative flx ai-c"></span>
+            <div :class="dashboard ? 'wrap-text wrap-line-2' : ''">
+                {{ notification.content }}
+            </div>
         </div>
-    </a>
+        <div v-if="!dashboard" class="flx jc-sb ai-c">
+            <span class="fs-09 gray">{{ ago_time(notification.created_at) }}</span>
+            <button @click="$store.dispatch('deleteThisNotification', notification.id)" class="btn-sm">Delete</button>
+        </div>
+    </router-link>
 </template>
 <script>
+import formatDateTime from '@/mixins/formatDateTime';
 export default {
     name: 'NotificationList',
-    props: ['notification']
+    props: ['notification', 'dashboard'],
+    mixins: [formatDateTime]
 }
 </script>
 <style lang="scss" scoped>
+.no-hover{
+    background-color: transparent;
+    cursor: default;
+    &:active {
+        transform: unset;
+    }
+}
+a:not(.no-hover) {
+    transition: var(--input-btn-transition);
+    &:hover {
+        background-color: rgba(1, 115, 255, 0.08);
+    }
+}
 a{
     padding: 32px;
     max-width: 500px;
@@ -31,22 +52,11 @@ a{
     grid-template-columns: 0.5fr 5fr;
 }
 
-.read{
-    span {
-        color: #999999;
-        &::before {
-            content: '';
-            background-color: #E0E0E0;
-        }
-    }
-}
-.not-read {
-    span {
+span {
         color: var(--ft-dark);
         &::before {
             content: '';
             background-color: var(--primary-color);
         }
     }
-}
 </style>

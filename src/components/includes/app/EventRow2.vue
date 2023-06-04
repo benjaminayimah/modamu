@@ -8,7 +8,7 @@
             <div class="wrap-text wrap-line-1">{{ format_date(event.date) }}</div>
         </div>
         <div class="table-cell gap-8">
-            <div class="wrap-text wrap-line-1">{{ event.start_time }}</div>
+            <div class="wrap-text wrap-line-1">{{ format_time(event.start_time) }}</div>
         </div>
         <div class="table-cell jc-sb attendees-cell" v-if="!device">
             <div class="flx ai-c stack-cards" v-if="!nokids">

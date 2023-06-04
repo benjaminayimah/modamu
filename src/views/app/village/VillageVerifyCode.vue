@@ -3,7 +3,7 @@
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Verify & checkout kids</h1>
-                <span class="count-info count-primary">{{ attendees.length }}</span>
+                <span class="count-info" :class="attendees.length ? 'count-primary' : 'count-secondary'">{{ attendees.length }}</span>
             </div>
             <div class="input-wrapper">
                 <i>
@@ -25,24 +25,31 @@
                 <div v-if="!attendees.length" class="bg-white pd-24 br-16 centered">
                     No attendees found
                 </div>
-                <request-list-row v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn"/>
+                <request-list-row v-for="attendee in sort_newest(attendees) " :key="attendee.id" :attendee="attendee" @check-in="checkIn" :creating="creating"/>
             </div>
         </div>
     </section>
 </template>
 <script>
 import { getApi } from '@/api';
+import sortedItemsMixin from '@/mixins/sortedItemsMixin';
 import { mapState } from 'vuex';
 import RequestListRow from '@/components/includes/app/RequestListRow.vue';
 export default {
     components: { RequestListRow },
     name: 'VillageVerifyCode',
+    mixins: [sortedItemsMixin],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
             token: (state) => state.token,
             attendees: (state) => state.attendees
         })
+    },
+    data() {
+        return {
+            creating: ''
+        }
     },
     methods: {
         async fetchAttendees() {
@@ -54,8 +61,20 @@ export default {
                 console.error(error);
             }
         },
-        async checkIn(payload) {
+        // async checkIn(payload) {
+        //     this.$store.dispatch('checkInAttendee', payload)
+        // }
+        checkIn(payload) {
+            this.creating = payload
             this.$store.dispatch('checkInAttendee', payload)
+            .then((res) => {
+                this.creating = ''
+                if(res.data) {
+                    this.$store.commit('updateAttendees', res.data)
+                }
+            }).catch((err) => {
+                console.log(err.response.data)
+            })
         }
     },
     mounted() {

@@ -16,10 +16,10 @@
             <div class="track-event-list flx column gap-24 bg-white br-24">
                 <div v-if="attendees.length > 0" class="gray fs-09">Your kids in this event</div>
                 <div v-else class="fs-09">Your kids have been picked-up and deleted</div>
-                <div class="relative img-stacks">
-                    <button class="del-btn" v-if="attendees.length == 0" @click="$store.dispatch('deleteRegistered', booking.id)">Delete this card</button>
+                <div class="stack-cards">
+                    <button class="del-btn btn-sm" v-if="attendees.length == 0" @click="$store.dispatch('deleteRegistered', booking.id)">Delete this card</button>
                     <profile-avatar class="attendees" v-for="kid in attendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
-                    <span v-if="attendees.length > 5" class="counter flx jc-c">+{{ attendees.length - 5 }}</span>
+                    <span v-if="attendees.length > 5" class="counter bg-img flx jc-c">+{{ attendees.length - 5 }}</span>
                 </div>
                 <div class="flx jc-sb gap-8">
                     <div>
@@ -32,11 +32,11 @@
                     </div>
                     <div>
                         <div class="gray mb-8 fs-09">Starts</div>
-                        <div><strong>{{ event.start_time }}</strong></div>
+                        <div><strong>{{ format_time(event.start_time) }}</strong></div>
                     </div>
                     <div>
                         <div class="gray mb-8 fs-09">Ends</div>
-                        <div><strong>{{ event.end_time }}</strong></div>
+                        <div><strong>{{ format_time(event.end_time) }}</strong></div>
                     </div>
                 </div>
             </div>
@@ -74,12 +74,14 @@
     </section>
 </template>
 <script>
+import formatDateTime from '@/mixins/formatDateTime'
 import { getApi } from '@/api'
 import { mapState } from 'vuex'
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue'
 export default {
     components: { ProfileAvatar },
     name: 'TrackEvent',
+    mixins: [formatDateTime],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
@@ -122,16 +124,12 @@ section {
     width: 600px;
     padding: 24px;
 }
-.img-stacks{
-    height: $height;
-}
 .bg-img {
     height: $height;
     width: $height;
 }
 .attendees{
     border: 1px solid #fff;
-    background-color: #444;
 }
 .counter{
     background-color: #fff;
@@ -140,27 +138,10 @@ section {
     display: flex;
     align-items: center;
     border-radius: 60px;
-    transform: translateX(100px);
     border: 1px solid var(--bg-color);
 }
-.attendees, .counter{
-    position: absolute;
-}
-.attendees{
-    background-color: var(--bg-color);
-    &:nth-child(2) {
-        transform: translateX(20px);
-    }
-    &:nth-child(3) {
-        transform: translateX(40px);
-    }
-    &:nth-child(4) {
-        transform: translateX(60px);
-    }
-    &:nth-child(5) {
-        transform: translateX(80px);
-    }
-}
+
+
 .session{
     display: flex;
     flex-direction: column;
