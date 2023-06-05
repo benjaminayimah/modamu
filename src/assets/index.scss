@@ -236,7 +236,7 @@ button.drop-down{
 }
 .button-outline{
     background-color: transparent;
-    border: 1px var(--gray) solid;
+    border: 1px var(--text-light) solid;
     &:hover {
         background-color: var(--bg-white);
     }
@@ -683,6 +683,7 @@ a, button {
 .status-decrease{
     background-color: var(--warning);
 }
+
 form {
     label {
         font-size: 0.9rem;

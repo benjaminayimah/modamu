@@ -23,10 +23,11 @@ export default {
             }
         },
         ago_time(date) {
-          return moment(date).startOf('minutes').fromNow(); 
-        },
-        format_minutes(time) {
-          moment(time).format('LT'); 
+          const ago = moment(date).fromNow();
+          // if(ago == '12 hours ago')
+          // return this.format_date_time(date)
+          // else
+          return ago
         },
         calculateAge(dateOfBirth) {
             const dob = new Date(dateOfBirth);

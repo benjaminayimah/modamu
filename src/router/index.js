@@ -45,6 +45,7 @@ import AdminDashUpcomingTab from '@/components/layouts/AdminDashUpcomingTab.vue'
 import AdminDashPastTab from '@/components/layouts/AdminDashPastTab.vue'
 import ParentVerifyCode from '@/views/app/parents/ParentVerifyCode.vue'
 import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
+import AddVillagePage from '@/views/app/admin/AddVillagePage.vue'
 
 
 
@@ -88,6 +89,7 @@ const routes = [
       { path: '/villages', name: 'Villages', component: Villages },
       { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
       { path: '/transactions', name: 'Transactions', component: Transactions },
+      { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
       { path: '/parents', name: 'Parents', component: Parents },
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,

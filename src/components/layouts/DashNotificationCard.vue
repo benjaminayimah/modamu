@@ -25,7 +25,7 @@ export default {
                 if(this.device == 'tablet')
                 return 2
                 else
-                return 5
+                return 4
             }
         })
     }

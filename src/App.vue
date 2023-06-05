@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="scss">
+*,
+*:after,
+*:before,
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

@@ -2,12 +2,12 @@
         <div class="grid-item-outline br-24 bg-white">
             <div class="flx jc-sb mb-16">
                 <div>
-                    <div class="name mb-4"><strong>{{ event.event.event_name }}</strong></div>
-                    <div class="address">{{ event.event.address }}</div>
+                    <div class="name mb-4 wrap-text wrap-line-1"><strong>{{ event.event.event_name }}</strong></div>
+                    <div class="address wrap-text wrap-line-1">{{ event.event.address }}</div>
                 </div>
                 <button @click.prevent="goToEvent" class="button-primary">View details</button>
             </div>
-            <div class="mb-16">
+            <div class="mb-16 wrap-text wrap-line-2">
                 {{ event.event.description }}
             </div>
             <div class="bg-img relative br-16 mb-16" :style="computedImage ? { backgroundImage: 'url('+hostname+'/storage/'+event.event.user_id+'/'+computedImage.image+')'} : ''">
@@ -16,7 +16,7 @@
             <div class="flx jc-sb">
                 <div class="flx ai-c gap-4">
                     <i class="br-50"></i>
-                    <span class="text-ellipsis">{{ format_distance(event.distance) }}</span>
+                    <span>{{ format_distance(event.distance) }}</span>
                     away
                 </div>
                 <!-- <div class="relative stack-row flx w-100">

@@ -122,8 +122,8 @@ export default createStore({
       state.kids = payload.kids,
       state.villages = payload.villages,
       state.bookings = payload.bookings,
-      state.parents = payload.parents
-
+      state.parents = payload.parents,
+      state.wait_lists = payload.waitlist
       this.commit('updateLocalStorage', payload.user)
     },
     setRegisteredEvents(state, payload) {
@@ -204,7 +204,9 @@ export default createStore({
     toggleMenu(state) {
       state.menu = !state.menu
     },
-
+    goToVillagePage() {
+      router.push({ name: 'AddVillagePage'})
+    },
     //village set all events
     setEvents(state, payload) {
       state.events = payload.events
