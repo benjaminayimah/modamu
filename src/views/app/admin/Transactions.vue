@@ -25,7 +25,7 @@
                     <h4 class="table-cell wrap-text wrap-line-1">Total amount</h4>
                 </div>
                 <div v-if="!bookings.length" class="bg-white pd-24 br-16 centered">
-                    <div>There are no bookings</div>
+                    <div>There are no transactions</div>
                 </div>
                 <booking-row v-for="booking in bookings" :key="booking.id" :booking="booking" />
             </div>

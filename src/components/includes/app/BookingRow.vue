@@ -5,7 +5,7 @@
             <span class="wrap-text wrap-line-1">{{ booking.name }}</span>
         </div>
        <div class="table-cell">
-            <span class="wrap-text wrap-line-1">{{ booking.event_name }}</span>
+            <router-link :to="{ name: 'DetailedEvent', params: { id: booking.event_id, name: booking.event_name}}" class="wrap-text wrap-line-1">{{ booking.event_name }}</router-link>
        </div>
        <div class="table-cell">
         <span class="wrap-text wrap-line-1">{{ format_date_short(booking.created_at) }}</span>
@@ -31,5 +31,11 @@ export default {
 .bg-img {
     height: 42px;
     width: 42px;
+}
+a{
+    color: var(--primary-color);
+    &:hover {
+        text-decoration: underline ;
+    }
 }
 </style>
