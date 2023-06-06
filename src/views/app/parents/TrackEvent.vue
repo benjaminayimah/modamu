@@ -17,7 +17,7 @@
                 <div v-if="attendees.length > 0" class="gray fs-09">Your kids in this event</div>
                 <div v-else class="fs-09">Your kids have been picked-up and deleted</div>
                 <div class="stack-cards">
-                    <button class="del-btn btn-sm" v-if="attendees.length == 0" @click="$store.dispatch('deleteRegistered', booking.id)">Delete this card</button>
+                    <!-- <button class="del-btn btn-sm" v-if="attendees.length == 0" @click="$store.dispatch('deleteRegistered', booking.id)">Delete this card</button> -->
                     <profile-avatar class="attendees" v-for="kid in attendees.slice(0, 5)" :key="kid.id" :id="kid.user_id" :image="kid.photo" />
                     <span v-if="attendees.length > 5" class="counter bg-img flx jc-c">+{{ attendees.length - 5 }}</span>
                 </div>

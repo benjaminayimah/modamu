@@ -150,9 +150,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import Backdrop from '../Backdrop.vue';
-
 export default {
-  components: { Backdrop },
+    components: { Backdrop },
     name: 'MainNav',
     computed: mapGetters(['is_super', 'is_admin', 'is_parent', 'is_village', 'getMenu', 'getDevice'])
 }
@@ -349,7 +348,7 @@ aside{
         }
     }
     .expanded{
-        left: 0 ;
+        left: 0;
         visibility: visible;
         span {
             transform: translateX(0);

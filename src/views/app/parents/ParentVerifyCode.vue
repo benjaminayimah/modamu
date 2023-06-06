@@ -4,16 +4,16 @@
             <h1 class="title mb-24">Verify & checkout</h1>
             <div class="flx ai-c gap-16">
                 <h4>Registered kids</h4>
-                <span class="count-info" :class="attendees.length ? 'count-primary' : 'count-secondary'">{{ attendees.length }}</span>
+                <span class="count-info" :class="computedAttendees.length ? 'count-primary' : 'count-secondary'">{{ computedAttendees.length }}</span>
             </div>
         </div>
-        <div v-if="!attendees.length" class="centered bg-white br-16 pd-32" >
-            <h4 class="mb-16">No Kid is Registered</h4>
-            <div>Your registered kids would appear here.</div>
+        <div v-if="!computedAttendees.length" class="centered bg-white br-16 pd-32" >
+            <h4 class="mb-16">You have no child in any event</h4>
+            <div>All kids that are registered for an active event would show up here.</div>
         </div>
         <div v-else class="body-container">
             <div class="grid col-2 gap-70">
-                <parent-checkout-list v-for="attendee in attendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn" :creating="creating" />
+                <parent-checkout-list v-for="attendee in computedAttendees" :key="attendee.id" :attendee="attendee" @check-in="checkIn" :creating="creating" />
             </div>
         </div>
     </section>
@@ -30,7 +30,10 @@ export default {
             hostname: (state) => state.hostname,
             token: (state) => state.token,
             attendees: (state) => state.attendees
-        })
+        }),
+        computedAttendees() {
+            return this.attendees.filter(item => item.status != '3')
+        }
     },
     data() {
         return {
