@@ -1,6 +1,6 @@
 <template>
     <teleport to="#modal_title">
-        Add your child
+        {{ forms ? 'Edit this child' : 'Add your child' }}
     </teleport>
     <teleport to="#modal_content">
         <div>
@@ -64,17 +64,21 @@
                     </span>
                 </div>
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button v-if="!forms" @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Adding...' : 'Add'}}</span>
                 </button>  
+                <button v-else @click="doUpdate(forms.id)" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+                    <span>{{ creating ? 'Updating...' : 'Submit update'}}</span>
+                </button> 
             </form>
         </div>
     </teleport>
 </template>
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex';
+import { postApi, deleteApi, putApi } from '@/api';
+import { mapGetters, mapState } from 'vuex';
 import validationMixin from '../../mixins/validationMixin'
 import tempImageUploadMixin from '../../mixins/tempImageUpload';
 import Spinner from '../includes/Spinner';
@@ -84,6 +88,9 @@ export default {
     name: 'AddKidsForm',
     computed: {
         ...mapGetters(['getGender', 'getHostname', 'getDefaultImage', 'auth', 'getToken', 'getUser']),
+        ...mapState({
+            forms: (state) => state.forms.user
+        }),
         token() {
             if(this.auth)
             return this.getToken
@@ -114,7 +121,7 @@ export default {
     methods: {
         deltmp() {
             this.startLoader()
-            axios.delete(this.getHostname + "/api/del-temp-upload/" + this.id + '?token=' + this.token)
+            deleteApi(this.getHostname + "/api/del-temp-upload/" + this.id + '?token=' + this.token)
             .then(() => {
                 this.afterDeletion()
             }).catch((err) => {
@@ -124,7 +131,7 @@ export default {
         },
         doSubmit() {
             this.creating = true
-            axios.post(this.getHostname+'/api/kid-details?token=' + this.token, this.form)
+            postApi(this.getHostname+'/api/kid-details?token=' + this.token, this.form)
             .then((res) => {
                 this.auth ? this.addToKids(res.data.kid) : this.signupSuccess(res.data.kid)
             }).catch((e) => {
@@ -138,7 +145,6 @@ export default {
         signupSuccess(res) {
             this.creating = false
             this.clearErrs()
-            this.resetForm()
             this.$store.commit('setNewKid', res)
             let stored = JSON.parse(localStorage.getItem('newUser'));
             stored.kids.push(res);
@@ -149,16 +155,47 @@ export default {
             await this.$store.commit('addToKids', payload)
             this.$store.commit('closeModal')
         },
-        resetForm() {
-            this.clrOldfile()
-            this.status.tempImage = null
-            this.form.name = '',
-            this.form.gender = '0',
-            this.form.dob = '',
-            this.form.height = '',
-            this.form.about = '',
-            this.form.tempImage = null
-        }
+        async updateKids(payload) {
+            await this.$store.commit('updateKids', payload)
+            this.$store.commit('closeModal')
+        },
+        async doUpdate(id) {
+            this.creating = true
+            try {
+                const res = await putApi(this.getHostname+'/api/update-kid/'+id+'?token='+this.token, this.form)
+                if(res.data) {
+                    this.updateKids(res.data)
+                }
+            } catch (e) {
+                this.creating = false
+                if(e.response.status == 422){
+                    this.validation.error = true
+                    this.validation.errors = e.response.data.errors
+                }
+            }
+        },
+        async setUpdate() {
+            this.startLoader()
+            try {
+                const res = await this.$store.dispatch('doPreloadTemp', this.forms.photo)
+                this.stopLoader()
+                this.setData(res.data.image)
+            } catch (error) {
+                this.stopLoader()
+                
+            }
+        },
+        setData(image) {
+            this.afterTempUpload(image)
+            this.form.name = this.forms.kid_name
+            this.form.gender = this.forms.gender
+            this.form.dob = this.forms.dob
+            this.form.height = this.forms.height
+            this.form.about = this.forms.about
+        },
+    },
+    mounted() {
+        this.forms != '' ? this.setUpdate() : ''
     }
 }
 </script>

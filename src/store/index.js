@@ -79,7 +79,13 @@ export default createStore({
         state.forms.verifyCode = true
       }else if(payload == 'add-village') {
         state.forms.addVillage = true
+      }else if(payload == 'update-kid') {
+        state.forms.kids = true
       }
+    },
+    setUpdateKid(state, payload) {
+      state.forms.user = payload
+      this.commit('openModal', 'update-kid')
     },
     startSpinner(state) {
       state.creating = true
@@ -103,6 +109,9 @@ export default createStore({
       document.body.classList.remove('fixed-body')
       for (let i in state.forms)
       state.forms[i] = false
+      if(state.forms.user) {
+        state.forms.user = {}
+      }
     },
     //signin
     async signInSuccess(state, payload) {
@@ -163,6 +172,10 @@ export default createStore({
     },
     addToKids(state, payload) {
       state.kids.push(payload)
+    },
+    updateKids(state, payload) {
+      const i = state.kids.findIndex(x => x.id == payload.id)
+      state.kids.splice(i, 1, payload)
     },
     destroyToken(){
       localStorage.removeItem('auth')
@@ -265,6 +278,9 @@ export default createStore({
         .catch(error => {
           console.log(error); // Handle any errors that occurred
         });
+    },
+    async doPreloadTemp(state, payload) {
+      return await postApi(this.getters.getHostname+'/api/set-temp-update?token=' + this.getters.getToken, {image: payload})
     },
     async checkInAttendee(state, payload) {  
       return await postApi(this.getters.getHostname+'/api/check-in-kid?token='+this.getters.getToken, { id: payload })    

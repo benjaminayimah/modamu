@@ -116,7 +116,7 @@ export default {
     methods: {
         preloadForEdit() {
             this.startLoader()
-            axios.post(this.getHostname+'/api/set-temp-update?token=' + this.token )
+            this.$store.dispatch('doPreloadTemp', this.getUser.image)
             .then((res) => {
                 this.stopLoader()
                 this.setData(res.data.image)
@@ -136,7 +136,7 @@ export default {
             this.afterTempUpload(image)
             this.form.name = this.getUser.name
             this.form.email = this.getUser.email
-            this.form.phone_number = this.getUser.phone_number
+            this.form.phone_number = this.getUser.phone
             this.form.emergency_number = this.getUser.emergency_number
             this.form.ocupation = this.getUser.ocupation
             this.form.address = this.getUser.address
