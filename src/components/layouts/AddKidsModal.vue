@@ -1,6 +1,6 @@
 <template>
     <teleport to="#modal_title">
-        {{ forms ? 'Edit this child' : 'Add your child' }}
+        {{ auth && forms ? 'Edit this child' : 'Add your child' }}
     </teleport>
     <teleport to="#modal_content">
         <div>
@@ -64,14 +64,14 @@
                     </span>
                 </div>
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button v-if="!forms" @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Adding...' : 'Add'}}</span>
-                </button>  
-                <button v-else @click="doUpdate(forms.id)" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button v-if="auth && forms" @click="doUpdate(forms.id)" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Updating...' : 'Submit update'}}</span>
                 </button> 
+                <button v-else @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+                    <span>{{ creating ? 'Adding...' : 'Add'}}</span>
+                </button>  
             </form>
         </div>
     </teleport>
