@@ -110,7 +110,7 @@ export default {
             const startIndex = (this.currentPage - 1) * this.itemsPerPage;
             const endIndex = startIndex + this.itemsPerPage;
             return this.computedEvents.events.slice(startIndex, endIndex);
-        },
+        }
     },
     data() {
         return {
@@ -150,7 +150,7 @@ export default {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
             }
-        },
+        }
     },
     mounted() {
         this.FetchThisVillageEvent()

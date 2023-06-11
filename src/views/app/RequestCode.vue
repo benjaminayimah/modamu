@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <section class="section-main">
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
@@ -31,13 +31,13 @@
 import { mapState } from 'vuex';
 import RequestListRow from '../../components/includes/app/RequestListRow.vue'
 export default {
-  components: { RequestListRow },
-  name: 'RequestCode',
-  computed: mapState({
-    wait_lists: (state) => state.wait_lists
-  })
-
-
+    components: { RequestListRow },
+    name: 'RequestCode',
+    computed: {
+        ...mapState({
+            wait_lists: (state) => state.wait_lists
+        })
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -63,4 +63,4 @@ section {
     width: 40px;
 }
 
-</style>
+</style> -->

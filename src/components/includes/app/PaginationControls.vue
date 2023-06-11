@@ -1,5 +1,5 @@
 <template>
-<div class="flx jc-fe">
+<div class="flx jc-c">
     <div  class="paginationa-controls flx gap-16 ai-c mt-24">
         <button class="br-50" @click="$emit('previous')" :disabled="currentPage === 1" :class="currentPage !== 1 ? 'activate' : 'disabled'">
             <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8 14">

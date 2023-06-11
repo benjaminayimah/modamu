@@ -38,7 +38,7 @@ export default {
         ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents']),
         ...mapState({
             token: (state) => state.token,
-            hostname: (state) => state.hostname
+            hostname: (state) => state.hostname,
         })
     },
     methods: {
