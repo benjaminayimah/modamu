@@ -9,7 +9,7 @@
                 </a>
                 <button @click="$emit('open-details')" class="flx gap-8 ai-c br-32 bg-transparent">
                     <profile-avatar :image="image" :id="to"/>
-                    <strong class="wrap-text wrap-line-1">{{ name }}</strong>
+                    <strong class="wrap-text wrap-line-1 capitalize">{{ name }}</strong>
                 </button>
             </div>
             <a v-if="back" href="#" @click.prevent=""  class="centered br-50 more">

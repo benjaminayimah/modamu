@@ -10,7 +10,7 @@
 </a>
 <div class="flx ai-c column gap-16">
     <profile-avatar :image="user.image"  :id="user.id"/>
-    <h4>{{ user.name }}</h4>
+    <h4 class="capitalize">{{ user.name }}</h4>
     <span class="acc-type br-32" v-if="!admin">{{ owner ? computedAcc : user.relationship }}</span>
     <span class="acc-type br-32" v-else>Village</span>
 

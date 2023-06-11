@@ -2,7 +2,7 @@
     <section class="flx column gap-24 dashboard-main">
       <div class="top-row grid gap-32">
         <div class="wl-sec flx column gap-16">
-          <h1 class="wrap-text wrap-line-2">Good day {{ computedFirstName(user.name) }},</h1>
+          <h1 class="wrap-text wrap-line-2">Good day <span>{{ computedFirstName(user.name) }},</span></h1>
           <div>At modamu we bring the fun to your kids easily so browse through our events catalogue close to you and begin the fun.</div>
           <a href="#" @click.prevent="$store.commit('showOnboardingModal')" class="getting-started flx ai-c gap-8 fw-600">
             Getting started

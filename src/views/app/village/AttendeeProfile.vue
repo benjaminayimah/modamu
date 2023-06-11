@@ -19,7 +19,7 @@
                 <div class="main-content-card parent-profile flx column gap-24">
                     <div class="centered gap-16">
                         <profile-avatar :id="parent.id" :image="parent.image"/>
-                        <h4>{{ parent.name }}</h4>
+                        <h4 class="capitalize">{{ parent.name }}</h4>
                         <span class="acc-type br-32">father</span>
                         <div class="flx jc-sb br-16 w-100 info-row ai-c">
                             <div class="flx gap-8">
