@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'DetailedVillage', params: { name: village.name, id: village.id, filter: 'all' }}" class="table-row grid-item row-hover grid-col-dash">
         <div class="table-cell gap-8">
             <profile-avatar :id="village.id" :image="village.image"/>
-            <span class="wrap-text wrap-line-1">{{ village.name }}</span>
+            <span class="wrap-text wrap-line-1 capitalize">{{ village.name }}</span>
         </div>
         <div class="table-cell gap-8">
             <div class="wrap-text wrap-line-1">{{ village.address }}</div>

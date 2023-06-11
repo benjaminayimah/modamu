@@ -3,7 +3,7 @@
         <div class="flx ai-c gap-8">
             <profile-avatar :id="attendee.user_id" :image="attendee.photo" />
             <div>
-                <div>{{ attendee.kid_name }}</div>
+                <div class="capitalize">{{ attendee.kid_name }}</div>
                 <span class="gray fs-09">{{ calculateAge(attendee.dob)}} years</span>
             </div>
         </div>

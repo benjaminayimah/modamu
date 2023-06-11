@@ -2,7 +2,7 @@
     <teleport to="#onboarding_top_row">
         <div class="flx-1 flx column gap-8">
                 <h2>We’re happy to have you on board,</h2>
-                <h1>{{ computedFirstName(user.name) }}</h1>
+                <h1 class="capitalize">{{ computedFirstName(user.name) }}</h1>
             </div>
             <div class="flx-1">
                 <lottie-welcome />

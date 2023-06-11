@@ -21,7 +21,7 @@
                         <i v-if="computedNotifications" class="bg-primary br-50"></i>
                     </router-link>
                     <router-link to="/profile" class="flx gap-16 ai-c u-a">
-                        <span class="text-ellipsis">{{ computedFirstName(user.name) }}</span>
+                        <span class="text-ellipsis capitalize">{{ computedFirstName(user.name) }}</span>
                         <div class="bg-img br-50" :style="user.image ? { backgroundImage: 'url('+hostname+'/storage/'+user.id+'/'+user.image+')'} : { backgroundImage: 'url('+defaultImage+')'}"></div>
                     </router-link>
                 </div>

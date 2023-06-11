@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'Attendee', params: { id: attendee.id,  name: attendee.kid_name } }" class="grid-item table-row">
         <div class="table-cell flx ai-c gap-8">
             <profile-avatar :id="attendee.user_id" :image="attendee.photo" />
-            <span class="wrap-text wrap-line-1">{{ attendee.kid_name }}</span>
+            <span class="wrap-text wrap-line-1 capitalize">{{ attendee.kid_name }}</span>
         </div>
         <div class="table-cell flx ai-c">
             <span class="wrap-text wrap-line-1">{{ calculateAge(attendee.dob )}} years</span>

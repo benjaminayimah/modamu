@@ -2,7 +2,7 @@
     <router-link :to="{ name: 'ViewParentProfile', params: { parent_id: this.parent.id, parent: this.parent.name } }" class="table-row grid-item row-hover grid-col-parents">
         <div class="table-cell gap-8">
             <profile-avatar :id="parent.id" :image="parent.image"/>
-            <span class="wrap-text wrap-line-1">{{ parent.name }}</span>
+            <span class="wrap-text wrap-line-1 capitalize">{{ parent.name }}</span>
         </div>
         <div class="table-cell gap-4"><span>{{ computedKids }}</span><span>kids</span></div>
         <div class="table-cell gap-4"><span :data-type="parent.relationship" class="gender-pill capitalize">{{ parent.relationship }}</span></div>

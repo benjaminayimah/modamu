@@ -4,12 +4,12 @@
         <div class="flx column ai-c gap-8">
             <profile-avatar :image="attendee.photo" :id="attendee.user_id"/>
             <div class="flx column ai-c">
-                <div class="text-ellipsis">{{ attendee.kid_name }}</div>
+                <div class="text-ellipsis capitalize">{{ attendee.kid_name }}</div>
                 <div class="flx gap-4 gray age"><span>{{ calculateAge(attendee.dob) }}</span><span>years old</span></div>
             </div>
             <div class="text-center" v-if="attendee.security_code">
                 <div class="code fw-600">{{ attendee.security_code }}</div>
-                <span class="gray fs-08">({{ computedFirstName(attendee.kid_name) }}'s checkout code)</span>
+                <span class="gray fs-08 capitalize">({{ computedFirstName(attendee.kid_name) }}'s checkout code)</span>
             </div>
         </div>
     </div>
