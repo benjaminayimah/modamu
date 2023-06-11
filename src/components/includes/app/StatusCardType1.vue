@@ -18,7 +18,7 @@
             <span>0</span>
         </div>
         <div v-else class="stack-cards">
-            <profile-avatar v-for="item in data.array" :key="item.id" :id="data.parent ? item.id : item.user_id" :image="data.parent ? item.image : item.photo" />
+            <profile-avatar v-for="item in data.array.slice(0, 3)" :key="item.id" :id="data.parent ? item.id : item.user_id" :image="data.parent ? item.image : item.photo" />
             <div v-if="data.array.length > 3" class="fw-700 bg-img counter centered br-24">+{{ data.array.length - 3 }}</div>
         </div>
     </div>

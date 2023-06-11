@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="flx column gap-16 flx-grow-1 mt--32">
-                <div class="flx flx-end gap-8 ai-c"><span>Registered with</span><span class="count-info count-primary">{{ otherKids.length }}</span></div>
+                <div class="flx jc-fe gap-8 ai-c"><span>Registered with</span><span class="count-info count-primary">{{ otherKids.length }}</span></div>
                 <div class="bg-white centered pd-32 br-16" v-if="!otherKids.length">Registered alone</div>
                 <kids-list v-for="kid in otherKids" :key="kid.id" :kid="kid" :id="kid.user_id" :noClick="true"/>
             </div>

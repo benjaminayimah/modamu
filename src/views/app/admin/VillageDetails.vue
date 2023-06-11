@@ -39,12 +39,12 @@
                             <h4 class="table-cell wrap-text wrap-line-1">Event date</h4>
                             <h4 class="table-cell wrap-text wrap-line-1">Event time</h4>
                         </div>
-                        <event-row-2 v-for="event in computedEvents.events" :key="event.id" :event="event" :dashboard="false" :nokids="true" />
+                        <event-row-2 v-for="event in displayedItems" :key="event.id" :event="event" :dashboard="false" :nokids="true" />
                     </div>
+                    <pagination-controls :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
                 </div>
             </div>
         </div>
-        
     </section>
 </template>
 
@@ -54,8 +54,9 @@ import { mapState } from 'vuex'
 import ProfileBodyContent from '@/components/layouts/ProfileBodyContent.vue'
 import LottieLoader from '@/components/includes/LottieLoader.vue'
 import EventRow2 from '@/components/includes/app/EventRow2.vue'
+import PaginationControls from '@/components/includes/app/PaginationControls.vue'
 export default {
-    components: { ProfileBodyContent, LottieLoader, EventRow2 },
+    components: { ProfileBodyContent, LottieLoader, EventRow2, PaginationControls },
     name: 'VillageDetails',
     computed: {
         ...mapState({
@@ -98,48 +99,18 @@ export default {
             }
             else
             return result
-            
-
-
-    //         getOngoingEvents(state) {
-    //   const events = state.events
-    //   let newEvent = []
-    //   const currentDateTime = new Date()
-    //   events.forEach(element => {
-    //     const startDate = new Date(element.date+'T'+element.start_time)
-    //     const endDate = new Date(element.date+'T'+element.end_time)
-    //     if (currentDateTime > startDate && currentDateTime < endDate) {
-    //       newEvent.push(element)
-    //     }
-        
-    //   })
-    //   return newEvent
-    // },
-    // getUpcomingEvents(state) {
-    //   const events = state.events
-    //   let newEvent = []
-    //   const currentDateTime = new Date()
-    //   events.forEach(element => {
-    //     const startDate = new Date(element.date+'T'+element.start_time)
-    //     if (currentDateTime < startDate) {
-    //       newEvent.push(element)
-    //     }
-    //   })
-    //   return newEvent
-    // },
-    // getPastEvents(state) {
-    //   const events = state.events
-    //   let newEvent = []
-    //   const currentDateTime = new Date()
-    //   events.forEach(element => {
-    //     const endDate = new Date(element.date+'T'+element.end_time)
-    //     if (currentDateTime > endDate) {
-    //       newEvent.push(element)
-    //     }
-    //   })
-    //   return newEvent
-    // },
-        }
+        },
+        totalItems() {
+            return this.computedEvents.events.length
+        },
+        totalPages() {
+            return Math.ceil(this.totalItems / this.itemsPerPage);
+        },
+        displayedItems() {
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return this.computedEvents.events.slice(startIndex, endIndex);
+        },
     },
     data() {
         return {
@@ -151,7 +122,9 @@ export default {
                 { id: 2, name: 'ongoing', url: 'ongoing'},
                 { id: 3, name: 'upcoming', url: 'upcoming'},
                 { id: 4, name: 'past', url: 'past'}
-            ]
+            ],
+            currentPage: 1,
+            itemsPerPage: 10,
         }
     },
     methods: {
@@ -167,7 +140,17 @@ export default {
                 console.error(error)
                 this.submitting = false
             }
-        }
+        },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+            }
+        },
     },
     mounted() {
         this.FetchThisVillageEvent()

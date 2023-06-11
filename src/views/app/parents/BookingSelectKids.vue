@@ -16,7 +16,7 @@
             <div class="select-kids-container flx column gap-32 scroll-snap overflow-y-scroll scroll-hidden">
                 <booking-select-kids-list v-for="kid in kids" :key="kid.id" :kid="kid" :selected="selected" @emmitSelect="doSelection"/>
             </div>
-            <div class="payment-calc flx-end column flx">
+            <div class="payment-calc jc-fe column flx">
                 <div class="payment-calc-container flx gap-16 column br-24 bg-white">
                     <span v-if="error" class="input-error">Make a selection first</span>
                     <div class="flx jc-sb ai-c">

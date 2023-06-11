@@ -45,7 +45,7 @@
           </div>
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
-              <a v-if="!getTodaysEvents.length" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
+              <a v-if="!getTodaysEvents.length" @click="goToEvents" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
                   <div class="text-center">
                     <div>Oops! there seems to be no events today.</div>
                     <div class="gray">No worries, <span class="ft-dark">click here</span> to discover upcoming events</div>

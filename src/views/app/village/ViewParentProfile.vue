@@ -23,7 +23,7 @@
                 </div>
                 <div class="flx gap-50 kids overflow-y-scroll scroll-hidden">
                     <div class="kids-column flx column gap-16">
-                        <div v-if="!kids.length">Not found</div>
+                        <div class="pd-32 centered bg-white br-16" v-if="!kids.length">No kid registered</div>
                         <kids-list v-else :noClick="true" v-for="kid in kids" :key="kid.id" :kid="kid" :id="kid.user_id" />
                     </div>
                 </div>

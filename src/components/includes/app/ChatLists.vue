@@ -1,9 +1,9 @@
 <template>
     <article class="flx column">
-        <div v-if="computeMyChat" class="flx flx-end">
+        <div v-if="computeMyChat" class="flx jc-fe">
             <div class="chat-bubble host">
                 <span class="fs-09">{{ chat.chat }}</span>
-                <span class="fs-07 flx ai-c flx-end gap-8">
+                <span class="fs-07 flx ai-c jc-fe gap-8">
                     <span>{{ time }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="8" viewBox="0 0 26.59 13.41">
                         <g id="check" transform="translate(-4529 -2657)">
@@ -17,7 +17,7 @@
         <div v-else class="flx">
             <div class="chat-bubble guest">
                 <span class="fs-09">{{ chat.chat }}</span>
-                <span class="fs-07 flx flx-end ai-c gap-8">
+                <span class="fs-07 flx jc-fe ai-c gap-8">
                     <span>{{ time }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="8" viewBox="0 0 26.59 13.41">
                         <g id="check" transform="translate(-4529 -2657)">
