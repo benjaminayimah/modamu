@@ -98,7 +98,6 @@ export default {
     mixins: [usersLevelMixin]
 }
 </script>
-
 <style lang="scss" scoped>
 button.del-btn {
     height: 54px;
