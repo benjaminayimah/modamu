@@ -279,7 +279,7 @@ export default createStore({
           state.commit('setCurrentLocation', address)
         })
         .catch(error => {
-          console.log(error); // Handle any errors that occurred
+          console.log(error);
         });
     },
     async doPreloadTemp(state, payload) {
