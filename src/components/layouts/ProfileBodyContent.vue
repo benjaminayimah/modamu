@@ -24,7 +24,7 @@
             </svg>
             <label>Name</label>
         </div>
-        <span>{{ user.name }}</span>
+        <span class="capitalize">{{ user.name }}</span>
     </div>
     <div class="flx jc-sb br-16 info-row ai-c">
         <div class="flx gap-8">

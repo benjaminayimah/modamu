@@ -8,7 +8,7 @@
     <div class="profile-body flx gap-16 column">
         <div class="flx ai-c column gap-16">
             <profile-avatar :image="user.image"  :id="user.id"/>
-            <h4>{{ $route.params.name }}</h4>
+            <h4 class="capitalize">{{ $route.params.name }}</h4>
             <span class="acc-type br-32">{{ computedAcct }}</span>
         </div>
         <div class="flx column gap-16">
