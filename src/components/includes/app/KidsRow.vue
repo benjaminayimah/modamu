@@ -4,7 +4,7 @@
             <profile-avatar :id="attendee.user_id" :image="attendee.photo" />
             <div>
                 <div class="capitalize">{{ attendee.kid_name }}</div>
-                <span class="gray fs-09">{{ calculateAge(attendee.dob)}} years</span>
+                <span class="gray fs-09">{{ calculateAge(attendee.dob)}}</span>
             </div>
         </div>
         <span class="flx gap-8 ai-c fs-09">

@@ -4,7 +4,7 @@
             <profile-avatar :id="waitinglist.user_id" :image="waitinglist.photo" />
             <div class="flx column jc-c gap-4">
                 <h5 class="wrap-text wrap-line-1 capitalize">{{ waitinglist.kid_name }}</h5>
-                <div class="gray fs-08 wrap-text wrap-line-1">{{ calculateAge(waitinglist.dob) }} years</div>
+                <div class="gray fs-08 wrap-text wrap-line-1">{{ calculateAge(waitinglist.dob) }}</div>
             </div>
         </div>
         <div></div>

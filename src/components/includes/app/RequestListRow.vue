@@ -5,7 +5,7 @@
             <span class="wrap-text wrap-line-1 capitalize">{{ attendee.kid_name }}</span>
         </div>
         <div class="table-cell flx ai-c">
-            <span class="wrap-text wrap-line-1">{{ calculateAge(attendee.dob )}} years</span>
+            <span class="wrap-text wrap-line-1">{{ calculateAge(attendee.dob )}}</span>
         </div>
         <div class="table-cell flx jc-sb ai-c">
             <span class="gender-pill capitalize" :data-type="attendee.gender">{{ computedGender }}</span>
