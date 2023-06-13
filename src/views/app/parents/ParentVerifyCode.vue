@@ -7,8 +7,9 @@
                 <span class="count-info" :class="computedAttendees.length ? 'count-primary' : 'count-secondary'">{{ computedAttendees.length }}</span>
             </div>
         </div>
-        <div v-if="!computedAttendees.length" class="centered bg-white br-16 pd-32" >
-            <h4 class="mb-16">You have no child in any event</h4>
+        <div v-if="!computedAttendees.length" class="bg-white br-16 pd-32 flx column jc-c ai-c empty-state-container">
+            <empty-state-lottie />
+            <h1 class="mb-16">You have no child in any event</h1>
             <div>All kids that are registered for an active event would show up here.</div>
         </div>
         <div v-else class="body-container">
@@ -22,8 +23,9 @@
 import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import ParentCheckoutList from '@/components/includes/app/ParentCheckoutList.vue';
+import EmptyStateLottie from '@/components/includes/EmptyStateLottie.vue';
 export default {
-    components: { ParentCheckoutList },
+    components: { ParentCheckoutList, EmptyStateLottie },
     name: 'ParentVerifyCode',
     computed: {
         ...mapState({
@@ -76,5 +78,7 @@ section {
 .body-container{
     width: 600px;
 }
-
+.empty-state-container{
+    height: calc(100dvh - 275px);
+}
 </style>

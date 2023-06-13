@@ -7,8 +7,9 @@
             </div>
             <div>Events your kids are billed to attend.</div>
         </div>
-        <div class="centered bg-white br-16 pd-32" v-if="!registered_events.length">
-            <h4 class="mb-16">No events yet</h4>
+        <div class="bg-white br-16 pd-32 flx column jc-c ai-c empty-state-container" v-if="!registered_events.length">
+            <empty-state-lottie />
+            <h1 class="mb-16">No events yet</h1>
             <div>Your booked events would appear here.</div>
         </div>
         <div v-else  class="grid col-4 gap-32">
@@ -21,8 +22,9 @@
 import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import RegisteredEventList from '../../../components/includes/app/RegisteredEventList.vue';
+import EmptyStateLottie from '@/components/includes/EmptyStateLottie.vue';
 export default {
-  components: { RegisteredEventList },
+  components: { RegisteredEventList, EmptyStateLottie },
     name: 'RegisteredEvents',
     computed: {
         ...mapState({
@@ -52,5 +54,8 @@ export default {
 <style lang="scss" scoped>
 section {
     padding: $profileSecPadding 0;
+}
+.empty-state-container{
+    height: calc(100dvh - 260px);
 }
 </style>
