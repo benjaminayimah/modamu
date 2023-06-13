@@ -37,7 +37,12 @@ export default {
             if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < dob.getDate())) {
               age--;
             }
-            return age;
+            if(age < 1) {
+              age = moment(dateOfBirth).fromNow(true);
+              return age + ' old';
+            }else {
+              return age + ' years old';
+            }
           }
           
     }

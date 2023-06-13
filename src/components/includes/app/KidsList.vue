@@ -5,7 +5,7 @@
                 <profile-avatar :image="kid.photo" :id="kid.user_id"/>
                 <div class="flx column ai-c">
                     <div class="name text-ellipsis capitalize">{{ kid.kid_name }}</div>
-                    <div class="flx gap-4 gray age"><span>{{ calculateAge(kid.dob) }}</span><span>years old</span></div>
+                    <div class="flx gap-4 gray age"><span>{{ calculateAge(kid.dob) }}</span></div>
                 </div>
             </div>
         </router-link>

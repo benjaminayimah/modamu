@@ -150,6 +150,10 @@ h1 {
 button.add-kid {
   height: 48px;
   width: 48px;
+  background-color: var(--light-gray);
+  &:hover {
+    background-color: var(--light-gray-hover);
+  }
 }
 .stack-cards {
     --height: 48px;
