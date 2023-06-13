@@ -11,7 +11,7 @@
             </svg>
 
           </a>
-          <button @click="goToEvents" class="button-secondary btn-lg">See events close to you</button>
+          <button @click="$store.commit('goToEvents')" class="button-secondary btn-lg">See events close to you</button>
         </div>
         <div class="flx column gap-24 top-row-col-2">
           <div class="grid col-2 gap-24">
@@ -45,7 +45,7 @@
           </div>
           <div class="flx column flx-grow-1 gap-16">
               <h4>Today's top events</h4>
-              <a v-if="!getTodaysEvents.length" @click="goToEvents" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
+              <a v-if="!getTodaysEvents.length" @click="$store.commit('goToEvents')" href="#" class="flx-grow-1 bg-white br-16 centered pd-16">
                   <div class="text-center">
                     <div>Oops! there seems to be no events today.</div>
                     <div class="gray">No worries, <span class="ft-dark">click here</span> to discover upcoming events</div>
@@ -53,7 +53,7 @@
               </a>
               <div v-else class="flx flx-grow-1 column jc-sb gap-16">
                 <dash-todays-event-list v-for="event in getTodaysEvents.slice(0, 3)" :key="event.id" :event="event" />
-                <a href="#" @click.prevent="goToEvents" v-if="getTodaysEvents.length < 3" class="flx-grow-1 bg-white br-16 centered pd-16">
+                <a href="#" @click.prevent="$store.commit('goToEvents')" v-if="getTodaysEvents.length < 3" class="flx-grow-1 bg-white br-16 centered pd-16">
                   Explore more
                 </a>
               </div>
@@ -65,7 +65,7 @@
         <h4>Upcoming events</h4>
         <div class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
-          <a href="#" @click.prevent="goToEvents" class="bg-white br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">
+          <a href="#" @click.prevent="$store.commit('goToEvents')" class="bg-white br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">
               <div class="caption flx column gap-16">
                 <div class="ft-white">
                   <h2>We’re happy to have you on board</h2>
@@ -103,9 +103,6 @@ export default {
     })
   },
   methods: {
-    goToEvents() {
-      this.$router.push({ name: 'EventsNear' })
-    },
     checkOnboarding() {
       const data = localStorage.getItem('tempOnboarding')
       if(!data) {

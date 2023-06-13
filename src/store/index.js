@@ -113,6 +113,9 @@ export default createStore({
         state.forms.user = {}
       }
     },
+    goToEvents() {
+      router.push({ name: 'EventsNear' })
+    },
     //signin
     async signInSuccess(state, payload) {
       await this.commit('setAuthToken', payload)
