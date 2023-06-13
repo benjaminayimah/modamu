@@ -9,7 +9,7 @@
         <div v-if="!notifications.length" class="bg-white br-16 pd-32 flx column jc-c ai-c empty-state-container">
             <empty-state-lottie />
             <h1 class="mb-16">No Notifications</h1>
-            <div>All your notifications will appear here.</div>
+            <div class="gray">All your notifications will appear here.</div>
         </div>
         <div class="flx gap-24 column">
             <notification-list class="br-24" v-for="notification in notifications" :key="notification.id" :notification="notification" />

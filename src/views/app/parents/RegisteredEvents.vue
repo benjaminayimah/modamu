@@ -10,7 +10,7 @@
         <div class="bg-white br-16 pd-32 flx column jc-c ai-c empty-state-container" v-if="!registered_events.length">
             <empty-state-lottie />
             <h1 class="mb-16">No events yet</h1>
-            <div class="mb-8">Your booked events would appear here.</div>
+            <div class="mb-8 gray">Your booked events would appear here.</div>
             <a href="#" @click.prevent="$store.commit('goToEvents')" class="getting-started flx ai-c gap-8 fw-600">Explore nearby events</a>
         </div>
         <div v-else  class="grid col-4 gap-32">

@@ -10,7 +10,7 @@
         <div v-if="!computedAttendees.length" class="bg-white br-16 pd-32 flx column jc-c ai-c empty-state-container">
             <empty-state-lottie />
             <h1 class="mb-16">You have no child in any event</h1>
-            <div class="mb-8">All kids that are registered for an active event would show up here.</div>
+            <div class="mb-8 gray">All kids that are registered for an active event would show up here.</div>
             <a href="#" @click.prevent="$store.commit('goToEvents')" class="getting-started flx ai-c gap-8 fw-600">Explore nearby events</a>
         </div>
         <div v-else class="body-container">
