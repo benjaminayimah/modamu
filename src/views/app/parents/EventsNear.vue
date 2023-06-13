@@ -40,6 +40,7 @@
             </div>
         </div>
         <div v-if="!events_near.events.length && !load" class="not-found flx column jc-c ai-c gap-16">
+            <not-found-lottie />
             <span>No event found at your current location,</span>
             <span class="ft-primary flx ai-c gap-8">
                 <svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 20.101 19.821">
@@ -64,8 +65,9 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 import EventsNearMeLists from '../../../components/includes/app/EventsNearMeLists.vue';
 import LocationBeacon from '@/components/includes/LocationBeacon.vue';
+import NotFoundLottie from '@/components/includes/NotFoundLottie.vue';
 export default {
-    components: { EventsNearMeLists, LocationBeacon },
+    components: { EventsNearMeLists, LocationBeacon, NotFoundLottie },
     name: 'EventsNear',
     computed: {
         ...mapState({
