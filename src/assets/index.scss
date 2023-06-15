@@ -660,6 +660,7 @@ a, button {
     background-position: center;
     background-size: cover;
     flex-shrink: 0;
+    overflow: hidden;
 }
 .bg-img{
     background-color: var(--bg-color);

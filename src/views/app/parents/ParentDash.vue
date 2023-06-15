@@ -65,7 +65,7 @@
         <h4>Upcoming events</h4>
         <div class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
-          <a href="#" @click.prevent="$store.commit('goToEvents')" class="bg-white br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">
+          <a href="#" @click.prevent="$store.commit('goToEvents')" class="br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">
               <div class="caption flx column gap-16">
                 <div class="ft-white">
                   <h2>We’re happy to have you on board</h2>
@@ -142,6 +142,7 @@ h1 {
     min-width: 230px;
     min-height: 230px;
   }
+  container-type: inline-size;
 }
 .button-secondary{
     width: 85%;
@@ -171,8 +172,31 @@ button.add-kid {
 }
 .bg-img-banner{
   padding: 32px calc(4% + 10px);
+
 }
 .banner-logo{
   align-items: flex-end;
+}
+@container(inline-size <= 600px) {
+  .bg-img-banner{
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+      &::after{
+      content: '';
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .caption, .banner-logo {
+      z-index: 2;
+    }
+  }
+  
+  h2 {
+    width: 100% !important
+  }
 }
 </style>
