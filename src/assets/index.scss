@@ -361,7 +361,7 @@ select{
     input[data-type=icon] {
         padding: 8px 12px 8px 50px;
     }
-    i,span{
+    i,span:not(.double),.span-double-wrapper{
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -372,7 +372,7 @@ select{
     i {
         left: 20px;
     }
-    span{
+    span:not(.double){
         right: 12px;
         height: 38px;
         width: 38px;
@@ -385,8 +385,21 @@ select{
     path{
         fill: var(--dark-gray);
     }
+    .span-double-wrapper{
+        right: 12px;
+        span {
+            height: 38px;
+            width: 38px;
+            &:hover {
+                background-color: var(--input-hover);
+                path {
+                    fill: var(--primary-color);
+                }
+            }
+        }
+    }
 }
-.hide-pass-active{
+.hide-pass-active, .copied{
     background-color: var(--bg-color);
     path{
         fill: var(--primary-color);
