@@ -210,6 +210,13 @@ button.drop-down{
         background-color: var(--primary-dark);
     }
 }
+.button-alt{
+    color: var(--primary-color);
+    background-color: rgba(1, 115, 255, 0.09);
+    &:hover {
+        background-color: rgba(1, 115, 255, 0.15);
+    }
+}
 .button-secondary {
     background-color: var(--seconday-dark);
     color: var(--ft-white);

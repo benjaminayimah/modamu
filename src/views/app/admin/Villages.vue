@@ -13,9 +13,9 @@
                     <input class="form-control" v-model="search" type="search" data-type="icon" placeholder="Search village...">
                 </div>
             </div>
-            <button @click="$store.commit('goToVillagePage')" class="button-primary gap-8 btn-md">
-                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 20 20">
-                    <path d="M-3266.055-837.995a1.029,1.029,0,0,1-1.021-1.034l.048-7.944-7.944-.048a1.028,1.028,0,0,1-1.022-1.034,1.028,1.028,0,0,1,1.034-1.021l7.944.048.048-7.944a1.028,1.028,0,0,1,1.034-1.021,1.027,1.027,0,0,1,1.021,1.034l-.048,7.944,7.945.048a1.029,1.029,0,0,1,1.021,1.034,1.028,1.028,0,0,1-1.034,1.022l-7.944-.048-.048,7.944a1.03,1.03,0,0,1-1.03,1.022Z" transform="translate(3275.994 857.994)" fill="#fff"/>
+            <button @click="$store.commit('goToVillagePage')" class="button-primary gap-4 btn-md">
+                <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 15.132 15.132">
+                    <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#fff"/>
                 </svg>
                 Add village
             </button>

@@ -21,7 +21,7 @@
                         <h4 class="capitalize">{{ computedEvents.filter + 's' }}</h4><span class="counter-pill">{{ computedEvents.events.length }}</span>
                     </div>
                     <div v-if="events.length" class="flx gap-8 mt-16 mb-16">
-                        <router-link replace v-for="tab in tabs" :key="tab.id" :to="{ name: 'DetailedVillage', params: { name: $route.params.name, id: $route.params.id, filter: tab.url }}" :class="[{ 'active-pill' : tab.url == $route.params.filter},  tab.url+'-e']" class="flx gap-8 ai-c btn-pill fs-09">
+                        <router-link replace v-for="tab in tabs" :key="tab.id" :to="{ name: 'DetailedVillage', params: { name: $route.params.name, id: $route.params.id, filter: tab.url }}" :class="{ 'active-pill' : tab.url == $route.params.filter}" class="flx gap-8 ai-c btn-pill fs-09">
                             {{ tab.name }}
                         </router-link>
                     </div>
@@ -169,13 +169,13 @@ section {
 .grid-col-notdash{
     grid-template-columns: 1.2fr .8fr .6fr .6fr;
 }
-.ongoing-e {
-    border-color: #09cc1d !important;
-}
-.upcoming-e {
-    border-color: #0a8f17 !important;
-}
-.past-e {
-    border-color: var(--warning) !important;
-}
+// .ongoing-e {
+//     border-color: #09cc1d !important;
+// }
+// .upcoming-e {
+//     border-color: #0a8f17 !important;
+// }
+// .past-e {
+//     border-color: var(--warning) !important;
+// }
 </style>
