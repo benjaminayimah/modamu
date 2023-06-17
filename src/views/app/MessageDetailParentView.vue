@@ -106,7 +106,7 @@ export default {
     methods: {
         async FetchThisUser() {
             try {
-                const res = await postApi(this.hostname + '/api/fetchThisUser?token='+ this.token, {id: this.to_id})
+                const res = await postApi(this.hostname + '/api/fetch-this-user?token='+ this.token, {id: this.to_id})
                 if(res.data) {
                     this.user = res.data.thisUser
                     this.registered_kids = res.data.kids
