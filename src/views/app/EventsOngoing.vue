@@ -3,7 +3,7 @@
         <h3 class="mb-8">Ongoing events</h3>
         <div class="gray">View and track all on going events here.</div>
     </div>
-    <table-body-ongoing :events="totalItems" />
+    <table-body-ongoing :events="displayedItems" />
     <pagination-controls v-if="totalItems > 10" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
 </template>
 <script>

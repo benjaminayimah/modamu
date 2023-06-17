@@ -23,7 +23,7 @@ export default createStore({
     onboardModal: false,
     mainModal: false,
     creating: false,
-    forms: { kids: false, editProfile: false, changePass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
+    forms: { kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
     kids: [],
     events: [],
     images: [],
@@ -86,6 +86,14 @@ export default createStore({
     setUpdateKid(state, payload) {
       state.forms.user = payload
       this.commit('openModal', 'update-kid')
+    },
+    async resetTheirPass(state, payload) {
+      state.forms.id = payload
+      await this.commit('setOtherPass')
+      this.commit('openModal', 'change-pass')
+    },
+    setOtherPass(state) {
+      state.forms.otherPass = true
     },
     startSpinner(state) {
       state.creating = true

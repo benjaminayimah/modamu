@@ -680,6 +680,13 @@ a, button {
 }
 .bg-img-banner {
     background-color: #4e56e7;
+    padding: 32px calc(4% + 10px);
+    .caption{
+        h2, div {
+          line-height: 1.1;
+          width: 70%;
+        }
+    }
 
 }
 .w-fc {
