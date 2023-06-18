@@ -1,6 +1,6 @@
 <template>
     <teleport to="#modal_title">
-        {{ auth && forms ? 'Edit this child' : 'Add your child' }}
+        {{ auth && (!forms == null || !forms == false) ? 'Edit this child' : 'Add your child' }}
     </teleport>
     <teleport to="#modal_content">
         <div>

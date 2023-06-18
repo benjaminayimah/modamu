@@ -23,7 +23,7 @@ export default createStore({
     onboardModal: false,
     // mainModal: false,
     creating: false,
-    forms: { kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
+    forms: { kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: null },
     modalLoader: false,
     kids: [],
     events: [],
