@@ -58,6 +58,7 @@ body{
 }
 .bg-transparent {
     background-color: transparent;
+    cursor: pointer;
 }
 .bg-primary {
     background-color: var(--primary-color);
@@ -474,6 +475,9 @@ dialog {
 }
 .jc-fe{
     justify-content: flex-end;
+}
+.jc-fs{
+    justify-content: flex-start;
 }
 .ai-fs {
     align-items: flex-start;

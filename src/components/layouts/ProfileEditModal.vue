@@ -178,6 +178,9 @@ export default {
             this.form.about = '',
             this.form.tempImage = null
         }
+    },
+    mounted() {
+        this.$store.commit('stopModalLoader')
     }
 }
 </script>

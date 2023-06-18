@@ -35,7 +35,7 @@ export default {
         ...mapState({
             forms: (state) => state.forms,
         })
-    } 
+    }
 }
 </script>
 

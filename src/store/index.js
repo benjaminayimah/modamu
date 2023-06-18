@@ -21,9 +21,10 @@ export default createStore({
     user: JSON.parse(localStorage.getItem('user')) || {},
     addModal: false,
     onboardModal: false,
-    mainModal: false,
+    // mainModal: false,
     creating: false,
     forms: { kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: {} },
+    modalLoader: false,
     kids: [],
     events: [],
     images: [],
@@ -41,7 +42,10 @@ export default createStore({
     registered_events: [],
     attendees: [],
     bookings: [],
-    parents: []
+    parents: [],
+    chats: [],
+    chatImage: '',
+    msgParentDetails: false
   },
   mutations: {
     computeWindow(state) {
@@ -65,6 +69,7 @@ export default createStore({
       state.onboardModal = false
     },
     async openModal(state, payload) {
+      state.modalLoader = true
       await this.commit('activateModal')
       document.body.classList.add('fixed-body')
       if(payload == 'kids') {
@@ -92,6 +97,9 @@ export default createStore({
       await this.commit('setOtherPass')
       this.commit('openModal', 'change-pass')
     },
+    stopModalLoader(state) {
+      state.modalLoader = false
+    },
     setOtherPass(state) {
       state.forms.otherPass = true
     },
@@ -106,6 +114,13 @@ export default createStore({
     },
     setTempUser(state, payload) {
       state.forms.user = payload
+    },
+    setChats(state, payload) {
+      state.chats = payload.chats
+      state.chatImage = payload.image
+      const i =  state.messages.findIndex(x => x.message.id == payload.id) 
+      if(i > -1)
+      state.messages[i].unread = 0
     },
     activateModal() {
       const modal = document.querySelector('#main_modal')
@@ -123,6 +138,12 @@ export default createStore({
     },
     goToEvents() {
       router.push({ name: 'EventsNear' })
+    },
+    doMsgParentDetails(state) {
+      state.msgParentDetails = !state.msgParentDetails
+    },
+    closeMsgParentDetails(state) {
+      state.msgParentDetails = false
     },
     //signin
     async signInSuccess(state, payload) {
@@ -144,6 +165,8 @@ export default createStore({
       state.bookings = payload.bookings,
       state.parents = payload.parents,
       state.wait_lists = payload.waitlist
+      state.messages = payload.messages
+      state.notifications = payload.notifications
       this.commit('updateLocalStorage', payload.user)
     },
     setRegisteredEvents(state, payload) {
@@ -344,6 +367,18 @@ export default createStore({
             console.error(error);
         }
       },
+      async fetchChats(state, payload) {
+        state.commit('startLoader')
+        payload.to ? router.push({ name: 'MessageDetail', params: { id: payload.id, name: payload.name, to: payload.to }, replace: true}): ''
+        try {
+            const res = await postApi(this.getters.getHostname + '/api/fetch-this-chats/'+ payload.id +'?token='+this.getters.getToken)
+            state.commit('setChats', res.data)
+            state.commit('stopLoader')
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
 
     // async fetchWaitList() {
     //   return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
@@ -433,6 +468,14 @@ export default createStore({
         }
       })
       return newEvent
+    },
+    getMessageTotalCount(state) {
+      const msgs = state.messages
+      let count = 0
+      msgs.forEach(element => {
+        count = Number(element.unread + count)
+      });
+      return count
     },
     getDevice: (state) => state.device,
     getWindowWidth: (state) => state.windowWidth,

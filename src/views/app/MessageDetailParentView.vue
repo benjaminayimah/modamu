@@ -1,6 +1,6 @@
 <template>
 <div class="u-profile relative">
-    <button @click="$emit('close')" class="br-50 close-btn">
+    <button @click="$store.commit('doMsgParentDetails')" class="br-50 close-btn">
         <svg xmlns="http://www.w3.org/2000/svg" height="14.683" viewBox="0 0 14.647 14.683">
             <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#6f7689"/>
         </svg>
@@ -105,11 +105,13 @@ export default {
     },
     methods: {
         async FetchThisUser() {
+            this.$store.commit('startLoader')
             try {
                 const res = await postApi(this.hostname + '/api/fetch-this-user?token='+ this.token, {id: this.to_id})
                 if(res.data) {
                     this.user = res.data.thisUser
                     this.registered_kids = res.data.kids
+                    this.$store.commit('stopLoader')
                 }
             } catch (error) {
                 console.error(error)

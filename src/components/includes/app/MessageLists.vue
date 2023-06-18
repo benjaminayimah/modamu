@@ -1,6 +1,6 @@
 <template>
     <li>
-        <router-link :to="{ name: 'MessageDetail', params: { id: data.message.id, name: data.sender.name, to: data.sender.id }}" href="" class="flx gap-8 bg-white br-16 relative" :class="{ 'new-chat' : data.unread > 0}">
+        <a @click.prevent="fetchChats" href="#" class="flx gap-8 bg-white br-16 relative" :class="{ 'new-chat' : data.unread > 0}">
             <profile-avatar :id="data.sender.id" :image="data.sender.image" />
             <div class="flx column gap-4 ms flx-grow-1">
                 <div class="flx jc-sb ai-c">
@@ -12,7 +12,7 @@
                     <span v-if="data.unread > 0" class="count-info count-primary centered fs-08">{{ data.unread }}</span>
                 </div>
             </div>
-        </router-link>
+        </a>
     </li>
 </template>
 <script>
@@ -22,7 +22,13 @@ export default {
     components: { ProfileAvatar },
     mixins: [formatDateTime],
     name: 'MessageLists',
-    props: ['data']
+    props: ['data'],
+    methods: {
+        fetchChats() {
+            this.$store.dispatch('fetchChats', {id: this.data.message.id, name: this.data.sender.name, to: this.data.sender.id})
+            this.$store.commit('closeMsgParentDetails')
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
