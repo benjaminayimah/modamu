@@ -8,9 +8,12 @@
                 Back
             </router-link>
             <div>
-                <h1 class="title mb-16">Track kids</h1>
+                <h1 class="title">Track kids</h1>
                 <span class="gray">Keep updates on your kids</span>
             </div>
+        </div>
+        <div class="pd-24 bd-dashed br-16 text-center">
+                {{ computedStatus }}
         </div>
         <div class="flx gap-16 column mt-32">
             <div class="track-event-list flx column gap-24 bg-white br-24">
@@ -86,7 +89,18 @@ export default {
         ...mapState({
             hostname: (state) => state.hostname,
             token: (state) => state.token
-        })
+        }),
+        computedStatus() {
+            let status
+            if(this.booking.kids_status == 0) {
+                status = 'Your kids have not been dropped off at this event yet.'
+            }else if(this.booking.kids_status == 3) {
+                status = 'Your kids have been picked up from this village.'
+            }else {
+                status = 'Your kids have been dropped off at the event village. Use the unique code generated when you\'re ready to pick them up. This can be found under the \'Verify code\' menu.'
+            }
+            return status
+        }
     },
     data () {
         return {
@@ -123,6 +137,9 @@ section {
 .track-event-list{
     width: 600px;
     padding: 24px;
+}
+.bd-dashed{
+    width: 600px;
 }
 .bg-img {
     height: $height;

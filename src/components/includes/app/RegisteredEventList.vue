@@ -28,8 +28,8 @@
         </div>
         <div class="flx jc-sb">
             <div class="flx gap-8 ai-c">
-                <i class="br-50" :class="event.accepted ? 'accepted' : 'pending'"></i>
-                <span class="capitalize">{{event.accepted ? 'accepted' : 'pending' }}</span>
+                <i class="br-50" :class="computedStatus"></i>
+                <span class="capitalize">{{ computedStatus }}</span>
             </div>
             <button @click="trackEvent" class="button-primary btn-sm" :class="{ 'button-disabled' : !event.accepted }" :disabled="!event.accepted ? true : false">Track</button>
         </div>
@@ -42,6 +42,21 @@ export default {
     name: 'RegisteredEventsList',
     props: ['event'],
     mixins: [formatDateTime],
+    computed: {
+        computedStatus() {
+            let status
+            if(!this.event.accepted && this.event.kids_status == 0) {
+                status = 'pending'
+            }else if(this.event.accepted && this.event.kids_status == 0) {
+                status = 'accepted'
+            }else if(this.event.kids_status < 3) {
+                status = 'at event'
+            }else if(this.event.kids_status == 3) {
+                status = 'ended'
+            }
+            return status
+        }
+    },
     methods: {
         trackEvent() {
             this.$router.push({ name: 'TrackEvent', params: { id: this.event.id, name: this.event.event_name}})
@@ -67,10 +82,13 @@ i{
     height: 8px;
     width: 8px;
 }
-.accepted {
+.accepted, .event {
     background-color: var(--primary-color);
 }
 .pending {
     background-color: var(--warning);
+}
+.ended {
+    background-color: var(--error);
 }
 </style>
