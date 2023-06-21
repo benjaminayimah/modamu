@@ -243,6 +243,9 @@ button.drop-down{
 .hide{
     display: none;
 }
+.block{
+    display: block;
+}
 .button-outline{
     background-color: transparent;
     border: 1px var(--text-light) solid;
@@ -696,9 +699,8 @@ a, button {
     background-color: #4e56e7;
     padding: 32px calc(4% + 10px);
     .caption{
-        h2, div {
+        h2 {
           line-height: 1.1;
-          width: 70%;
         }
     }
 

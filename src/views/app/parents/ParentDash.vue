@@ -69,9 +69,9 @@
               <div class="caption flx column gap-16">
                 <div class="ft-white">
                   <h2 class="mb-8">We’re happy to have you on board</h2>
-                  <div>Explore our latest upcoming events</div>
+                  <span class="block">Explore our latest upcoming events</span>
                 </div>
-                <span class="explore-btn fw-600 br-24 fs-09 bg-white w-fc">Explore events</span>
+                <a href="#" class="explore-btn fw-600 br-24 fs-09 bg-white w-fc">Explore events</a>
               </div>
               <div class="banner-logo ai-fe flx h-100">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 213.709 52.869">
@@ -164,6 +164,12 @@ button.add-kid {
         border: 2px solid var(--bg-white);
     }
 }
+
+.bg-img-banner{
+  h2 {
+    width: 70%
+  }
+}
 @container(inline-size <= 600px) {
   .bg-img-banner{
     flex-direction: column-reverse;
@@ -180,10 +186,10 @@ button.add-kid {
     .caption, .banner-logo {
       z-index: 2;
     }
+    h2, span {
+      width: 100% !important
+    }
   }
-  
-  h2, div {
-    width: 100% !important
-  }
+ 
 }
 </style>
