@@ -64,7 +64,7 @@ dialog {
 }
 .modal-body{
     padding: 32px 28px 50px 28px;
-    max-height: calc(100vh - 220px);
+    max-height: calc(100dvh - 220px);
 }
 .modal-footer{
     padding: 16px 28px 28px 28px;
@@ -77,13 +77,13 @@ dialog {
 }
 @media screen and (max-width: 430px){
     dialog{
-        height: 100vh;
+        height: 100dvh;
         max-width: 100%;
         max-height: 100%;
         border-radius: 0;
     }
     .modal-body{
-        max-height: calc(100vh - 155px);
+        max-height: calc(100dvh - 155px);
         height: 100%;
     }
     
