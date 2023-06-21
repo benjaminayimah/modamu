@@ -63,17 +63,19 @@
                         {{ validation.errors.about[0] }}
                     </span>
                 </div>
-                <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button v-if="auth && forms" @click="doUpdate(forms.id)" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Updating...' : 'Submit update'}}</span>
-                </button> 
-                <button v-else @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Adding...' : 'Add'}}</span>
-                </button>  
+                <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img"> 
             </form>
         </div>
+    </teleport>
+    <teleport to="#modal_footer">
+        <button v-if="auth && forms" @click="doUpdate(forms.id)" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+            <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+            <span>{{ creating ? 'Updating...' : 'Submit update'}}</span>
+        </button> 
+        <button v-else @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+            <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+            <span>{{ creating ? 'Adding...' : 'Add'}}</span>
+        </button> 
     </teleport>
 </template>
 <script>

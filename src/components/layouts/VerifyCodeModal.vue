@@ -13,7 +13,7 @@
             <div v-if="userError.error" class="invalid-credentials response-message mb-24 text-center">
                 <span>{{ userError.message }}</span>
             </div>
-            <form @submit.prevent="submitCode" class="flx column gap-24">
+            <form @submit.prevent="" class="flx column gap-24">
                 <div class="form-row column">
                     <label for="current_password" class="text-center">Checkout code</label>
                     <div class="input-wrapper">
@@ -22,13 +22,15 @@
                     <span class="input-error text-center" v-if="validation.error && validation.errors.checkout_code">
                         {{ validation.errors.checkout_code[0] }}
                     </span>
-                </div>
-                <button @click="checkOut" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Verifying...' : 'Verify'}}</span>
-                </button> 
+                </div> 
             </form>
         </div>
+    </teleport>
+    <teleport to="#modal_footer">
+        <button @click="checkOut" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+            <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+            <span>{{ creating ? 'Verifying...' : 'Verify'}}</span>
+        </button>
     </teleport>
 </template>
 <script>

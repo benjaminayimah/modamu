@@ -14,7 +14,7 @@
                     Tap to add photo
                 </button>
             </div>
-            <form @submit.prevent="submitSignUp" class="flx column gap-24">
+            <form @submit.prevent="" class="flx column gap-24">
                 <div class="form-row column">
                     <label for="name">Village name</label>
                     <div class="input-wrapper">
@@ -94,12 +94,14 @@
                     </span>
                 </div>
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Creating account...' : 'Create'}}</span>
-                </button>
             </form>
         </div>
+    </teleport>
+    <teleport to="#modal_footer">
+        <button @click="submitSignUp" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+            <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+            <span>{{ creating ? 'Creating account...' : 'Create'}}</span>
+        </button>
     </teleport>
 </template>
 

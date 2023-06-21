@@ -8,7 +8,7 @@ export default {
     props: ['image', 'id'],
     computed: {
         ...mapGetters(['getHostname', 'getDefaultImage']),
-    } 
+    }
 }
 </script>
 <style lang="scss" scoped>

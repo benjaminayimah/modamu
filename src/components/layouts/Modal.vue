@@ -11,6 +11,7 @@
         <div class="modal-body overflow-y-scroll scroll-hidden">
             <div id="modal_content" class="modal-content"></div>
         </div>
+        <div class="modal-footer" id="modal_footer"></div>
     </dialog>
     <add-kids-modal v-if="forms.kids" />
     <profile-edit-modal v-else-if="forms.editProfile" />
@@ -63,14 +64,16 @@ dialog {
 }
 .modal-body{
     padding: 32px 28px 50px 28px;
-    max-height: calc(100vh - 160px);
+    max-height: calc(100vh - 220px);
 }
-
+.modal-footer{
+    padding: 16px 28px 28px 28px;
+    box-shadow: rgba(23, 23, 23, 0.1) 0px 0px 8px;
+}
 @media screen and (max-width: 590px){
     dialog{
         width: 430px;
     }
-    
 }
 @media screen and (max-width: 430px){
     dialog{
@@ -80,7 +83,9 @@ dialog {
         border-radius: 0;
     }
     .modal-body{
-        max-height: calc(100vh - 60px);
+        max-height: calc(100vh - 155px);
+        height: 100%;
     }
+    
 }
 </style>

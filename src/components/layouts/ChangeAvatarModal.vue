@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <teleport to="#modal_title">
         Change your photo
     </teleport>
@@ -65,4 +65,4 @@ button.button-outline{
     height: 46px;
     padding: 8px 17px;
 }
-</style>
+</style> -->

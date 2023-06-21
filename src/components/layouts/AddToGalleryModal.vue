@@ -16,12 +16,14 @@
             </div>
             <form @submit.prevent="" class="flx column gap-24">
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
-                <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
-                    <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                    <span>{{ creating ? 'Submitting...' : 'Submit update'}}</span>
-                </button>  
             </form>
         </div>
+    </teleport>
+    <teleport to="#modal_footer">
+        <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+            <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+            <span>{{ creating ? 'Submitting...' : 'Submit update'}}</span>
+        </button>  
     </teleport>
 </template>
 
