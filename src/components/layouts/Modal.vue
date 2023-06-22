@@ -104,6 +104,7 @@ export default {
         max-width: 100%;
         max-height: 100dvh;
         border-radius: 0;
+        min-height: 100%;
     }
     .modal-body{
         height: 100%;
