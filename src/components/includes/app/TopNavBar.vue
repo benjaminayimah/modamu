@@ -1,5 +1,5 @@
 <template>
-    <nav class="sticky-top" id="top_nav">
+    <nav class="sticky" id="top_nav">
         <div class="flx jc-sb ai-c nav-wrapper">
             <div class="flx">
                 <button @click.prevent="$store.commit('toggleMenu')" aria-expanded="false" aria-controls="menus" v-if="device == 'mobile'" id="mobile_menu_toggle">

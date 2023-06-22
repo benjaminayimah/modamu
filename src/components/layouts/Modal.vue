@@ -1,8 +1,8 @@
 <template>
     <div v-if="forms.active" class="modal-container jc-c ai-c">
         <backdrop :index="100" />
-        <div id="main_modal" class="modal">
-            <div class="modal-top flx jc-sb ai-c">
+        <div id="main_modal" class="modal overflow-y-scroll scroll-hidden flx column relative">
+            <div class="modal-top flx jc-sb ai-c sticky">
                 <h3 id="modal_title"></h3>
                 <button @click="$store.commit('closeModal')" class="br-50">
                     <svg xmlns="http://www.w3.org/2000/svg" height="14.683" viewBox="0 0 14.647 14.683">
@@ -10,12 +10,12 @@
                     </svg>
                 </button>
             </div>
-            <div class="modal-body overflow-y-scroll scroll-hidden">
+            <div class="modal-body">
                 <div id="modal_content" class="modal-content">
                     <lottie-loader v-if="forms.loader" />
                 </div>
             </div>
-            <div class="modal-footer" id="modal_footer"></div>
+            <div class="modal-bottom sticky" id="modal_footer"></div>
         </div>
     </div>
     <add-kids-modal v-if="forms.kids" />
@@ -59,12 +59,15 @@ export default {
   max-height: 90vh;
   width: 560px;
   border-radius: 24px;
-  overflow-y: hidden;
   background-color: #fff;
   z-index: 110;
 }
 .modal-top{
-    border-bottom: 1px solid var(--bg-color);
+    // border-bottom: 1px solid var(--bg-color);
+    background-color: hsla(0,0%,100%,.8);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    top: 0;
     padding: 6px 28px;
     button {
         height: 48px;
@@ -79,13 +82,17 @@ export default {
         }
     }
 }
+.modal-top, .modal-bottom {
+    z-index: 1;
+}
 .modal-body{
     padding: 32px 28px 50px 28px;
-    max-height: calc(100dvh - 250px);
+    // max-height: calc(100dvh - 250px);
 }
-.modal-footer{
+.modal-bottom{
     padding: 16px 28px 28px 28px;
-    box-shadow: rgba(23, 23, 23, 0.1) 0px 0px 8px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 15%);
+    bottom: 0;
 }
 @media screen and (max-width: 590px){
     .modal{
@@ -94,13 +101,11 @@ export default {
 }
 @media screen and (max-width: 430px){
     .modal{
-        height: 100dvh;
         max-width: 100%;
-        max-height: 100%;
+        max-height: 100dvh;
         border-radius: 0;
     }
     .modal-body{
-        max-height: calc(100dvh - 155px);
         height: 100%;
     }
     
