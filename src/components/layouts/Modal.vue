@@ -108,6 +108,7 @@ export default {
     }
     .modal-body{
         height: 100%;
+        flex-grow: 1;
     }
     
 }
