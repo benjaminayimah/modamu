@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    // appHostname: 'http://localhost:8080',
-    hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    hostname: 'http://localhost:8000',
+    appHostname: 'http://localhost:8080',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -71,7 +71,7 @@ export default createStore({
     async openModal(state, payload) {
       state.modalLoader = true
       await this.commit('activateModal')
-      document.body.classList.add('fixed-body')
+      // document.body.classList.add('fixed-body')
       if(payload == 'kids') {
         state.forms.kids = true
       }else if(payload == 'edit-profile') {
