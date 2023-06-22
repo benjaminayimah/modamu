@@ -140,6 +140,9 @@ export default {
         endSubmit() {
             this.creating = false
         }
+    },
+    mounted() {
+        this.$store.commit('stopFormLoader')
     }
 }
 </script>

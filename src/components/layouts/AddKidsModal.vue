@@ -194,10 +194,12 @@ export default {
             this.form.dob = this.forms.dob
             this.form.height = this.forms.height
             this.form.about = this.forms.about
+            this.$store.commit('stopFormLoader')
+
         },
     },
     mounted() {
-        this.forms != '' ? this.setUpdate() : ''
+        this.forms != '' ? this.setUpdate() : this.$store.commit('stopFormLoader')
     }
 }
 </script>

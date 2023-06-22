@@ -2,6 +2,7 @@
   <router-view/>
   <modal-onboarding v-if="onboardModal" />
   <modal />
+  
 </template>
 <script>
 

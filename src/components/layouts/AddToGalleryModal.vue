@@ -83,6 +83,9 @@ export default {
                 console.log(err.response);
             });
         },
+    },
+    mounted() {
+        this.$store.commit('stopFormLoader')
     }
 }
 </script>

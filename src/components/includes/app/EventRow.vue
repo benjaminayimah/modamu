@@ -36,7 +36,7 @@ export default {
             },
             computedAttendees() {
                 return this.attendees.length ? this.attendees.filter(data => data.event_id == this.event.id) : ''
-            },
+            }
         })
     },
     methods: {

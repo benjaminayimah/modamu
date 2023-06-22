@@ -30,6 +30,7 @@
     --button-disabled: #559aef;
     --radius-24: 24px;
     --input-btn-radius: 18px;
+    --btn-radius: 50px;
     --input-btn-height: 58px;
     --input-btn-transition: 0.2s all ease;
     --log-side-padding: 10%;
@@ -164,7 +165,7 @@ button, .a-button{
     color: unset;
     font-weight: 700;
     cursor: pointer;
-    border-radius: var(--input-btn-radius);
+    border-radius: var(--btn-radius);
     transition: var(--input-btn-transition);
     path {
         transition: var(--input-btn-transition);

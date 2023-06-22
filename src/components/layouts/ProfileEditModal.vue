@@ -142,6 +142,8 @@ export default {
             this.form.emergency_number = this.getUser.emergency_number
             this.form.ocupation = this.getUser.ocupation
             this.form.address = this.getUser.address
+            this.$store.commit('stopFormLoader')
+
         },
         deltmp() {
             this.startLoader()
@@ -180,9 +182,6 @@ export default {
             this.form.about = '',
             this.form.tempImage = null
         }
-    },
-    mounted() {
-        this.$store.commit('stopModalLoader')
     }
 }
 </script>

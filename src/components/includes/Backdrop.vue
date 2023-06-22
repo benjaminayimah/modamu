@@ -3,7 +3,13 @@
 </template>
 <script>
 export default {
-    name: 'BackdropOverlay'
+    name: 'BackdropOverlay',
+    props: ['index'],
+    computed: {
+        computedIndex() {
+            return this.index
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -14,6 +20,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: v-bind(computedIndex);
 }
 </style>

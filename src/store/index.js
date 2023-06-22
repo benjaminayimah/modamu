@@ -7,10 +7,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    // appHostname: 'http://localhost:8080',
-    hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    hostname: 'http://localhost:8000',
+    appHostname: 'http://localhost:8080',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -23,8 +23,7 @@ export default createStore({
     onboardModal: false,
     // mainModal: false,
     creating: false,
-    forms: { kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: null },
-    modalLoader: false,
+    forms: { active: false, loader: true, kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: '' },
     kids: [],
     events: [],
     images: [],
@@ -69,9 +68,9 @@ export default createStore({
       state.onboardModal = false
     },
     async openModal(state, payload) {
-      state.modalLoader = true
+      state.forms.loader = true
       await this.commit('activateModal')
-      // document.body.classList.add('fixed-body')
+      document.body.classList.add('fixed-body')
       if(payload == 'kids') {
         state.forms.kids = true
       }else if(payload == 'edit-profile') {
@@ -88,6 +87,9 @@ export default createStore({
         state.forms.kids = true
       }
     },
+    stopFormLoader(state) {
+      state.forms.loader = false
+    },
     setUpdateKid(state, payload) {
       state.forms.user = payload
       this.commit('openModal', 'update-kid')
@@ -96,9 +98,6 @@ export default createStore({
       state.forms.id = payload
       await this.commit('setOtherPass')
       this.commit('openModal', 'change-pass')
-    },
-    stopModalLoader(state) {
-      state.modalLoader = false
     },
     setOtherPass(state) {
       state.forms.otherPass = true
@@ -122,13 +121,15 @@ export default createStore({
       if(i > -1)
       state.messages[i].unread = 0
     },
-    activateModal() {
-      const modal = document.querySelector('#main_modal')
-      modal.showModal()
+    activateModal(state) {
+      state.forms.active = true
+      // const modal = document.querySelector('#main_modal')
+      // modal.showModal()
     },
     closeModal(state) {
-      const modal = document.querySelector('#main_modal')
-      modal.close()
+      // const modal = document.querySelector('#main_modal')
+      // modal.close()
+      state.forms.active = false
       document.body.classList.remove('fixed-body')
       for (let i in state.forms)
       state.forms[i] = false

@@ -172,6 +172,9 @@ export default {
             this.$store.commit('closeModal')
             console.log(res)
         }
+    },
+    mounted() {
+        this.$store.commit('stopFormLoader')
     }
 }
 </script>
