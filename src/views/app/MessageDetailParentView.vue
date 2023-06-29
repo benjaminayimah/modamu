@@ -113,8 +113,10 @@ export default {
                     this.registered_kids = res.data.kids
                     this.$store.commit('stopLoader')
                 }
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         goToParentProfile() {

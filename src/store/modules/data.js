@@ -10,6 +10,18 @@ export default {
             {id: 2, name: 'female'},
             {id: 3, name: 'prefer not to say'}
         ],
+        filterList: [
+            { id: 1, name: 'All', filter: 'all', active: true },
+            { id: 2, name: 'Fathers', filter: 'father', active: false },
+            { id: 3, name: 'Mothers', filter: 'mother', active: false },
+            { id: 4, name: 'Guardians', filter: 'guardian', active: false }
+        ],
+        sortList: [
+            { id: 1, name: 'Newest first', sort: 'newest', active: true },
+            { id: 2, name: 'Oldest first', sort: 'oldest', active: false },
+            { id: 3, name: 'Sort A-Z', sort: 'a-z', active: false },
+            { id: 4, name: 'Sort Z-A', sort: 'z-a', active: false }
+        ],
         defaultImage: require('@/assets/images/default-avatar.png'),
         banner1: require('@/assets/images/modamu_banner.png'),
         image: require('@/assets/images/welcome_banner.jpg'),
@@ -24,6 +36,31 @@ export default {
             state.tempData = false
             state.tempData.data = ''
             state.tempData.array = []
+        },
+        parentFilter(state, payload) {
+            state.filterList.forEach(element => {
+                element.active = false
+            });
+            let i = state.filterList.findIndex(x => x.filter === payload)
+            state.filterList[i].active = true
+        },
+        parentSort(state, payload) {
+            state.sortList.forEach(element => {
+                element.active = false
+            });
+            let i = state.sortList.findIndex(x => x.sort === payload)
+            state.sortList[i].active = true
+        },
+        resetParentFilter(state) {
+            state.filterList.forEach(element => {
+                element.active = false
+            });
+            state.sortList.forEach(element => {
+                element.active = false
+            });
+            state.filterList[0].active = true
+            state.sortList[0].active = true
+
         }
     },
     getters: {

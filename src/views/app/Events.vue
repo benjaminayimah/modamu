@@ -47,8 +47,10 @@ export default {
                 const res = await getApi(this.hostname+'/api/village-user-fetch-events?token='+this.token)
                 this.$store.commit('setEvents', res.data)
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     },

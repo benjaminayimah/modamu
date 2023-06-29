@@ -62,7 +62,7 @@ export default {
         computedItem() {
             if(this.search !=='')
             return this.wait_lists.filter(item => {
-                return item.kid_name.toLowerCase().match(this.search.toLowerCase())
+                return item.kid_name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
             })
             else
             return this.wait_lists
@@ -81,8 +81,10 @@ export default {
                 const res = await getApi(this.hostname+'/api/bookings?token='+this.token)
                 this.$store.commit('setWaitlist', res.data.waitlist)
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         previousPage() {

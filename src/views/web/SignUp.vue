@@ -44,7 +44,7 @@
               <path d="M-438.305-337.394A4.7,4.7,0,0,1-443-342.088v-3a4.7,4.7,0,0,1,3.583-4.561v-1.568a5.2,5.2,0,0,1,5.172-5.174,5.2,5.2,0,0,1,5.176,5.172v1.6a4.7,4.7,0,0,1,3.459,4.529v3a4.7,4.7,0,0,1-4.7,4.694Zm-3.3-7.7v3a3.309,3.309,0,0,0,3.3,3.3h8a3.309,3.309,0,0,0,3.306-3.3v-3a3.31,3.31,0,0,0-3.306-3.3h-8A3.309,3.309,0,0,0-441.61-345.089Zm11.151-4.694v-1.435A3.8,3.8,0,0,0-434.245-355a3.8,3.8,0,0,0-3.783,3.785v1.433Zm-6.541,6.7a2.7,2.7,0,0,1,2.7-2.7,2.7,2.7,0,0,1,2.695,2.7,2.7,2.7,0,0,1-2.695,2.695A2.7,2.7,0,0,1-437-343.088Zm1.39,0a1.307,1.307,0,0,0,1.305,1.3,1.307,1.307,0,0,0,1.3-1.3,1.307,1.307,0,0,0-1.3-1.3A1.306,1.306,0,0,0-435.61-343.088Z" transform="translate(443 356.392)"/>
             </svg>
           </i>
-          <input v-model="form.password" autocomplete="new-password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" data-color="light" placeholder="Enter a min of 6 digit password">
+          <input v-model="form.password" autocomplete="new-password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" data-color="light" placeholder="Enter a min of 6 characters">
           <span class="hide-show-pass br-50" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
               <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
                   <g transform="translate(1.182 1.182)">
@@ -57,6 +57,14 @@
         <span class="input-error" v-if="validation.error && validation.errors.password">
             {{ validation.errors.password[0] }}
         </span>
+        <div class="mt-8 progress-wrapper" v-if="form.password" :class="passwordStrengthClass">
+          <div class="progress-bar mb-8 gap-8 flx">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="fs-09">Password strength: <strong class="capitalize">{{ passwordStrengthClass }}</strong></div>
+        </div>
       </div>
       <button class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
@@ -79,13 +87,44 @@ export default {
   components: { Spinner },
   mixins: [passwordToggleMixin, inputValMixin],
   name: 'SignUp',
-  computed: mapGetters(['getHostname']),
+  computed: {
+    ...mapGetters(['getHostname']),
+    passwordStrength() {
+      let strength = 0;
+      if (this.form.password.length >= 6) {
+        strength += 1;
+      }
+      if (this.form.password.length >= 10) {
+        strength += 1;
+      }
+      if (/[A-Z]/.test(this.form.password) && /[a-z]/.test(this.form.password)) {
+        strength += 1;
+      }
+      if (/\d/.test(this.form.password)) {
+        strength += 1;
+      }
+      if (/[\W_]/.test(this.form.password)) {
+        strength += 1;
+      }
+      return strength;
+    },
+    passwordStrengthClass() {
+      if (this.passwordStrength < 3) {
+        return 'weak';
+      } else if (this.passwordStrength < 5) {
+        return 'medium';
+      } else {
+        return 'strong';
+      }
+    },
+  },
   data () {
       return {
         form: {
           name: '',
           email: '',
-          password: ''
+          password: '',
+          zipcode: ''
         },
         creating: false,
       }
@@ -98,14 +137,7 @@ export default {
           this.signupSuccess(res.data)
         }).catch((e) => {
           this.creating = false
-          if(e.response.status == 422){
-            this.validation.error = true
-            this.validation.errors = e.response.data.errors
-          }
-          if (e.response.status == 503) {
-            this.userError.error = true
-            this.userError.message = 'Our system is currently down for upgrade. Please try again later. Sorry for the inconvenience.'
-          }
+          this.errorResponse(e)
         })
       },
       async signupSuccess(payload) {
@@ -119,6 +151,50 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.progress-wrapper{
+  --weak: #dae0e6;
+  --medium: #dae0e6;
+  --strong: #dae0e6;
+}
+.progress-bar{
+  width: 100%;
+  height: 3px;
+  div {
+    height: inherit;
+    border-radius: 3px;
+    flex: 1;
+    &:first-child {
+      background-color: var(--weak);
+    }
+    &:nth-child(2) {
+      background-color: var(--medium);
+    }
+    &:nth-child(3) {
+      background-color: var(--strong);
+    }
+    
+  }
+}
+.weak{
+  --weak: #fc1d12;
+  strong{
+    color: var(--weak);
+  }
+}
+.medium{
+  --weak: #fc1d12;
+  --medium: #f0b708;
+  strong{
+    color: var(--medium);
+  }
+}
+.strong{
+  --weak: #fc1d12;
+  --medium: #f0b708;
+  --strong: #03b109;
+  strong{
+    color: var(--strong);
+  }
+}
 
 </style>

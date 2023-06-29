@@ -49,8 +49,10 @@ export default {
                 const res = await getApi(this.hostname+'/api/parent-fetch-attendees?token='+this.token);
                 this.$store.commit('setAttendees', res.data)
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         checkIn(payload) {
@@ -61,8 +63,10 @@ export default {
                 if(res.data) {
                     this.$store.commit('updateAttendees', res.data)
                 }
-            }).catch((err) => {
-                console.log(err.response.data)
+            }).catch((e) => {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         }
     },

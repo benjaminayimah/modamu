@@ -74,11 +74,14 @@ export default {
                     this.userError.error = true
                     this.userError.message = res.data.msg
                 }
-            } catch (error) {
+            } catch (e) {
                 this.creating = false
-                if(error.response.status == 422){
+                if(e.response.status == 422){
                     this.validation.error = true
-                    this.validation.errors = error.response.data.errors
+                    this.validation.errors = e.response.data.errors
+                }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
                 }
             }
         }

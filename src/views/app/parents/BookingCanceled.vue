@@ -31,9 +31,10 @@ export default {
         async cancelBooking() {
             try {
                 await postApi(this.hostname + '/api/cancel-booking?token='+this.token, {session_id: this.$route.params.session_id})
-            } catch (error) {
-                console.error(error)
-                
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
 
         }

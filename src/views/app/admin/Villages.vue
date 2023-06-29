@@ -42,7 +42,7 @@ export default {
         computedItem() {
             if(this.search !=='')
             return this.villages.filter(item => {
-                return item.name.toLowerCase().match(this.search.toLowerCase()) || item.address.toLowerCase().match(this.search.toLowerCase())
+                return item.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.address.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
             })
             else
             return this.villages

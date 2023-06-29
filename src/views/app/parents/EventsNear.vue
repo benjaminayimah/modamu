@@ -105,9 +105,11 @@ export default {
             .then((res) => {
                 this.$store.commit('addNearByEvent', res.data)
                 this.loaderOff()
-            }).catch((err) => {
+            }).catch((e) => {
                 this.loaderOff()
-                console.log(err.response.data)
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         },
         loaderOn() {

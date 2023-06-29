@@ -38,7 +38,8 @@
             </svg>
             <label>Height</label>
         </div>
-        <span>{{ kid.height }} cm</span>
+        <span v-if="kid.height">{{ kid.height }}cm</span>
+        <span v-else>n/a</span>
     </div>
     <div class="flx jc-sb br-16 info-row ai-c">
         <div class="flx gap-8">
@@ -47,12 +48,15 @@
             </svg>
             <label>Hobbies</label>
         </div>
-        <span>{{ kid.hobbies || 'n/a'}}</span>
+        <div class="flx gap-8 flx-wrap">
+            <span v-if="!hobbies.length">n/a</span>
+            <li class="capitalize" v-for="hobby in hobbies" :key="hobby.id">{{ hobby.name }}</li>
+        </div>
     </div>
     <label><strong>Health status</strong></label>
     <div class="flx column gap-16">
         <div class="flx health-row illness jc-sb br-16 ai-c">
-            <div class="flx gap-24 ai-c">
+            <div class="flx gap-8 ai-c">
                 <i class="br-50 centered">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 21.873 21.874">
                     <path d="M-3304.661-753.554a7.255,7.255,0,0,1-3.337-1.3c-1.5-1.192-2.091-3.155-2.091-7s.586-5.812,2.091-7a7.235,7.235,0,0,1,3.337-1.3l.047-.008a5.439,5.439,0,0,1,1.619-3.514,5.485,5.485,0,0,1,3.842-1.385,5.485,5.485,0,0,1,3.842,1.385,5.434,5.434,0,0,1,1.619,3.514l.048.008a7.237,7.237,0,0,1,3.337,1.3c1.5,1.192,2.091,3.154,2.091,7s-.586,5.811-2.091,7a7.256,7.256,0,0,1-3.337,1.3,32.8,32.8,0,0,1-5.508.35A32.808,32.808,0,0,1-3304.661-753.554Zm.316-14.821a5.652,5.652,0,0,0-2.522.94c-.994.787-1.4,2.4-1.4,5.574s.406,4.786,1.4,5.574a5.653,5.653,0,0,0,2.522.939,31.06,31.06,0,0,0,5.193.323,31.059,31.059,0,0,0,5.192-.323,5.653,5.653,0,0,0,2.522-.939c.994-.787,1.4-2.4,1.4-5.574s-.406-4.787-1.4-5.574a5.652,5.652,0,0,0-2.522-.94,31.17,31.17,0,0,0-5.192-.322A31.171,31.171,0,0,0-3304.345-768.375Zm2.6-3.988a3.489,3.489,0,0,0-1,1.96c1.01-.079,2.19-.117,3.593-.117s2.581.038,3.591.117a3.482,3.482,0,0,0-1-1.96,3.655,3.655,0,0,0-2.595-.892A3.657,3.657,0,0,0-3301.747-772.363Zm1.683,13.691V-760.5h-1.823a.912.912,0,0,1-.912-.912.912.912,0,0,1,.912-.911h1.823v-1.822a.911.911,0,0,1,.912-.911.911.911,0,0,1,.912.911v1.822h1.823a.911.911,0,0,1,.911.911.912.912,0,0,1-.911.912h-1.823v1.824a.912.912,0,0,1-.912.912A.912.912,0,0,1-3300.064-758.672Z" transform="translate(3310.088 775.077)"/>
@@ -60,10 +64,13 @@
                 </i>
                 <span>Illness</span>
             </div>
-            <div>{{ kid.illness || 'n/a' }}</div>
+            <div class="flx gap-8 flx-wrap">
+                <span v-if="!illnesses.length">n/a</span>
+                <li v-else class="capitalize" v-for="illness in illnesses" :key="illness.id">{{ illness.name }}</li>
+            </div>
         </div>
         <div class="flx health-row allergies jc-sb br-16 ai-c">
-            <div class="flx gap-24 ai-c">
+            <div class="flx gap-8 ai-c">
                 <i class="br-50 centered">
                     <svg xmlns="http://www.w3.org/2000/svg" height="13" viewBox="0 0 24.605 13.79">
                         <path d="M-1978.008,13.786c-2.069-.047-4.913-.561-6.71-2.745A5.788,5.788,0,0,1-1986,8.323l-3.455-1.313a.85.85,0,0,1-.492-1.1.849.849,0,0,1,1.1-.492l2.539.965-.625-3.881c-1.225-.47-2-.852-2.084-.894A.85.85,0,0,1-1989.4.472a.851.851,0,0,1,1.14-.383,27.859,27.859,0,0,0,10.642,2.642,28.749,28.749,0,0,0,10.76-2.644.849.849,0,0,1,1.137.391.849.849,0,0,1-.391,1.136c-.085.042-.868.419-2.1.886l-.71,3.919,2.349-.987a.849.849,0,0,1,1.112.455A.85.85,0,0,1-1965.916,7l-3.369,1.414-.09.5-.008.032a5.945,5.945,0,0,1-1.637,2.559,9.525,9.525,0,0,1-6.655,2.29C-1977.788,13.79-1977.9,13.789-1978.008,13.786Zm-6.306-5.707c.031.215.629,3.878,6.345,4.008.105,0,.209,0,.31,0,5.386,0,6.53-3.253,6.625-3.559l.977-5.393a25.893,25.893,0,0,1-7.562,1.293,25.363,25.363,0,0,1-7.49-1.286Zm2.123,1.373a.851.851,0,0,1-.383-1.14.851.851,0,0,1,1.139-.382,10.136,10.136,0,0,0,3.851.959,10.389,10.389,0,0,0,3.9-.962.85.85,0,0,1,1.137.391.849.849,0,0,1-.391,1.137,12.08,12.08,0,0,1-4.644,1.134A11.761,11.761,0,0,1-1982.192,9.453Zm0-3a.85.85,0,0,1-.383-1.139.85.85,0,0,1,1.139-.383,10.143,10.143,0,0,0,3.851.958,10.4,10.4,0,0,0,3.9-.961.85.85,0,0,1,1.137.391.85.85,0,0,1-.391,1.137,12.087,12.087,0,0,1-4.644,1.133A11.744,11.744,0,0,1-1982.192,6.452Z" transform="translate(1990 0)"/>
@@ -71,7 +78,10 @@
                 </i>
                 <span>Allergies</span>
             </div>
-            <div>{{ kid.allergies || 'n/a' }}</div>
+            <div class="flx gap-8 flx-wrap">
+                <span v-if="!allergies.length">n/a</span>
+                <li v-else class="capitalize" v-for="allergy in allergies" :key="allergy.id">{{ allergy.name }}</li>
+            </div>
         </div>
     </div>
 </div>
@@ -82,10 +92,10 @@ import userNameMixin from '@/mixins/userNameMixin';
 import formatDateTime from '@/mixins/formatDateTime';
 import ProfileAvatar from '../includes/app/ProfileAvatar.vue'
 export default {
-  components: { ProfileAvatar },
+    components: { ProfileAvatar },
     name: 'KidsBodyProfile',
     mixins: [formatDateTime, userNameMixin],
-    props: ['kid']
+    props: ['kid', 'hobbies', 'illnesses', 'allergies']
 }
 </script>
 
@@ -102,5 +112,8 @@ export default {
 .bg-img {
     height: 120px;
     width: 120px;
+}
+li {
+    font-size: 0.9rem;
 }
 </style>

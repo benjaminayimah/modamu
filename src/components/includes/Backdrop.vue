@@ -4,17 +4,21 @@
 <script>
 export default {
     name: 'BackdropOverlay',
-    props: ['index'],
+    props: ['index', 'opacity'],
     computed: {
         computedIndex() {
             return this.index
+        },
+        computedOpacity() {
+            return this.opacity
         }
     }
 }
 </script>
 <style lang="scss" scoped>
 #overlay{
-    background-color: rgba($color: #000000, $alpha: 0.5);
+    --opacity: v-bind(computedOpacity);
+    background-color: rgba($color: #000000, $alpha: var(--opacity));
     position: fixed;
     top: 0;
     left: 0;

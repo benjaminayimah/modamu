@@ -75,15 +75,15 @@ export default {
         console.log(res.data)
         res.data.email ? this.emailSent = true : ''
         this.creating = false
-      } catch (error) {
+      } catch (e) {
         this.creating = false
-        if(error.response.status == 422){
+        if(e.response.status == 422){
           this.validation.error = true
-          this.validation.errors = error.response.data.errors
+          this.validation.errors = e.response.data.errors
         }
-        if (error.response.status == 404) {
+        if (e.response.status == 404) {
             this.userError.error = true
-            this.userError.message = error.response.data.email+' does not exist in our system.'
+            this.userError.message = e.response.data.email+' does not exist in our system.'
         }
       }
     },

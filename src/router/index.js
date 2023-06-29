@@ -46,6 +46,10 @@ import AdminDashPastTab from '@/components/layouts/AdminDashPastTab.vue'
 import ParentVerifyCode from '@/views/app/parents/ParentVerifyCode.vue'
 import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
 import AddVillagePage from '@/views/app/admin/AddVillagePage.vue'
+import SubAdmins from '@/views/app/admin/SubAdmins.vue'
+import SubAdminViewOne from '@/views/app/admin/SubAdminViewOne.vue'
+import SubAdminViewTwo from '@/views/app/admin/SubAdminViewTwo.vue'
+
 
 
 
@@ -86,16 +90,14 @@ const routes = [
       { path: '/event/:id/:name', name: 'DetailedEvent', component: DetailedEvent },
       { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
       { path: '/parent/:parent_id/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
-      { path: '/villages', name: 'Villages', component: Villages },
       { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
       { path: '/transactions', name: 'Transactions', component: Transactions },
       { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
-      { path: '/parents', name: 'Parents', component: Parents },
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,
-      children: [
-        { path: '/messages/:id/:name/:to', name: 'MessageDetail', component: MessageDetail },
-      ]
+        children: [
+          { path: '/messages/:id/:name/:to', name: 'MessageDetail', component: MessageDetail },
+        ]
       },
       { path: '/notifications', name: 'Notification', component: Notification },
       // { path: '/', name: 'Payment', component: Payment,
@@ -113,6 +115,21 @@ const routes = [
       { path: '/track-event/:id/:name', name: 'TrackEvent', component: TrackEvent},
       { path: '/verify-code-and-checkout', name: 'ParentVerifyCode', component: ParentVerifyCode},
       { path: '/code-verification', name: 'VillageVerifyCode', component: VillageVerifyCode},
+
+      //super
+      { path: '/parents', name: 'Parents', component: Parents },
+      { path: '/sub-admins', component: SubAdmins,
+      children: [
+          { path: '/sub-admins', name: 'SubAdminViewOne', component: SubAdminViewOne },
+          { path: '/sub-admins/village-personnels', name: 'SubAdminViewTwo', component: SubAdminViewTwo }
+        ]
+      },
+      { path: '/villages', name: 'Villages', component: Villages },
+
+
+    
+
+
 
 
 

@@ -51,7 +51,7 @@ export default {
         computedItem() {
             if(this.search !=='')
             return this.messages.filter(item => {
-                return item.sender.name.toLowerCase().match(this.search.toLowerCase()) || item.message.preview.toLowerCase().match(this.search.toLowerCase())
+                return item.sender.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.message.preview.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
             })
             else
             return this.messages

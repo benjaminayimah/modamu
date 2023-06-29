@@ -122,8 +122,11 @@ export default {
             .then((res) => {
                 this.stopLoader()
                 this.setData(res.data.image)
-            }).catch(() => {
+            }).catch((e) => {
                 this.stopLoader()
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         },
         checkIfisset() {
@@ -150,9 +153,11 @@ export default {
             axios.delete(this.getHostname + "/api/del-temp-upload/" + this.getUser.id)
             .then(() => {
                 this.afterDeletion()
-            }).catch((err) => {
+            }).catch((e) => {
                 this.stopLoader()
-                console.log(err.response);
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             });
         },
         doSubmit() {
@@ -165,6 +170,9 @@ export default {
                 if(e.response.status == 422){
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
+                }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
                 }
             })
         },

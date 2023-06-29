@@ -61,7 +61,7 @@
   </section>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import { mapGetters } from 'vuex'
 import inputValMixin from '../../mixins/inputValMixin'
 import Spinner from '../../components/includes/Spinner.vue'
@@ -70,7 +70,7 @@ export default {
   components: { Spinner },
   name: 'SignIn',
   mixins: [inputValMixin, passwordToggleMixin],
-  computed: mapGetters(['getImage', 'getHostname']),
+  computed: mapGetters(['getHostname']),
   data () {
     return {
       form: {
@@ -81,28 +81,39 @@ export default {
     }
   },
   methods: {
-    submitSignin() {
-      this.creating = true
-      this.validation.error || this.userError.error ? this.clearErrs() : ''
-      axios.post(this.getHostname+'/api/sign-in', this.form)
-      .then((res) => {
-          this.signinSuccess(res)
-        }).catch((e) => {
+    // submitSignin() {
+    //   this.creating = true
+    //   this.validation.error || this.userError.error ? this.clearErrs() : ''
+    //   axios.post(this.getHostname+'/api/sign-in', this.form)
+    //   .then((res) => {
+    //       this.signinSuccess(res)
+    //     }).catch((e) => {
+    //       this.creating = false
+    //       if (e.response.status == 401) {
+    //         this.userError.error = true
+    //         this.userError.message = 'Invalid email or password. Please try again or try resetting your password.'
+    //         this.form.password = ''
+    //       }
+    //       if(e.response.status == 422){
+    //         this.validation.error = true
+    //         this.validation.errors = e.response.data.errors
+    //       }
+    //       if (e.response.status == 503) {
+    //         this.userError.error = true
+    //         this.userError.message = 'Our system is currently down for upgrade. Please try again later. Sorry for the inconvenience.'
+    //       }
+    //     })
+    // },
+    async submitSignin() { 
+        this.creating = true
+        this.validation.error || this.userError.error ? this.clearErrs() : ''
+        try {
+            const res = await this.$store.dispatch('signIn', this.form)
+            this.signinSuccess(res)
+        } catch (e) {
           this.creating = false
-          if (e.response.status == 401) {
-            this.userError.error = true
-            this.userError.message = 'Invalid email or password. Please try again or try resetting your password.'
-            this.form.password = ''
-          }
-          if(e.response.status == 422){
-            this.validation.error = true
-            this.validation.errors = e.response.data.errors
-          }
-          if (e.response.status == 503) {
-            this.userError.error = true
-            this.userError.message = 'Our system is currently down for upgrade. Please try again later. Sorry for the inconvenience.'
-          }
-        })
+          this.errorResponse(e)
+        }
     },
     async signinSuccess(res) {
       this.creating = false

@@ -2,15 +2,16 @@ import axios from 'axios'
 import { createStore } from 'vuex'
 import data from './modules/data'
 import newUser from './modules/newUser'
+import dropdown from './modules/dropdown'
 import { deleteApi, getApi, postApi } from '@/api'
 import router from '@/router'
 
 export default createStore({
   state: {
-    // hostname: 'http://localhost:8000',
-    // appHostname: 'http://localhost:8080',
-    hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    hostname: 'http://localhost:8000',
+    appHostname: 'http://localhost:8080',
+    // hostname: 'https://modamu-api.rancroftdev.com',
+    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -21,9 +22,11 @@ export default createStore({
     user: JSON.parse(localStorage.getItem('user')) || {},
     addModal: false,
     onboardModal: false,
+    sessionExp: false,
+    village_allocation: { active: false, user: ''},
     // mainModal: false,
     creating: false,
-    forms: { active: false, loader: true, kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, id: '', user: '' },
+    forms: { active: false, loader: true, kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, sub_admin: false, id: '', user: '' },
     kids: [],
     events: [],
     images: [],
@@ -43,8 +46,12 @@ export default createStore({
     bookings: [],
     parents: [],
     chats: [],
+    hobbies: [],
+    illnesses: [],
+    allergies: [],
     chatImage: '',
-    msgParentDetails: false
+    msgParentDetails: false,
+    sub_admins: []
   },
   mutations: {
     computeWindow(state) {
@@ -85,6 +92,17 @@ export default createStore({
         state.forms.addVillage = true
       }else if(payload == 'update-kid') {
         state.forms.kids = true
+      }else if(payload == 'sub-admin') {
+        state.forms.sub_admin = true
+      }
+    },
+    closeModal(state) {
+      state.forms.active = false
+      document.body.classList.remove('fixed-body')
+      for (let i in state.forms)
+      state.forms[i] = false
+      if(state.forms.user) {
+        state.forms.user = ''
       }
     },
     stopFormLoader(state) {
@@ -93,6 +111,10 @@ export default createStore({
     setUpdateKid(state, payload) {
       state.forms.user = payload
       this.commit('openModal', 'update-kid')
+    },
+    setAddAdmin(state, payload) {
+      state.forms.user = payload
+      this.commit('openModal', 'sub-admin')
     },
     async resetTheirPass(state, payload) {
       state.forms.id = payload
@@ -126,17 +148,6 @@ export default createStore({
       // const modal = document.querySelector('#main_modal')
       // modal.showModal()
     },
-    closeModal(state) {
-      // const modal = document.querySelector('#main_modal')
-      // modal.close()
-      state.forms.active = false
-      document.body.classList.remove('fixed-body')
-      for (let i in state.forms)
-      state.forms[i] = false
-      if(state.forms.user) {
-        state.forms.user = {}
-      }
-    },
     goToEvents() {
       router.push({ name: 'EventsNear' })
     },
@@ -168,6 +179,10 @@ export default createStore({
       state.wait_lists = payload.waitlist
       state.messages = payload.messages
       state.notifications = payload.notifications
+      state.hobbies = payload.hobbies
+      state.illnesses = payload.illnesses
+      state.allergies = payload.allergies
+      state.sub_admins = payload.sub_admins
       this.commit('updateLocalStorage', payload.user)
     },
     setRegisteredEvents(state, payload) {
@@ -198,6 +213,14 @@ export default createStore({
     setKids(state, payload) {
       state.kids = payload
     },
+    openAllocateVillage(state, payload) {
+      state.village_allocation.active = true
+      state.village_allocation.user = payload
+    },
+    closeAllocateVillage(state) {
+      state.village_allocation.active = false
+      state.village_allocation.user = ''
+    },
     upadateEvents(state, payload) {
       state.events.push(payload.event)
       state.images.push(payload.image)
@@ -206,11 +229,17 @@ export default createStore({
       state.villages.push(payload)
     },
     addToKids(state, payload) {
-      state.kids.push(payload)
+      state.kids.push(payload.kid)
+      state.hobbies = payload.hobbies
+      state.illnesses = payload.illnesses
+      state.allergies = payload.allergies
     },
     updateKids(state, payload) {
-      const i = state.kids.findIndex(x => x.id == payload.id)
-      state.kids.splice(i, 1, payload)
+      const i = state.kids.findIndex(x => x.id == payload.kid.id)
+      state.kids.splice(i, 1, payload.kid)
+      state.hobbies = payload.hobbies
+      state.illnesses = payload.illnesses
+      state.allergies = payload.allergies
     },
     destroyToken(){
       localStorage.removeItem('auth')
@@ -229,6 +258,9 @@ export default createStore({
     setAttendees(state, payload) {
       state.attendees = payload
     },
+    addToSubAdmin(state, payload) {
+      state.sub_admins.push(payload)
+    },
     updateAttendees(state, payload) {
       const i = state.attendees.findIndex(x => x.id == payload.id)
       state.attendees.splice(i, 1, payload)
@@ -242,6 +274,12 @@ export default createStore({
     deleteRegistered(state, payload) {
       state.registered_events =  state.registered_events.filter(item => item.id != payload)
       router.go(-1)
+    },
+    setExpSession(state) {
+      state.sessionExp = true
+    },
+    unsetExpSession(state) {
+      state.sessionExp = false
     },
     startLoader(state) {
       state.loader = true
@@ -290,10 +328,15 @@ export default createStore({
           //   body: 'Error loading store! Please check your internet connection'
           // }
           // state.commit('showAlert', newPayload)
-          state.commit('destroyToken') 
+          // state.commit('destroyToken') 
+          if(e.response.status == 400) {
+            state.commit('destroyToken')
+          }
         }      
     },
-    
+    async signIn(state, payload) {  
+        return await axios.post(this.getters.getHostname+'/api/sign-in', payload) 
+    },
     logoutAuth(state){
         state.commit('startLoader') 
         axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
@@ -310,8 +353,10 @@ export default createStore({
           const address = data.results[0].formatted_address
           state.commit('setCurrentLocation', address)
         })
-        .catch(error => {
-          console.log(error);
+        .catch(e => {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         });
     },
     async doPreloadTemp(state, payload) {
@@ -326,16 +371,20 @@ export default createStore({
             const res = await getApi(this.getters.getHostname+'/api/fetch-messages?token='+this.getters.getToken);
             state.commit('setMessages', res.data)
             state.commit('stopLoader')
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+          if(e.response.status == 400) {
+            state.commit('setExpSession')
+          }
         }
       },
       async fetchNotifications(state, payload) {
         try {
             const res = await postApi(this.getters.getHostname+'/api/notifications?token='+this.getters.getToken, {read: payload});
             state.commit('setNotifications', res.data)
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         }
       },
       async deleteThisNotification(state, payload) {
@@ -344,8 +393,10 @@ export default createStore({
             const res = await deleteApi(this.getters.getHostname+'/api/notifications/'+payload+'?token='+this.getters.getToken);
             state.commit('deleteNotification', res.data)
             state.commit('stopLoader')
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         }
       },
       async deleteAttendee(state, payload) {
@@ -354,8 +405,10 @@ export default createStore({
             const res = await deleteApi(this.getters.getHostname+'/api/bookings/'+payload+'?token='+this.getters.getToken);
             state.commit('deleteAttendees', res.data)
             state.commit('stopLoader')
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         }
       },
       async deleteRegistered(state, payload) {
@@ -364,8 +417,10 @@ export default createStore({
             const res = await deleteApi(this.getters.getHostname+'/api/delete-registered-finish-event/'+payload+'?token='+this.getters.getToken);
             state.commit('deleteRegistered', res.data)
             state.commit('stopLoader')
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         }
       },
       async fetchChats(state, payload) {
@@ -375,26 +430,13 @@ export default createStore({
             const res = await postApi(this.getters.getHostname + '/api/fetch-this-chats/'+ payload.id +'?token='+this.getters.getToken)
             state.commit('setChats', res.data)
             state.commit('stopLoader')
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+          if(e.response.status == 400) {
+              state.commit('setExpSession')
+          }
         }
 
     }
-
-    // async fetchWaitList() {
-    //   return await axios.get(this.getters.getHostname+'/api/bookings?token='+ this.getters.getToken)    
-    // },
-    // async doFetchKids(url) {
-    //   try {
-    //     const data =  await axios.post(url+'?token='+this.getters.getToken)
-    //     return data
-    //   } catch (error) {
-    //     console.error('Error:', error);
-    //   }
-    // },
-    
-    
-    
   },
   getters: {
     getHostname: (state) => state.hostname,
@@ -409,10 +451,10 @@ export default createStore({
       return state.user.access_level == 0 ? true : false
     },
     is_super(state) {
-      return state.user.access_level == 0 && !state.user.sub_level ? true : false
+      return state.user.access_level == 0 && !state.user.sub_admin ? true : false
     },
     is_subadmin(state) {
-      return state.user.access_level == 0 && state.user.sub_level ? true : false
+      return state.user.access_level == 0 && state.user.sub_admin ? true : false
     },
     is_village(state) {
       return state.user.access_level == 1 ? true : false
@@ -478,6 +520,12 @@ export default createStore({
       });
       return count
     },
+    getSubAdmins(state) {
+      return state.sub_admins.filter(data => data.sub_level == 1)
+    },
+    getVillagePersonnels(state) {
+      return state.sub_admins.filter(data => data.sub_level == 2)
+    },
     getDevice: (state) => state.device,
     getWindowWidth: (state) => state.windowWidth,
     getWindowHeight: (state) => state.windowHeight,
@@ -489,6 +537,7 @@ export default createStore({
   },
   modules: {
     data,
-    newUser
+    newUser,
+    dropdown
   }
 })

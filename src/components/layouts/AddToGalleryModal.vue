@@ -61,7 +61,9 @@ export default {
                     location.reload()
                 }).catch((e) => {
                     this.creating = false
-                    console.log(e.response)
+                    if(e.response.status == 400) {
+                        this.$store.commit('setExpSession')
+                    }
                 })
             }
             
@@ -78,9 +80,11 @@ export default {
             axios.delete(this.getHostname + "/api/del-temp-upload/" + this.getUser.id)
             .then(() => {
                 this.afterDeletion()
-            }).catch((err) => {
+            }).catch((e) => {
                 this.stopLoader()
-                console.log(err.response);
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             });
         },
     },

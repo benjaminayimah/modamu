@@ -53,9 +53,11 @@ export default {
                 if(res.data) {
                     this.completed = true
                 }
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
                 this.error = true
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         goToEvent() {

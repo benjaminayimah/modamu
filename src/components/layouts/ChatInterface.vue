@@ -78,8 +78,10 @@ export default {
                 }
                 this.$emit('add-to-chat', res.data.chat)
                 this.form.chat = ''
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
     },

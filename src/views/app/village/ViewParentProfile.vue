@@ -75,8 +75,10 @@ export default {
                 this.chats = res.data.chats
                 this.message_id = res.data.message_id
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         addToChat(payload) {

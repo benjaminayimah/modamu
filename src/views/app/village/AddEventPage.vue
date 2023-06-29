@@ -199,6 +199,9 @@ export default {
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
                 }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         },
         startSubmit() {
@@ -217,8 +220,11 @@ export default {
             axios.delete(this.getHostname + "/api/del-temp-upload/" + this.user.id)
             .then(() => {
                 this.afterDeletion()
-            }).catch(() => {
+            }).catch((e) => {
                 this.stopLoader()
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             });
         },
         goToEvent() {

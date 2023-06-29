@@ -42,12 +42,11 @@ export default {
                 if(res.data) {
                     this.results(res.data)
                 }
-            } catch (err) {
-                this.results(err.response.data)
+            } catch (e) {
+                this.results(e.response.data)
             }
         },
         results(data) {
-            console.log(data)
             this.response.status = data.status
             this.response.message = data.msg
             this.submitting = false

@@ -62,7 +62,7 @@ export default {
         computedItem() {
             if(this.search !=='')
             return this.attendees.filter(item => {
-                return item.kid_name.toLowerCase().match(this.search.toLowerCase())
+                return item.kid_name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
             })
             else
             return this.attendees
@@ -82,8 +82,10 @@ export default {
                 const res = await getApi(this.hostname+'/api/village-fetch-attendees?token='+this.token);
                 this.$store.commit('setAttendees', res.data)
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         // async checkIn(payload) {
@@ -97,8 +99,10 @@ export default {
                 if(res.data) {
                     this.$store.commit('updateAttendees', res.data)
                 }
-            }).catch((err) => {
-                console.log(err.response.data)
+            }).catch((e) => {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         },
         previousPage() {

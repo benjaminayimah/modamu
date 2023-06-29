@@ -51,10 +51,12 @@ export default {
                     this.sending = false
                     this.successful = true
                 }
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
                 this.error = true
                 this.sending = false
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     },

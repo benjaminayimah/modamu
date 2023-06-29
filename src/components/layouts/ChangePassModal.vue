@@ -64,7 +64,7 @@
                         </span>
                     </div>
                     <div v-if="superAdmin" class="flx gap-16">
-                        <a @click.prevent="generatePass(8)" href="#" class="getting-started">Or auto-generate a password</a>
+                        <a @click.prevent="generatePass(10)" href="#" class="getting-started">Or auto-generate a password</a>
                         <i>{{ form.new_password }}</i>
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.new_password">
@@ -126,11 +126,13 @@ export default {
                 this.endSubmit()
                 this.$store.commit('closeModal')
             }).catch((e) => {
-                console.log(e.response)
                 this.endSubmit()
                 if(e.response.status == 422){
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
+                }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
                 }
             });
         },

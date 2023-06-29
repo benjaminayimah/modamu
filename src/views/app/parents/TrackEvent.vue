@@ -117,8 +117,10 @@ export default {
                 this.booking = res.data.booking
                 this.event = res.data.event
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     },

@@ -1,6 +1,6 @@
 <template>
     <div v-if="forms.active" class="modal-container jc-c ai-c">
-        <backdrop :index="100" />
+        <backdrop :index="100" :opacity="0.5" />
         <div id="main_modal" class="modal overflow-y-scroll scroll-hidden flx column relative">
             <div class="modal-top flx jc-sb ai-c sticky">
                 <h3 id="modal_title"></h3>
@@ -24,12 +24,14 @@
     <add-to-gallery v-else-if="forms.addtoGallery" />
     <verify-code-modal v-else-if="forms.verifyCode" />
     <add-village-form v-else-if="forms.addVillage" />
+    <add-admin-form v-else-if="forms.sub_admin" />
 </template>
 <script>
 import { defineAsyncComponent } from 'vue';
 import { mapState } from 'vuex';
 import Backdrop from '../includes/Backdrop.vue';
 import LottieLoader from '../includes/LottieLoader.vue';
+import AddAdminForm from '@/views/app/admin/AddAdminForm.vue';
 const VerifyCodeModal = defineAsyncComponent(() => import(/* webpackChunkName: VerifyCodeModal */ '@/components/layouts/VerifyCodeModal.vue'));
 const AddKidsModal = defineAsyncComponent(() => import(/* webpackChunkName: AddKidsModal */ './AddKidsModal.vue'));
 const AddToGallery = defineAsyncComponent(() => import(/* webpackChunkName: AddToGallery */ './AddToGalleryModal.vue'));
@@ -37,7 +39,7 @@ const ChangePassModal = defineAsyncComponent(() => import(/* webpackChunkName: C
 const ProfileEditModal = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ './ProfileEditModal.vue'));
 const AddVillageForm = defineAsyncComponent(() => import(/* webpackChunkName: ProfileEditModal */ '../../views/app/admin/AddVillageForm.vue'));
 export default {
-    components: { AddKidsModal, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal, AddVillageForm, Backdrop, LottieLoader },
+    components: { AddKidsModal, ProfileEditModal, ChangePassModal, AddToGallery, VerifyCodeModal, AddVillageForm, Backdrop, LottieLoader, AddAdminForm },
     name: 'MainModal',
     computed: {
         ...mapState({
@@ -48,13 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-container{
-  position: fixed;
-  inset: 0;
   // pointer-events: none !important;
-  display: flex;
-  z-index: 100;
-}
 .modal{
   max-height: 90vh;
   width: 560px;
@@ -63,31 +59,13 @@ export default {
   z-index: 110;
 }
 .modal-top{
-    // border-bottom: 1px solid var(--bg-color);
-    background-color: hsla(0,0%,100%,.8);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    top: 0;
     padding: 6px 28px;
-    button {
-        height: 48px;
-        width: 48px;
-        padding: unset;
-        background-color: transparent;
-        margin-right: -16px;
-        &:hover {
-            path{
-                fill: var(--ft-dark);
-            }
-        }
-    }
 }
 .modal-top, .modal-bottom {
     z-index: 1;
 }
 .modal-body{
     padding: 32px 28px 50px 28px;
-    // max-height: calc(100dvh - 250px);
 }
 .modal-bottom{
     padding: 16px 28px 28px 28px;
@@ -110,6 +88,6 @@ export default {
         height: 100%;
         flex-grow: 1;
     }
-    
 }
+
 </style>

@@ -136,9 +136,11 @@ export default {
                     this.events = res.data.events
                     this.submitting = false
                 }
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
                 this.submitting = false
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         previousPage() {

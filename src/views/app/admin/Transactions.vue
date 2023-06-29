@@ -46,7 +46,7 @@ export default {
         computedItem() {
             if(this.search !=='')
             return this.bookings.filter(item => {
-                return item.name.toLowerCase().match(this.search.toLowerCase()) || item.event_name.toLowerCase().match(this.search.toLowerCase())
+                return item.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.event_name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
             })
             else
             return this.bookings

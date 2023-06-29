@@ -13,7 +13,7 @@
         </div>
         <div class="flx gap-50 row-column">
             <div class="main-content-card kid-profile flx column gap-24">
-                <profile-kid-body-content :kid="thisKid"/>
+                <profile-kid-body-content :kid="thisKid" :hobbies="hobbies" :illnesses="illnesses" :allergies="allergies"/>
             </div>
             <div class="flx-grow-1">
                 <div class="main-content-card parent-profile flx column gap-24">
@@ -74,9 +74,12 @@ export default {
     data() {
         return {
             thisKid: '',
-            otherKids: [],
+            otherKids: '',
             parent: '',
-            event: ''
+            event: '',
+            hobbies: '',
+            illnesses: '',
+            allergies: ''
         }
     },
     methods: {
@@ -87,10 +90,14 @@ export default {
                 this.parent = res.data.parent
                 this.event = res.data.event
                 this.otherKids = res.data.otherkids
-                console.log(res.data)
+                this.hobbies = res.data.hobbies
+                this.illnesses = res.data.illnesses
+                this.allergies = res.data.allergies
                 this.$store.commit('stopLoader')
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         goToParentProfile() {

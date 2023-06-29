@@ -44,9 +44,11 @@ export default {
                         }).then((res) => {
                             this.stopLoader()
                             this.afterTempUpload(res.data.image)
-                        }).catch((err) => {
+                        }).catch((e) => {
                             this.stopLoader()
-                            console.log(err.response);
+                            if(e.response.status == 400) {
+                                this.$store.commit('setExpSession')
+                            }
                         });
 
                     }else {

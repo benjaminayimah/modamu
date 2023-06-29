@@ -81,8 +81,10 @@ export default {
                 axios.post(this.hostname + '/api/make-payment?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
                 .then((res) => {
                     location.href = res.data
-                }).catch((err) => {
-                    console.log(err)
+                }).catch((e) => {
+                    if(e.response.status == 400) {
+                        this.$store.commit('setExpSession')
+                    }
                 })
             }
         },
@@ -102,8 +104,10 @@ export default {
             try {
                 const res = await axios.post(this.hostname + '/api/fetch-kids?token=' + this.token)
                 this.$store.commit('setKids', res.data.kids)
-            } catch (error) {
-                console.error('Error:', error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     },

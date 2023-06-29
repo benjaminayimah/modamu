@@ -90,7 +90,7 @@
                                     <path d="M-438.305-337.394A4.7,4.7,0,0,1-443-342.088v-3a4.7,4.7,0,0,1,3.583-4.561v-1.568a5.2,5.2,0,0,1,5.172-5.174,5.2,5.2,0,0,1,5.176,5.172v1.6a4.7,4.7,0,0,1,3.459,4.529v3a4.7,4.7,0,0,1-4.7,4.694Zm-3.3-7.7v3a3.309,3.309,0,0,0,3.3,3.3h8a3.309,3.309,0,0,0,3.306-3.3v-3a3.31,3.31,0,0,0-3.306-3.3h-8A3.309,3.309,0,0,0-441.61-345.089Zm11.151-4.694v-1.435A3.8,3.8,0,0,0-434.245-355a3.8,3.8,0,0,0-3.783,3.785v1.433Zm-6.541,6.7a2.7,2.7,0,0,1,2.7-2.7,2.7,2.7,0,0,1,2.695,2.7,2.7,2.7,0,0,1-2.695,2.695A2.7,2.7,0,0,1-437-343.088Zm1.39,0a1.307,1.307,0,0,0,1.305,1.3,1.307,1.307,0,0,0,1.3-1.3,1.307,1.307,0,0,0-1.3-1.3A1.306,1.306,0,0,0-435.61-343.088Z" transform="translate(443 356.392)"/>
                                 </svg>
                             </i>
-                            <input @input="checkCopied" v-model="form.password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" autocomplete="new-password" data-color="dark" placeholder="Enter a min of 6 digit password">
+                            <input @input="checkCopied" v-model="form.password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" autocomplete="new-password" data-color="dark" placeholder="Enter a min of 6 characters">
                             <div class="gap-8 span-double-wrapper">
                                 <span v-if="form.password" :class="{'copied' : copied}" @click="copyTextToClipboard(form.password)" class="double ai-c jc-c flx br-50 a-btn" title="Copy password">
                                     <svg v-if="!copied" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 23.625 29.25">
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <div class="flx gap-16">
-                            <a @click.prevent="generatePass(8)" href="#" class="getting-started">Or auto-generate a password</a>
+                            <a @click.prevent="generatePass(10)" href="#" class="getting-started">Or auto-generate a password</a>
                             <i>{{ form.password }}</i>
                         </div>
                         <span class="input-error" v-if="validation.error && validation.errors.password">
@@ -159,6 +159,7 @@ export default {
                 village_name: '',
                 password: '',
                 address: '',
+                zipcode: '',
                 latitude: null,
                 longitude: null,
                 tempImage: null,
@@ -180,6 +181,9 @@ export default {
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
                 }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             })
         },
         deltmp() {
@@ -187,9 +191,11 @@ export default {
             axios.delete(this.hostname + "/api/del-temp-upload/" + this.user.id)
             .then(() => {
                 this.afterDeletion()
-            }).catch((err) => {
+            }).catch((e) => {
                 this.stopLoader()
-                console.log(err.response);
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             });
         },
         async signupSuccess(res) {

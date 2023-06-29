@@ -203,16 +203,20 @@ export default {
                 this.event = res.data.event
                 this.attendees = res.data.attendees
                 this.images = res.data.images
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         async delImage(id) {
             try {
                 await deleteApi(this.hostname+'/api/del-this-image/'+id+ '?token='+this.token)
                 location.reload()
-            } catch (error) {
-                console.error(error)
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     },

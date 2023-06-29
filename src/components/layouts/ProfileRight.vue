@@ -47,8 +47,10 @@ export default {
             try {
                 const res = await axios.post(this.getHostname + '/api/fetch-kids?token=' + this.getToken)
                 this.$store.commit('setKids', res.data.kids)
-            } catch (error) {
-                console.error('Error:', error);
+            } catch (e) {
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         }
     }

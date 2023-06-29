@@ -86,15 +86,15 @@ export default {
                     this.successful = true
                 }
                 this.creating = false
-            } catch (error) {
+            } catch (e) {
                 this.creating = false
-                if(error.response.status == 422){
+                if(e.response.status == 422){
                     this.validation.error = true
-                    this.validation.errors = error.response.data.errors
+                    this.validation.errors = e.response.data.errors
                 }
-                if (error.response.status == 401) {
+                if (e.response.status == 401) {
                     this.userError.error = true
-                    this.userError.message = error.response.data.message
+                    this.userError.message = e.response.data.message
                 }
             }
         }

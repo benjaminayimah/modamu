@@ -63,9 +63,11 @@ export default {
                 const res = await postApi(this.hostname+'/api/accept-this-attendee?token='+this.token, { id: this.attendee.id});
                 this.$store.commit('updateWaitlist', res.data)
                 this.stopSpinner()
-            } catch (error) {
-                console.error(error);
+            } catch (e) {
                 this.stopSpinner()
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         startSpinner() {

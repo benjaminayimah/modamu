@@ -63,6 +63,75 @@
                         {{ validation.errors.about[0] }}
                     </span>
                 </div>
+                <div class="form-row column">
+                    <label for="hobby" class="flx column gap-6">
+                        Hobbies
+                        <div id="hobby_wrapper" class="bd-dashed pd-16 flx-wrap br-16 flx text-center gap-4 bg-white form-list-holder">
+                            <li v-for="i in form.hobbies" :key="i.name" class="flx gap-8 br-8 ai-c form-list-item">
+                                <span>{{ i.name }}</span>
+                                <a @click.prevent="remFromList(i.name, 'hobby')" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="9" viewBox="0 0 14.647 14.683">
+                                        <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#6f7689"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="flx-1 flx ai-c">
+                                <input v-model="hobby" autocomplete="off" @keyup.enter="addToList(hobby, 'hobby')" @focusin="focusIn('hobby_wrapper')" @focusout="focusOut('hobby_wrapper')" class="flx-1" id="hobby" data-type="list" type="text" :placeholder="form.hobbies.length ? 'Press `Enter` after each' : 'Add up to 10 hobbies. Press `Enter` after each'">
+                                <i v-if="hobby && form.hobbies.length < 10" class="centered" @click="addToList(hobby, 'hobby')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 29.25 29.25">
+                                        <path d="M18,3.375A14.625,14.625,0,1,0,32.625,18,14.623,14.623,0,0,0,18,3.375Zm6.363,15.75H19.125v5.238a1.125,1.125,0,0,1-2.25,0V19.125H11.637a1.125,1.125,0,0,1,0-2.25h5.238V11.637a1.125,1.125,0,0,1,2.25,0v5.238h5.238a1.125,1.125,0,0,1,0,2.25Z" transform="translate(-3.375 -3.375)" fill="#0173FF"/>
+                                    </svg>
+                                </i>
+                            </li>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-row column">
+                    <label for="illness" class="flx column gap-6">
+                        illnesses
+                        <div id="illness_wrapper" class="bd-dashed pd-16 flx-wrap br-16 flx text-center gap-4 bg-white form-list-holder">
+                            <li v-for="i in form.illnesses" :key="i.name" class="flx gap-8 br-8 ai-c form-list-item">
+                                <span>{{ i.name }}</span>
+                                <a @click.prevent="remFromList(i.name, 'illness')" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="9" viewBox="0 0 14.647 14.683">
+                                        <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#6f7689"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="flx-1 flx ai-c">
+                                <input v-model="illness" autocomplete="off" @keyup.enter="addToList(illness, 'illness')" @focusin="focusIn('illness_wrapper')" @focusout="focusOut('illness_wrapper')" class="flx-1" id="illness" data-type="list" type="text" :placeholder="form.illnesses.length ? 'Press `Enter` after each' : 'Enter illnesses. Press `Enter` after each'">
+                                <i v-if="illness && form.illnesses.length < 10" class="centered" @click="addToList(illness, 'illness')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 29.25 29.25">
+                                        <path d="M18,3.375A14.625,14.625,0,1,0,32.625,18,14.623,14.623,0,0,0,18,3.375Zm6.363,15.75H19.125v5.238a1.125,1.125,0,0,1-2.25,0V19.125H11.637a1.125,1.125,0,0,1,0-2.25h5.238V11.637a1.125,1.125,0,0,1,2.25,0v5.238h5.238a1.125,1.125,0,0,1,0,2.25Z" transform="translate(-3.375 -3.375)" fill="#0173FF"/>
+                                    </svg>
+                                </i>
+                            </li>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-row column">
+                    <label for="allergy" class="flx column gap-6">
+                        Allergies
+                        <div id="allergy_wrapper" class="bd-dashed pd-16 flx-wrap br-16 flx text-center gap-4 bg-white form-list-holder">
+                            <li v-for="i in form.allergies" :key="i.name" class="flx gap-8 br-8 ai-c form-list-item">
+                                <span>{{ i.name }}</span>
+                                <a @click.prevent="remFromList(i.name, 'allergy')" href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="9" viewBox="0 0 14.647 14.683">
+                                        <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#6f7689"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="flx-1 flx ai-c">
+                                <input v-model="allergy" autocomplete="off" @keyup.enter="addToList(allergy, 'allergy')" @focusin="focusIn('allergy_wrapper')" @focusout="focusOut('allergy_wrapper')" class="flx-1" id="allergy" data-type="list" type="text" :placeholder="form.allergies.length ? 'Press `Enter` after each' : 'Enter allergies. Press `Enter` after each'">
+                                <i v-if="allergy && form.allergies.length < 10" class="centered" @click="addToList(allergy, 'allergy')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 29.25 29.25">
+                                        <path d="M18,3.375A14.625,14.625,0,1,0,32.625,18,14.623,14.623,0,0,0,18,3.375Zm6.363,15.75H19.125v5.238a1.125,1.125,0,0,1-2.25,0V19.125H11.637a1.125,1.125,0,0,1,0-2.25h5.238V11.637a1.125,1.125,0,0,1,2.25,0v5.238h5.238a1.125,1.125,0,0,1,0,2.25Z" transform="translate(-3.375 -3.375)" fill="#0173FF"/>
+                                    </svg>
+                                </i>
+                            </li>
+                        </div>
+                    </label>
+                </div>
                 <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img"> 
             </form>
         </div>
@@ -91,7 +160,11 @@ export default {
     computed: {
         ...mapGetters(['getGender', 'getHostname', 'getDefaultImage', 'auth', 'getToken', 'getUser']),
         ...mapState({
-            forms: (state) => state.forms.user
+            forms: (state) => state.forms.user,
+            device: (state) => state.device,
+            hobbies: (state) => state.hobbies,
+            illnesses: (state) => state.illnesses,
+            allergies: (state) => state.allergies
         }),
         token() {
             if(this.auth)
@@ -116,7 +189,13 @@ export default {
                 height: '',
                 about: '',
                 tempImage: null,
+                hobbies: [],
+                illnesses: [],
+                allergies: []
             },
+            hobby: '',
+            illness: '',
+            allergy: '',
             creating: false,
         }
     },
@@ -126,21 +205,26 @@ export default {
             deleteApi(this.getHostname + "/api/del-temp-upload/" + this.id + '?token=' + this.token)
             .then(() => {
                 this.afterDeletion()
-            }).catch((err) => {
+            }).catch((e) => {
                 this.stopLoader()
-                console.log(err.response);
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             });
         },
         doSubmit() {
             this.creating = true
             postApi(this.getHostname+'/api/kid-details?token=' + this.token, this.form)
             .then((res) => {
-                this.auth ? this.addToKids(res.data.kid) : this.signupSuccess(res.data.kid)
+                this.auth ? this.addToKids(res.data) : this.signupSuccess(res.data.kid)
             }).catch((e) => {
                 this.creating = false
                 if(e.response.status == 422){
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
+                }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
                 }
             })
         },
@@ -174,6 +258,9 @@ export default {
                     this.validation.error = true
                     this.validation.errors = e.response.data.errors
                 }
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
             }
         },
         async setUpdate() {
@@ -182,8 +269,11 @@ export default {
                 const res = await this.$store.dispatch('doPreloadTemp', this.forms.photo)
                 this.stopLoader()
                 this.setData(res.data.image)
-            } catch (error) {
+            } catch (e) {
                 this.stopLoader()
+                if(e.response.status == 400) {
+                    this.$store.commit('setExpSession')
+                }
                 
             }
         },
@@ -195,8 +285,56 @@ export default {
             this.form.height = this.forms.height
             this.form.about = this.forms.about
             this.$store.commit('stopFormLoader')
-
+            this.form.hobbies = this.hobbies.filter(item => item.kid_id == this.forms.id)
+            this.form.illnesses = this.illnesses.filter(item => item.kid_id == this.forms.id)
+            this.form.allergies = this.allergies.filter(item => item.kid_id == this.forms.id)
         },
+        focusIn(e) {
+            document.querySelector('#'+e).classList.add('list-focused')
+        },
+        focusOut(e) {
+            document.querySelector('#'+e).classList.remove('list-focused')
+        },
+        addToList(payload, name) {
+            let array = []
+            if(name === 'hobby') {
+                array = this.form.hobbies
+            }else if(name === 'illness') {
+                array = this.form.illnesses
+            }else if(name === 'allergy') {
+                array = this.form.allergies
+            }
+            if(array.length < 10 && !this.checkIfExistList(payload, array)) {
+                const item = { id: null, name: payload }
+                array.push(item)
+                this.clearHobbyInput()
+            }
+        },
+        checkIfExistList(payload, array) {
+            if(payload) {
+                const item = array.find(item => item.name.toLowerCase() == payload.toLowerCase())
+                if(item)
+                return true
+                else
+                return false
+            }
+            else
+            return true
+        },
+        remFromList(payload, name) {
+            if(name === 'hobby') {
+                this.form.hobbies = this.form.hobbies.filter(item => item.name != payload)
+            }else if(name === 'illness') {
+                this.form.illnesses = this.form.illnesses.filter(item => item.name != payload)
+            }else if(name === 'allergy') {
+                this.form.allergies = this.form.allergies.filter(item => item.name != payload)
+            }
+        },
+        clearHobbyInput() {
+            this.hobby = ''
+            this.illness = ''
+            this.allergy = ''
+        }
     },
     mounted() {
         this.forms != '' ? this.setUpdate() : this.$store.commit('stopFormLoader')
@@ -213,5 +351,69 @@ button.button-outline{
 }
 input[type=date] {
     line-height: 1.8 !important;
+}
+input[data-type=list] {
+    border: none;
+    background-color: transparent !important;
+    &:focus {
+        background-color: transparent !important;
+    }
+    &:visited {
+        background-color: transparent !important;
+    }
+}
+.form-list-item {
+    padding: 4px 8px;
+    text-transform: capitalize;
+    background-color: var(--bg-dark);
+    color: var(--ft-white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    a {
+        &:hover {
+            path {
+                fill: var(--ft-white);
+            }
+        }
+    }
+    i {
+        cursor: pointer;
+        &:hover {
+            path: {
+                fill: var(--primary-dark);
+            }
+        }
+    }
+}
+#illness_wrapper, #allergy_wrapper{
+    .form-list-item {
+        color: var(--ft-dark);
+        a {
+            &:hover {
+                path {
+                    fill: var(--ft-dark);
+                }
+            }
+        }
+    }
+}
+#illness_wrapper{
+    .form-list-item {
+        background-color: var(--illness);
+    }
+}
+#allergy_wrapper{
+    .form-list-item {
+        background-color: var(--allergies);
+    }
+}
+.form-list-holder {
+    transition: var(--input-btn-transition);
+    &:hover {
+        border-color: var(--gray);
+    }
+}
+.list-focused{
+    border-color: var(--primary-color) !important;
 }
 </style>

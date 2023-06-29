@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="kid-body overflow-y-scroll scroll-hidden">
-                <profile-kid-body-content :kid="computeThisKid" />
+                <profile-kid-body-content :kid="computeThisKid" :hobbies="computedHobbies" :illnesses="computedIllnesses" :allergies="computedAllergies" />
             </div>
         </div>
 </template>
@@ -28,10 +28,22 @@ export default {
     computed: {
         ...mapGetters(['getKids']),
         ...mapState({
-            device: (state) => state.device
+            device: (state) => state.device,
+            hobbies: (state) => state.hobbies,
+            illnesses: (state) => state.illnesses,
+            allergies: (state) => state.allergies
         }),
         computeThisKid() {
             return this.getKids.length ? this.getKids.find(kid => kid.id == this.$route.params.id) : ''
+        },
+        computedHobbies() {
+            return this.hobbies.filter(item => item.kid_id == this.$route.params.id)
+        },
+        computedIllnesses() {
+            return this.illnesses.filter(item => item.kid_id == this.$route.params.id)
+        },
+        computedAllergies() {
+            return this.allergies.filter(item => item.kid_id == this.$route.params.id)
         }
     },
     methods: {
