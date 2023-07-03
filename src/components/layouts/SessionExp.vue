@@ -1,6 +1,6 @@
 <template>
     <div class="modal-container jc-c ai-c">
-        <backdrop :index="300" :opacity="0.5" />
+        <backdrop :index="400" :opacity="0.5" />
         <div class="modal flx gap-24 column">
             <div class="text-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" height="60" viewBox="0 0 30 30">
@@ -105,7 +105,7 @@ export default {
   width: 460px;
   border-radius: 24px;
   background-color: #fff;
-  z-index: 301;
+  z-index: 401;
   padding: 40px;
 }
 form {

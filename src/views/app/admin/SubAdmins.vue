@@ -42,7 +42,7 @@
                             </i>
                             <div class="column flx jc-c">
                                 <h4>Allocate village personnel</h4>
-                                <span class="gray">Add villages personnel to manage specific villages</span>
+                                <span class="gray">Add sub admins to manage specific villages</span>
                             </div>
                         </a>
                     </li>
