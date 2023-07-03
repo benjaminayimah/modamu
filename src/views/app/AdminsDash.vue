@@ -71,7 +71,7 @@
                 <div v-else class="flx-grow-1 flx column bg-white br-24 pd-24">
                     <div class="flx jc-sb ai-c">
                         <div>Villages</div>
-                        <button @click="$store.commit('goToVillagePage')" class="button-outline rounded-outl btn-sm">Add new</button>
+                        <button @click="$store.commit('openModal', 'add-village')" class="button-outline rounded-outl btn-sm">Add new</button>
                     </div>
                     <admin-dash-villages />
                 </div>

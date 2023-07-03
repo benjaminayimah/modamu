@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <section class="section-main">
         <div class="title-row">
             <h1 class="title">Add new village</h1>
@@ -112,7 +112,6 @@
                         </div>
                         <div class="flx gap-16">
                             <a @click.prevent="generatePass(10)" href="#" class="getting-started">Or auto-generate a password</a>
-                            <i>{{ form.password }}</i>
                         </div>
                         <span class="input-error" v-if="validation.error && validation.errors.password">
                             {{ validation.errors.password[0] }}
@@ -159,7 +158,6 @@ export default {
                 village_name: '',
                 password: '',
                 address: '',
-                zipcode: '',
                 latitude: null,
                 longitude: null,
                 tempImage: null,
@@ -222,4 +220,4 @@ section {
 .input-error{
     font-size: 0.9rem;
 }
-</style>
+</style> -->

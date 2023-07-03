@@ -25,6 +25,7 @@
     --divider-bg: #e2e7f2;
     --input-hover: #e2e7f2;
     --error: #EA1515;
+    --error-dark: #c00a0a;
     --warning: #EE9987;
     // --warning: #efb60d ;
     --button-disabled: #559aef;
@@ -216,6 +217,13 @@ button.drop-down{
         background-color: var(--primary-dark);
     }
 }
+.button-delete{
+    background-color: var(--error);
+    color: var(--ft-white);
+    &:hover {
+        background-color: var(--error-dark);
+    }
+}
 .button-alt{
     color: var(--primary-color);
     background-color: rgba(1, 115, 255, 0.09);
@@ -239,6 +247,13 @@ button.drop-down{
         transform: scale(0.98);
     }
 }
+.s-btn{
+    cursor: pointer;
+    transition: var(--input-btn-transition);
+    &:active {
+        transform: scale(0.9);
+    }
+}
 .dropdown-toggle {
     padding: 0;
     a:not([data-type=reset]){
@@ -253,6 +268,9 @@ button.drop-down{
     &:hover {
         box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px;
     }
+}
+.hidden{
+    visibility: hidden;
 }
 .hide{
     display: none !important;
@@ -289,7 +307,7 @@ button.drop-down{
     gap: 6px;
     flex-direction: column;
 }
-input, select, textarea {
+input:not([type=checkbox]), select, textarea {
     appearance: none;
     outline: 0;
     font-family: inherit;
@@ -302,9 +320,12 @@ input:not([data-type=list]), select, textarea {
     display: block;
     background-clip: padding-box;
     padding: 16px 24px;
-    width: 100%;
 }
-input:not([data-type=list]), select {
+input[type=checkbox]{
+    height: 17px;
+    width: 17px;
+}
+input:not([data-type=list],[type=checkbox]), select {
     height: 62px;
 }
 input[type=search]:not([data-state=location]) {
@@ -338,6 +359,9 @@ input[data-color=light]:-webkit-autofill:hover,
 input[data-color=light]:-webkit-autofill:focus, 
 input[data-color=light]:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 40px white inset !important;
+}
+.form-control {
+    width: 100%;
 }
 .form-control[data-color=light], .form-control[data-color=dark] {
     &:hover {
@@ -389,6 +413,41 @@ select{
     inset: 0;
     display: flex;
     z-index: 100;
+}
+.modal{
+    border-radius: 24px;
+    background-color: #fff;
+}
+.modal-top{
+    padding: 6px 28px;
+}
+.modal-top, .modal-bottom {
+    z-index: 1;
+}
+.modal-body{
+    padding: 32px 28px 50px 28px;
+}
+.modal-bottom{
+    padding: 16px 28px 28px 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 15%);
+    bottom: 0;
+}
+@media screen and (max-width: 590px){
+    .modal{
+        width: 430px;
+    }
+}
+@media screen and (max-width: 430px){
+    .modal{
+        max-width: 100%;
+        max-height: 100dvh;
+        border-radius: 0;
+        min-height: 100%;
+    }
+    .modal-body{
+        height: 100%;
+        flex-grow: 1;
+    }
 }
 #session_form input {
     height: 60px;
@@ -671,6 +730,9 @@ dialog {
 .w-90{
     width: 90%;
 }
+.w-80{
+    width: 80%;
+}
 .h-100{
     height: 100%;
 }
@@ -685,6 +747,15 @@ dialog {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.s-a{
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.c-a {
+    border-color: var(--error);
+    color: var(--error);
+    font-weight: 500;
 }
 ul{
     padding: 0;
@@ -789,9 +860,9 @@ a, button {
 }
 
 form {
-    label {
+    label:not([data-type=input-wapper]) {
         font-size: 0.9rem;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--ft-dark);
     }
 }
@@ -965,6 +1036,16 @@ form {
     padding: 0 8px;
     display: flex;
     align-items: center;
+    .hidden{
+        background-color: var(--bg-color);
+        height: 36px;
+        width: 36px;
+        &:hover {
+            path {
+                fill: var(--ft-dark);
+            }
+        }
+    }
 }
 .pd-0{
     padding: 0;
@@ -1035,20 +1116,42 @@ form {
     } 
 }
 .table-row{
-    button {
+    button:not(.t-pill-btn) {
         height: 55px;
         padding: 8px 24px;
         margin-left: 40px;
     }
-    .row-actions{
-        span {
-            color: var(--primary-color);
-            &:hover {
-                text-decoration: underline;
+    .t-pill-btn {
+        padding: 6px 12px;
+        border-radius: 30px;
+        color: var(--primary-color);
+        background-color: var(--bg-color);
+        height: 36px;
+        min-width: 36px;
+        font-weight: unset;
+        &:hover {
+            background-color: var(--primary-color);
+            color: var(--ft-white);
+            // box-shadow: rgba(15, 41, 77, 0.08) 0px 8px 16px 0px;
+            path {
+                fill: var(--ft-white);
             }
         }
-        .delete{
-            color: var(--error);
+    }
+    .delete{
+        color: var(--error);
+        background-color: #ffecec;
+        &:hover {
+            background-color: var(--error);
+            color: var(--ft-white);
+        }
+    }
+    .row-actions{
+        gap: 6px;
+    }
+    .cell-hover-show:hover{
+        .hidden {
+            visibility: visible;
         }
     }
 }
@@ -1058,8 +1161,7 @@ form {
         color: var(--ft-white);
         span{
             color: var(--ft-dark);
-            background-color: #fff;
-
+            background-color: var(--bg-white);
         }
     }
     a{

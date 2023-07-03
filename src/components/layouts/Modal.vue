@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div id="modal_content" class="modal-content">
+                <div id="modal_content">
                     <lottie-loader v-if="forms.loader" />
                 </div>
             </div>
@@ -52,42 +52,9 @@ export default {
 <style lang="scss" scoped>
   // pointer-events: none !important;
 .modal{
-  max-height: 90vh;
-  width: 560px;
-  border-radius: 24px;
-  background-color: #fff;
-  z-index: 110;
-}
-.modal-top{
-    padding: 6px 28px;
-}
-.modal-top, .modal-bottom {
-    z-index: 1;
-}
-.modal-body{
-    padding: 32px 28px 50px 28px;
-}
-.modal-bottom{
-    padding: 16px 28px 28px 28px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white 15%);
-    bottom: 0;
-}
-@media screen and (max-width: 590px){
-    .modal{
-        width: 430px;
-    }
-}
-@media screen and (max-width: 430px){
-    .modal{
-        max-width: 100%;
-        max-height: 100dvh;
-        border-radius: 0;
-        min-height: 100%;
-    }
-    .modal-body{
-        height: 100%;
-        flex-grow: 1;
-    }
+    max-height: 90vh;
+    width: 560px;
+    z-index: 110;
 }
 
 </style>

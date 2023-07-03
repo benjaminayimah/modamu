@@ -45,7 +45,7 @@ import AdminDashUpcomingTab from '@/components/layouts/AdminDashUpcomingTab.vue'
 import AdminDashPastTab from '@/components/layouts/AdminDashPastTab.vue'
 import ParentVerifyCode from '@/views/app/parents/ParentVerifyCode.vue'
 import VillageVerifyCode from '@/views/app/village/VillageVerifyCode.vue'
-import AddVillagePage from '@/views/app/admin/AddVillagePage.vue'
+// import AddVillagePage from '@/views/app/admin/AddVillagePage.vue'
 import SubAdmins from '@/views/app/admin/SubAdmins.vue'
 import SubAdminViewOne from '@/views/app/admin/SubAdminViewOne.vue'
 import SubAdminViewTwo from '@/views/app/admin/SubAdminViewTwo.vue'
@@ -92,7 +92,7 @@ const routes = [
       { path: '/parent/:parent_id/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
       { path: '/transactions', name: 'Transactions', component: Transactions },
-      { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
+      // { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,
         children: [

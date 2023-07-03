@@ -1,6 +1,6 @@
 <template>
     <teleport to="#modal_title">
-        {{ !superAdmin ? 'Change your password' : 'Reset village password' }}
+        {{ !superAdmin ? 'Change your password' : 'Reset user\'s password' }}
     </teleport>
     <teleport to="#modal_content">
         <div>
@@ -14,7 +14,7 @@
                             </svg>
                         </i>
                         <input v-model="form.current_password" data-type="icon" :type="showPass ? 'text' : 'password'" autocomplete="new-password" class="form-control" id="current_password" name="password_confirmation" data-color="dark" placeholder="Provide your current password">
-                        <span class="hide-show-pass br-50 ai-c jc-c flx a-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
+                        <span class="hide-show-pass br-50 ai-c jc-c flx s-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
                             <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
                                 <g transform="translate(1.182 1.182)">
                                     <path d="M16027.619-15079.234a21.431,21.431,0,0,1-4.111-4.4,2.816,2.816,0,0,1,0-3.226,21.339,21.339,0,0,1,4.111-4.406,11.5,11.5,0,0,1,7.129-2.734,11.516,11.516,0,0,1,7.132,2.734,21.4,21.4,0,0,1,4.107,4.4,2.822,2.822,0,0,1,0,3.229,21.4,21.4,0,0,1-4.107,4.4,11.51,11.51,0,0,1-7.132,2.734A11.492,11.492,0,0,1,16027.619-15079.234Zm.927-10.853a19.948,19.948,0,0,0-3.813,4.087,1.32,1.32,0,0,0,0,1.5,19.8,19.8,0,0,0,3.81,4.084,10.018,10.018,0,0,0,6.2,2.412,10.015,10.015,0,0,0,6.2-2.412,19.886,19.886,0,0,0,3.814-4.088,1.322,1.322,0,0,0,0-1.5,19.9,19.9,0,0,0-3.81-4.083,10.011,10.011,0,0,0-6.2-2.413A10.013,10.013,0,0,0,16028.546-15090.087Zm1.454,4.836a4.754,4.754,0,0,1,4.748-4.748,4.758,4.758,0,0,1,4.752,4.748,4.758,4.758,0,0,1-4.752,4.752A4.754,4.754,0,0,1,16030-15085.251Zm1.5,0a3.253,3.253,0,0,0,3.25,3.25,3.253,3.253,0,0,0,3.249-3.25,3.253,3.253,0,0,0-3.249-3.25A3.253,3.253,0,0,0,16031.5-15085.251Z" transform="translate(-16022.748 15097.25)" fill="#000"/>
@@ -37,15 +37,15 @@
                         </i>
                         <input @input="checkCopied" v-model="form.new_password" :type="showPass ? 'text' : 'password'" autocomplete="new-password" class="form-control" id="new_password" name="password" data-color="dark" data-type="icon" placeholder="Enter a new password">
                         <div v-if="superAdmin" class="gap-8 span-double-wrapper">
-                            <span v-if="form.password" :class="{'copied' : copied}" @click="copyTextToClipboard(form.password)" class="double ai-c jc-c flx br-50 a-btn" title="Copy password">
+                            <span v-if="form.password" :class="{'copied' : copied}" @click="copyTextToClipboard(form.password)" class="double ai-c jc-c flx br-50 s-btn" title="Copy password">
                                 <svg v-if="!copied" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 23.625 29.25">
                                     <path  d="M20.813,3.375h-8.4A2.812,2.812,0,0,0,9.563,6.152v.6H9.035A2.812,2.812,0,0,0,6.188,9.527v20.25a2.872,2.872,0,0,0,2.848,2.848H23.66a2.812,2.812,0,0,0,2.777-2.848V29.25h.6A2.812,2.812,0,0,0,29.813,26.4V12.375Zm0,3.136,5.864,5.864H20.813Zm3.375,23.266a.568.568,0,0,1-.527.6H9.035a.626.626,0,0,1-.6-.6V9.527A.568.568,0,0,1,9.035,9h.527V26.965a2,2,0,0,0,2.285,2.285h12.34ZM27.563,26.4a.568.568,0,0,1-.527.6H12.41a.626.626,0,0,1-.6-.6V6.152a.568.568,0,0,1,.6-.527h6.152v9h9Z" transform="translate(-6.188 -3.375)"/>
                                 </svg>
-                                <svg v-else xmlns="http://www.w3.org/2000/svg" width="19.724" height="12" viewBox="0 0 19.724 15.104">
-                                    <path d="M30.054,13.974l-1.612-1.658a.347.347,0,0,0-.256-.11h0a.333.333,0,0,0-.256.11L16.754,23.573l-4.067-4.067a.354.354,0,0,0-.513,0l-1.63,1.63a.365.365,0,0,0,0,.522l5.129,5.129a1.622,1.622,0,0,0,1.072.522,1.7,1.7,0,0,0,1.062-.5h.009L30.063,14.5A.392.392,0,0,0,30.054,13.974Z" transform="translate(-10.434 -12.206)" fill="#0173ff"/>
+                                <svg v-else xmlns="http://www.w3.org/2000/svg"  height="11" viewBox="0 0 18.788 14.586">
+                                    <path d="M3710.728,693.174a1.2,1.2,0,0,1-.838-.341l-6.174-6.019a1.2,1.2,0,0,1,1.675-1.718l5.248,5.116,9.383-11.194a1.2,1.2,0,0,1,1.839,1.542l-10.214,12.186a1.2,1.2,0,0,1-.859.428Z" transform="translate(-3703.354 -678.589)" fill="#0173ff"/>
                                 </svg>
                             </span>
-                            <span class="hide-show-pass br-50 double ai-c jc-c flx a-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
+                            <span class="hide-show-pass br-50 double ai-c jc-c flx s-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
                                     <g transform="translate(1.182 1.182)">
                                         <path d="M16027.619-15079.234a21.431,21.431,0,0,1-4.111-4.4,2.816,2.816,0,0,1,0-3.226,21.339,21.339,0,0,1,4.111-4.406,11.5,11.5,0,0,1,7.129-2.734,11.516,11.516,0,0,1,7.132,2.734,21.4,21.4,0,0,1,4.107,4.4,2.822,2.822,0,0,1,0,3.229,21.4,21.4,0,0,1-4.107,4.4,11.51,11.51,0,0,1-7.132,2.734A11.492,11.492,0,0,1,16027.619-15079.234Zm.927-10.853a19.948,19.948,0,0,0-3.813,4.087,1.32,1.32,0,0,0,0,1.5,19.8,19.8,0,0,0,3.81,4.084,10.018,10.018,0,0,0,6.2,2.412,10.015,10.015,0,0,0,6.2-2.412,19.886,19.886,0,0,0,3.814-4.088,1.322,1.322,0,0,0,0-1.5,19.9,19.9,0,0,0-3.81-4.083,10.011,10.011,0,0,0-6.2-2.413A10.013,10.013,0,0,0,16028.546-15090.087Zm1.454,4.836a4.754,4.754,0,0,1,4.748-4.748,4.758,4.758,0,0,1,4.752,4.748,4.758,4.758,0,0,1-4.752,4.752A4.754,4.754,0,0,1,16030-15085.251Zm1.5,0a3.253,3.253,0,0,0,3.25,3.25,3.253,3.253,0,0,0,3.249-3.25,3.253,3.253,0,0,0-3.249-3.25A3.253,3.253,0,0,0,16031.5-15085.251Z" transform="translate(-16022.748 15097.25)" fill="#000"/>
@@ -54,7 +54,7 @@
                                 </svg>
                             </span>
                         </div>
-                        <span v-else class="hide-show-pass br-50 ai-c jc-c flx a-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
+                        <span v-else class="hide-show-pass br-50 ai-c jc-c flx s-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
                             <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
                                 <g transform="translate(1.182 1.182)">
                                     <path d="M16027.619-15079.234a21.431,21.431,0,0,1-4.111-4.4,2.816,2.816,0,0,1,0-3.226,21.339,21.339,0,0,1,4.111-4.406,11.5,11.5,0,0,1,7.129-2.734,11.516,11.516,0,0,1,7.132,2.734,21.4,21.4,0,0,1,4.107,4.4,2.822,2.822,0,0,1,0,3.229,21.4,21.4,0,0,1-4.107,4.4,11.51,11.51,0,0,1-7.132,2.734A11.492,11.492,0,0,1,16027.619-15079.234Zm.927-10.853a19.948,19.948,0,0,0-3.813,4.087,1.32,1.32,0,0,0,0,1.5,19.8,19.8,0,0,0,3.81,4.084,10.018,10.018,0,0,0,6.2,2.412,10.015,10.015,0,0,0,6.2-2.412,19.886,19.886,0,0,0,3.814-4.088,1.322,1.322,0,0,0,0-1.5,19.9,19.9,0,0,0-3.81-4.083,10.011,10.011,0,0,0-6.2-2.413A10.013,10.013,0,0,0,16028.546-15090.087Zm1.454,4.836a4.754,4.754,0,0,1,4.748-4.748,4.758,4.758,0,0,1,4.752,4.748,4.758,4.758,0,0,1-4.752,4.752A4.754,4.754,0,0,1,16030-15085.251Zm1.5,0a3.253,3.253,0,0,0,3.25,3.25,3.253,3.253,0,0,0,3.249-3.25,3.253,3.253,0,0,0-3.249-3.25A3.253,3.253,0,0,0,16031.5-15085.251Z" transform="translate(-16022.748 15097.25)" fill="#000"/>
@@ -64,8 +64,7 @@
                         </span>
                     </div>
                     <div v-if="superAdmin" class="flx gap-16">
-                        <a @click.prevent="generatePass(10)" href="#" class="getting-started">Or auto-generate a password</a>
-                        <i>{{ form.new_password }}</i>
+                        <a @click.prevent="generatePass(16)" href="#" class="getting-started">Or auto-generate a strong password</a>
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.new_password">
                         {{ validation.errors.new_password[0] }}

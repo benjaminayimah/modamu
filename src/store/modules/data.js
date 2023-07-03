@@ -10,6 +10,15 @@ export default {
             {id: 2, name: 'female'},
             {id: 3, name: 'prefer not to say'}
         ],
+        // adminAccess: [
+        //     {id: 1, name: 'villages', status: true },
+        //     {id: 2, name: 'events', status: false },
+        //     {id: 3, name: 'parents', status: false },
+        //     {id: 4, name: 'kids', status: false },
+        //     {id: 5, name: 'notifications', status: false },
+        //     {id: 6, name: 'messages', status: false },
+        //     {id: 7, name: 'bookings', status: false }
+        // ],
         filterList: [
             { id: 1, name: 'All', filter: 'all', active: true },
             { id: 2, name: 'Fathers', filter: 'father', active: false },

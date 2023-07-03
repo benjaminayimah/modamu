@@ -13,7 +13,7 @@
                     <input class="form-control" v-model="search" type="search" data-type="icon" placeholder="Search village...">
                 </div>
             </div>
-            <button @click="$store.commit('goToVillagePage')" class="button-primary gap-4 btn-md">
+            <button @click="$store.commit('openModal', 'add-village')" class="button-primary gap-4 btn-md">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 15.132 15.132">
                     <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#fff"/>
                 </svg>

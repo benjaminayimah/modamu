@@ -8,10 +8,10 @@ import router from '@/router'
 
 export default createStore({
   state: {
-    hostname: 'http://localhost:8000',
-    appHostname: 'http://localhost:8080',
-    // hostname: 'https://modamu-api.rancroftdev.com',
-    // appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    // hostname: 'http://localhost:8000',
+    // appHostname: 'http://localhost:8080',
+    hostname: 'https://modamu-api.rancroftdev.com',
+    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
@@ -23,10 +23,12 @@ export default createStore({
     addModal: false,
     onboardModal: false,
     sessionExp: false,
-    village_allocation: { active: false, user: ''},
-    // mainModal: false,
+    subAdminStore: { adminAccess: false, villageAccess: false, viewing: false, edit: false, user: ''},
+    subAdminSignUpCompleted: false,
     creating: false,
-    forms: { active: false, loader: true, kids: false, editProfile: false, changePass: false, otherPass: false, addtoGallery: false, verifyCode: false, addVillage: false, sub_admin: false, id: '', user: '' },
+    forms: { active: false, loader: true, kids: false, editProfile: false, changePass: false, otherPass: false, otherProfile: false, addtoGallery: false, verifyCode: false, addVillage: false, sub_admin: false, id: '', user: '' },
+    deleteModal: { active: false, deleting: false, id: '', type: '' },
+    alert: { status: { show: false, success: false, danger: false,  info: false }, title: '', body: '' },
     kids: [],
     events: [],
     images: [],
@@ -51,7 +53,9 @@ export default createStore({
     allergies: [],
     chatImage: '',
     msgParentDetails: false,
-    sub_admins: []
+    sub_admins: [],
+    village_allocation_access: [],
+    admin_access: []
   },
   mutations: {
     computeWindow(state) {
@@ -93,6 +97,7 @@ export default createStore({
       }else if(payload == 'update-kid') {
         state.forms.kids = true
       }else if(payload == 'sub-admin') {
+        state.subAdminSignUpCompleted ? state.subAdminSignUpCompleted = false : ''
         state.forms.sub_admin = true
       }
     },
@@ -123,6 +128,14 @@ export default createStore({
     },
     setOtherPass(state) {
       state.forms.otherPass = true
+    },
+    async updateTheirInfo(state, payload) {
+      state.forms.user = payload
+      await this.commit('setOtherProfile')
+      this.commit('openModal', 'edit-profile')
+    },
+    setOtherProfile(state) {
+      state.forms.otherProfile = true
     },
     startSpinner(state) {
       state.creating = true
@@ -182,7 +195,6 @@ export default createStore({
       state.hobbies = payload.hobbies
       state.illnesses = payload.illnesses
       state.allergies = payload.allergies
-      state.sub_admins = payload.sub_admins
       this.commit('updateLocalStorage', payload.user)
     },
     setRegisteredEvents(state, payload) {
@@ -213,13 +225,55 @@ export default createStore({
     setKids(state, payload) {
       state.kids = payload
     },
+    async viewAllocatedVillage(state, payload) {
+      state.subAdminStore.viewing = true
+      await this.commit('setSubAdminStore', payload)
+      state.subAdminStore.villageAccess = true
+    },
+    toggleVillageAllocationMode(state) {
+      state.subAdminStore.viewing = !state.subAdminStore.viewing
+      state.subAdminStore.edit = !state.subAdminStore.edit
+    },
     openAllocateVillage(state, payload) {
-      state.village_allocation.active = true
-      state.village_allocation.user = payload
+      state.subAdminStore.villageAccess = true
+      this.commit('setSubAdminStore', payload)
     },
     closeAllocateVillage(state) {
-      state.village_allocation.active = false
-      state.village_allocation.user = ''
+      state.subAdminStore.villageAccess = false
+      state.subAdminStore.edit = false
+      state.subAdminStore.viewing = false
+      document.body.classList.remove('fixed-body')
+      this.commit('clearSubAdminStore')
+    },
+    async addPermissions(state, payload) {
+      await this.commit('setSubAdminStore', payload)
+      state.subAdminStore.adminAccess = true
+    },
+    async updatePermissions(state, payload) {
+      let user = payload
+      const check = state.admin_access.find(data => data.user_id == payload.id)
+      if(check) {
+        user = check
+      }
+      state.subAdminStore.edit = true
+      await this.commit('setSubAdminStore', user)
+      state.subAdminStore.adminAccess = true
+    },
+    closeAdminControl(state) {
+      state.subAdminStore.adminAccess = false
+      state.subAdminStore.edit = false
+      document.body.classList.remove('fixed-body')
+      this.commit('clearSubAdminStore')
+    },
+    setSubAdminStore(state, payload) {
+      state.subAdminStore.user = payload
+      document.body.classList.add('fixed-body')
+    },
+    clearSubAdminStore(state) {
+      state.subAdminStore.user = ''
+      if(state.forms.sub_admin) {
+        state.subAdminSignUpCompleted = true
+      }
     },
     upadateEvents(state, payload) {
       state.events.push(payload.event)
@@ -227,6 +281,33 @@ export default createStore({
     },
     updateVillage(state, payload) {
       state.villages.push(payload)
+    },
+    setSubAdmins(state, payload) {
+      state.sub_admins = payload.sub_admins
+      state.admin_access = payload.admin_access
+      this.commit('updateVillageAllocationAccess', payload.village_access)
+    },
+    deleteSubAdmin(state, payload) {
+      const i = state.sub_admins.findIndex(x => x.id == payload)
+      state.sub_admins.splice(i, 1);
+    },
+    updateVillageAllocationAccess(state, payload) {
+      state.village_allocation_access = payload
+    },
+    addAdminAccess(state, payload) {
+      state.admin_access.push(payload)
+    },
+    updateAdminAccess(state, payload) {
+      const i = state.admin_access.findIndex(x => x.id === payload.id)
+      if(i > -1) {
+        state.admin_access.splice(i, 1, payload)
+      }else {
+        this.commit('addAdminAccess', payload)
+      }
+    },
+    removeFromVillageAllocation(state, payload) {
+      const i = state.village_allocation_access.findIndex(x => x.id == payload)
+      state.village_allocation_access.splice(i, 1);
     },
     addToKids(state, payload) {
       state.kids.push(payload.kid)
@@ -260,6 +341,10 @@ export default createStore({
     },
     addToSubAdmin(state, payload) {
       state.sub_admins.push(payload)
+    },
+    updateSubAdminInfo(state, payload) {
+      const i = state.sub_admins.findIndex(x => x.id == payload.id)
+      state.sub_admins.splice(i, 1, payload)
     },
     updateAttendees(state, payload) {
       const i = state.attendees.findIndex(x => x.id == payload.id)
@@ -301,7 +386,65 @@ export default createStore({
     },
     setImages(state, payload) {
       state.images = payload
-    }
+    },
+
+    //set delete
+    setDeleteModal(state, payload) {
+      document.body.classList.add('fixed-body')
+      state.deleteModal.active = true
+      state.deleteModal.id = payload.id
+      state.deleteModal.type = payload.type  
+    },
+    closeDeleteModal(state) {
+      for (let i in state.deleteModal) {
+        state.deleteModal[i] = false
+      }
+      document.body.classList.remove('fixed-body')
+    },
+    doDelete(state) {
+      state.deleteModal.deleting = true
+      const id = state.deleteModal.id
+      const type = state.deleteModal.type
+      if(type === 'admin'){
+        this.dispatch('deleteSubAdmin', id)
+      }
+      else{
+        // const newPayload = {
+        //     id: 'danger',
+        //     body: 'Error deleting item try again'
+        // }
+        // this.commit('showAlert', newPayload)
+        this.commit('closeDeleteModal')
+        console.log('errr')
+
+      }
+    },
+    showAlert(state, payload) {
+      this.commit('dismisAlert')
+      if(payload.id === 'success'){
+          state.alert.title = payload.title
+          state.alert.body = payload.body
+          state.alert.status.success = true
+          state.alert.status.show = true
+          setTimeout(() => {
+            this.commit('dismisAlert')
+          }, 3000);
+      }else if(payload.id === 'danger'){
+        state.alert.title = payload.title
+        state.alert.body = payload.body
+        state.alert.status.danger = true
+        state.alert.status.show = true
+      }   
+    },
+    dismisAlert(state) {
+        for (let i in state.alert.status) {
+          state.alert.status[i] = false
+        }
+        state.alert.body = ''
+        state.alert.title = ''
+    },
+
+
     // toggleMenu() {
     //   const menu = document.querySelector('#menus')
     //   const backdrop = document.querySelector('.backdrop')
@@ -320,16 +463,8 @@ export default createStore({
           const res = await axios.get(this.getters.getHostname+'/api/auth-user?token='+this.getters.getToken)
           state.commit('setUser', res.data)
           state.commit('stopLoader')
-
         } catch (e) {
-          // state.commit('unSetLoader')
-          // const newPayload = {
-          //   id: 'danger',
-          //   body: 'Error loading store! Please check your internet connection'
-          // }
-          // state.commit('showAlert', newPayload)
-          // state.commit('destroyToken') 
-          if(e.response.status == 400) {
+          if(e.response.status == 400 || e.response.status == 404) {
             state.commit('destroyToken')
           }
         }      
@@ -337,12 +472,15 @@ export default createStore({
     async signIn(state, payload) {  
         return await axios.post(this.getters.getHostname+'/api/sign-in', payload) 
     },
-    logoutAuth(state){
-        state.commit('startLoader') 
-        axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
-        .then(()=> {
+    async logoutAuth(state){
+        state.commit('startLoader')
+        try {
+          axios.delete(this.getters.getHostname+'/api/logout?token='+this.getters.getToken)
           state.commit('destroyToken')
-        })
+        } catch (error) {
+          state.commit('destroyToken')
+        }
+  
     },
     getCucrrentLocation(state, payload) {
       const apiKey = 'AIzaSyBhfD_dScS-ENmuXtQAxTCxtOYadquTric' // Your Google Cloud Platform API key
@@ -435,7 +573,18 @@ export default createStore({
               state.commit('setExpSession')
           }
         }
-
+    },
+    async deleteSubAdmin(state, payload) {
+      try {
+        const res = await deleteApi(this.getters.getHostname+'/api/sub-admin/'+payload+'?token='+this.getters.getToken);
+        state.commit('deleteSubAdmin', res.data.id)
+        state.commit('closeDeleteModal')
+      } catch (e) {
+        console.log(e.response)
+        if(e.response.status == 400) {
+            state.commit('setExpSession')
+        }
+      }
     }
   },
   getters: {

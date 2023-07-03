@@ -30,6 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 .grid-col-subadmins{
-    grid-template-columns: 1fr .8fr .8fr 1.5fr;
+    grid-template-columns: 1fr 1.2fr .8fr 1fr;
 }
 </style>

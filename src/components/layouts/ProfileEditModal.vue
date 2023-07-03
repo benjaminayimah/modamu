@@ -1,10 +1,11 @@
 <template>
     <teleport to="#modal_title">
-        Edit profile
+        {{ !forms.otherProfile ? 'Edit profile' : 'Edit user\'s info' }}
+        
     </teleport>
     <teleport to="#modal_content">
         <div>
-            <div class="flx ai-c column gap-16 mb-24">
+            <div v-if="!forms.otherProfile" class="flx ai-c column gap-16 mb-24">
                 <avatar :status="status" :hostname="getHostname" :id="getUser.id" @deleteTemp="deltmp" />
                 <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
                 <button @click.prevent="uploadClick('avatar_img')" class="button-outline rounded-outl gap-8">
@@ -33,7 +34,7 @@
                         {{ validation.errors.email[0] }}
                     </span>
                 </div>
-                <div class="form-row column">
+                <div v-if="!forms.otherProfile" class="form-row column">
                     <label for="phone">Phone number</label>
                     <div class="input-wrapper">
                         <input v-model="form.phone_number" class="form-control" type="tel" name="phone_number" data-color="dark">
@@ -91,13 +92,14 @@ import usersLevelMixin from '../../mixins/usersLevelMixin';
 export default {
     components: { Avatar, Spinner },
     name: 'ProfileEditModal',
+    mixins: [ validationMixin, usersLevelMixin, tempImageUploadMixin ],
     computed: {
         ...mapGetters(['getHostname', 'getDefaultImage', 'getUser']),
         ...mapState({
-            token: (state) => state.token
+            token: (state) => state.token,
+            forms: (state) => state.forms
         })
     },
-    mixins: [ validationMixin, usersLevelMixin, tempImageUploadMixin ],
     data() {
         return {
             form: {
@@ -112,9 +114,6 @@ export default {
             creating: false,
         }
     },
-    created() {
-        this.preloadForEdit();
-    },
     methods: {
         preloadForEdit() {
             this.startLoader()
@@ -128,6 +127,11 @@ export default {
                     this.$store.commit('setExpSession')
                 }
             })
+        },
+        preloadForOtherUser() {
+            this.form.name = this.forms.user.name
+            this.form.email = this.forms.user.email
+            this.$store.commit('stopFormLoader')
         },
         checkIfisset() {
             if(!this.getUser.image) {
@@ -146,7 +150,6 @@ export default {
             this.form.ocupation = this.getUser.ocupation
             this.form.address = this.getUser.address
             this.$store.commit('stopFormLoader')
-
         },
         deltmp() {
             this.startLoader()
@@ -162,9 +165,13 @@ export default {
         },
         doSubmit() {
             this.creating = true
-            axios.put(this.getHostname+'/api/sign-in/' + this.getUser.id + '?token=' + this.token, this.form)
+            let id = this.getUser.id 
+            if(this.forms.otherProfile) {
+                id = this.forms.user.id
+            }
+            axios.put(this.getHostname+'/api/sign-in/' + id + '?token=' + this.token, this.form)
             .then((res) => {
-                this.updateSuccess(res.data.user)
+                this.updateSuccess(res.data)
             }).catch((e) => {
                 this.creating = false
                 if(e.response.status == 422){
@@ -176,8 +183,12 @@ export default {
                 }
             })
         },
-        updateSuccess(res) {
-            this.$store.commit('updateUser', res)
+        async updateSuccess(res) {
+            if (this.forms.otherProfile) {
+                await this.$store.commit('updateSubAdminInfo', res)
+            } else {
+                await this.$store.commit('updateUser', res)
+            }
             this.$store.commit('closeModal')
         },
         resetForm() {
@@ -190,7 +201,10 @@ export default {
             this.form.about = '',
             this.form.tempImage = null
         }
-    }
+    },
+    mounted() {
+        !this.forms.otherProfile ? this.preloadForEdit() : this.preloadForOtherUser()
+    },
 }
 </script>
 <style lang="scss" scoped>

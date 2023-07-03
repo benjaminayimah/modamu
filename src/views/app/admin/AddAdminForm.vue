@@ -1,10 +1,10 @@
 <template>
-    <teleport to="#modal_title">
-        {{ user === 1 ? 'Add sub admin' : 'Village personnel' }}
+    <teleport v-if="!signUpState" to="#modal_title">
+        {{ user === 1 ? 'Add sub admin' : 'Allocate village personnel' }}
     </teleport>
     <teleport to="#modal_content">
         <div>
-            <form @submit.prevent="" class="flx column gap-24">
+            <form v-if="!signUpState" @submit.prevent="" class="flx column gap-24">
                 <div class="form-row column">
                     <label for="name">Name</label>
                     <div class="input-wrapper">
@@ -34,45 +34,60 @@
                     </span>
                 </div>
                 <div class="form-row column">
-                        <label for="password">Password</label>
-                        <div class="input-wrapper">
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 17.39 18.998">
-                                    <path d="M-438.305-337.394A4.7,4.7,0,0,1-443-342.088v-3a4.7,4.7,0,0,1,3.583-4.561v-1.568a5.2,5.2,0,0,1,5.172-5.174,5.2,5.2,0,0,1,5.176,5.172v1.6a4.7,4.7,0,0,1,3.459,4.529v3a4.7,4.7,0,0,1-4.7,4.694Zm-3.3-7.7v3a3.309,3.309,0,0,0,3.3,3.3h8a3.309,3.309,0,0,0,3.306-3.3v-3a3.31,3.31,0,0,0-3.306-3.3h-8A3.309,3.309,0,0,0-441.61-345.089Zm11.151-4.694v-1.435A3.8,3.8,0,0,0-434.245-355a3.8,3.8,0,0,0-3.783,3.785v1.433Zm-6.541,6.7a2.7,2.7,0,0,1,2.7-2.7,2.7,2.7,0,0,1,2.695,2.7,2.7,2.7,0,0,1-2.695,2.695A2.7,2.7,0,0,1-437-343.088Zm1.39,0a1.307,1.307,0,0,0,1.305,1.3,1.307,1.307,0,0,0,1.3-1.3,1.307,1.307,0,0,0-1.3-1.3A1.306,1.306,0,0,0-435.61-343.088Z" transform="translate(443 356.392)"/>
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 17.39 18.998">
+                                <path d="M-438.305-337.394A4.7,4.7,0,0,1-443-342.088v-3a4.7,4.7,0,0,1,3.583-4.561v-1.568a5.2,5.2,0,0,1,5.172-5.174,5.2,5.2,0,0,1,5.176,5.172v1.6a4.7,4.7,0,0,1,3.459,4.529v3a4.7,4.7,0,0,1-4.7,4.694Zm-3.3-7.7v3a3.309,3.309,0,0,0,3.3,3.3h8a3.309,3.309,0,0,0,3.306-3.3v-3a3.31,3.31,0,0,0-3.306-3.3h-8A3.309,3.309,0,0,0-441.61-345.089Zm11.151-4.694v-1.435A3.8,3.8,0,0,0-434.245-355a3.8,3.8,0,0,0-3.783,3.785v1.433Zm-6.541,6.7a2.7,2.7,0,0,1,2.7-2.7,2.7,2.7,0,0,1,2.695,2.7,2.7,2.7,0,0,1-2.695,2.695A2.7,2.7,0,0,1-437-343.088Zm1.39,0a1.307,1.307,0,0,0,1.305,1.3,1.307,1.307,0,0,0,1.3-1.3,1.307,1.307,0,0,0-1.3-1.3A1.306,1.306,0,0,0-435.61-343.088Z" transform="translate(443 356.392)"/>
+                            </svg>
+                        </i>
+                        <input @input="checkCopied" v-model="form.password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" autocomplete="new-password" data-color="dark" placeholder="Enter a min of 6 characters">
+                        <div class="gap-8 span-double-wrapper">
+                            <span v-if="form.password" :class="{'copied' : copied}" @click="copyTextToClipboard(form.password)" class="double ai-c jc-c flx br-50 s-btn" title="Copy password">
+                                <svg v-if="!copied" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 23.625 29.25">
+                                    <path  d="M20.813,3.375h-8.4A2.812,2.812,0,0,0,9.563,6.152v.6H9.035A2.812,2.812,0,0,0,6.188,9.527v20.25a2.872,2.872,0,0,0,2.848,2.848H23.66a2.812,2.812,0,0,0,2.777-2.848V29.25h.6A2.812,2.812,0,0,0,29.813,26.4V12.375Zm0,3.136,5.864,5.864H20.813Zm3.375,23.266a.568.568,0,0,1-.527.6H9.035a.626.626,0,0,1-.6-.6V9.527A.568.568,0,0,1,9.035,9h.527V26.965a2,2,0,0,0,2.285,2.285h12.34ZM27.563,26.4a.568.568,0,0,1-.527.6H12.41a.626.626,0,0,1-.6-.6V6.152a.568.568,0,0,1,.6-.527h6.152v9h9Z" transform="translate(-6.188 -3.375)"/>
                                 </svg>
-                            </i>
-                            <input @input="checkCopied" v-model="form.password" class="form-control" :type="showPass ? 'text' : 'password'" name="password" id="password" data-type="icon" autocomplete="new-password" data-color="dark" placeholder="Enter a min of 6 characters">
-                            <div class="gap-8 span-double-wrapper">
-                                <span v-if="form.password" :class="{'copied' : copied}" @click="copyTextToClipboard(form.password)" class="double ai-c jc-c flx br-50 a-btn" title="Copy password">
-                                    <svg v-if="!copied" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 23.625 29.25">
-                                        <path  d="M20.813,3.375h-8.4A2.812,2.812,0,0,0,9.563,6.152v.6H9.035A2.812,2.812,0,0,0,6.188,9.527v20.25a2.872,2.872,0,0,0,2.848,2.848H23.66a2.812,2.812,0,0,0,2.777-2.848V29.25h.6A2.812,2.812,0,0,0,29.813,26.4V12.375Zm0,3.136,5.864,5.864H20.813Zm3.375,23.266a.568.568,0,0,1-.527.6H9.035a.626.626,0,0,1-.6-.6V9.527A.568.568,0,0,1,9.035,9h.527V26.965a2,2,0,0,0,2.285,2.285h12.34ZM27.563,26.4a.568.568,0,0,1-.527.6H12.41a.626.626,0,0,1-.6-.6V6.152a.568.568,0,0,1,.6-.527h6.152v9h9Z" transform="translate(-6.188 -3.375)"/>
-                                    </svg>
-                                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="19.724" height="12" viewBox="0 0 19.724 15.104">
-                                        <path d="M30.054,13.974l-1.612-1.658a.347.347,0,0,0-.256-.11h0a.333.333,0,0,0-.256.11L16.754,23.573l-4.067-4.067a.354.354,0,0,0-.513,0l-1.63,1.63a.365.365,0,0,0,0,.522l5.129,5.129a1.622,1.622,0,0,0,1.072.522,1.7,1.7,0,0,0,1.062-.5h.009L30.063,14.5A.392.392,0,0,0,30.054,13.974Z" transform="translate(-10.434 -12.206)" fill="#0173ff"/>
-                                    </svg>
-                                </span>
-                                <span class="hide-show-pass br-50 double ai-c jc-c flx a-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
-                                        <g transform="translate(1.182 1.182)">
-                                            <path d="M16027.619-15079.234a21.431,21.431,0,0,1-4.111-4.4,2.816,2.816,0,0,1,0-3.226,21.339,21.339,0,0,1,4.111-4.406,11.5,11.5,0,0,1,7.129-2.734,11.516,11.516,0,0,1,7.132,2.734,21.4,21.4,0,0,1,4.107,4.4,2.822,2.822,0,0,1,0,3.229,21.4,21.4,0,0,1-4.107,4.4,11.51,11.51,0,0,1-7.132,2.734A11.492,11.492,0,0,1,16027.619-15079.234Zm.927-10.853a19.948,19.948,0,0,0-3.813,4.087,1.32,1.32,0,0,0,0,1.5,19.8,19.8,0,0,0,3.81,4.084,10.018,10.018,0,0,0,6.2,2.412,10.015,10.015,0,0,0,6.2-2.412,19.886,19.886,0,0,0,3.814-4.088,1.322,1.322,0,0,0,0-1.5,19.9,19.9,0,0,0-3.81-4.083,10.011,10.011,0,0,0-6.2-2.413A10.013,10.013,0,0,0,16028.546-15090.087Zm1.454,4.836a4.754,4.754,0,0,1,4.748-4.748,4.758,4.758,0,0,1,4.752,4.748,4.758,4.758,0,0,1-4.752,4.752A4.754,4.754,0,0,1,16030-15085.251Zm1.5,0a3.253,3.253,0,0,0,3.25,3.25,3.253,3.253,0,0,0,3.249-3.25,3.253,3.253,0,0,0-3.249-3.25A3.253,3.253,0,0,0,16031.5-15085.251Z" transform="translate(-16022.748 15097.25)" fill="#000"/>
-                                            <path v-if="!showPass" d="M0,22.121-2.121,20,20-2.121,22.121,0Z" transform="translate(2 2)" fill="#000" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </div>
+                                <svg v-else xmlns="http://www.w3.org/2000/svg"  height="11" viewBox="0 0 18.788 14.586">
+                                    <path d="M3710.728,693.174a1.2,1.2,0,0,1-.838-.341l-6.174-6.019a1.2,1.2,0,0,1,1.675-1.718l5.248,5.116,9.383-11.194a1.2,1.2,0,0,1,1.839,1.542l-10.214,12.186a1.2,1.2,0,0,1-.859.428Z" transform="translate(-3703.354 -678.589)" fill="#0173ff"/>
+                                </svg>
+                            </span>
+                            <span class="hide-show-pass br-50 double ai-c jc-c flx s-btn" :class="{ 'hide-pass-active' : showPass }" @click="togglePass">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 26.364 26.364">
+                                    <g transform="translate(1.182 1.182)">
+                                        <path d="M16027.619-15079.234a21.431,21.431,0,0,1-4.111-4.4,2.816,2.816,0,0,1,0-3.226,21.339,21.339,0,0,1,4.111-4.406,11.5,11.5,0,0,1,7.129-2.734,11.516,11.516,0,0,1,7.132,2.734,21.4,21.4,0,0,1,4.107,4.4,2.822,2.822,0,0,1,0,3.229,21.4,21.4,0,0,1-4.107,4.4,11.51,11.51,0,0,1-7.132,2.734A11.492,11.492,0,0,1,16027.619-15079.234Zm.927-10.853a19.948,19.948,0,0,0-3.813,4.087,1.32,1.32,0,0,0,0,1.5,19.8,19.8,0,0,0,3.81,4.084,10.018,10.018,0,0,0,6.2,2.412,10.015,10.015,0,0,0,6.2-2.412,19.886,19.886,0,0,0,3.814-4.088,1.322,1.322,0,0,0,0-1.5,19.9,19.9,0,0,0-3.81-4.083,10.011,10.011,0,0,0-6.2-2.413A10.013,10.013,0,0,0,16028.546-15090.087Zm1.454,4.836a4.754,4.754,0,0,1,4.748-4.748,4.758,4.758,0,0,1,4.752,4.748,4.758,4.758,0,0,1-4.752,4.752A4.754,4.754,0,0,1,16030-15085.251Zm1.5,0a3.253,3.253,0,0,0,3.25,3.25,3.253,3.253,0,0,0,3.249-3.25,3.253,3.253,0,0,0-3.249-3.25A3.253,3.253,0,0,0,16031.5-15085.251Z" transform="translate(-16022.748 15097.25)" fill="#000"/>
+                                        <path v-if="!showPass" d="M0,22.121-2.121,20,20-2.121,22.121,0Z" transform="translate(2 2)" fill="#000" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                                    </g>
+                                </svg>
+                            </span>
                         </div>
-                        <div class="flx gap-16">
-                            <a @click.prevent="generatePass(10)" href="#" class="getting-started">Or auto-generate a password</a>
-                            <i>{{ form.password }}</i>
-                        </div>
-                        <span class="input-error" v-if="validation.error && validation.errors.password">
-                            {{ validation.errors.password[0] }}
-                        </span>
                     </div>
+                    <div class="flx gap-16">
+                        <a @click.prevent="generatePass(16)" href="#" class="getting-started">Or auto-generate a strong password</a>
+                    </div>
+                    <span class="input-error" v-if="validation.error && validation.errors.password">
+                        {{ validation.errors.password[0] }}
+                    </span>
+                </div>
+                <div>
+                    <label for="send_email" class="flx gap-8" data-type="input-wapper">
+                        <input v-model="form.sendEmail" type="checkbox" id="send_email">
+                        Automatically send login details to user's email
+                    </label>
+                </div>
             </form>
+            <div v-else class="flx column ai-c">
+                <completed-anime />
+                <div class="flx column gap-24 ai-c">
+                    <h2>Successful</h2>
+                    <div class="text-center comp-text">
+                        You've successfully added a Modamu sub administrator. <span v-if="form.sendEmail">Login details would be sent to the email provided.</span>
+                    </div>
+                    <button @click="$store.commit('closeModal')" class="button-primary w-100 btn-lg">Done</button>
+                </div>
+            </div>
         </div>
     </teleport>
-    <teleport to="#modal_footer">
+    <teleport v-if="!signUpState" to="#modal_footer">
         <button @click="submitSignUp" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
             <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
             <span>{{ creating ? 'Creating account...' : 'Create'}}</span>
@@ -86,15 +101,17 @@ import { mapState } from 'vuex'
 import inputValMixin from '@/mixins/inputValMixin'
 import passwordToggleMixin from '@/mixins/passwordToggle'
 import Spinner from '@/components/includes/Spinner.vue'
+import CompletedAnime from '@/components/includes/CompletedAnime.vue'
 export default {
-    components: { Spinner },
+    components: { Spinner, CompletedAnime },
     name: 'AddSubAdminForm',
     mixins: [passwordToggleMixin, inputValMixin],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
             user: (state) => state.forms.user,
-            token: (state) => state.token
+            token: (state) => state.token,
+            signUpState: (state) => state.subAdminSignUpCompleted
         })
     },
     data () {
@@ -103,7 +120,8 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                user:''
+                user:'',
+                sendEmail: true
             },
             creating: false,
             completed: false,
@@ -112,7 +130,7 @@ export default {
     methods: {
         submitSignUp() {
             this.creating = true
-            axios.post(this.hostname+'/api/add-sub-admin?token='+this.token, this.form)
+            axios.post(this.hostname+'/api/sub-admin?token='+this.token, this.form)
             .then((res) => {
                 this.signupSuccess(res.data)
             }).catch((e) => {
@@ -125,7 +143,13 @@ export default {
         },
         async signupSuccess(res) {
             this.$store.commit('addToSubAdmin', res)
-            console.log(res)
+            this.creating = false
+            //call village allocation modal
+            if(this.form.user == 1) {
+                this.$store.commit('addPermissions', res)
+            }else {
+                this.$store.commit('openAllocateVillage', res)
+            }
         }
     },
     mounted() {

@@ -4,7 +4,7 @@
             <div class="grid-item table-head grid-col-subadmins">
                 <h4 class="table-cell wrap-text wrap-line-1">Name</h4>
                 <h4 class="table-cell wrap-text wrap-line-1">Email</h4>
-                <h4 class="table-cell wrap-text wrap-line-1">Access</h4>
+                <h4 class="table-cell wrap-text wrap-line-1">Permissions</h4>
                 <h4 class="table-cell wrap-text wrap-line-1">Actions</h4>
             </div>
             <sub-admin-row-1 v-for="user in getSubAdmins" :key="user.id" :user="user"/>
@@ -29,6 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .grid-col-subadmins{
-    grid-template-columns: 1fr .8fr .8fr 1.5fr;
+    grid-template-columns: 1fr 1fr 1.3fr 1.3fr;
 }
 </style>

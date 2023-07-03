@@ -3,22 +3,27 @@
   <modal-onboarding v-if="onboardModal" />
   <modal />
   <session-exp v-if="sessionExp" />
-  <village-allocation-modal v-if="allocate" />
+  <village-allocation-modal v-if="villageAllocation" />
+  <access-control-modal v-if="adminAccess" />
+  <delete-modal v-if="deleteModal" />
 </template>
 <script>
-
+import DeleteModal from './components/includes/app/DeleteModal.vue'
 import Modal from './components/layouts/Modal.vue'
 import { mapState } from 'vuex'
 import ModalOnboarding from './components/layouts/ModalOnboarding.vue'
 import SessionExp from './components/layouts/SessionExp.vue'
 import VillageAllocationModal from './views/app/admin/VillageAllocationModal.vue'
+import AccessControlModal from './views/app/admin/AccessControlModal.vue'
 export default {
-  components: { Modal, ModalOnboarding, SessionExp, VillageAllocationModal },
+  components: { Modal, ModalOnboarding, SessionExp, VillageAllocationModal, AccessControlModal, DeleteModal },
   computed: {
     ...mapState({
       onboardModal: (state) => state.onboardModal,
       sessionExp: (state) => state.sessionExp,
-      allocate: (state) => state.village_allocation.active
+      villageAllocation: (state) => state.subAdminStore.villageAccess,
+      adminAccess: (state) => state.subAdminStore.adminAccess,
+      deleteModal: (state) => state.deleteModal.active
     })
   },
   name: 'App',
