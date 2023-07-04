@@ -116,7 +116,7 @@ export default {
         return {
             load: false,
             form: {
-                radius: 100,
+                radius: 10,
                 latitude: null,
                 longitude: null,
             },
