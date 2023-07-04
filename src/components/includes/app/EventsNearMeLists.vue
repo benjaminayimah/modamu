@@ -14,7 +14,7 @@
                 <span class="status-pill br-32 capitalize" :class="computedStatus">{{ computedStatus }}</span>
             </div>
             <div class="flx jc-sb">
-                <div class="flx ai-c gap-4">
+                <div class="flx ai-c gap-4" v-if="event.distance">
                     <i class="br-50"></i>
                     <span>{{ format_distance(event.distance) }}</span>
                     away

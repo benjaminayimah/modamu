@@ -1,5 +1,5 @@
 <template>
-    <Vue3Lottie :animationData="animationData" :height="200" :width="200" />
+    <Vue3Lottie :animationData="animationData" :loop="false" :height="200" :width="200" />
 </template>
 
 <script>

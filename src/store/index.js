@@ -195,6 +195,9 @@ export default createStore({
       state.hobbies = payload.hobbies
       state.illnesses = payload.illnesses
       state.allergies = payload.allergies
+      if(!state.events_near.events.length) {
+        this.commit('setNearbyEventToEvents')
+      }
       this.commit('updateLocalStorage', payload.user)
     },
     setRegisteredEvents(state, payload) {
@@ -332,6 +335,14 @@ export default createStore({
     },
     addNearByEvent(state, payload) {
       state.events_near = payload
+    },
+    setNearbyEventToEvents(state) {
+      let events = []
+      state.events.forEach(element => {
+        events.push({ event: element})
+      });
+      state.events_near.events = events
+      state.events_near.images = state.images
     },
     setWaitlist(state, payload) {
       state.wait_lists = payload

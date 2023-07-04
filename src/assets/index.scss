@@ -75,6 +75,9 @@ body{
 .bg-color{
     background-color: var(--bg-color);
 }
+.danger{
+    color: var(--error);
+}
 .ft-primary {
     color: var(--primary-color);
 }
