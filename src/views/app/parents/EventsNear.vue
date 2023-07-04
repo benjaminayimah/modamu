@@ -64,7 +64,7 @@
         </div>
         <div v-if="!events_near.events.length && !load" class="not-found flx column jc-c ai-c gap-16">
             <not-found-lottie />
-            <span><strong>Sorry!</strong> There are no events found</span>
+            <span><strong>Sorry,</strong> there were no events found</span>
         </div>
     </section>
 </template>
