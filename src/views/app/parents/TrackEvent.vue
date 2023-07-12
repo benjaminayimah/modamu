@@ -13,10 +13,7 @@
             </div>
         </div>
         <div class="pd-24 bd-dashed br-16 text-center">
-                <div>{{ computedStatus }}</div>
-                <div v-if="booking.kids_status == 0">
-                    <span>Ready? </span><router-link :to="{ name: 'ParentVerifyCode' }">Drop them off</router-link>
-                </div>
+            {{ computedStatus }}
         </div>
         <div class="flx gap-16 column mt-32">
             <div class="track-event-list flx column gap-24 bg-white br-24">
