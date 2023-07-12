@@ -109,7 +109,6 @@ i{
 }
 .status-pill{
     padding: 8px 14px;
-    color: #fff;
     position: absolute;
     left: 10px;
     bottom: 10px;

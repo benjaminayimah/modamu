@@ -16,7 +16,7 @@
                 <div class="relative mb-16">
                     <div v-if="is_village" class="absolute actions-container br-32">
                         <ul class="flx gap-8 ai-c jc-c">
-                            <button title="Add more photos" @click="setID" class="no-width gap-4 fw-500" :class="{ 'button-disabled' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
+                            <button title="Add more photos" @click="setID" class="no-width gap-4 fw-500" :class="{ 'button-disabled2' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 15.132 15.132">
                                     <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#000"/>
                                 </svg>
@@ -124,9 +124,12 @@
                             {{ format_time(event.end_time) }}
                         </div>
                     </div>
-                    <button v-if="is_parent" @click="bookNow" class="button-primary absolute gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' }" :disabled="computeStatus === 'past' ? true : false">
-                        Book now
-                    </button>
+                    <div class="absolute book-wrapper text-center">
+                        <div class="mb-4 fs-09" :class="computedLimit.state === 'full' ? 'in-active' : 'active'">{{ computedLimit.text }}</div>
+                        <button v-if="is_parent" @click="bookNow" class="button-primary gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' || computedLimit.state === 'full' }" :disabled="computeStatus === 'past' || computedLimit.state === 'full' ? true : false">
+                            Book now
+                        </button>
+                    </div>
                 </div>
             </div>
             <div v-if="is_village || is_admin" class="main-content-card flx-grow-1">
@@ -189,6 +192,18 @@ export default {
         },
         computeEmptyGal() {
             return 4 - this.images.length
+        },
+        computedLimit() {
+            let payload = { state: '', text: ''}
+            let limit = this.event.limit
+            let count = this.event.limit_count
+            if(limit == count) {
+                payload.state = 'full'
+                payload.text = 'All spots are booked'
+            }else {
+                payload.text = 'Only ' + Number(limit - count) + ' spots left'
+            }
+            return payload
         }
     },
     data () {
@@ -244,8 +259,11 @@ section {
         flex-direction: column;
         align-items: flex-start;
     }
-    .button-primary{
+    .book-wrapper{
         position: relative;
+    }
+    .button-primary {
+        width: 100%
     }
     h1 {
         font-size: 1.1rem
@@ -314,9 +332,16 @@ label {
 .value{
     font-weight: 600;
 }
+.book-wrapper{
+    inset: auto 0 0 auto;
+    .in-active{
+        color: var(--error);
+    }
+    .active {
+        color: var(--success-green);
+    }
+}
 .button-primary {
-    right: 0;
-    bottom: 0;
     height: 52px;
 }
 .empty{
@@ -357,7 +382,7 @@ label {
         height: 16px;
     }
 }
-.button-disabled{
+.button-disabled2{
     color: var(--gray);
     cursor: not-allowed;
     path {

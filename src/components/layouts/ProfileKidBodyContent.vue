@@ -7,7 +7,7 @@
         <h3>{{ kid.kid_name }}</h3>
         <span class="gray">{{ calculateAge(kid.dob)}}</span>
     </div>
-    <span v-if="kid.about">About <span>{{ computedFirstName(kid.name) }}</span></span>
+    <span v-if="kid.about">About <span>{{ computedFirstName(kid.kid_name) }}</span></span>
     <article class="gray">
         {{ kid.about }}
     </article>
