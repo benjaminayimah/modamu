@@ -30,6 +30,7 @@
                 Use current location
             </button>
         </div>
+        <div class="mb-24 danger" v-if="noInput">Please type in a location and then select from the dropdown list</div>
         <div v-if="load" class="empty-state flx column jc-c ai-c gap-16">
             <location-beacon />
             <span>Scanning for events in...</span>
@@ -40,11 +41,10 @@
                 {{ computedLocationName }}
             </span>
         </div>
-        <div class="mb-24 danger" v-if="noInput">Please type in a location and then select from the dropdown list</div>
         <div v-if="events_near.events.length && !load">
             <div class="flx gap-16">
                 <div v-if="locationAfterSearch">
-                    All events in
+                    Showing events in...
                     <span class="ft-primary flx ai-c gap-8">
                         <svg xmlns="http://www.w3.org/2000/svg" height="19" viewBox="0 0 20.101 19.821">
                             <path d="M-3280.074-712.862a22.722,22.722,0,0,1-4.877-3.317,11.435,11.435,0,0,1-3.8-6.158,8.244,8.244,0,0,1,1.584-6.6c1.235-1.576,3.682-3.454,8.318-3.454s7.083,1.878,8.319,3.454a8.245,8.245,0,0,1,1.584,6.6,11.436,11.436,0,0,1-3.8,6.158,22.725,22.725,0,0,1-4.878,3.317,2.694,2.694,0,0,1-1.222.3A2.7,2.7,0,0,1-3280.074-712.862Zm-5.778-15.036a6.543,6.543,0,0,0-1.258,5.237,9.809,9.809,0,0,0,3.287,5.243,21.039,21.039,0,0,0,4.511,3.065,1.013,1.013,0,0,0,.461.112,1.015,1.015,0,0,0,.462-.112,21.039,21.039,0,0,0,4.511-3.065,9.818,9.818,0,0,0,3.287-5.243,6.547,6.547,0,0,0-1.258-5.237c-1.443-1.84-3.864-2.813-7-2.813S-3284.41-729.739-3285.852-727.9Zm3.651,3.886a3.353,3.353,0,0,1,3.349-3.35,3.353,3.353,0,0,1,3.35,3.35,3.353,3.353,0,0,1-3.35,3.349A3.352,3.352,0,0,1-3282.2-724.012Zm1.675,0a1.676,1.676,0,0,0,1.674,1.675,1.676,1.676,0,0,0,1.675-1.675,1.677,1.677,0,0,0-1.675-1.675A1.676,1.676,0,0,0-3280.526-724.012Z" transform="translate(3288.902 732.387)" fill="#0173ff"/>
@@ -127,6 +127,10 @@ export default {
             this.noInput = true
             this.isFocusedIn('location_search_wrapper')
         },
+        clearErr() {
+
+            this.noInput ? this.noInput = false : ''
+        },
         fetchNearByEvents: function() {
             this.manual = false
             this.loaderOn()
@@ -157,6 +161,7 @@ export default {
                 }else {
                     this.locationAfterSearch = this.current_location
                 }
+                this.clearErr()
                 this.loaderOff()
             }).catch((e) => {
                 this.loaderOff()

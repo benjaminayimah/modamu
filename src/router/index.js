@@ -15,6 +15,7 @@ import ResetPassword from '@/views/web/ResetPassword.vue'
 import Profile from '@/views/app/Profile.vue'
 import KidsProfile from '@/components/layouts/ProfileViewKidDetail.vue'
 import AddEventPage from '@/views/app/village/AddEventPage.vue'
+import EventEdit from '@/views/app/village/EventEdit.vue'
 import Events from '@/views/app/Events.vue'
 import OngoingEvents from '@/views/app/EventsOngoing.vue'
 import UpcomingEvents from '@/views/app/EventsUpcoming.vue'
@@ -80,6 +81,7 @@ const routes = [
         { path: '/profile/:name/:id', name: 'KidsProfile', component: KidsProfile }
       ]},
       { path: '/add-new-event', name: 'AddEventPage', component: AddEventPage},
+      { path: '/edit-event/:id/:name/', name: 'EventEdit', component: EventEdit},
       { path: '/events/:name', component: Events,
       children: [
         { path: '/events/:name', name: 'OngoingEvents', component: OngoingEvents },

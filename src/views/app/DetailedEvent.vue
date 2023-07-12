@@ -13,34 +13,40 @@
         </div>
         <div class="flx gap-60 row-column">
             <div class="main-content-card details">
-                <div class="grid gallery mb-16 gap-16">
-                    <div class="grid-item image-1 bg-img" :style="images[0] ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+images[0].image +')'} : ''">
-                        <button v-if="is_village && images[0]" class="br-50 absolute" @click="delImage(images[0].id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 17.5 21">
-                                <path id="Path_44" data-name="Path 44" d="M-3568.023-836.575a6.145,6.145,0,0,1-1.2-2.411c-.266-.878-.493-1.9-.78-3.2l-.152-.686c-.69-3.1-.346-5.1,1.082-6.3a6.375,6.375,0,0,1,2.894-1.23,22.93,22.93,0,0,1,4.43-.345,22.933,22.933,0,0,1,4.431.345,6.39,6.39,0,0,1,2.894,1.23c1.427,1.2,1.771,3.2,1.082,6.3l-.151.684c-.287,1.3-.514,2.326-.78,3.2a6.145,6.145,0,0,1-1.2,2.411c-1.031,1.148-2.731,1.575-6.273,1.575S-3566.992-835.427-3568.023-836.575Zm2.189-12.115a4.815,4.815,0,0,0-2.116.857c-1.145.958-.832,3.072-.5,4.578q.08.355.152.686c.279,1.264.5,2.262.745,3.075a4.667,4.667,0,0,0,.829,1.75c.463.517,1.387.995,4.971.995s4.508-.478,4.971-.995a4.672,4.672,0,0,0,.828-1.75c.247-.815.467-1.812.746-3.074q.073-.332.152-.687c.7-3.146.051-4.119-.5-4.578a4.82,4.82,0,0,0-2.116-.857,21.307,21.307,0,0,0-4.085-.31A21.3,21.3,0,0,0-3565.834-848.69Zm6.709,8.44v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.874.874,0,0,1-3559.125-840.25Zm-3.5,0v-5.25a.876.876,0,0,1,.875-.876.876.876,0,0,1,.876.876v5.25a.875.875,0,0,1-.876.875A.875.875,0,0,1-3562.625-840.25Zm-3.517,0v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.875.875,0,0,1-3566.142-840.25Zm11.816-10.625a14.576,14.576,0,0,0-7.424-1.625c-3.911,0-6.362.943-7.4,1.611a.876.876,0,0,1-1.21-.264.875.875,0,0,1,.264-1.209,14.509,14.509,0,0,1,6.6-1.827v-.937a.875.875,0,0,1,.875-.875h1.751a.875.875,0,0,1,.875.875v.937a14.935,14.935,0,0,1,6.576,1.814.874.874,0,0,1,.3,1.2.875.875,0,0,1-.75.424A.869.869,0,0,1-3554.326-850.875Z" transform="translate(3570.5 856)" fill="#fff"/>
-                            </svg>
-                        </button>
+                <div class="relative mb-16">
+                    <div class="absolute actions-container br-32">
+                        <ul class="flx gap-8 ai-c jc-c">
+                            <button title="Add more photos" @click="setID" class="no-width gap-4 fw-500" :class="{ 'button-disabled' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 15.132 15.132">
+                                    <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#000"/>
+                                </svg>
+                                <div class="wrap-text wrap-line-1">
+                                    Add more photos to gallery
+                                </div>
+                            </button>
+                            <span></span>
+                            <div class="flx">
+                                <button @click="doEdit" title="Edit this event">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 16.919 16.166">
+                                        <path d="M-3593.823-882.342a.749.749,0,0,1-.2-.713l.857-3.427a.75.75,0,0,1,.2-.348l10.708-10.708a2.555,2.555,0,0,1,1.816-.751,2.55,2.55,0,0,1,1.815.751,2.57,2.57,0,0,1,0,3.631l-10.708,10.708a.749.749,0,0,1-.348.2l-3.427.857a.753.753,0,0,1-.181.022A.751.751,0,0,1-3593.823-882.342Zm12.624-14.134-10.561,10.561-.5,2.012,2.012-.5,10.561-10.561a1.067,1.067,0,0,0,0-1.509,1.059,1.059,0,0,0-.754-.312A1.063,1.063,0,0,0-3581.2-896.476Zm-4.385,14.353a.75.75,0,0,1-.75-.75.75.75,0,0,1,.75-.75h7.709a.75.75,0,0,1,.75.75.75.75,0,0,1-.75.75Z" transform="translate(3594.043 898.288)" fill="#000000"/>
+                                    </svg>
+                                </button>
+                                <!-- <button title="Cancel event">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 16 16">
+                                        <path d="M-1990,8a8,8,0,0,1,8-8,8,8,0,0,1,8,8,8,8,0,0,1-8,8A8,8,0,0,1-1990,8Zm1.6,0a6.407,6.407,0,0,0,6.4,6.4,6.407,6.407,0,0,0,6.4-6.4,6.407,6.407,0,0,0-6.4-6.4A6.407,6.407,0,0,0-1988.4,8Zm8.643,3.233L-1982,8.99l-2.243,2.243a.7.7,0,0,1-.99,0,.7.7,0,0,1,0-.99L-1982.99,8l-2.243-2.243a.7.7,0,0,1,0-.99.7.7,0,0,1,.99,0L-1982,7.01l2.243-2.243a.7.7,0,0,1,.99,0,.7.7,0,0,1,0,.99L-1981.01,8l2.243,2.243a.7.7,0,0,1,0,.99.7.7,0,0,1-.5.205A.7.7,0,0,1-1979.757,11.233Z" transform="translate(1990)" fill="#EA1515"/>
+                                    </svg>
+                                </button> -->
+                                <!-- <button title="Delete event">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 17.5 21">
+                                        <path id="Path_44" data-name="Path 44" d="M-3568.023-836.575a6.145,6.145,0,0,1-1.2-2.411c-.266-.878-.493-1.9-.78-3.2l-.152-.686c-.69-3.1-.346-5.1,1.082-6.3a6.375,6.375,0,0,1,2.894-1.23,22.93,22.93,0,0,1,4.43-.345,22.933,22.933,0,0,1,4.431.345,6.39,6.39,0,0,1,2.894,1.23c1.427,1.2,1.771,3.2,1.082,6.3l-.151.684c-.287,1.3-.514,2.326-.78,3.2a6.145,6.145,0,0,1-1.2,2.411c-1.031,1.148-2.731,1.575-6.273,1.575S-3566.992-835.427-3568.023-836.575Zm2.189-12.115a4.815,4.815,0,0,0-2.116.857c-1.145.958-.832,3.072-.5,4.578q.08.355.152.686c.279,1.264.5,2.262.745,3.075a4.667,4.667,0,0,0,.829,1.75c.463.517,1.387.995,4.971.995s4.508-.478,4.971-.995a4.672,4.672,0,0,0,.828-1.75c.247-.815.467-1.812.746-3.074q.073-.332.152-.687c.7-3.146.051-4.119-.5-4.578a4.82,4.82,0,0,0-2.116-.857,21.307,21.307,0,0,0-4.085-.31A21.3,21.3,0,0,0-3565.834-848.69Zm6.709,8.44v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.874.874,0,0,1-3559.125-840.25Zm-3.5,0v-5.25a.876.876,0,0,1,.875-.876.876.876,0,0,1,.876.876v5.25a.875.875,0,0,1-.876.875A.875.875,0,0,1-3562.625-840.25Zm-3.517,0v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.875.875,0,0,1-3566.142-840.25Zm11.816-10.625a14.576,14.576,0,0,0-7.424-1.625c-3.911,0-6.362.943-7.4,1.611a.876.876,0,0,1-1.21-.264.875.875,0,0,1,.264-1.209,14.509,14.509,0,0,1,6.6-1.827v-.937a.875.875,0,0,1,.875-.875h1.751a.875.875,0,0,1,.875.875v.937a14.935,14.935,0,0,1,6.576,1.814.874.874,0,0,1,.3,1.2.875.875,0,0,1-.75.424A.869.869,0,0,1-3554.326-850.875Z" transform="translate(3570.5 856)" fill="#EA1515"/>
+                                    </svg>
+                                </button> -->
+                            </div>
+                        </ul>
                     </div>
-                    <div class="grid-item image-2 bg-img" :style="images[1] ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+images[1].image +')'} : ''">
-                        <button v-if="is_village && images[1]" class="br-50 absolute" @click="delImage(images[1].id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 17.5 21">
-                                <path id="Path_44" data-name="Path 44" d="M-3568.023-836.575a6.145,6.145,0,0,1-1.2-2.411c-.266-.878-.493-1.9-.78-3.2l-.152-.686c-.69-3.1-.346-5.1,1.082-6.3a6.375,6.375,0,0,1,2.894-1.23,22.93,22.93,0,0,1,4.43-.345,22.933,22.933,0,0,1,4.431.345,6.39,6.39,0,0,1,2.894,1.23c1.427,1.2,1.771,3.2,1.082,6.3l-.151.684c-.287,1.3-.514,2.326-.78,3.2a6.145,6.145,0,0,1-1.2,2.411c-1.031,1.148-2.731,1.575-6.273,1.575S-3566.992-835.427-3568.023-836.575Zm2.189-12.115a4.815,4.815,0,0,0-2.116.857c-1.145.958-.832,3.072-.5,4.578q.08.355.152.686c.279,1.264.5,2.262.745,3.075a4.667,4.667,0,0,0,.829,1.75c.463.517,1.387.995,4.971.995s4.508-.478,4.971-.995a4.672,4.672,0,0,0,.828-1.75c.247-.815.467-1.812.746-3.074q.073-.332.152-.687c.7-3.146.051-4.119-.5-4.578a4.82,4.82,0,0,0-2.116-.857,21.307,21.307,0,0,0-4.085-.31A21.3,21.3,0,0,0-3565.834-848.69Zm6.709,8.44v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.874.874,0,0,1-3559.125-840.25Zm-3.5,0v-5.25a.876.876,0,0,1,.875-.876.876.876,0,0,1,.876.876v5.25a.875.875,0,0,1-.876.875A.875.875,0,0,1-3562.625-840.25Zm-3.517,0v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.875.875,0,0,1-3566.142-840.25Zm11.816-10.625a14.576,14.576,0,0,0-7.424-1.625c-3.911,0-6.362.943-7.4,1.611a.876.876,0,0,1-1.21-.264.875.875,0,0,1,.264-1.209,14.509,14.509,0,0,1,6.6-1.827v-.937a.875.875,0,0,1,.875-.875h1.751a.875.875,0,0,1,.875.875v.937a14.935,14.935,0,0,1,6.576,1.814.874.874,0,0,1,.3,1.2.875.875,0,0,1-.75.424A.869.869,0,0,1-3554.326-850.875Z" transform="translate(3570.5 856)" fill="#fff"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="grid-item image-3 bg-img" :style="images[2] ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+images[2].image +')'} : ''">
-                        <button v-if="is_village && images[2]" class="br-50 absolute" @click="delImage(images[2].id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 17.5 21">
-                                <path id="Path_44" data-name="Path 44" d="M-3568.023-836.575a6.145,6.145,0,0,1-1.2-2.411c-.266-.878-.493-1.9-.78-3.2l-.152-.686c-.69-3.1-.346-5.1,1.082-6.3a6.375,6.375,0,0,1,2.894-1.23,22.93,22.93,0,0,1,4.43-.345,22.933,22.933,0,0,1,4.431.345,6.39,6.39,0,0,1,2.894,1.23c1.427,1.2,1.771,3.2,1.082,6.3l-.151.684c-.287,1.3-.514,2.326-.78,3.2a6.145,6.145,0,0,1-1.2,2.411c-1.031,1.148-2.731,1.575-6.273,1.575S-3566.992-835.427-3568.023-836.575Zm2.189-12.115a4.815,4.815,0,0,0-2.116.857c-1.145.958-.832,3.072-.5,4.578q.08.355.152.686c.279,1.264.5,2.262.745,3.075a4.667,4.667,0,0,0,.829,1.75c.463.517,1.387.995,4.971.995s4.508-.478,4.971-.995a4.672,4.672,0,0,0,.828-1.75c.247-.815.467-1.812.746-3.074q.073-.332.152-.687c.7-3.146.051-4.119-.5-4.578a4.82,4.82,0,0,0-2.116-.857,21.307,21.307,0,0,0-4.085-.31A21.3,21.3,0,0,0-3565.834-848.69Zm6.709,8.44v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.874.874,0,0,1-3559.125-840.25Zm-3.5,0v-5.25a.876.876,0,0,1,.875-.876.876.876,0,0,1,.876.876v5.25a.875.875,0,0,1-.876.875A.875.875,0,0,1-3562.625-840.25Zm-3.517,0v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.875.875,0,0,1-3566.142-840.25Zm11.816-10.625a14.576,14.576,0,0,0-7.424-1.625c-3.911,0-6.362.943-7.4,1.611a.876.876,0,0,1-1.21-.264.875.875,0,0,1,.264-1.209,14.509,14.509,0,0,1,6.6-1.827v-.937a.875.875,0,0,1,.875-.875h1.751a.875.875,0,0,1,.875.875v.937a14.935,14.935,0,0,1,6.576,1.814.874.874,0,0,1,.3,1.2.875.875,0,0,1-.75.424A.869.869,0,0,1-3554.326-850.875Z" transform="translate(3570.5 856)" fill="#fff"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="grid-item image-4 bg-img" :style="images[3] ? { backgroundImage: 'url('+hostname+'/storage/'+event.user_id+'/'+images[3].image +')'} : ''">
-                        <button v-if="is_village && images[3]" class="br-50 absolute" @click="delImage(images[3].id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 17.5 21">
-                                <path id="Path_44" data-name="Path 44" d="M-3568.023-836.575a6.145,6.145,0,0,1-1.2-2.411c-.266-.878-.493-1.9-.78-3.2l-.152-.686c-.69-3.1-.346-5.1,1.082-6.3a6.375,6.375,0,0,1,2.894-1.23,22.93,22.93,0,0,1,4.43-.345,22.933,22.933,0,0,1,4.431.345,6.39,6.39,0,0,1,2.894,1.23c1.427,1.2,1.771,3.2,1.082,6.3l-.151.684c-.287,1.3-.514,2.326-.78,3.2a6.145,6.145,0,0,1-1.2,2.411c-1.031,1.148-2.731,1.575-6.273,1.575S-3566.992-835.427-3568.023-836.575Zm2.189-12.115a4.815,4.815,0,0,0-2.116.857c-1.145.958-.832,3.072-.5,4.578q.08.355.152.686c.279,1.264.5,2.262.745,3.075a4.667,4.667,0,0,0,.829,1.75c.463.517,1.387.995,4.971.995s4.508-.478,4.971-.995a4.672,4.672,0,0,0,.828-1.75c.247-.815.467-1.812.746-3.074q.073-.332.152-.687c.7-3.146.051-4.119-.5-4.578a4.82,4.82,0,0,0-2.116-.857,21.307,21.307,0,0,0-4.085-.31A21.3,21.3,0,0,0-3565.834-848.69Zm6.709,8.44v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.874.874,0,0,1-3559.125-840.25Zm-3.5,0v-5.25a.876.876,0,0,1,.875-.876.876.876,0,0,1,.876.876v5.25a.875.875,0,0,1-.876.875A.875.875,0,0,1-3562.625-840.25Zm-3.517,0v-5.25a.875.875,0,0,1,.875-.876.875.875,0,0,1,.875.876v5.25a.874.874,0,0,1-.875.875A.875.875,0,0,1-3566.142-840.25Zm11.816-10.625a14.576,14.576,0,0,0-7.424-1.625c-3.911,0-6.362.943-7.4,1.611a.876.876,0,0,1-1.21-.264.875.875,0,0,1,.264-1.209,14.509,14.509,0,0,1,6.6-1.827v-.937a.875.875,0,0,1,.875-.875h1.751a.875.875,0,0,1,.875.875v.937a14.935,14.935,0,0,1,6.576,1.814.874.874,0,0,1,.3,1.2.875.875,0,0,1-.75.424A.869.869,0,0,1-3554.326-850.875Z" transform="translate(3570.5 856)" fill="#fff"/>
-                            </svg>
-                        </button>
+                    <div class="grid gallery gap-16">
+                        <gallery-image-list v-for="image in images" :key="image.id" :image="image" :is_village="is_village"/>
+                        <div v-for="empty in computeEmptyGal" :key="empty.id" class="bg-img grid-item br-16"></div>
                     </div>
                 </div>
                 <div class="flx column gap-24 relative">
@@ -48,6 +54,7 @@
                         <div class="flx gap-8 ai-c avatar-wrapper">
                             <profile-avatar :id="event.user_id" :image="event.image"/>
                             <h1>{{ event.event_name }}</h1>
+                            <span class="event-status br-24 capitalize" :class="computeStatus">{{ computeStatus }}</span>
                         </div>
                         <div class="flx gap-8 ai-c">
                             <div>Price per child</div>
@@ -117,13 +124,7 @@
                             {{ format_time(event.end_time) }}
                         </div>
                     </div>
-                    <button @click="setID" v-if="is_village" class="button-primary absolute btn-md gap-4" :class="{ 'button-disabled' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 15.132 15.132">
-                            <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#fff"/>
-                        </svg>
-                        <span id="add"></span>
-                    </button>
-                    <button v-else @click="bookNow " class="button-primary absolute gap-8 btn-md book-now" :class="{ 'button-disabled' : pastEvent }" :disabled="pastEvent ? true : false">
+                    <button v-if="is_parent" @click="bookNow " class="button-primary absolute gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' }" :disabled="computeStatus === 'past' ? true : false">
                         Book now
                     </button>
                 </div>
@@ -155,31 +156,39 @@
     </section>
 </template>
 <script>
-import { postApi, deleteApi } from '@/api';
+import { postApi } from '@/api';
 import formatDateTime from '../../mixins/formatDateTime';
 import usersLevelMixin from '../../mixins/usersLevelMixin';
 import { mapState } from 'vuex';
 import KidsRow from '../../components/includes/app/KidsRow.vue';
 import ProfileAvatar from '../../components/includes/app/ProfileAvatar.vue';
+import GalleryImageList from '@/components/layouts/GalleryImageList.vue';
 export default {
-    components: { KidsRow, ProfileAvatar },
+    components: { KidsRow, ProfileAvatar,/* Spinner,*/ GalleryImageList },
     name: 'DetailedEvent',
     mixins: [usersLevelMixin, formatDateTime],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
-            token: (state) => state.token
+            token: (state) => state.token,
+            forms: (state) => state.forms
         }),
-        pastEvent() {
-            const currentDateTime = new Date()
-            const endDate = new Date(this.event.date+'T'+this.event.end_time)
-            if(currentDateTime > endDate)
-            return true
-            else
-            return false
-        },
         computedAttendees() {
             return this.attendees.length ? this.attendees.filter(data => data.event_id == this.$route.params.id) : ''
+        },
+        computeStatus() {
+            const currentDateTime = new Date()
+            const startDate = new Date(this.event.date+'T'+this.event.start_time)
+            const endDate = new Date(this.event.date+'T'+this.event.end_time)
+            if(currentDateTime > startDate &&  currentDateTime < endDate)
+            return 'ongoing'
+            else if (currentDateTime < startDate)
+            return 'upcoming'
+            else
+            return 'past'
+        },
+        computeEmptyGal() {
+            return 4 - this.images.length
         }
     },
     data () {
@@ -187,11 +196,12 @@ export default {
             event: {},
             attendees: [],
             images: [],
+            deleting: false
         }
     },
     methods: {
         bookNow() {
-            !this.pastEvent ? this.$router.push({ name: 'BookingSelectKids', params: { event_id: this.event.id, village: this.event.user_id, event_name: this.event.name, event_price: this.event.amount }}) : ''
+            !this.computeStatus === 'past' ? this.$router.push({ name: 'BookingSelectKids', params: { event_id: this.event.id, village: this.event.user_id, event_name: this.event.name, event_price: this.event.amount }}) : ''
         },
         async setID(){
             await this.$store.commit('setTempID', this.event.id)
@@ -209,15 +219,8 @@ export default {
                 }
             }
         },
-        async delImage(id) {
-            try {
-                await deleteApi(this.hostname+'/api/del-this-image/'+id+ '?token='+this.token)
-                location.reload()
-            } catch (e) {
-                if(e.response.status == 400) {
-                    this.$store.commit('setExpSession')
-                }
-            }
+        doEdit() {
+            this.$router.push({ name: 'EventEdit', params: { id: this.event.id, name: this.event.event_name }})
         }
     },
     created() {
@@ -288,35 +291,19 @@ section {
 }
 @container( inline-size > 380px) {
     #add::after{
-        content: 'Add Pictures to event gallery';
+        content: 'Add more photos to galllery';
     }
 }
 
-.grid-item{
-    background-color: var(--bg-color);
-    border-radius: 16px;
-    position: relative;
-    button {
-        padding: 0;
-        height: 40px;
-        width: 40px;
-        background-color: rgba(0, 0, 0, 0.4);
-        inset: 8px 8px auto auto;
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-    }
-}
 .grid {
     grid-template-columns: 1.2fr 1.5fr 1fr;
 }
-.image-1 {
+.grid-item:nth-child(1){
     grid-row: span 2;
 }
-.image-4 {
+.grid-item:nth-child(4) {
     grid-column: span 2;
 }
-
 label {
     font-size: 0.9rem;
 }
@@ -334,7 +321,6 @@ label {
 }
 .empty{
     height: calc(100vh - 418px);
-
 }
 .kids-view{
     padding: 24px 0;
@@ -343,5 +329,39 @@ label {
     padding-right: 50px;
     padding-left: 50px;
 }
-
+.actions-container{
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    inset: auto auto 8px 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 1px 15px 0 rgba(14,20,44,.12);
+    button {
+        background-color: transparent;
+        height: 40px;
+        &:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+    }
+    button:not(.no-width) {
+        width: 40px;
+    }
+    .no-width{
+        padding: 0 14px;
+    }
+    span {
+        background-color: #c2c3c7;
+        width: 1px;
+        height: 16px;
+    }
+}
+.button-disabled{
+    color: var(--gray);
+    cursor: not-allowed;
+    path {
+        fill: var(--gray);
+    }
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
     <router-link :to="{ name: 'DetailedEvent', params: { id: event.id, name: event.event_name}}" class="table-row grid-item row-hover " :class="dashboard ? 'grid-col-dash' : 'grid-col-notdash'">
         <div class="table-cell gap-8">
-            <profile-avatar :id="event.user_id" :image="computedImage.image"/>
+            <profile-avatar :id="event.user_id" :image="computedImage"/>
             <span class="wrap-text wrap-line-1">{{ event.event_name }}</span>
         </div>
         <div class="table-cell gap-8">
@@ -39,7 +39,11 @@ export default {
             images: (state) => state.images,
             attendees: (state) => state.attendees,
             computedImage() {
-                return this.images.filter(data => data.event_id == this.event.id)[0]
+                const image =  this.images.length ? this.images.filter(data => data.event_id == this.event.id)[0] : ''
+                if(image)
+                return image.image
+                else
+                return null
             },
             computedAttendees() {
                 return this.attendees.filter(data => data.event_id == this.event.id)

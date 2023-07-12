@@ -1,33 +1,20 @@
 <template>
     <section class="section-main">
-        <div class="title-row">
-            <h1 class="title">Add New Event</h1>
+        <div class="title-row flx gap-24 ai-c">
+            <router-link :to="{ name: 'DetailedEvent', params: { id: $route.params.id, name: $route.params.name}}" class="flx gap-8 ai-c">
+                <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 14.647 14.683">
+                    <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#000"></path>
+                </svg>
+                Cancel
+            </router-link>
+            <h3 class="title">
+                {{ $route.params.name }}
+            </h3>
         </div>
-        <div class="flx jc-c">
-            <div v-if="completed" class="main-content-card completed-card flx column ai-c">
-                <completed-anime />
-                <div class="flx column gap-24 ai-c">
-                    <h2>Successful</h2>
-                    <div class="text-center comp-text">
-                        Your event has been added successfully and you can easily track and monitor attendance and reports.
-                    </div>
-                    <button @click="goToEvent" class="button-primary w-100 btn-lg">Track</button>
-                </div>
-            </div>
-            <div v-else class="main-content-card add-event-card">
+        <div  class="flx jc-c">
+            <div class="main-content-card add-event-card">
                 <div class="flx jc-c">
                     <div class="flx ai-c column gap-16 mb-24">
-                        <avatar v-bind:status="status" v-bind:hostname="getHostname" :id="user.id" @deleteTemp="deltmp"/>
-                        <span class="input-error" v-if="imageStatus.active">{{ imageStatus.msg }}</span>
-                        <span class="input-error" v-if="validation.error && validation.errors.tempImage">
-                            The image field is required.
-                            </span>
-                        <button @click.prevent="uploadClick('avatar_img')" class="button-outline rounded-outl gap-8">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 28 28">
-                                <path d="M-3279.885-497.309a8.8,8.8,0,0,1-4.272-1.81c-1.926-1.663-2.677-4.44-2.677-9.9,0-3.357,0-6.254.656-8.382a4.95,4.95,0,0,1,1.559-2.511,4.667,4.667,0,0,1,3.035-.917,3.69,3.69,0,0,0,2.462-.625,2.116,2.116,0,0,0,.6-1.375c.013-.088.023-.164.032-.23.024-.178.046-.332.084-.5a1.685,1.685,0,0,1,.266-.64l.012-.016a1.206,1.206,0,0,1,.243-.241,1.5,1.5,0,0,1,.368-.2,3.359,3.359,0,0,1,1.183-.172h7a3.359,3.359,0,0,1,1.182.172,1.5,1.5,0,0,1,.366.2,1.192,1.192,0,0,1,.246.244l.009.012a1.672,1.672,0,0,1,.268.643c.038.17.059.322.084.5v0c.01.068.02.144.032.232a2.113,2.113,0,0,0,.6,1.374,3.684,3.684,0,0,0,2.46.625,4.616,4.616,0,0,1,3.035.935,5.05,5.05,0,0,1,1.559,2.542c.656,2.143.656,5.011.656,8.332,0,5.418-.75,8.183-2.677,9.859a8.816,8.816,0,0,1-4.272,1.838,38.156,38.156,0,0,1-7.051.493A39.3,39.3,0,0,1-3279.885-497.309Zm3.673-25.187a4.391,4.391,0,0,1-1.355,2.777,5.722,5.722,0,0,1-4.017,1.219,2.486,2.486,0,0,0-1.576.4,2.793,2.793,0,0,0-.787,1.379c-.553,1.79-.553,4.658-.553,7.692,0,4.636.541,6.994,1.868,8.14a6.723,6.723,0,0,0,3.179,1.283,37.235,37.235,0,0,0,6.619.436,36.138,36.138,0,0,0,6.608-.45,6.757,6.757,0,0,0,3.183-1.307c1.332-1.16,1.876-3.506,1.876-8.1,0-3,0-5.84-.554-7.649a2.9,2.9,0,0,0-.8-1.417,2.429,2.429,0,0,0-1.562-.41,5.722,5.722,0,0,1-4.017-1.219,4.389,4.389,0,0,1-1.354-2.777s0,0,0,0h-6.756Zm-2.455,12.83a5.84,5.84,0,0,1,5.833-5.834,5.841,5.841,0,0,1,5.834,5.834,5.84,5.84,0,0,1-5.834,5.833A5.839,5.839,0,0,1-3278.667-509.666Zm2.334,0a3.5,3.5,0,0,0,3.5,3.5,3.5,3.5,0,0,0,3.5-3.5,3.5,3.5,0,0,0-3.5-3.5A3.5,3.5,0,0,0-3276.333-509.666ZM-3267-515.5a1.167,1.167,0,0,1,1.167-1.166,1.167,1.167,0,0,1,1.167,1.166,1.167,1.167,0,0,1-1.167,1.167A1.167,1.167,0,0,1-3267-515.5Z" transform="translate(3286.833 524.833)"/>
-                            </svg>
-                            Tap to add photo
-                        </button>
                         <div>
                             <button id="location_preloaded" class="gap-8 br-24">
                                 <div class="flx gap-8 ai-c">
@@ -142,58 +129,72 @@
                             {{ validation.errors.description[0] }}
                         </span>
                     </div>
-                    <input class="hide" @change="uploadTemp" name="image" id="avatar_img" type="file" ref="img">
                     <button @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                         <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
-                        <span>{{ creating ? 'Creating...' : 'Create event'}}</span>
+                        <span>{{ creating ? 'Submitting...' : 'Submit update'}}</span>
                     </button> 
                 </form>
             </div>
         </div>
     </section>
 </template>
+
 <script>
-import axios from 'axios';
+import { putApi } from '@/api';
 import { mapGetters, mapState } from 'vuex';
 import inputValMixin from '@/mixins/inputValMixin';
-import tempImageUploadMixin from '@/mixins/tempImageUpload';
 import Spinner from '@/components/includes/Spinner.vue'
-import Avatar from '@/components/includes/Avatar.vue';
-import CompletedAnime from '@/components/includes/CompletedAnime.vue';
 export default {
-    components: { Spinner, Avatar, CompletedAnime },
-    name: 'AddEventPage',
-    mixins: [ inputValMixin, tempImageUploadMixin ],
+    name: 'EventEdit',
+    components: { Spinner },
+    mixins: [ inputValMixin ],
     computed: {
         ...mapGetters(['getHostname']),
         ...mapState({
             user: (state) => state.user,
-            token: (state) => state.token
-        })
+            hostname: (state) => state.hostname,
+            token: (state) => state.token,
+            events: (state) => state.events
+        }),
+        computedEvent() {
+            if (this.events) {
+                return this.events.find(event => event.id == this.$route.params.id)
+            }
+            else 
+            return ''
+        }
+    },
+    watch: {
+        computedEvent(newComputedEvent) {
+            if (newComputedEvent) {
+                if(this.events.length) {
+                    this.setData(newComputedEvent)
+                }
+            }
+        }
     },
     data() {
         return {
             form: {
                 event_name: '',
-                date: new Date().toISOString().slice(0, 10),
+                date: '',
                 start_time: '',
                 end_time: '',
                 amount: '',
                 attendance_limit: '',
                 description: '',
-                tempImage: null,
             },
-            creating: false,
-            completed: false
+            creating: false
         }
     },
     methods: {
-        doSubmit() {
+        async doSubmit() {
             this.startSubmit()
-            axios.post(this.getHostname+'/api/event?token=' + this.token, this.form)
-            .then((res) => {
-                this.submitSuccess(res.data)
-            }).catch((e) => {
+            try {
+                const res = await putApi(this.hostname + '/api/event/'+ this.$route.params.id + '?token='+ this.token, this.form)
+                this.$store.commit('updateEvent', res.data)
+                this.$router.push({ name: 'DetailedEvent', params: { id: this.$route.params.id, name: this.$route.params.name}})
+            } catch (e) {
                 this.endSubmit()
                 if(e.response.status == 422){
                     this.validation.error = true
@@ -202,7 +203,7 @@ export default {
                 if(e.response.status == 400) {
                     this.$store.commit('setExpSession')
                 }
-            })
+            }
         },
         startSubmit() {
             this.creating = true
@@ -210,29 +211,28 @@ export default {
         endSubmit() {
             this.creating = false
         },
-        submitSuccess(data) {
-            this.endSubmit()
-            this.completed = true
-            this.$store.commit('upadateEvents', data)
+        computedEvent2() {
+            if(this.events.length) {
+                const event = this.events.find(event => event.id == this.$route.params.id)
+                this.setData(event)
+            }
         },
-        deltmp() {
-            this.startLoader()
-            axios.delete(this.getHostname + "/api/del-temp-upload/" + this.user.id)
-            .then(() => {
-                this.afterDeletion()
-            }).catch((e) => {
-                this.stopLoader()
-                if(e.response.status == 400) {
-                    this.$store.commit('setExpSession')
-                }
-            });
+        setData(event) {
+            this.form.event_name = event.event_name
+            this.form.date = event.date
+            this.form.start_time = event.start_time
+            this.form.end_time = event.end_time
+            this.form.amount = event.amount
+            this.form.attendance_limit = event.attendance_limit
+            this.form.description = event.description
         },
-        goToEvent() {
-            this.$router.push({ name: 'OngoingEvents', params: { name: 'ongoing-events'} })
-        }
+    },
+    mounted() {
+        this.computedEvent2()
     }
 }
 </script>
+
 <style lang="scss" scoped>
 section {
     padding: $profileSecPadding 0;

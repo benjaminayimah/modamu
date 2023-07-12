@@ -2,7 +2,7 @@
 
 :root {
     --font: 'Neue Montreal', sans-serif;
-    --primary-color: #0173FF;
+    --primary-color: #0073ff;
     --primary-dark: #0566de;
     --seconday-dark: #000;
     --seconday-hover: #212135;
@@ -882,6 +882,15 @@ form {
 .ongoing{
     background-color: rgba(9, 204, 29, 0.9);
     color: #fff;
+}
+// .ongoing {
+//     background-color: #09cc1d;
+// }
+// .upcoming {
+//     background-color: #0a8f17;
+// }
+.past {
+    background-color: var(--warning);
 }
 .event-status{
     padding: 7px 12px;

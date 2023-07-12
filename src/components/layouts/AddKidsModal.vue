@@ -284,10 +284,10 @@ export default {
             this.form.dob = this.forms.dob
             this.form.height = this.forms.height
             this.form.about = this.forms.about
-            this.$store.commit('stopFormLoader')
             this.form.hobbies = this.hobbies.filter(item => item.kid_id == this.forms.id)
             this.form.illnesses = this.illnesses.filter(item => item.kid_id == this.forms.id)
             this.form.allergies = this.allergies.filter(item => item.kid_id == this.forms.id)
+            this.$store.commit('stopFormLoader')
         },
         focusIn(e) {
             document.querySelector('#'+e).classList.add('list-focused')

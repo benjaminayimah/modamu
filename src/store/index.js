@@ -312,6 +312,10 @@ export default createStore({
       const i = state.village_allocation_access.findIndex(x => x.id == payload)
       state.village_allocation_access.splice(i, 1);
     },
+    updateEvent(state, payload) {
+      const i = state.events.findIndex(x => x.id == payload.id)
+      state.events.splice(i, 1, payload)
+    },
     addToKids(state, payload) {
       state.kids.push(payload.kid)
       state.hobbies = payload.hobbies

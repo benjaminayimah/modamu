@@ -114,13 +114,4 @@ i{
     left: 10px;
     bottom: 10px;
 }
-.ongoing {
-    background-color: #09cc1d;
-}
-.upcoming {
-    background-color: #0a8f17;
-}
-.past {
-    background-color: var(--warning);
-}
 </style>
