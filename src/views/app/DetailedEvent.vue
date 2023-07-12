@@ -124,7 +124,7 @@
                             {{ format_time(event.end_time) }}
                         </div>
                     </div>
-                    <button v-if="is_parent" @click="bookNow " class="button-primary absolute gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' }" :disabled="computeStatus === 'past' ? true : false">
+                    <button v-if="is_parent" @click="bookNow" class="button-primary absolute gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' }" :disabled="computeStatus === 'past' ? true : false">
                         Book now
                     </button>
                 </div>
@@ -201,7 +201,7 @@ export default {
     },
     methods: {
         bookNow() {
-            !this.computeStatus === 'past' ? this.$router.push({ name: 'BookingSelectKids', params: { event_id: this.event.id, village: this.event.user_id, event_name: this.event.name, event_price: this.event.amount }}) : ''
+            this.computeStatus === 'past' ? '' : this.$router.push({ name: 'BookingSelectKids', params: { event_id: this.event.id, village: this.event.user_id, event_name: this.event.event_name, event_price: this.event.amount }})
         },
         async setID(){
             await this.$store.commit('setTempID', this.event.id)
