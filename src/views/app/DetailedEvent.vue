@@ -14,7 +14,7 @@
         <div class="flx gap-60 row-column">
             <div class="main-content-card details">
                 <div class="relative mb-16">
-                    <div class="absolute actions-container br-32">
+                    <div v-if="is_village" class="absolute actions-container br-32">
                         <ul class="flx gap-8 ai-c jc-c">
                             <button title="Add more photos" @click="setID" class="no-width gap-4 fw-500" :class="{ 'button-disabled' : images.length == 4 }" :disabled="images.length == 4 ? true : false">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="12" viewBox="0 0 15.132 15.132">
