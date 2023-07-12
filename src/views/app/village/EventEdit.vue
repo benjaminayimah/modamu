@@ -223,7 +223,7 @@ export default {
             this.form.start_time = event.start_time
             this.form.end_time = event.end_time
             this.form.amount = event.amount
-            this.form.attendance_limit = event.attendance_limit
+            this.form.attendance_limit = event.limit
             this.form.description = event.description
         },
     },
