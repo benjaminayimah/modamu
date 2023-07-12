@@ -13,7 +13,10 @@
             </div>
         </div>
         <div class="pd-24 bd-dashed br-16 text-center">
-                {{ computedStatus }}
+                <div>{{ computedStatus }}</div>
+                <div v-if="booking.kids_status == 0">
+                    <span>Ready? </span><router-link :to="{ name: 'ParentVerifyCode' }">Drop them off</router-link>
+                </div>
         </div>
         <div class="flx gap-16 column mt-32">
             <div class="track-event-list flx column gap-24 bg-white br-24">
@@ -93,7 +96,7 @@ export default {
         computedStatus() {
             let status
             if(this.booking.kids_status == 0) {
-                status = 'Your kids have not been dropped off at this event yet.'
+                status = 'Your kid(s) have not been dropped off at this event yet.'
             }else if(this.booking.kids_status == 3) {
                 status = 'Your kids have been picked up from this village.'
             }else {
@@ -142,6 +145,12 @@ section {
 }
 .bd-dashed{
     width: 600px;
+    a {
+        color: var(--primary-color);
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 .bg-img {
     height: $height;
