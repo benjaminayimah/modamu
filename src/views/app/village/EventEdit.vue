@@ -1,7 +1,7 @@
 <template>
     <section class="section-main">
         <div class="title-row flx gap-24 ai-c">
-            <router-link :to="{ name: 'DetailedEvent', params: { id: $route.params.id, name: $route.params.name}}" class="flx gap-8 ai-c">
+            <router-link :to="{ name: 'DetailedEvent', params: { id: $route.params.id, name: $route.params.name}, replace: true}" class="flx gap-8 ai-c">
                 <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 14.647 14.683">
                     <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#000"></path>
                 </svg>
@@ -193,7 +193,7 @@ export default {
             try {
                 const res = await putApi(this.hostname + '/api/event/'+ this.$route.params.id + '?token='+ this.token, this.form)
                 this.$store.commit('updateEvent', res.data)
-                this.$router.push({ name: 'DetailedEvent', params: { id: this.$route.params.id, name: this.$route.params.name}})
+                this.$router.push({ name: 'DetailedEvent', params: { id: this.$route.params.id, name: this.$route.params.name}, replace: true})
             } catch (e) {
                 this.endSubmit()
                 if(e.response.status == 422){

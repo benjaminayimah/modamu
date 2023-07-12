@@ -220,7 +220,7 @@ export default {
             }
         },
         doEdit() {
-            this.$router.push({ name: 'EventEdit', params: { id: this.event.id, name: this.event.event_name }})
+            this.$router.push({ name: 'EventEdit', params: { id: this.event.id, name: this.event.event_name }, replace: true})
         }
     },
     created() {
