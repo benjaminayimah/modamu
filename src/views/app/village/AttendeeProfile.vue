@@ -20,7 +20,7 @@
                     <div class="centered gap-16">
                         <profile-avatar :id="parent.id" :image="parent.image"/>
                         <h4 class="capitalize">{{ parent.name }}</h4>
-                        <span class="acc-type br-32">father</span>
+                        <span class="acc-type br-32">{{ parent.relationship }}</span>
                         <div class="flx jc-sb br-16 w-100 info-row ai-c">
                             <div class="flx gap-8">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="19" viewBox="0 0 19 19">
@@ -40,7 +40,7 @@
                             <span>{{ parent.emergency_number }}</span>
                         </div>
                         <a href="#" @click.prevent="goToParentProfile" class="button-primary gap-8 w-100 a-button a-btn btn-lg">
-                            Parents profile
+                            Parent's profile
                             <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 0 5.714 10">
                                 <path d="M1.533,10a.714.714,0,0,1-.505-1.219L4.809,5,1.028,1.22A.714.714,0,0,1,2.038.21L6.324,4.5a.714.714,0,0,1,0,1.01L2.038,9.791A.712.712,0,0,1,1.533,10Z" transform="translate(-0.819 -0.001)" fill="#fff"/>
                             </svg>
