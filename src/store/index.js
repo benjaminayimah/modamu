@@ -53,7 +53,9 @@ export default createStore({
     msgParentDetails: false,
     sub_admins: [],
     village_allocation_access: [],
-    admin_access: []
+    admin_access: [],
+    messageTab: 'recent',
+    contactOnly: false
   },
   mutations: {
     computeWindow(state) {
@@ -165,6 +167,14 @@ export default createStore({
     },
     closeMsgParentDetails(state) {
       state.msgParentDetails = false
+    },
+    setMessageTab(state, payload) {
+      state.messageTab = payload
+      if(payload !== 'recent') {
+          state.contactOnly = true
+      }else {
+          state.contactOnly = false
+      }
     },
     //signin
     async signInSuccess(state, payload) {

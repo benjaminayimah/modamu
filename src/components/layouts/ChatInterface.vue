@@ -76,6 +76,7 @@ export default {
                 }
                 this.$emit('add-to-chat', res.data.chat)
                 this.form.chat = ''
+                this.$store.commit('setMessageTab', 'recent')
             } catch (e) {
                 if(e.response.status == 400) {
                     this.$store.commit('setExpSession')

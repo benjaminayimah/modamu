@@ -27,9 +27,9 @@
             </div>
             <div v-if="is_admin" class="flx">
                 <ul class="flx br-16 mt-8">
-                    <li><a :class="{'active' : tab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
-                    <li><a :class="{'active' : tab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
-                    <li><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
+                    <li><a :class="{'active' : messageTab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
+                    <li><a :class="{'active' : messageTab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
+                    <li><a :class="{'active' : messageTab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
                 </ul>
             </div>
             <div v-if="!messages.length && !computedItem.length && !search" class="bg-white mt-24 pd-24 br-16 centered">
@@ -57,11 +57,14 @@ export default {
         ...mapState({
             messages: (state) => state.messages,
             villages: (state) => state.villages,
-            parents: (state) => state.parents
+            parents: (state) => state.parents,
+            messageTab: (state) => state.messageTab,
+            contactOnly: (state) => state.contactOnly
+
         }),
         computedItem() {
             let newArr = this.messages
-            let tab = this.tab
+            let tab = this.messageTab
             if(tab === 'parents') {
                 newArr = this.parents
             }else if(tab === 'villages') {
@@ -73,10 +76,12 @@ export default {
                     return item.sender.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.message.preview.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
                     else
                     return item.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
- 
                 })
             }else {
-                return newArr
+                if(tab === 'parents' || tab === 'villages')
+                return newArr.sort((a, b) => a.name.localeCompare(b.name)) 
+                else
+                return newArr.sort((a, b) => new Date(b.message.updated_at) - new Date(a.message.updated_at))
             }
         }
     },
@@ -84,8 +89,6 @@ export default {
         return {
             searchToggle: false,
             search: '',
-            tab: 'recent',
-            contactOnly: false
         }
     },
     methods: {
@@ -98,12 +101,7 @@ export default {
             })
         },
         toggleDisplay(tab) {
-            this.tab = tab
-            if(tab !== 'recent') {
-                this.contactOnly = true
-            }else {
-                this.contactOnly = false
-            }
+            this.$store.commit('setMessageTab', tab)
         }
     },
     mounted () {
