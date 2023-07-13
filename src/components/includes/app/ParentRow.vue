@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'ViewParentProfile', params: { parent_id: this.parent.id, parent: this.parent.name } }" class="table-row grid-item row-hover grid-col-parents">
+    <router-link :to="{ name: 'ViewParentProfile', params: { to: this.parent.id, parent: this.parent.name } }" class="table-row grid-item row-hover grid-col-parents">
         <div class="table-cell gap-8">
             <profile-avatar :id="parent.id" :image="parent.image"/>
             <span class="wrap-text wrap-line-1 capitalize">{{ parent.name }}</span>

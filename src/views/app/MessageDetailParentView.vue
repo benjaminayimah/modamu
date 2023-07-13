@@ -120,7 +120,7 @@ export default {
             }
         },
         goToParentProfile() {
-            this.$router.push({ name: 'ViewParentProfile', params: { parent_id: this.user.id, parent: this.user.name } })
+            this.$router.push({ name: 'ViewParentProfile', params: { to: this.user.id, parent: this.user.name } })
         }
     },
     mounted() {

@@ -91,7 +91,7 @@ const routes = [
       },
       { path: '/event/:id/:name', name: 'DetailedEvent', component: DetailedEvent },
       { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
-      { path: '/parent/:parent_id/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
+      { path: '/parent/:to/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
       { path: '/transactions', name: 'Transactions', component: Transactions },
       // { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
