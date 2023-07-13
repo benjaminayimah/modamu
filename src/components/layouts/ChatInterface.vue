@@ -19,6 +19,9 @@
             </a> -->
         </div>
         <div class="chat-body chat-padd flx-grow-1 overflow-y-scroll scroll-hidden">
+            <div class="centered">
+                <lottie-loader v-if="loadingChats" />
+            </div>
             <div v-if="!chats.length" class="centered">
                 No messages yet 
             </div>
@@ -30,9 +33,10 @@
                     <input v-model="form.chat" type="text" class="form-control" data-color="dark" placeholder="Type a message">
                     <i></i>
                 </div>
-                <button class="send-btn br-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="23" viewBox="0 0 30.002 30">
-                        <path d="M30.707,1.293a1,1,0,0,0-1.013-.245l-28,9a1,1,0,0,0-.2,1.816L11.4,17.643,21,11l-6.643,9.6,5.779,9.9A1,1,0,0,0,21,31a.976.976,0,0,0,.108-.006,1,1,0,0,0,.844-.688l9-28a1,1,0,0,0-.245-1.013Z" transform="translate(-0.998 -1)" fill="#0173FF"/>
+                <button class="send-btn button-primary br-50">
+                    <spinner v-if="submitting" v-bind:size="20" v-bind:white="true" />
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" height="23" viewBox="0 0 30.002 30">
+                        <path d="M30.707,1.293a1,1,0,0,0-1.013-.245l-28,9a1,1,0,0,0-.2,1.816L11.4,17.643,21,11l-6.643,9.6,5.779,9.9A1,1,0,0,0,21,31a.976.976,0,0,0,.108-.006,1,1,0,0,0,.844-.688l9-28a1,1,0,0,0-.245-1.013Z" transform="translate(-0.998 -1)" fill="#fff"/>
                     </svg>
                 </button>
             </form>
@@ -45,14 +49,17 @@ import { postApi } from '@/api';
 import { mapState } from 'vuex';
 import ProfileAvatar from '../includes/app/ProfileAvatar.vue';
 import ChatBody from './ChatBody.vue';
+import Spinner from '../includes/Spinner.vue';
+import LottieLoader from '../includes/LottieLoader.vue';
 export default {
-  components: { ProfileAvatar, ChatBody },
+  components: { ProfileAvatar, ChatBody, Spinner, LottieLoader },
     name: 'ChatInterface',
     props: ['chats', 'name', 'image', 'message_id', 'to', 'back'],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
-            token: (state) => state.token
+            token: (state) => state.token,
+            loadingChats: (state) => state.loadingChats
         })
     },
     data() {
@@ -60,11 +67,16 @@ export default {
             form: {
                 chat: '',
                 to: ''
-            }
+            },
+            submitting: false
         }
     },
     methods: {
         async doSubmit() {
+            if(!this.form.chat) {
+                return false
+            }
+            this.submitting = true
             try {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,
                 { chat: this.form.chat, message_id: this.message_id, to: this.to })
@@ -77,6 +89,7 @@ export default {
                 this.$emit('add-to-chat', res.data.chat)
                 this.form.chat = ''
                 this.$store.commit('setMessageTab', 'recent')
+                this.submitting = false
             } catch (e) {
                 if(e.response.status == 400) {
                     this.$store.commit('setExpSession')
@@ -99,7 +112,7 @@ export default {
         padding: 0 20px;
     }
     button {
-        background-color: unset;
+        // background-color: unset;
         padding: unset;
     }
 }
@@ -128,7 +141,7 @@ export default {
 .more {
     margin-right: -8px;
 }
-a, .send-btn{
+a{
     height: var(--img-height);
     width: var(--img-height);
     &:hover {

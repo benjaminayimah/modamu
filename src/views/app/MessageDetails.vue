@@ -42,12 +42,14 @@ export default {
             this.chats.push(payload)
         },
         async fetchThisChats() {
+            this.$store.commit('startLoadingChats')
             try {
                 const res = await postApi(this.hostname + '/api/fetch-this-chats/' + this.$route.params.to + '?token='+ this.token)
                 this.chats = res.data.chats
                 this.image = res.data.image
                 this.message_id = res.data.id
                 this.$store.commit('setRead', res.data.id)
+                this.$store.commit('stopLoadingChats')
             } catch (e) {
                 if(e.response.status == 400) {
                     this.$store.commit('setExpSession')

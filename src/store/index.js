@@ -55,7 +55,8 @@ export default createStore({
     village_allocation_access: [],
     admin_access: [],
     messageTab: 'recent',
-    contactOnly: false
+    contactOnly: false,
+    loadingChats: false
   },
   mutations: {
     computeWindow(state) {
@@ -112,6 +113,12 @@ export default createStore({
     },
     stopFormLoader(state) {
       state.forms.loader = false
+    },
+    startLoadingChats(state) {
+      state.loadingChats = true
+    },
+    stopLoadingChats(state) {
+      state.loadingChats = false
     },
     setUpdateKid(state, payload) {
       state.forms.user = payload
