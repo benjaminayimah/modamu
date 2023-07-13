@@ -25,17 +25,17 @@
                     </button>
                 </div>
             </div>
-            <div v-if="!is_parent" class="flx">
+            <div v-if="is_admin" class="flx">
                 <ul class="flx br-16 mt-8">
-                    <li v-if="is_admin || is_village"><a :class="{'active' : tab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
-                    <li v-if="is_admin"><a :class="{'active' : tab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
-                    <li v-if="is_admin || is_village"><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
+                    <li><a :class="{'active' : tab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
+                    <li><a :class="{'active' : tab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
+                    <li><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
                 </ul>
             </div>
             <div v-if="!messages.length && !computedItem.length && !search" class="bg-white mt-24 pd-24 br-16 centered">
                 No Messages
             </div>
-            <div v-else-if="computedItem.length" class="flx column gap-16 message-body">
+            <div v-else-if="computedItem.length" class="flx column gap-8 message-body">
                 <message-lists v-for="data in computedItem" :key="data.id" :data="data" :contactOnly="contactOnly"/>
             </div>
             <div v-else class="mt-16"><strong>No search result for:</strong> <i>{{ search }}</i></div>
