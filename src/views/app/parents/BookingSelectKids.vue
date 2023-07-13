@@ -14,6 +14,11 @@
         </div>
         <div class="flx gap-50 select-kids-body row-column">
             <div class="select-kids-container flx column gap-32 scroll-snap overflow-y-scroll scroll-hidden">
+                <div v-if="!kids.length">
+                    <h4>No child registered.</h4>
+                    <div>Register at least one child to book this event.</div>
+                    <a href="#" @click.prevent="$store.commit('openModal', 'kids')" class="reg-child">Register your child</a>
+                </div>
                 <booking-select-kids-list v-for="kid in kids" :key="kid.id" :kid="kid" :selected="selected" @emmitSelect="doSelection"/>
             </div>
             <div class="payment-calc jc-fe column flx">
@@ -146,6 +151,12 @@ section {
 }
 .input-error{
     font-size: 1rem;
+}
+.reg-child {
+    color: var(--primary-color);
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 </style>
