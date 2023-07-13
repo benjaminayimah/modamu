@@ -21,11 +21,9 @@
         <div class="chat-body chat-padd flx-grow-1 overflow-y-scroll scroll-hidden">
             <div class="centered">
                 <lottie-loader v-if="loadingChats" />
+                <span v-else-if="!chats.length">No messages yet </span>
             </div>
-            <div v-if="!chats.length" class="centered">
-                No messages yet 
-            </div>
-            <chat-body :chats="chats" v-else />
+            <chat-body :chats="chats" v-if="chats.length" />
         </div>
         <div class="chat-footer chat-padd bg-white br-16">
             <form @submit.prevent="doSubmit" class="flx ai-c gap-16">
