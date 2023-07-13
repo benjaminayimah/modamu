@@ -1,6 +1,6 @@
 <template>
     <div class="flx right-container">
-        <chat-interface :back="true" :chats="chats" :name="$route.params.name" :image="image" :message_id="message_id" :to="$route.params.to" @add-to-chat="addToChat" />
+        <chat-interface :back="true" :chats="chats" :name="$route.params.name" :image="image" :message_id="message_id" :to="$route.params.to" @add-to-chat="addToChat" @set-message-id="setMessageId" />
         <message-detail-parent-view v-if="msgParentDetails" :to_id="$route.params.to"/>
     </div>
 </template>
@@ -53,6 +53,9 @@ export default {
                     this.$store.commit('setExpSession')
                 }
             }
+        },
+        setMessageId(id) {
+            this.message_id = id
         }
     },
     mounted() {
