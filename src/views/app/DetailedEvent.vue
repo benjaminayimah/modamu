@@ -124,9 +124,9 @@
                             {{ format_time(event.end_time) }}
                         </div>
                     </div>
-                    <div class="absolute book-wrapper text-center">
+                    <div v-if="is_parent" class="absolute book-wrapper text-center">
                         <div class="mb-4 fs-09" :class="computedLimit.state === 'full' ? 'in-active' : 'active'">{{ computedLimit.text }}</div>
-                        <button v-if="is_parent" @click="bookNow" class="button-primary gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' || computedLimit.state === 'full' }" :disabled="computeStatus === 'past' || computedLimit.state === 'full' ? true : false">
+                        <button @click="bookNow" class="button-primary gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' || computedLimit.state === 'full' }" :disabled="computeStatus === 'past' || computedLimit.state === 'full' ? true : false">
                             Book now
                         </button>
                     </div>
