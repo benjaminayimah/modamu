@@ -25,11 +25,18 @@
                     </button>
                 </div>
             </div>
+            <div v-if="is_admin" class="flx">
+                <ul class="flx br-16 mt-8">
+                    <li><a :class="{'active' : tab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
+                    <li><a :class="{'active' : tab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
+                    <li><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
+                </ul>
+            </div>
             <div v-if="!messages.length" class="bg-white mt-24 pd-24 br-16 centered">
                 No Messages
             </div>
             <div v-else-if="computedItem.length" class="flx column gap-16 message-body">
-                <message-lists v-for="data in computedItem" :key="data.message.id" :data="data"/>
+                <message-lists v-for="data in computedItem" :key="data.id" :data="data" :contactOnly="contactOnly"/>
             </div>
             <div v-else class="mt-16"><strong>No search result for:</strong> <i>{{ search }}</i></div>
         </div>
@@ -39,28 +46,46 @@
     </section>
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import { mapState } from 'vuex';
 import MessageLists from '../../components/includes/app/MessageLists.vue'
 export default {
     components: { MessageLists },
+    mixins: [usersLevelMixin],
     name: 'MessagePage',
     computed: {
         ...mapState({
-            messages: (state) => state.messages
+            messages: (state) => state.messages,
+            villages: (state) => state.villages,
+            parents: (state) => state.parents
         }),
         computedItem() {
-            if(this.search !=='')
-            return this.messages.filter(item => {
-                return item.sender.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.message.preview.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
-            })
-            else
-            return this.messages
+            let newArr = this.messages
+            let tab = this.tab
+            if(tab === 'parents') {
+                newArr = this.parents
+            }else if(tab === 'villages') {
+                newArr = this.villages
+            }
+            if(this.search !=='') {
+                return newArr.filter(item => {
+                    if(!this.contactOnly)
+                    return item.sender.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase()) || item.message.preview.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
+                    else
+                    return item.name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
+ 
+                })
+            }else {
+                return newArr
+            }
         }
     },
     data () {
         return {
             searchToggle: false,
-            search: ''
+            search: '',
+            tab: 'recent',
+            contactOnly: false
         }
     },
     methods: {
@@ -71,6 +96,14 @@ export default {
                     this.$refs.searchInput.focus()
                 }
             })
+        },
+        toggleDisplay(tab) {
+            this.tab = tab
+            if(tab !== 'recent') {
+                this.contactOnly = true
+            }else {
+                this.contactOnly = false
+            }
         }
     },
     mounted () {
@@ -81,7 +114,7 @@ export default {
 <style lang="scss" scoped>
 section {
     padding: $profileSecPadding 0;
-    height: calc(100vh - 133px);
+    height: calc(100vh - 189px);
 }
 
 .message-left{
@@ -117,6 +150,19 @@ button.toggle-btn{
     flex: 1 1;
     input {
         padding: 8px 12px 8px 45px;
+    }
+}
+ul {
+    background-color: #e2e7f2;;
+    padding: 12px;
+    a {
+        padding: 8px 12px;
+        border-radius: 24px;
+    }
+    .active {
+        background-color: #000;
+        color: var(--ft-white);
+        font-weight: 600;
     }
 }
 </style>

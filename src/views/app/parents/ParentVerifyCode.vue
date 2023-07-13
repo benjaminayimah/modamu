@@ -46,7 +46,7 @@ export default {
     methods: {
         async fetchAttendees() {
             try {
-                const res = await getApi(this.hostname+'/api/parent-fetch-attendees?token='+this.token);
+                const res = await getApi(this.hostname+'/api/parent-fetch-attendees?token='+this.token)
                 this.$store.commit('setAttendees', res.data)
                 this.$store.commit('stopLoader')
             } catch (e) {

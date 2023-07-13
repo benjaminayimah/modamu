@@ -47,11 +47,9 @@ export default createStore({
     attendees: [],
     bookings: [],
     parents: [],
-    chats: [],
     hobbies: [],
     illnesses: [],
     allergies: [],
-    chatImage: '',
     msgParentDetails: false,
     sub_admins: [],
     village_allocation_access: [],
@@ -149,10 +147,8 @@ export default createStore({
     setTempUser(state, payload) {
       state.forms.user = payload
     },
-    setChats(state, payload) {
-      state.chats = payload.chats
-      state.chatImage = payload.image
-      const i =  state.messages.findIndex(x => x.message.id == payload.id) 
+    setRead(state, payload) {
+      const i =  state.messages.findIndex(x => x.message.id == payload) 
       if(i > -1)
       state.messages[i].unread = 0
     },
@@ -576,19 +572,19 @@ export default createStore({
           }
         }
       },
-      async fetchChats(state, payload) {
-        state.commit('startLoader')
-        payload.to ? router.push({ name: 'MessageDetail', params: { id: payload.id, name: payload.name, to: payload.to }, replace: true}): ''
-        try {
-            const res = await postApi(this.getters.getHostname + '/api/fetch-this-chats/'+ payload.id +'?token='+this.getters.getToken)
-            state.commit('setChats', res.data)
-            state.commit('stopLoader')
-        } catch (e) {
-          if(e.response.status == 400) {
-              state.commit('setExpSession')
-          }
-        }
-    },
+    //   async fetchChats(state, payload) {
+    //     state.commit('startLoader')
+    //     // payload.to ? router.push({ name: 'MessageDetail', params: { id: payload.id, name: payload.name, to: payload.to }, replace: true}): ''
+    //     try {
+    //         const res = await postApi(this.getters.getHostname + '/api/fetch-this-chats/'+ payload.id +'?token='+this.getters.getToken)
+    //         state.commit('setChats', res.data)
+    //         state.commit('stopLoader')
+    //     } catch (e) {
+    //       if(e.response.status == 400) {
+    //           state.commit('setExpSession')
+    //       }
+    //     }
+    // },
     async deleteSubAdmin(state, payload) {
       try {
         const res = await deleteApi(this.getters.getHostname+'/api/sub-admin/'+payload+'?token='+this.getters.getToken);

@@ -1,13 +1,13 @@
 <template>
     <li>
-        <a @click.prevent="fetchChats" href="#" class="flx gap-8 bg-white br-16 relative" :class="{ 'new-chat' : data.unread > 0}">
-            <profile-avatar :id="data.sender.id" :image="data.sender.image" />
-            <div class="flx column gap-4 ms flx-grow-1">
+        <a @click.prevent="fetchChats" href="#"  class="flx gap-8 bg-white br-16 relative" :class="{ 'new-chat' : data.unread > 0}">
+            <profile-avatar :id="!contactOnly ? data.sender.id : data.id" :image="!contactOnly ? data.sender.image : data.image" />
+            <div class="flx gap-4 ms flx-grow-1" :class="{'column' : !contactOnly}">
                 <div class="flx jc-sb ai-c">
-                    <label class="wrap-text wrap-line-1 fw-600 fs-09 capitalize">{{ data.sender.name }}</label>
-                    <span class="gray fs-08 wrap-text wrap-line-1">{{ ago_time(data.message.updated_at) }}</span>
+                    <div class="wrap-text wrap-line-1 fw-600 fs-09 capitalize name">{{ !contactOnly ? data.sender.name : data.name }}</div>
+                    <span v-if="!contactOnly" class="gray fs-08 wrap-text wrap-line-1">{{ ago_time(data.message.updated_at) }}</span>
                 </div>
-                <div class="flx jc-sb">
+                <div v-if="!contactOnly" class="flx jc-sb">
                     <span class="fs-09 wrap-text wrap-line-1 gray highlight">{{ data.message.preview }}</span>
                     <span v-if="data.unread > 0" class="count-info count-primary centered fs-08">{{ data.unread }}</span>
                 </div>
@@ -22,10 +22,19 @@ export default {
     components: { ProfileAvatar },
     mixins: [formatDateTime],
     name: 'MessageLists',
-    props: ['data'],
+    props: ['data', 'contactOnly'],
     methods: {
         fetchChats() {
-            this.$store.dispatch('fetchChats', {id: this.data.message.id, name: this.data.sender.name, to: this.data.sender.id})
+            let name
+            let to
+            if(!this.contactOnly) {
+                name = this.data.sender.name
+                to = this.data.sender.id
+            }else {
+                name = this.data.name
+                to = this.data.id
+            }
+            this.$router.push({ name: 'MessageDetail', params: { to: to, name: name }, replace: true})
             this.$store.commit('closeMsgParentDetails')
         }
     }
@@ -55,7 +64,7 @@ a {
     }
 }
 .new-chat {
-    label, .highlight {
+    .name, .highlight {
         color: var(--ft-dark);
     }
 }

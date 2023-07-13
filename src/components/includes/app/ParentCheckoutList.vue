@@ -50,15 +50,15 @@ export default {
             return false
         }
     },
-    methods: {
-        doChecking() {
-            this.attendee.status == '0' ? this.$emit('check-in', this.attendee.id) : this.verifyCode()
-        },
-        async verifyCode(){
-            await this.$store.commit('setTempUser', this.attendee)
-            this.$store.commit('openModal', 'verify-code')
-        },
-    }
+    // methods: {
+    //     doChecking() {
+    //         this.attendee.status == '0' ? this.$emit('check-in', this.attendee.id) : this.verifyCode()
+    //     },
+    //     async verifyCode(){
+    //         await this.$store.commit('setTempUser', this.attendee)
+    //         this.$store.commit('openModal', 'verify-code')
+    //     },
+    // }
 }
 </script>
 

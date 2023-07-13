@@ -58,7 +58,7 @@
                 </div>
                 <span>{{ user.address || 'n/a' }}</span>
             </div>
-            <div v-if="!is_parent" class="flx column ai-c gap-24">
+            <div v-if="user.access_level === '2'" class="flx column ai-c gap-24">
                 <h4>Registered kids</h4>
                 <div class="stack-cards">
                     <profile-avatar v-for="kid in registered_kids.slice(0, 4)" :key="kid.id" :id="user.id" :image="kid.photo" />

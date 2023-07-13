@@ -95,9 +95,9 @@ export default {
             if(this.booking.kids_status == 0) {
                 status = 'Your kid(s) have not been dropped off at this event yet.'
             }else if(this.booking.kids_status == 3) {
-                status = 'Your kids have been picked up from this village.'
+                status = 'Your kid(s) have been picked up from this village.'
             }else {
-                status = 'Your kids have been dropped off at the event village. Use the unique code generated when you\'re ready to pick them up. This can be found under the \'Verify code\' menu.'
+                status = 'Your kid(s) have been dropped off at the event village. Use the unique code generated when you\'re ready to pick them up. This can be found under the \'Verify code\' menu.'
             }
             return status
         }
