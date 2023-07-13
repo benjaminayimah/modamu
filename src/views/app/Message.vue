@@ -32,7 +32,7 @@
                     <li><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
                 </ul>
             </div>
-            <div v-if="!messages.length" class="bg-white mt-24 pd-24 br-16 centered">
+            <div v-if="!messages.length && !computedItem.length && !search" class="bg-white mt-24 pd-24 br-16 centered">
                 No Messages
             </div>
             <div v-else-if="computedItem.length" class="flx column gap-16 message-body">
