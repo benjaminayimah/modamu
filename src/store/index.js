@@ -56,7 +56,9 @@ export default createStore({
     admin_access: [],
     messageTab: 'recent',
     contactOnly: false,
-    loadingChats: false
+    loadingChats: false,
+    bulkMessage: false,
+    contactSelections: []
   },
   mutations: {
     computeWindow(state) {
@@ -406,6 +408,24 @@ export default createStore({
     goToVillagePage() {
       router.push({ name: 'AddVillagePage'})
     },
+    openBulkMessage(state) {
+      state.bulkMessage = true
+    },
+    closeBulkMessage(state) {
+      state.bulkMessage = false
+      state.contactSelections = []
+    },
+    selectRecipient(state, payload) {
+      const i = state.contactSelections.findIndex(x => x.id === payload.id)
+      if(i > -1) {
+        state.contactSelections.splice(i, 1);
+      }else {
+        state.contactSelections.push(payload)
+      }
+    },
+    unSelectAllRecipients(state) {
+      state.contactSelections = []
+    },
     //village set all events
     setEvents(state, payload) {
       state.events = payload.events
@@ -471,6 +491,7 @@ export default createStore({
         state.alert.body = ''
         state.alert.title = ''
     },
+
 
 
     // toggleMenu() {

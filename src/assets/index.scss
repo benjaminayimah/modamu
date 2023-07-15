@@ -63,6 +63,9 @@ body{
     background-color: transparent;
     cursor: pointer;
 }
+.transparent {
+    background-color: transparent;
+}
 .bg-primary {
     background-color: var(--primary-color);
 }
@@ -170,7 +173,6 @@ button, .a-button{
     white-space: nowrap;
     font-family: inherit;
     font-size: 1rem;
-    color: unset;
     font-weight: 700;
     cursor: pointer;
     border-radius: var(--btn-radius);
@@ -712,6 +714,9 @@ dialog {
 .relative {
     position: relative;
 }
+.br-0{
+    border-radius: 0;
+}
 .br-8 {
     border-radius: 8px;
 }
@@ -1017,6 +1022,9 @@ form {
 @media screen and (max-width: 640px){
     .wc-section{
         width: 100%;
+    }
+    .modal-bottom{
+        background: unset;
     }
 }
 
@@ -1327,6 +1335,82 @@ $completionWidth: 440px;
     }
 }
 
+
+//secondary
+.secondary-input-wrapper{
+    position: relative;
+    label {
+        position: absolute;
+        font-weight: 500;
+        cursor: text;
+        transition: 0.2s all;
+        margin: 0;
+        color: var(--gray);
+        top: 18px;
+        font-size: 16px;
+    }
+}
+  #location_search_wrapper{
+    min-width: 320px;
+    label {
+        left: 46px;
+    }
+    input{
+        padding-left: 44px !important;
+    }
+}
+#search_radius_wrapper{
+    input {
+        padding: 16px;
+        width: 135px;
+    }
+    label {
+    left: 16px;
+    }
+}
+  .input-is-focused{
+    label {
+        transform: translateY(-12px);
+        color: var(--primary-color);
+        font-size: 12px;
+    }
+}
+.is-iddle{
+    label{
+        color: var(--gray);
+        font-size: 12px;
+        transform: translateY(-12px);
+    }
+}
+.show-err{
+    input {
+        border-color: var(--error);
+    }
+    label {
+        color: var(--error) !important;
+    }
+}
+.location-submit {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+//tabs
+ul.tab {
+    background-color: #e2e7f2;;
+    padding: 12px;
+    a {
+        padding: 8px 12px;
+        border-radius: 24px;
+    }
+    .active {
+        background-color: #000 !important;
+        color: var(--ft-white);
+        font-weight: 600;
+    }
+}
+
+
 //mobile
 .mobile{
     #overlay{
@@ -1406,6 +1490,14 @@ $completionWidth: 440px;
     #messages{
         height: unset;
         display: block;
+    }
+    #bulk_message {
+        height: 100%;
+        width: 100%;
+        bottom: 0;
+        border-radius: 0;
+        z-index: 100;
+        left: 0;
     }
     .message-left{
         height: unset;
@@ -1510,10 +1602,6 @@ $completionWidth: 440px;
         max-width: 90%;
     }
     
-    
-    
-
-
     
    
 }

@@ -31,10 +31,10 @@
                     <input v-model="form.chat" type="text" class="form-control" data-color="dark" placeholder="Type a message">
                     <i></i>
                 </div>
-                <button class="send-btn button-primary br-50">
+                <button class="send-btn button-primary br-50" :disabled="submitting ? true : false">
                     <spinner v-if="submitting" v-bind:size="20" v-bind:white="true" />
-                    <svg v-else xmlns="http://www.w3.org/2000/svg" height="23" viewBox="0 0 30.002 30">
-                        <path d="M30.707,1.293a1,1,0,0,0-1.013-.245l-28,9a1,1,0,0,0-.2,1.816L11.4,17.643,21,11l-6.643,9.6,5.779,9.9A1,1,0,0,0,21,31a.976.976,0,0,0,.108-.006,1,1,0,0,0,.844-.688l9-28a1,1,0,0,0-.245-1.013Z" transform="translate(-0.998 -1)" fill="#fff"/>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="18" height="20.122" viewBox="0 0 20.786 20.122">
+                        <path d="M14.044,20.569a2.508,2.508,0,0,1-2.085-1.294,4.853,4.853,0,0,1-.5-1.046l-2.1-5.245-6.511-2.6a2.085,2.085,0,0,1-1.4-2.114A2.289,2.289,0,0,1,3.26,6.148L18.17.7a3.372,3.372,0,0,1,3.265.395,2.877,2.877,0,0,1,.553,3.183L16.552,18.345a2.84,2.84,0,0,1-2.486,2.224ZM11.3,12.455l2.025,5.062a.8.8,0,0,1,.028.08c.135.428.488.974.689.972.243,0,.508-.511.591-.8a.782.782,0,0,1,.033-.1L20.126,3.551l.006-.016c.055-.145.21-.732-.031-.947-.285-.255-1.007-.1-1.223-.014l-.016.006L3.887,8.048a.657.657,0,0,1-.129.038c-.044.013-.309.1-.312.226a.3.3,0,0,0,.029.168l.069.025,6.344,2.538,3.46-3.46A1,1,0,0,1,14.763,9Z" transform="translate(-1.446 -0.447)" fill="#fff"/>
                     </svg>
                 </button>
             </form>
@@ -74,6 +74,7 @@ export default {
             if(!this.form.chat) {
                 return false
             }
+            console.log('me')
             this.submitting = true
             try {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,

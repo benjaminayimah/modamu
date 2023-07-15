@@ -60,7 +60,7 @@ export default {
         }
     },
     mounted () {
-        if(this.form.radius && this.form.radius != '') {
+        if(this.form && this.form.radius && this.form.radius != '') {
             this.isFocusedOut('search_radius_wrapper', 'searchRadiusInput')
         }
     }
