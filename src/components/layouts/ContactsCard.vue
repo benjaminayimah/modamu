@@ -3,8 +3,8 @@
         <div v-if="active" class="contact-wrapper absolute">
             <div class="modal-top flx ai-c">
                 <button class="br-50" @click="$emit('select-contact')">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="14.683" viewBox="0 0 14.647 14.683">
-                        <path d="M5648.416,3695.679l-5.629-5.655-5.6,5.59a1,1,0,1,1-1.412-1.415l5.6-5.592-5.584-5.61a1,1,0,1,1,1.418-1.411l5.583,5.608,5.623-5.61a1,1,0,1,1,1.412,1.417l-5.624,5.611,5.631,5.657a1,1,0,1,1-1.418,1.411Z" transform="translate(-5635.478 -3681.291)" fill="#6f7689"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 18.243 13.501">
+                        <path d="M15.216,11.51a.919.919,0,0,1,.007,1.294l-4.268,4.282H25.218a.914.914,0,0,1,0,1.828H10.955L15.23,23.2a.925.925,0,0,1-.007,1.294.91.91,0,0,1-1.287-.007L8.142,18.647h0a1.026,1.026,0,0,1-.19-.288.872.872,0,0,1-.07-.352.916.916,0,0,1,.26-.64l5.794-5.836A.9.9,0,0,1,15.216,11.51Z" transform="translate(-7.882 -11.252)" fill="#6f7689"/>
                     </svg>
                 </button>
                 <h4 class="wrap-text wrap-line-1">Select recipients</h4>
