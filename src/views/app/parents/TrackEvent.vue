@@ -46,7 +46,7 @@
             <div>Track</div>
             <div>
                 <h4 class="mb-16">Session progress</h4>
-                <div class="flx gap-24">
+                <div class="flx gap-24 session-progress">
                     <div class="session" :class="{ 'active' : booking.kids_status != '0'}">
                         <i class="centered br-50 mb-8">
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 18.213 13.126">
@@ -135,13 +135,14 @@ export default {
 $height: 60px;
 section {
     padding: $profileSecPadding 0;
+    --width: 600px;
 }
 .track-event-list{
-    width: 600px;
+    width: var(--width);
     padding: 24px;
 }
 .bd-dashed{
-    width: 600px;
+    width: var(--width);
     a {
         color: var(--primary-color);
         &:hover {
@@ -165,8 +166,6 @@ section {
     border-radius: 60px;
     border: 1px solid var(--bg-color);
 }
-
-
 .session{
     display: flex;
     flex-direction: column;
@@ -192,8 +191,26 @@ section {
     width: 180px;
     top: -50px;
     margin-left: 72px;
-    display: inline-block;
+    display: flex;
     position: relative;
     border-bottom: 1px dashed #b0c4f3
+}
+@media screen and (max-width: 765px){
+    section {
+        --width: 100%;
+    }
+    .session-progress{
+        gap: 16px;
+
+    }
+    .session:first-child::after, .session:nth-child(2):after {
+        width: 50px;
+        margin-left: 60px;
+    }
+}
+@media screen and (max-width: 400px){
+    .session:first-child::after, .session:nth-child(2):after {
+        width: 50px;
+    }
 }
 </style>
