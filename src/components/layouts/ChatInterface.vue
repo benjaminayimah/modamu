@@ -74,7 +74,6 @@ export default {
             if(!this.form.chat) {
                 return false
             }
-            console.log('me')
             this.submitting = true
             try {
                 const res = await postApi(this.hostname + '/api/send-chat?token='+ this.token,
