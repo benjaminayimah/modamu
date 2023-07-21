@@ -284,6 +284,9 @@ section {
             content: 'Use current location'
         }
     }
+    #radius::before  {
+        content: "Search radius(km)";
+    }
 }
 
 // a{
