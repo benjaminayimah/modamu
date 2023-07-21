@@ -46,7 +46,7 @@
                 <div v-if="is_parent" class="form-row column">
                     <label for="emergency_number">Emergency number</label>
                     <div class="input-wrapper">
-                        <input v-model="form.emergency_number" @input="formatEmergencyNumber" class="form-control" type="tel" name="emergency_number" data-color="dark">
+                        <input v-model="form.emergency_number" @input="formatEmergencyNumber" class="form-control" type="tel" name="emergency_number" data-color="dark" placeholder="222-333-4444">
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.emergency_number">
                         {{ validation.errors.emergency_number[0] }}
