@@ -37,7 +37,7 @@
                 <div v-if="!forms.otherProfile" class="form-row column">
                     <label for="phone">Phone number</label>
                     <div class="input-wrapper">
-                        <input v-model="form.phone_number" @input="formatPhoneNumber" class="form-control" type="tel" name="phone_number" data-color="dark">
+                        <input v-model="form.phone_number" @input="formatPhoneNumber" class="form-control" type="tel" name="phone_number" data-color="dark" placeholder="Eg. 222-333-4444">
                     </div>
                     <span class="input-error" v-if="validation.error && validation.errors.phone_number">
                         {{ validation.errors.phone_number[0] }}
