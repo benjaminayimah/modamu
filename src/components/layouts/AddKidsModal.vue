@@ -46,7 +46,7 @@
                     </span>
                 </div>
                 <div class="form-row column">
-                    <label for="name">Height (cm)</label>
+                    <label for="name">Height (feet)</label>
                     <div class="input-wrapper">
                         <input v-model="form.height" class="form-control" type="number" name="height" id="height" data-color="dark" placeholder="eg. 100">
                     </div>
