@@ -11,7 +11,7 @@ export default createStore({
     // hostname: 'http://localhost:8000',
     // appHostname: 'http://localhost:8080',
     hostname: 'https://modamu-api.rancroftdev.com',
-    appHostname: 'https://staging.d3u9u5xg4yg53c.amplifyapp.com',
+    appHostname: 'https://main.d7v940lfxffcb.amplifyapp.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
