@@ -30,7 +30,7 @@
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submiting...' : 'Finish up'}}</span>
                 </button>
-                <button v-else @click="doUpdate" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
+                <button v-else @click="doSubmit" class="button-primary w-100 gap-8 btn-lg" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
                     <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
                     <span>{{ creating ? 'Submiting...' : 'Submit update'}}</span>
                 </button>
@@ -108,8 +108,8 @@ export default {
         async doSubmit() {
             this.creating = true
             try {
-                const res = await postApi(this.hostname+'/api/access-control?token='+this.token, this.computedAccess )
-                this.successResponse(res.data)
+                const res = await postApi(this.hostname+'/api/access-control-update?token='+this.token, this.computedAccess )
+                this.updateResponse(res.data)
             } catch (e) {
                 this.creating = false
                 if(e.response.status == 400) {
@@ -122,18 +122,18 @@ export default {
             this.$store.commit('closeAdminControl')
             this.creating = false
         },
-        async doUpdate() {
-            this.creating = true
-            try {
-                const res = await postApi(this.hostname+'/api/access-control-update?token='+this.token, this.computedAccess )
-                this.updateResponse(res.data)
-            } catch (e) {
-                this.creating = false
-                if(e.response.status == 400) {
-                    this.$store.commit('setExpSession')
-                }
-            }
-        },
+        // async doUpdate() {
+        //     this.creating = true
+        //     try {
+        //         const res = await postApi(this.hostname+'/api/access-control-update?token='+this.token, this.computedAccess )
+        //         this.updateResponse(res.data)
+        //     } catch (e) {
+        //         this.creating = false
+        //         if(e.response.status == 400) {
+        //             this.$store.commit('setExpSession')
+        //         }
+        //     }
+        // },
         updateResponse(res) {
             this.$store.commit('updateAdminAccess', res)
             this.$store.commit('closeAdminControl')
