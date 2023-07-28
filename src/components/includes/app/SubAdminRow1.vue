@@ -145,9 +145,9 @@ export default {
                 status: '',
                 access: this.computedUser
             }
-            if(this.computedUser.villages && this.computedUser.events && this.computedUser.parents && this.computedUser.kids && this.computedUser.notifications && this.computedUser.messages && this.computedUser.bookings) {
+            if(this.computedUser.villages && this.computedUser.events && this.computedUser.parents && this.computedUser.kids && this.computedUser.messages && this.computedUser.bookings) {
                 data.status = 'all'
-            }else if(!this.computedUser.villages && !this.computedUser.events && !this.computedUser.parents && !this.computedUser.kids && !this.computedUser.notifications && !this.computedUser.messages && !this.computedUser.bookings) {
+            }else if(!this.computedUser.villages && !this.computedUser.events && !this.computedUser.parents && !this.computedUser.kids && !this.computedUser.messages && !this.computedUser.bookings) {
                 data.status = '0'
             }
             return data
