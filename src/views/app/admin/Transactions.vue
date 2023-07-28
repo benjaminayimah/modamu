@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_super || is_sublevel_bookings">
         <div class="title-row flx gap-50 ai-c jc-sb">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Transactions</h1>
@@ -32,13 +32,17 @@
             </div>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin'
 import BookingRow from '@/components/includes/app/BookingRow.vue'
 import { mapState } from 'vuex'
+import AccessDenied from '@/components/includes/app/AccessDenied.vue'
 export default {
-    components: { BookingRow },
+    components: { BookingRow, AccessDenied },
     name: 'TransactionsPage',
+    mixins: [usersLevelMixin],
     computed: {
         ...mapState({
             bookings: (state) => state.bookings

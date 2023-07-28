@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_parent">
         <div class="title-row">
             <router-link to="" @click.prevent="$router.go(-1)" class="flx ai-c gap-8 mb-16 ft-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8.414 14.828">
@@ -75,16 +75,19 @@
             </div>
         </div>
     </section>
+    <access-denied v-else/>
 </template>
 <script>
 import formatDateTime from '@/mixins/formatDateTime'
 import { getApi } from '@/api'
 import { mapState } from 'vuex'
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue'
+import usersLevelMixin from '@/mixins/usersLevelMixin'
+import AccessDenied from '@/components/includes/app/AccessDenied.vue'
 export default {
-    components: { ProfileAvatar },
+    components: { ProfileAvatar, AccessDenied },
     name: 'TrackEvent',
-    mixins: [formatDateTime],
+    mixins: [formatDateTime, usersLevelMixin],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,

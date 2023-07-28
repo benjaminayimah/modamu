@@ -1,6 +1,5 @@
 <template>
     <div id="grid_table">
-        
         <div class="grid table-body">
             <div class="grid-item table-head grid-col-subadmins">
                 <h4 class="table-cell wrap-text wrap-line-1">Name</h4>
@@ -31,5 +30,8 @@ export default {
 <style lang="scss" scoped>
 .grid-col-subadmins{
     grid-template-columns: 1fr 1.2fr .8fr 1fr;
+}
+#grid_table {
+    overflow-x: auto;
 }
 </style>

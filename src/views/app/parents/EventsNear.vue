@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_parent">
         <div class="title-row flx gap-24 ai-c">
             <div class="flx gap-8 search-row">
                 <div class="secondary-input-wrapper input-wrapper" id="search_radius_wrapper">
@@ -69,6 +69,7 @@
     </section>
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import autoCompleMixin from '@/mixins/autoCompleMixin';
 import inputValMixin from '@/mixins/inputValMixin';
 import axios from 'axios';
@@ -77,9 +78,9 @@ import EventsNearMeLists from '../../../components/includes/app/EventsNearMeList
 import LocationBeacon from '@/components/includes/LocationBeacon.vue';
 import NotFoundLottie from '@/components/includes/NotFoundLottie.vue';
 export default {
-    components: { EventsNearMeLists, LocationBeacon, NotFoundLottie },
+    components: { EventsNearMeLists, LocationBeacon, NotFoundLottie,  },
     name: 'EventsNear',
-    mixins: [inputValMixin, autoCompleMixin],
+    mixins: [inputValMixin, autoCompleMixin, usersLevelMixin],
     computed: {
         ...mapState({
             events_near: (state) => state.events_near,
@@ -178,7 +179,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.commit('setNearbyEventToEvents')
+        this.is_parent ? this.$store.commit('setNearbyEventToEvents') : ''
     }
 
 }

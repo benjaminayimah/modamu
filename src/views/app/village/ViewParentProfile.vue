@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_village || is_super || is_sublevel_parents">
         <div class="title-row flx gap-24 ai-c">
             <a class="flx gap-8 ai-c" href="#" @click.prevent="$router.go(-1)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 8.414 14.828">
@@ -37,6 +37,7 @@
             </router-link>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
 import { postApi } from '@/api'
@@ -45,9 +46,10 @@ import ProfileBodyContent from '@/components/layouts/ProfileBodyContent.vue'
 import KidsList from '../../../components/includes/app/KidsList.vue'
 import usersLevelMixin from '../../../mixins/usersLevelMixin'
 import ChatInterface from '@/components/layouts/ChatInterface.vue'
+import AccessDenied from '@/components/includes/app/AccessDenied.vue'
 
 export default {
-  components: { KidsList, ProfileBodyContent, ChatInterface },
+  components: { KidsList, ProfileBodyContent, ChatInterface, AccessDenied },
     name: 'ViewParentProfile',
     mixins: [ usersLevelMixin ],
     computed: {

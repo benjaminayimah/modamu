@@ -16,8 +16,6 @@ export default {
     computed: {
         ...mapState({
             device: (state) => state.device,
-            // chats: (state) => state.chats,
-            // image: (state) => state.chatImage,
             msgParentDetails: (state) => state.msgParentDetails,
             hostname: (state) => state.hostname,
             token: (state) => state.token

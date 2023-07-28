@@ -31,4 +31,7 @@ export default {
 .grid-col-subadmins{
     grid-template-columns: 1fr 1fr 1.3fr 1.3fr;
 }
+#grid_table {
+    overflow-x: auto;
+}
 </style>

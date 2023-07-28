@@ -6,7 +6,8 @@
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <router-link v-if="is_village" :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }" class="button-secondary a-button a-btn btn-lg">View all events</router-link>
             </div>
-            <dash-notification-card />
+            <dash-notification-card v-if="is_village" />
+            <dash-message-card v-else />
         </div>
         <div class="right flx column flx-grow-1 gap-32">
             <div class="top-right flx column gap-16">
@@ -71,15 +72,19 @@
                 <div v-else class="flx-grow-1 flx column bg-white br-24 pd-24">
                     <div class="flx jc-sb ai-c">
                         <div>Villages</div>
-                        <button @click="$store.commit('openModal', 'add-village')" class="button-outline rounded-outl btn-sm">Add new</button>
+                        <button v-if="is_super || is_sublevel_villages" @click="$store.commit('openModal', 'add-village')" class="button-outline rounded-outl btn-sm">Add new</button>
                     </div>
-                    <admin-dash-villages />
+                    <admin-dash-villages v-if="is_super || is_sublevel_villages || is_sublevel2" />
+                    <div v-else class="centered flx-grow-1">
+                        <div>You don't have access to view this content</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters, mapState } from 'vuex';
 import DashNotificationCard from '@/components/layouts/DashNotificationCard.vue'
@@ -87,10 +92,11 @@ import StatusCardType1 from '@/components/includes/app/StatusCardType1.vue';
 import StatusCardType2 from '@/components/includes/app/StatusCardType2.vue';
 import DashWaitingList from '@/components/includes/app/DashWaitingList.vue';
 import AdminDashVillages from '@/components/layouts/AdminDashVillages.vue';
+import DashMessageCard from '@/components/layouts/DashMessageCard.vue';
 export default {
-  components: { DashNotificationCard, StatusCardType1, StatusCardType2, DashWaitingList, AdminDashVillages },
+  components: { DashNotificationCard, StatusCardType1, StatusCardType2, DashWaitingList, AdminDashVillages, DashMessageCard },
     name: 'AdminsDash',
-    mixins: [userNameMixin],
+    mixins: [userNameMixin, usersLevelMixin],
     computed: {
         ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser', 'getTodaysEvents', 'is_village', 'is_admin', 'getBanner1']),
         ...mapState({

@@ -25,7 +25,7 @@ import Attendee from '@/views/app/village/AttendeeProfile.vue'
 import ViewParentProfile from '@/views/app/village/ViewParentProfile.vue'
 import Villages from '@/views/app/admin/Villages.vue'
 import DetailedVillage from '@/views/app/admin/VillageDetails.vue'
-import Transactions from '@/views/app/admin/Transactions.vue'
+import Bookings from '@/views/app/admin/Transactions.vue'
 import Parents from '@/views/app/admin/Parents.vue'
 import WaitList from '@/views/app/WaitList.vue'
 import Message from '@/views/app/Message.vue'
@@ -93,7 +93,7 @@ const routes = [
       { path: '/event/attendee/:id/:name', name: 'Attendee', component: Attendee },
       { path: '/parent/:to/:parent', name: 'ViewParentProfile', component: ViewParentProfile },
       { path: '/village/:name/:id/:filter', name: 'DetailedVillage', component: DetailedVillage },
-      { path: '/transactions', name: 'Transactions', component: Transactions },
+      { path: '/bookings', name: 'Bookings', component: Bookings },
       // { path: '/add-new-village', name: 'AddVillagePage', component: AddVillagePage},
       { path: '/waitlists', name: 'WaitList', component: WaitList },
       { path: '/messages', component: Message,

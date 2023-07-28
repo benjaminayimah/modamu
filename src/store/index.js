@@ -660,6 +660,33 @@ export default createStore({
     is_parent(state) {
       return state.user.access_level == 2 ? true : false
     },
+    is_sublevel2(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '2' ? true : false
+    },
+    is_sublevel1(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' ? true : false
+    },
+    is_sublevel_events(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.events ? true : false
+    },
+    is_sublevel_villages(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.villages ? true : false
+    },
+    is_sublevel_parents(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.parents ? true : false
+    },
+    is_sublevel_kids(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.kids ? true : false
+    },
+    is_sublevel_messages(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.messages ? true : false
+    },
+    is_sublevel_notifications(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.notifications ? true : false
+    },
+    is_sublevel_bookings(state) {
+      return state.user.access_level == 0 && state.user.sub_admin && state.user.sub_level == '1' && state.user.bookings ? true : false
+    },
     getOngoingEvents(state) {
       const events = state.events
       let newEvent = []

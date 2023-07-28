@@ -62,9 +62,9 @@ export default {
                 events: this.adminAccess[1].status,
                 parents: this.adminAccess[2].status,
                 kids: this.adminAccess[3].status,
-                notifications: this.adminAccess[4].status,
-                messages: this.adminAccess[5].status,
-                bookings: this.adminAccess[6].status
+                // notifications: this.adminAccess[4].status,
+                messages: this.adminAccess[4].status,
+                bookings: this.adminAccess[5].status
             }
         }
     },
@@ -79,9 +79,9 @@ export default {
                 {id: 2, name: 'events', abbr:'e', status: false},
                 {id: 3, name: 'parents', abbr:'p', status: false},
                 {id: 4, name: 'kids', abbr:'k', status: false},
-                {id: 5, name: 'notifications', abbr:'n', status: false},
-                {id: 6, name: 'messages', abbr:'m', status: false},
-                {id: 7, name: 'bookings', abbr:'b', status: false}
+                // {id: 5, name: 'notifications', abbr:'n', status: false},
+                {id: 5, name: 'messages', abbr:'m', status: false},
+                {id: 6, name: 'bookings', abbr:'b', status: false}
             ],
             creating: false,
             allAccess: false
@@ -147,9 +147,9 @@ export default {
                 this.adminAccess[1].status = this.subAdminStore.user.events
                 this.adminAccess[2].status = this.subAdminStore.user.parents
                 this.adminAccess[3].status = this.subAdminStore.user.kids
-                this.adminAccess[4].status = this.subAdminStore.user.notifications
-                this.adminAccess[5].status = this.subAdminStore.user.messages
-                this.adminAccess[6].status = this.subAdminStore.user.bookings
+                // this.adminAccess[4].status = this.subAdminStore.user.notifications
+                this.adminAccess[4].status = this.subAdminStore.user.messages
+                this.adminAccess[5].status = this.subAdminStore.user.bookings
             }else {
                 this.form.user = this.subAdminStore.user.id
             }

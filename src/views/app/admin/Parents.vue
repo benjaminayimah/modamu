@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_super || is_sublevel_parents">
         <div class="title-row flx gap-50 ai-c">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Parents</h1>
@@ -42,16 +42,20 @@
             <div v-else><strong>No search result for:</strong> <i>{{ search || filter }}</i></div>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin'
 import ParentRow from '@/components/includes/app/ParentRow.vue'
 import { mapState } from 'vuex'
 import SortDropdown from '@/components/includes/dropdowns/SortDropdown.vue'
 import FilterDropdown from '@/components/includes/dropdowns/FilterDropdown.vue'
 import ExportDropdown from '@/components/includes/dropdowns/ExportDropdown.vue'
+import AccessDenied from '@/components/includes/app/AccessDenied.vue'
 export default {
-    components: { ParentRow, SortDropdown, FilterDropdown, ExportDropdown },
+    components: { ParentRow, SortDropdown, FilterDropdown, ExportDropdown, AccessDenied },
     name: 'ParentsPage',
+    mixins: [usersLevelMixin],
     computed: {
         ...mapState({
             parents: (state) => state.parents,

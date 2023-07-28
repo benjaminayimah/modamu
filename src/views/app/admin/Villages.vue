@@ -1,5 +1,5 @@
 <template>
-    <section id="villages" class="section-main">
+    <section id="villages" class="section-main" v-if="is_super || is_sublevel_villages || is_sublevel2">
         <div class="title-row flx gap-50 ai-c jc-sb">
             <div class="flx gap-16 ai-c">
                 <h1 class="title">Villages</h1>
@@ -13,7 +13,7 @@
                     <input class="form-control" v-model="search" type="search" data-type="icon" placeholder="Search village...">
                 </div>
             </div>
-            <button @click="$store.commit('openModal', 'add-village')" class="button-primary gap-4 btn-md">
+            <button v-if="is_super || is_sublevel_villages" @click="$store.commit('openModal', 'add-village')" class="button-primary gap-4 btn-md">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 15.132 15.132">
                     <path d="M-1983.684,13.883V8.816h-5.066a1.25,1.25,0,0,1-1.25-1.25,1.25,1.25,0,0,1,1.25-1.25h5.066V1.25a1.25,1.25,0,0,1,1.25-1.25,1.25,1.25,0,0,1,1.249,1.25V6.316h5.066a1.25,1.25,0,0,1,1.25,1.25,1.25,1.25,0,0,1-1.25,1.25h-5.066v5.066a1.249,1.249,0,0,1-1.249,1.249A1.249,1.249,0,0,1-1983.684,13.883Z" transform="translate(1990)" fill="#fff"/>
                 </svg>
@@ -28,13 +28,17 @@
         </div>
         <div v-else><strong>No search result for:</strong> <i>{{ search }}</i></div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import VillageList from '@/components/includes/app/VillageList.vue';
 import { mapState } from 'vuex';
+import AccessDenied from '@/components/includes/app/AccessDenied.vue';
 export default {
-    components: { VillageList },
+    components: { VillageList, AccessDenied },
     name: 'VillagesPage',
+    mixins: [usersLevelMixin],
     computed: {
         ...mapState({
             villages: (state) => state.villages

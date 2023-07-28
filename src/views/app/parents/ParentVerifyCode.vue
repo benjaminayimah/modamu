@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_parent">
         <div class="title-row">
             <h1 class="title mb-24">Verify & checkout</h1>
             <div class="flx ai-c gap-16">
@@ -19,15 +19,19 @@
             </div>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import { getApi } from '@/api';
 import { mapState } from 'vuex';
 import ParentCheckoutList from '@/components/includes/app/ParentCheckoutList.vue';
 import EmptyStateLottie from '@/components/includes/EmptyStateLottie.vue';
+import AccessDenied from '@/components/includes/app/AccessDenied.vue';
 export default {
-    components: { ParentCheckoutList, EmptyStateLottie },
+    components: { ParentCheckoutList, EmptyStateLottie, AccessDenied },
     name: 'ParentVerifyCode',
+    mixins: [usersLevelMixin],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,

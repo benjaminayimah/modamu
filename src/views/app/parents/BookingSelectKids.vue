@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_parent">
         <div class="title-row">
             <router-link to="" @click.prevent="$router.go(-1)" class="flx ai-c gap-8 mb-16 ft-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 8.414 14.828">
@@ -43,12 +43,14 @@
 </template>
 
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import axios from 'axios';
 import { mapState } from 'vuex';
 import BookingSelectKidsList from '../../../components/includes/app/BookingSelectKidsList.vue';
 import Spinner from '@/components/includes/Spinner.vue';
 export default {
-  components: { BookingSelectKidsList, Spinner },
+    components: { BookingSelectKidsList, Spinner },
+    mixins: [usersLevelMixin],
     name: 'BookingSelectKids',
     computed: {
         ...mapState({

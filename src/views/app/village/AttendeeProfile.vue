@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_village || is_super || is_sublevel_kids">
         <div class="title-row flx gap-24 ai-c">
             <a class="flx gap-8 ai-c" href="#" @click.prevent="$router.go(-1)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 8.414 14.828">
@@ -55,16 +55,20 @@
             </div>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin'
 import { postApi } from '@/api'
 import { mapState } from 'vuex'
 import ProfileKidBodyContent from '@/components/layouts/ProfileKidBodyContent.vue'
 import KidsList from '../../../components/includes/app/KidsList.vue'
 import ProfileAvatar from '../../../components/includes/app/ProfileAvatar.vue'
+import AccessDenied from '@/components/includes/app/AccessDenied.vue'
 export default {
-    components: { ProfileAvatar, KidsList, ProfileKidBodyContent },
+    components: { ProfileAvatar, KidsList, ProfileKidBodyContent, AccessDenied },
     name: 'AttendeeProfile',
+    mixins: [usersLevelMixin],
     computed: {
         ...mapState({
             token: (state) => state.token,

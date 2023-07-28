@@ -12,8 +12,8 @@
             <div class="contact-body overflow-y-scroll scroll-hidden relative">
                 <div v-if="!is_parent" class="flx jc-c">
                     <ul class="flx br-16 gap-4 mt-8 tab">
-                        <li><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleTab('parents')"  href="#">Parents</a></li>
                         <li v-if="is_admin"><a :class="{'active' : tab == 'villages'}" @click.prevent="toggleTab('villages')" href="#">Villages</a></li>
+                        <li v-if="!is_sublevel2"><a :class="{'active' : tab == 'parents'}" @click.prevent="toggleTab('parents')"  href="#">Parents</a></li>
                     </ul>
                 </div>
                 <div class="input-wrapper">
@@ -85,7 +85,7 @@ export default {
     },
     data() {
         return {
-            tab: 'parents',
+            tab: 'villages',
             search: '',
             allSelected: false
         }
@@ -104,6 +104,11 @@ export default {
                 this.$store.commit('unSelectAllRecipients')
                 this.allSelected = false
             }
+        }
+    },
+    mounted() {
+        if(this.is_village) {
+            this.tab = 'parents'
         }
     }
 }

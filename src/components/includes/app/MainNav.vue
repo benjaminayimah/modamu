@@ -48,11 +48,11 @@
                             </router-link>
                         </li>
                         <li v-if="is_admin">
-                            <router-link :to="{ name: 'Transactions' }">
+                            <router-link :to="{ name: 'Bookings' }">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 0 24 24">
                                     <path d="M-1990,12a12,12,0,0,1,12-12,12,12,0,0,1,12,12,12,12,0,0,1-12,12A12,12,0,0,1-1990,12Zm4.873-7.128A10.012,10.012,0,0,0-1988.08,12a10.013,10.013,0,0,0,2.953,7.128A10.014,10.014,0,0,0-1978,22.08a10.015,10.015,0,0,0,7.128-2.952A10.014,10.014,0,0,0-1967.92,12a10.014,10.014,0,0,0-2.952-7.128A10.015,10.015,0,0,0-1978,1.92,10.014,10.014,0,0,0-1985.127,4.873Zm6.517,13.847V16.887h-3.054a.611.611,0,0,1-.611-.611.611.611,0,0,1,.611-.61h3.054V12.611h-.916a2.752,2.752,0,0,1-2.749-2.749,2.752,2.752,0,0,1,2.749-2.749h.916V5.281A.611.611,0,0,1-1978,4.67a.611.611,0,0,1,.611.611V7.113h2.443a.611.611,0,0,1,.611.611.611.611,0,0,1-.611.611h-2.443v3.054h.916a2.752,2.752,0,0,1,2.749,2.749,2.751,2.751,0,0,1-2.749,2.748h-.916v1.833a.611.611,0,0,1-.611.611A.611.611,0,0,1-1978.611,18.719Zm1.222-3.054h.916a1.529,1.529,0,0,0,1.527-1.527,1.529,1.529,0,0,0-1.527-1.527h-.916Zm-2.138-4.276h.916V8.335h-.916a1.529,1.529,0,0,0-1.527,1.527A1.529,1.529,0,0,0-1979.527,11.389Z" transform="translate(1990)" fill="#fff"/>
                                 </svg>
-                                <span>Transactions</span>
+                                <span>Bookings</span>
                             </router-link>
                         </li>
                         <li v-if="is_admin">
@@ -116,17 +116,6 @@
                             </router-link>
                         </li>
                     </div>
-                    <!-- <div v-if="is_parent" class="flx column nav-grp">
-                        <label>Billings</label>
-                        <li>
-                            <router-link :to="{ name: 'AllPayments'}">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 21 21.001">
-                                    <path d="M-3328.913-850.549a6.23,6.23,0,0,1-3.2-1.583,6.242,6.242,0,0,1-1.583-3.2,25.094,25.094,0,0,1-.424-5.288,25.093,25.093,0,0,1,.424-5.288,6.246,6.246,0,0,1,1.583-3.2,6.23,6.23,0,0,1,3.2-1.583,25.022,25.022,0,0,1,5.288-.425,25.013,25.013,0,0,1,5.289.425,6.223,6.223,0,0,1,3.2,1.583,6.227,6.227,0,0,1,1.583,3.2,25.022,25.022,0,0,1,.425,5.288,25.023,25.023,0,0,1-.425,5.288,6.227,6.227,0,0,1-1.583,3.2,6.224,6.224,0,0,1-3.2,1.583,25.025,25.025,0,0,1-5.289.425A25.006,25.006,0,0,1-3328.913-850.549Zm-3.462-10.076a23.383,23.383,0,0,0,.384,4.909,4.6,4.6,0,0,0,1.111,2.346,4.6,4.6,0,0,0,2.346,1.112,23.467,23.467,0,0,0,4.908.382,23.48,23.48,0,0,0,4.91-.382,4.6,4.6,0,0,0,2.346-1.112,4.6,4.6,0,0,0,1.112-2.346,23.386,23.386,0,0,0,.383-4.909c0-.633-.01-1.215-.031-1.75h-17.437C-3332.365-861.84-3332.375-861.258-3332.375-860.625Zm17.035-5.25a4.262,4.262,0,0,0-1.029-2.005,4.6,4.6,0,0,0-2.346-1.112,23.48,23.48,0,0,0-4.91-.383,23.466,23.466,0,0,0-4.908.383,4.6,4.6,0,0,0-2.346,1.112,4.267,4.267,0,0,0-1.029,2.005Zm-6.534,11.375a.875.875,0,0,1-.875-.876.875.875,0,0,1,.875-.875h3.5a.875.875,0,0,1,.875.875.875.875,0,0,1-.875.876Z" transform="translate(3334.125 871.125)" fill="#fff"/>
-                                </svg>
-                                <span>Cards</span>
-                            </router-link>
-                        </li>
-                    </div> -->
                     <li v-if="is_super">
                         <router-link :to="{ name: 'SubAdminViewOne' }">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 19.461 22.772">
@@ -150,12 +139,14 @@
 </template>
 <script>
 import { mapGetters, mapState } from 'vuex';
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import Backdrop from '../Backdrop.vue';
 export default {
     components: { Backdrop },
     name: 'MainNav',
+    mixins: [usersLevelMixin],
     computed: {
-        ...mapGetters(['is_super', 'is_admin', 'is_parent', 'is_village', 'getMenu', 'getDevice', 'getMessageTotalCount']),
+        ...mapGetters(['getMenu', 'getDevice', 'getMessageTotalCount']),
         ...mapState({
             notifications: (state) => state.notifications,
             wait_lists: (state) => state.wait_lists,
@@ -211,7 +202,6 @@ aside{
     border-radius: 40px;
     height: calc(100vh - var(--dash-padding) *2);
     #icon {
-        animation: fadeIn 1s;
         display: block;
         margin-top: 5px;
     }
@@ -309,12 +299,13 @@ aside{
                     border: unset;
                 }
             }
-            label, #logo {
+            label {
                 animation: fadeIn 1s;
+            }
+            label, #logo {
                 display: block;
             }
             #icon {
-                animation: fadeIn 1s;
                 display: none;
             }
             #logo_wrapper{

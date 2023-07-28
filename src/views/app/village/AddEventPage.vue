@@ -1,5 +1,5 @@
 <template>
-    <section class="section-main">
+    <section class="section-main" v-if="is_village">
         <div class="title-row">
             <h1 class="title">Add New Event</h1>
         </div>
@@ -151,8 +151,10 @@
             </div>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
+import usersLevelMixin from '@/mixins/usersLevelMixin';
 import axios from 'axios';
 import { mapGetters, mapState } from 'vuex';
 import inputValMixin from '@/mixins/inputValMixin';
@@ -160,10 +162,11 @@ import tempImageUploadMixin from '@/mixins/tempImageUpload';
 import Spinner from '@/components/includes/Spinner.vue'
 import Avatar from '@/components/includes/Avatar.vue';
 import CompletedAnime from '@/components/includes/CompletedAnime.vue';
+import AccessDenied from '@/components/includes/app/AccessDenied.vue';
 export default {
-    components: { Spinner, Avatar, CompletedAnime },
+    components: { Spinner, Avatar, CompletedAnime, AccessDenied },
     name: 'AddEventPage',
-    mixins: [ inputValMixin, tempImageUploadMixin ],
+    mixins: [ inputValMixin, tempImageUploadMixin, usersLevelMixin ],
     computed: {
         ...mapGetters(['getHostname']),
         ...mapState({

@@ -1,5 +1,5 @@
 <template>
-    <section id="messages" class="flx gap-8 section-main">
+    <section id="messages" class="flx gap-8 section-main" v-if="is_parent || is_village || is_super || is_sublevel_messages || is_sublevel2">
         <div class="message-left h-100 relative">
             <div class="fixed flx jc-c float">
                 <button v-if="!is_parent" @click="$store.commit('openBulkMessage')" class="flx bg-white gap-8 btn-lg ft-primary">
@@ -40,7 +40,7 @@
                 <ul class="flx br-16 mt-8 tab">
                     <li><a :class="{'active' : messageTab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
                     <li v-if="is_admin"><a :class="{'active' : messageTab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
-                    <li><a :class="{'active' : messageTab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
+                    <li v-if="!is_sublevel2"><a :class="{'active' : messageTab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
                 </ul>
             </div>
             <div v-if="!messages.length && !computedItem.length && !search" class="bg-white mt-24 pd-24 br-16 centered">
@@ -55,14 +55,16 @@
             <router-view></router-view>
         </div>
     </section>
+    <access-denied v-else />
 </template>
 <script>
 import usersLevelMixin from '@/mixins/usersLevelMixin';
 import { mapState } from 'vuex';
 import MessageLists from '../../components/includes/app/MessageLists.vue'
 import BulkMessage from '@/components/layouts/BulkMessage.vue';
+import AccessDenied from '@/components/includes/app/AccessDenied.vue';
 export default {
-    components: { MessageLists, BulkMessage },
+    components: { MessageLists, BulkMessage, AccessDenied },
     mixins: [usersLevelMixin],
     name: 'MessagePage',
     computed: {
