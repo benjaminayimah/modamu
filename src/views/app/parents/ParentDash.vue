@@ -2,7 +2,7 @@
     <section class="flx column gap-24 dashboard-main">
       <div class="top-row grid gap-32">
         <div class="wl-sec flx column gap-16">
-          <h1 class="wrap-text wrap-line-2">Good day <span>{{ computedFirstName(user.name) }},</span></h1>
+          <h1 class="wrap-text wrap-line-2 greeting">Good day <span>{{ computedFirstName(user.name) }},</span></h1>
           <div>At modamu we bring the fun to your kids easily so browse through our events catalogue close to you and begin the fun.</div>
           <a href="#" @click.prevent="$store.commit('showOnboardingModal')" class="getting-started flx ai-c gap-8 fw-600">
             Getting started
@@ -59,7 +59,10 @@
               </div>
             </div>
         </div>
-        <dash-msg-and-noti />
+        <div class="grid col-2 gap-32">
+          <dash-message-card />
+          <dash-notification-card />
+        </div>
       </div>
       <div class="flx column flx-grow-1 gap-8">
         <h4>Upcoming events</h4>
@@ -88,10 +91,11 @@ import { mapState, mapGetters } from 'vuex';
 import userNameMixin from '../../../mixins/userNameMixin';
 import DashEventList from '../../../components/includes/app/DashEventList.vue';
 import DashTodaysEventList from '@/components/includes/app/DashTodaysEventList.vue';
-import DashMsgAndNoti from '@/components/layouts/DashMsgAndNoti.vue';
 import ProfileAvatar from '@/components/includes/app/ProfileAvatar.vue';
+import DashMessageCard from '@/components/layouts/DashMessageCard.vue';
+import DashNotificationCard from '@/components/layouts/DashNotificationCard.vue';
 export default {
-    components: { DashEventList, DashTodaysEventList, DashMsgAndNoti, ProfileAvatar },
+    components: { DashEventList, DashTodaysEventList, ProfileAvatar, DashMessageCard, DashNotificationCard },
     name: 'ParentDash',
     mixins: [userNameMixin],
     computed: {

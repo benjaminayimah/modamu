@@ -7,7 +7,7 @@
         <div class="flx-grow-1 centered" v-if="!messages.length">No new messages</div>
         <div v-else class="m--10">
             <div v-if="is_parent || is_village || is_super || is_sublevel_messages">
-                <message-lists class="mb-8" v-for="data in messages.slice(0, computedMsgSlice)" :key="data.message.id" :data="data"/>
+                <message-lists class="mb-8" v-for="message in messages.slice(0, computedMsgSlice)" :key="message.message.id" :data="message"/>
             </div>
             <div v-else class="flx-grow-1 centered">
                 You don't have access to view this content
