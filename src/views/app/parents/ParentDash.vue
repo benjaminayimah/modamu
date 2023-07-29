@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="flx column flx-grow-1 gap-8">
-        <h4>Upcoming events</h4>
+        <h4>Explore events</h4>
         <div class="gap-8 flx bottom-row flx-grow-1 overflow-x-scroll scroll-hidden scroll-snap">
           <dash-event-list class="event-list" v-for="event in events.slice(0, 10)" :key="event.id"  :event="event"/>
           <a href="#" @click.prevent="$store.commit('goToEvents')" class="br-24 flx jc-sb ai-c flx-grow-1 bg-img-banner" :style="{ backgroundImage: 'url('+getBanner1+')'}">

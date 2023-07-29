@@ -1445,6 +1445,14 @@ ul.tab {
             width: 100%;
             margin-top: 8px;
         }
+        .stats-card {
+            height: auto;
+            min-height: 150px;
+        }
+        .stack-cards {
+            --height: 65px;
+            justify-content: center;
+        }
     }
     .scroll-snap{
         margin: 0 calc(-1 * var(--mobile-body-padding));

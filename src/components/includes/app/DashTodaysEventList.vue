@@ -29,10 +29,13 @@ export default {
         computeStatus() {
             const currentDateTime = new Date()
             const startDate = new Date(this.event.date+'T'+this.event.start_time)
-            if (currentDateTime < startDate)
+            const endDate = new Date(this.event.date+'T'+this.event.end_time)
+            if (currentDateTime > startDate &&  currentDateTime < endDate)
+            return 'ongoing'
+            else if (currentDateTime < startDate)
             return 'upcoming'
             else
-            return 'ongoing'
+            return 'past'
         }
     }
 }

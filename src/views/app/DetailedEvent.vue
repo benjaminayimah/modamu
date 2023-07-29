@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div v-if="is_parent" class="absolute book-wrapper text-center">
-                        <div class="mb-4 fs-09" :class="computedLimit.state === 'full' ? 'in-active' : 'active'">{{ computedLimit.text }}</div>
+                        <div class="mb-4 fs-09" :class="computedLimit.state">{{ computedLimit.text }}</div>
                         <button @click="bookNow" class="button-primary gap-8 btn-md book-now" :class="{ 'button-disabled' : computeStatus === 'past' || computedLimit.state === 'full' }" :disabled="computeStatus === 'past' || computedLimit.state === 'full' ? true : false">
                             Book now
                         </button>
@@ -199,11 +199,17 @@ export default {
             let payload = { state: '', text: ''}
             let limit = this.event.limit
             let count = this.event.limit_count
-            if(limit == count) {
-                payload.state = 'full'
-                payload.text = 'All spots are booked'
+            if(this.computeStatus !== 'past') {
+                if(limit == count) {
+                    payload.state = 'in-active'
+                    payload.text = 'All spots are booked'
+                }else {
+                    payload.state = 'active'
+                    payload.text = Number(limit - count) + ' spots left. Book now!'
+                }
             }else {
-                payload.text = 'Only ' + Number(limit - count) + ' spots left'
+                payload.state = 'in-active'
+                payload.text = 'Event has ended'
             }
             return payload
         }
