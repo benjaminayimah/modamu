@@ -36,13 +36,13 @@
                     </button>
                 </div>
             </div>
-            <div v-if="!is_parent" class="flx">
+            <nav v-if="!is_parent" class="flx">
                 <ul class="flx br-16 mt-8 tab">
                     <li><a :class="{'active' : messageTab == 'recent'}" @click.prevent="toggleDisplay('recent')" href="#">Recent</a></li>
                     <li v-if="is_admin"><a :class="{'active' : messageTab == 'villages'}" @click.prevent="toggleDisplay('villages')" href="#">Villages</a></li>
                     <li v-if="!is_sublevel2"><a :class="{'active' : messageTab == 'parents'}" @click.prevent="toggleDisplay('parents')"  href="#">Parents</a></li>
                 </ul>
-            </div>
+            </nav>
             <div v-if="!messages.length && !computedItem.length && !search" class="bg-white mt-24 pd-24 br-16 centered">
                 No Messages
             </div>
@@ -170,6 +170,14 @@ button.toggle-btn{
         box-shadow: 0 1px 15px 0 rgba(14, 20, 44, 0.12);
     }
 }
+@media screen and (max-width: 500px){
+    nav {
+        justify-content: center;
+    }
+    
+}
+
+
 
 //slide vertical
 .slide-vertical-enter-active,

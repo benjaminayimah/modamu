@@ -147,8 +147,11 @@ export default {
             //call village allocation modal
             if(this.form.user == 1) {
                 this.$store.commit('addPermissions', res)
+                this.$router.push({ name: 'SubAdminViewOne'})
             }else {
                 this.$store.commit('openAllocateVillage', res)
+                this.$router.push({ name: 'SubAdminViewTwo'})
+
             }
         }
     },
