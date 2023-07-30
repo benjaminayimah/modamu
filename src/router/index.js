@@ -129,24 +129,6 @@ const routes = [
       { path: '/villages', name: 'Villages', component: Villages },
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ]
   },
   { 

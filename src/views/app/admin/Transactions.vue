@@ -2,7 +2,7 @@
     <section class="section-main" v-if="is_super || is_sublevel_bookings">
         <div class="title-row flx gap-50 ai-c jc-sb">
             <div class="flx gap-16 ai-c">
-                <h1 class="title">Transactions</h1>
+                <h1 class="title">Bookings</h1>
                 <span class="count-info" :class="bookings.length ? 'count-primary' : 'count-secondary'">{{ bookings.length }}</span>
             </div>
             <div class="input-wrapper">

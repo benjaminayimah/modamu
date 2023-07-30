@@ -4,7 +4,7 @@
         <div class="gray">View and track all on going events here.</div>
     </div>
     <table-body-ongoing :events="displayedItems" />
-    <pagination-controls v-if="totalItems > 10" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
+    <pagination-controls v-if="totalItems > itemsPerPage" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
 </template>
 <script>
 import PaginationControls from '@/components/includes/app/PaginationControls.vue';

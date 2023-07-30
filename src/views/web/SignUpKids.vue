@@ -59,8 +59,11 @@ export default {
         },
         async goToDashboard() {
             await this.$store.commit('signInSuccess', this.token)
-            this.$router.push({ name: 'AdminDashboard'})
-        }
+            this.$store.commit('startSigning')
+        },
+    },
+    beforeCreate() {
+        localStorage.getItem('auth') ? window.location = '/' : ''
     }
 }
 </script>

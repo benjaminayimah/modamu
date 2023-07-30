@@ -1,6 +1,6 @@
 <template>
     <div class="w-100 flx ai-c jc-c vh-100 pd-32">
-        <div class="flx ai-cflx-grow-1 signup-progress-container gap-50">
+        <div v-if="!sigining" class="flx ai-cflx-grow-1 signup-progress-container gap-50">
             <section v-if="getNewUser.active" class="sign-up-progress flx-1">
                 <div class="flx column gap-32 flx-grow-1 wrap">
                     <div class="flx column gap-16 title">
@@ -20,27 +20,66 @@
                 <router-view />
             </section>
         </div>
+        <div v-else class="signin-progress centered">
+            <div class="text-center ">
+                <svg xmlns="http://www.w3.org/2000/svg" height="5" viewBox="0 0 205 5">
+                    <g transform="translate(-830.5 -590)">
+                        <line x2="200" transform="translate(833 592.5)" fill="none" stroke="rgba(0,0,0,0.2)" stroke-linecap="round" stroke-width="5"/>
+                        <line :x2="progressFill" transform="translate(833 592.5)" fill="none" stroke="#0073ff" stroke-linecap="round" stroke-width="5"/>
+                    </g>
+                </svg>
+                <span>Almost there...</span>
+            </div>
+        </div>
     </div>
   </template>
   <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapState } from 'vuex';
   export default {
     name: 'WelcomeSignUp',
     computed: {
       ...mapGetters(['getNewUser', 'getWindowWidth']),
+      ...mapState({
+        sigining: (state) => state.sigining
+      }),
       computedProgressWidth() {
         return this.getNewUser.data.progress + '%'
       }
     },
-    created() {
-      this.checkNewUser()
+    watch: {
+        sigining(newSigining) {
+            this.startProgress(newSigining)
+        },
+    },
+    data () {
+        return {
+            progressFill: 1,
+        }
     },
     methods: {
-      checkNewUser() {
-        JSON.parse(localStorage.getItem('newUser')) ? this.$store.commit('resetNewUser') : ''
-      }
+        checkNewUser() {
+            JSON.parse(localStorage.getItem('newUser')) ? this.$store.commit('resetNewUser') : ''
+        },
+        startProgress(payload) {
+            if(payload) {
+                var interval = setInterval(() => {
+                    if(this.progressFill < 200 ) {
+                        this.progressFill++
+                    }else if(this.progressFill == 200) {
+                        clearInterval(interval);
+                        setTimeout(()=> {
+                            this.$router.push({ name: 'AdminDashboard'})
+                        }, 200)
+                    }
+                }, 20)
+            }
+        },
+    },
+    created() {
+        this.checkNewUser()
     }
 }
+
 </script>
 <style lang="scss" scoped>
 section {
@@ -92,6 +131,9 @@ svg{
       transition: width .5s ease;
       // transform: translate(20%, -98%);
     }
+}
+.signin-progress {
+    height: 100dvh;
 }
 @media screen and (max-width: 1120px){
     .signup-progress-container {

@@ -41,7 +41,7 @@
                         </div>
                         <event-row-2 v-for="event in displayedItems" :key="event.id" :event="event" :dashboard="false" :nokids="true" />
                     </div>
-                    <pagination-controls v-if="totalItems > 10" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
+                    <pagination-controls v-if="totalItems > itemsPerPage" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
                 </div>
             </div>
         </div>

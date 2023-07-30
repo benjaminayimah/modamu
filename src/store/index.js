@@ -20,6 +20,7 @@ export default createStore({
     windowWidth: '',
     windowHeight: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
+    sigining: false,
     addModal: false,
     onboardModal: false,
     sessionExp: false,
@@ -194,6 +195,13 @@ export default createStore({
     //set auth
     setAuthToken(state, payload){
       state.token = payload;
+    },
+    startSigning(state) {
+      router.push({ name: 'SignUpParentDetails'})
+      state.sigining = true
+    },
+    stopSigning(state) {
+      state.sigining = false
     },
     setUser(state, payload) {
       state.user = payload.user

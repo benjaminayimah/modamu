@@ -443,16 +443,17 @@ select{
     }
 }
 @media screen and (max-width: 430px){
-    .modal{
+    .modal:not(#onboarding_modal){
         max-width: 100%;
         max-height: 100dvh;
         border-radius: 0;
         min-height: 100%;
+        .modal-body{
+            height: 100%;
+            flex-grow: 1;
+        }
     }
-    .modal-body{
-        height: 100%;
-        flex-grow: 1;
-    }
+
 }
 #session_form input {
     height: 60px;

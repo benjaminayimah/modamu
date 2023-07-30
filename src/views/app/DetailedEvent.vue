@@ -142,16 +142,18 @@
                             <path d="M-3384.438-704.614l-1.494-1.5c-1.017.746-2.525,1.083-4.788,1.083-2.569,0-4.164-.435-5.174-1.408-1.052-1.015-1.521-2.646-1.521-5.288s.469-4.273,1.521-5.288c1.01-.974,2.605-1.408,5.174-1.408s4.164.434,5.174,1.408c1.053,1.014,1.522,2.645,1.522,5.288,0,2.244-.338,3.759-1.085,4.786l1.5,1.5a.583.583,0,0,1,0,.824.58.58,0,0,1-.412.171A.582.582,0,0,1-3384.438-704.614Zm-10.647-11.556c-.795.766-1.165,2.18-1.165,4.448s.37,3.682,1.165,4.449c.775.747,2.121,1.08,4.364,1.08s3.589-.333,4.364-1.08c.795-.767,1.165-2.181,1.165-4.449s-.37-3.682-1.165-4.448c-.775-.748-2.12-1.081-4.364-1.081S-3394.311-716.918-3395.085-716.17Z" transform="translate(3397.417 718.417)" fill="#212135"/>
                         </svg>
                     </i>
-                    <input class="form-control" type="search" data-type="icon" placeholder="Search Kids by name...">
+                    <input v-model="search" class="form-control" type="search" data-type="icon" placeholder="Search Kids by name...">
                 </div>
                 <div class="kids-view">
                     <div class="empty centered" v-if="!computedAttendees.length">
                         No kids attending yet
                     </div>
                     <div v-else class="kids">
-                        <div class="kid-row">
-                            <kids-row v-for="attendee in computedAttendees" :key="attendee.id" :attendee="attendee"/>
+                        <div class="kid-row" v-if="displayedItems.length">
+                            <kids-row v-for="attendee in sort_newest(displayedItems)" :key="attendee.id" :attendee="attendee"/>
                         </div>
+                        <div v-else><strong>No search result for:</strong> <i>{{ search }}</i></div>
+                        <pagination-controls v-if="totalItems > itemsPerPage" :currentPage="currentPage" :totalPages="totalPages" @previous="previousPage" @next="nextPage" />
                     </div>
                 </div>
             </div>
@@ -160,18 +162,20 @@
     <access-denied v-else />
 </template>
 <script>
+import { mapState } from 'vuex';
 import { postApi } from '@/api';
 import formatDateTime from '../../mixins/formatDateTime';
 import usersLevelMixin from '../../mixins/usersLevelMixin';
-import { mapState } from 'vuex';
+import sortedItemsMixin from '@/mixins/sortedItemsMixin';
 import KidsRow from '../../components/includes/app/KidsRow.vue';
 import ProfileAvatar from '../../components/includes/app/ProfileAvatar.vue';
 import GalleryImageList from '@/components/layouts/GalleryImageList.vue';
 import AccessDenied from '@/components/includes/app/AccessDenied.vue';
+import PaginationControls from '@/components/includes/app/PaginationControls.vue';
 export default {
-    components: { KidsRow, ProfileAvatar,/* Spinner,*/ GalleryImageList, AccessDenied },
+    components: { KidsRow, ProfileAvatar, GalleryImageList, AccessDenied , PaginationControls},
     name: 'DetailedEvent',
-    mixins: [usersLevelMixin, formatDateTime],
+    mixins: [usersLevelMixin, formatDateTime, sortedItemsMixin],
     computed: {
         ...mapState({
             hostname: (state) => state.hostname,
@@ -212,6 +216,25 @@ export default {
                 payload.text = 'Event has ended'
             }
             return payload
+        },
+        totalItems() {
+            return this.computedItem.length
+        },
+        totalPages() {
+            return Math.ceil(this.totalItems / this.itemsPerPage);
+        },
+        displayedItems() {
+            const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+            const endIndex = startIndex + this.itemsPerPage;
+            return this.computedItem.slice(startIndex, endIndex);
+        },
+        computedItem() {
+            if(this.search !=='')
+            return this.computedAttendees.filter(item => {
+                return item.kid_name.toLowerCase().match(this.search.replace(/[^\w\s]/gi, "").toLowerCase())
+            })
+            else
+            return this.computedAttendees
         }
     },
     data () {
@@ -219,7 +242,10 @@ export default {
             event: {},
             attendees: [],
             images: [],
-            deleting: false
+            deleting: false,
+            currentPage: 1,
+            itemsPerPage: 10,
+            search: ''
         }
     },
     methods: {
@@ -244,6 +270,16 @@ export default {
         },
         doEdit() {
             this.$router.push({ name: 'EventEdit', params: { id: this.event.id, name: this.event.event_name }, replace: true})
+        },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+            }
         }
     },
     created() {
