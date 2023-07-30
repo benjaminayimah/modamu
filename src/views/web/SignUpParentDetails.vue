@@ -36,7 +36,10 @@
           <input v-model="form.ocupation" class="form-control" type="text" name="ocupation" id="ocupation" data-color="light" placeholder="What's your occupation">
         </div>
       </div>
-    <button class="button-primary w-100 btn-lg" @click="submitSignUp">Next</button>      
+    <button class="button-primary w-100 btn-lg gap-8" @click="submitSignUp">
+      <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
+        <span>{{ creating ? 'Please wait...' : 'Next'}}</span>
+    </button>      
     </form>
 </template>
 
@@ -45,7 +48,9 @@ import axios from 'axios'
 import { mapGetters } from 'vuex';
 import phoneNumberMixin from '@/mixins/phoneNumberMixin';
 import inputValMixin from '@/mixins/inputValMixin';
+import Spinner from '@/components/includes/Spinner.vue';
 export default {
+  components: { Spinner },
     name: 'ParentDetails',
     mixins: [inputValMixin, phoneNumberMixin],
     computed: mapGetters(['getRole', 'getHostname']),
@@ -57,7 +62,8 @@ export default {
         relationship: '',
         ocupation: '',
       },
-      token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null
+      creating: false,
+      token: JSON.parse(localStorage.getItem('newUser')).status.remember_token || null,
     }
   },
   methods: {

@@ -56,8 +56,7 @@ export default {
         ...mapState({
             kids: (state) => state.kids,
             hostname: (state) => state.hostname,
-            token: (state) => state.token,
-            appHostname: (state) => state.appHostname
+            token: (state) => state.token
         })
     },
     data() {
@@ -84,8 +83,7 @@ export default {
             this.clrError ? this.clrError() : ''
             if(this.checkSelection()){
                 this.processing = true;
-                const url = this.appHostname + '/booking-event'
-                axios.post(this.hostname + '/api/make-payment?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id, url: url} )
+                axios.post(this.hostname + '/api/make-payment?token='+this.token, { selection: this.selected, village: this.$route.params.village, event_id: this.$route.params.event_id} )
                 .then((res) => {
                     location.href = res.data
                 }).catch((e) => {
