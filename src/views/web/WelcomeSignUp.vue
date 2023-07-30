@@ -62,14 +62,13 @@
         },
         startProgress(payload) {
             if(payload) {
-                var interval = setInterval(() => {
+                let interval = setInterval(() => {
                     if(this.progressFill < 200 ) {
                         this.progressFill++
-                    }else if(this.progressFill == 200) {
+                    }
+                    if(this.progressFill === 200) {
                         clearInterval(interval);
-                        setTimeout(()=> {
-                            this.$router.push({ name: 'AdminDashboard'})
-                        }, 200)
+                        this.$router.push({ name: 'AdminDashboard'})
                     }
                 }, 20)
             }

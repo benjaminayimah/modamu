@@ -20,7 +20,7 @@
                   Your kids
                   <router-link to="/profile" class="gray fs-09 see-all">See all</router-link>
               </div>
-              <div v-if="!kids.length">
+              <div v-if="!kids.length" class="add-kid-btn-wrapper">
                 <button @click="$store.commit('openModal', 'kids')" class="add-kid br-50 pd-0">
                   <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 0 20 20">
                       <path d="M-3266.055-837.995a1.029,1.029,0,0,1-1.021-1.034l.048-7.944-7.944-.048a1.028,1.028,0,0,1-1.022-1.034,1.028,1.028,0,0,1,1.034-1.021l7.944.048.048-7.944a1.028,1.028,0,0,1,1.034-1.021,1.027,1.027,0,0,1,1.021,1.034l-.048,7.944,7.945.048a1.029,1.029,0,0,1,1.021,1.034,1.028,1.028,0,0,1-1.034,1.022l-7.944-.048-.048,7.944a1.03,1.03,0,0,1-1.03,1.022Z" transform="translate(3275.994 857.994)" fill="#000"/>
