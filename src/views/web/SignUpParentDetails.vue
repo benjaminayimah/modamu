@@ -36,7 +36,7 @@
           <input v-model="form.ocupation" class="form-control" type="text" name="ocupation" id="ocupation" data-color="light" placeholder="What's your occupation">
         </div>
       </div>
-    <button class="button-primary w-100 btn-lg gap-8" @click="submitSignUp">
+    <button class="button-primary w-100 btn-lg gap-8" @click="submitSignUp" :class="{ 'button-disabled' : creating }" :disabled="creating ? true : false">
       <spinner v-if="creating" v-bind:size="20" v-bind:white="true" />
         <span>{{ creating ? 'Please wait...' : 'Next'}}</span>
     </button>      

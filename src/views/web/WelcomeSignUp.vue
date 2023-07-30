@@ -21,14 +21,14 @@
             </section>
         </div>
         <div v-else class="signin-progress centered">
-            <div class="text-center ">
+            <div class="text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" height="5" viewBox="0 0 205 5">
                     <g transform="translate(-830.5 -590)">
                         <line x2="200" transform="translate(833 592.5)" fill="none" stroke="rgba(0,0,0,0.2)" stroke-linecap="round" stroke-width="5"/>
                         <line :x2="progressFill" transform="translate(833 592.5)" fill="none" stroke="#0073ff" stroke-linecap="round" stroke-width="5"/>
                     </g>
                 </svg>
-                <span>Almost there...</span>
+                <div class="mt-8">Almost there...</div>
             </div>
         </div>
     </div>
