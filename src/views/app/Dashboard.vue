@@ -4,7 +4,7 @@
 </template>
 <script>
 import { defineAsyncComponent } from 'vue';
-const ParentDash = defineAsyncComponent(() => import(/* webpackChunkName: ParentDash */ './parents/ParentDash.vue'));
+import ParentDash from './parents/ParentDash.vue'
 const AdminsDash = defineAsyncComponent(() => import(/* webpackChunkName: AdminsDash */ './AdminsDash.vue'));
 import { mapGetters } from 'vuex';
 export default {
