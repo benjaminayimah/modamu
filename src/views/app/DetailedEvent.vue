@@ -205,7 +205,7 @@ export default {
             let count = this.event.limit_count
             if(this.computeStatus !== 'past') {
                 if(limit == count) {
-                    payload.state = 'in-active'
+                    payload.state = 'full'
                     payload.text = 'All spots are booked'
                 }else {
                     payload.state = 'active'
@@ -378,7 +378,7 @@ label {
 }
 .book-wrapper{
     inset: auto 0 0 auto;
-    .in-active{
+    .in-active,.full{
         color: var(--error);
     }
     .active {

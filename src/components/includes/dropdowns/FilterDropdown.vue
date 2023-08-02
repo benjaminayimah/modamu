@@ -10,7 +10,7 @@
     <teleport to="body">
         <backdrop v-if="toggleMenu" @click.prevent="closeDropdown(id)" :index="100" :opacity="0" />
         <transition name="drop-fade" mode="out-in">
-            <div class="dropdown" v-if="toggleMenu" :style="{ left: dynamicFloatingDiv.left-80+'px', top: dynamicFloatingDiv.top+45 + 'px'}">
+            <div class="dropdown" v-if="toggleMenu" :style="{ left: dynamicFloatingDiv.left-85+'px', top: dynamicFloatingDiv.top+38 + 'px'}">
                 <ul>
                     <filter-list v-for="list in filterList" :key="list.id" :list="list" @filter-item="doFilter"  />
                 </ul>

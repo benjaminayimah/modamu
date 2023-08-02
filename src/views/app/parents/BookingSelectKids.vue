@@ -23,7 +23,7 @@
             </div>
             <div class="payment-calc jc-fe column flx">
                 <div class="payment-calc-container flx gap-16 column br-24 bg-white">
-                    <span v-if="error" class="input-error">Make a selection first</span>
+                    <span v-if="error" class="input-error">{{ errorMsg }}</span>
                     <div class="flx jc-sb ai-c">
                         <h4>Amount to be paid</h4>
                         <span class="price br-24">Price per child ${{ $route.params.event_price }}</span>
@@ -63,9 +63,8 @@ export default {
         return {
             selected: [],
             error: false,
+            errorMsg: '',
             completed: false,
-            successTitle: '',
-            successMsg: '',
             processing: false
         }
     },
@@ -87,20 +86,25 @@ export default {
                 .then((res) => {
                     location.href = res.data
                 }).catch((e) => {
+                    this.processing = false;
                     if(e.response.status == 400) {
                         this.$store.commit('setExpSession')
+                    }
+                    if(e.response.status == 404) {
+                        this.showError(e.response.data)
                     }
                 })
             }
         },
         checkSelection() {
             if(!this.selected.length) {
-                this.errorMsg()
+                this.showError('Make a selection first')
             }else
             return true
         },
-        errorMsg() {
+        showError(msg) {
             this.error = true
+            this.errorMsg = msg
         },
         clrError() {
             this.error = false

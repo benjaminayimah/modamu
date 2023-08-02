@@ -10,7 +10,7 @@
     <teleport to="body">
         <backdrop v-if="toggleMenu" @click.prevent="closeDropdown(id)" :index="100" :opacity="0" />
         <transition name="drop-fade" mode="out-in">
-            <div class="dropdown" v-if="toggleMenu" :style="{ left: dynamicFloatingDiv.left-55+'px', top: dynamicFloatingDiv.top+45 + 'px'}">
+            <div class="dropdown" v-if="toggleMenu" :style="{ left: dynamicFloatingDiv.left-55+'px', top: dynamicFloatingDiv.top+58 + 'px'}">
                 <ul>
                     <li class="a-btn">
                         <a href="#" class="gap-8" @click.prevent="doAdd(1)">
