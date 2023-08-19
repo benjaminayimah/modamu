@@ -2,7 +2,7 @@
     <section class="flx gap-32 dashboard-main">
         <div class="left flx column gap-32 admin-wl-sec">
             <div class="flx column gap-40 wl-sec">
-                <h1 class="wrap-text wrap-line-2 greeting">Good day <span class="capitalize">{{ computedFirstName(getUser.name) }},</span></h1>
+                <h1 class="wrap-text wrap-line-2 greeting">{{ getGreetingMessage() }} <span class="capitalize">{{ computedFirstName(getUser.name) }},</span></h1>
                 <div>Keep up to date with everything that happens, stay updated and informed of every event, village and events.</div>
                 <router-link v-if="is_village" :to="{ name: 'OngoingEvents', params: { name: 'ongoing-events'} }" class="button-secondary a-button a-btn btn-lg">View all events</router-link>
             </div>
@@ -84,6 +84,7 @@
     </section>
 </template>
 <script>
+import greetingMessage from '@/mixins/greetingMessage';
 import usersLevelMixin from '@/mixins/usersLevelMixin';
 import userNameMixin from '@/mixins/userNameMixin';
 import { mapGetters, mapState } from 'vuex';
@@ -96,7 +97,7 @@ import DashMessageCard from '@/components/layouts/DashMessageCard.vue';
 export default {
   components: { DashNotificationCard, StatusCardType1, StatusCardType2, DashWaitingList, AdminDashVillages, DashMessageCard },
     name: 'AdminsDash',
-    mixins: [userNameMixin, usersLevelMixin],
+    mixins: [userNameMixin, usersLevelMixin, greetingMessage],
     computed: {
         ...mapGetters(['getOngoingEvents', 'getUpcomingEvents', 'getPastEvents', 'getUser', 'getTodaysEvents', 'is_village', 'is_admin', 'getBanner1']),
         ...mapState({
