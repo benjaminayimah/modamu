@@ -9,7 +9,7 @@ import router from '@/router'
 export default createStore({
   state: {
     // hostname: 'http://localhost:8000',
-    hostname: 'https://modamu-api.rancroftdev.com',
+    hostname: 'https://api.modamuvillage.com',
     token: localStorage.getItem('auth') || null,
     current_location: '',
     menu: false,
