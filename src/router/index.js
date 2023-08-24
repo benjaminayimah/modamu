@@ -6,7 +6,7 @@ import Home from '@/views/app/Home.vue'
 import Dashboard from '@/views/app/Dashboard.vue'
 import Welcome from '@/views/web/WelcomeView.vue'
 import SignIn from '@/views/web/SignIn.vue'
-import SignUp from '@/views/web/SignUp.vue'
+// import SignUp from '@/views/web/SignUp.vue'
 import SignUpProgress from '@/views/web/WelcomeSignUp.vue'
 import SignUpParentDetails from '@/views/web/SignUpParentDetails.vue'
 import SignUpKids from '@/views/web/SignUpKids.vue'
@@ -136,7 +136,7 @@ const routes = [
     meta: {requiresVisitor: true},
     children: [
       { path: '/signin', name: 'SignIn', component: SignIn},
-      { path: '/signup', name: 'SignUp', component: SignUp},
+      { path: '/signup', name: 'SignUp', component: SignIn},
       { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword},
       { path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword},
     ],
