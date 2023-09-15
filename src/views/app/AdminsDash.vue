@@ -95,7 +95,7 @@ import DashWaitingList from '@/components/includes/app/DashWaitingList.vue';
 import AdminDashVillages from '@/components/layouts/AdminDashVillages.vue';
 import DashMessageCard from '@/components/layouts/DashMessageCard.vue';
 export default {
-  components: { DashNotificationCard, StatusCardType1, StatusCardType2, DashWaitingList, AdminDashVillages, DashMessageCard },
+    components: { DashNotificationCard, StatusCardType1, StatusCardType2, DashWaitingList, AdminDashVillages, DashMessageCard },
     name: 'AdminsDash',
     mixins: [userNameMixin, usersLevelMixin, greetingMessage],
     computed: {

@@ -72,7 +72,6 @@ export default {
       this.creating = true
       try {
         const res = await postApi(this.hostname + '/api/forgot-password', this.form)
-        console.log(res.data)
         res.data.email ? this.emailSent = true : ''
         this.creating = false
       } catch (e) {
