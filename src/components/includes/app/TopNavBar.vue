@@ -48,7 +48,8 @@ export default {
             const noti = this.notifications.find(item => !item.read)
             if(noti)
             return true
-            else return false
+            else
+            return false
         }
     }
 }

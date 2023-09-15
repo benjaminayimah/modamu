@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <backdrop v-if="getMenu" @click="$store.commit('toggleMenu')" :index="100" :opacity="0.5" />
+        <backdrop v-if="getMenu" @click="$store.commit('toggleMenu')" :index="91" :opacity="0.5" />
     </transition>
     <aside id="menus" :class="{ 'expanded' : getMenu }" class="flx">
         <nav class="flx column jc-sb">
